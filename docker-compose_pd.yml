@@ -81,3 +81,7 @@ services:
       - coupon3-web
 volumes:
   rest_framework:
+  certs:
+  html:
+  vhost:
+  dhparam:
