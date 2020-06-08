@@ -77,7 +77,7 @@ services:
       - VIRTUAL_PORT=80
       - LETSENCRYPT_HOST=li1895-202.members.linode.com
       - LETSENCRYPT_EMAIL=max@conquers.co
-    depends_on:
-      - "frontend"
+    depends_onf:
+      - coupon3-web
 volumes:
   rest_framework:

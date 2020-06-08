@@ -78,6 +78,6 @@ services:
       - LETSENCRYPT_HOST=li1895-202.members.linode.com
       - LETSENCRYPT_EMAIL=max@conquers.co
     depends_on:
-      - "frontend"
+      - coupon3-web
 volumes:
   rest_framework:
