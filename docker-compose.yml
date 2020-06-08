@@ -1,0 +1,20 @@
+version: '3'
+services:
+  dailyinfo-web:
+    container_name: dailyinfo-django-web
+    build: .
+    ports:
+      - "2266:2266"
+    volumes:
+      - ./web:/app
+      - ./log:/root/var/log
+    depends_on:
+      - dailyinfo-redis
+  dailyinfo-redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6442:6379
+    volumes:
+      - ./data/redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf

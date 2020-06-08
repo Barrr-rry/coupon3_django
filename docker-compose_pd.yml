@@ -1,0 +1,83 @@
+version: '3'
+services:
+  coupon3-web:
+    container_name: coupon3-django-web
+    sysctls:
+      net.core.somaxconn: 32768
+    build:
+      context: .
+      dockerfile: Dockerfile_pd
+    restart: always
+    command: >
+      bash -c "service cron start & uwsgi  --emperor uwsgi.ini"
+    ports:
+      - "2002:2000"
+    volumes:
+      - ./web:/app
+      - ./log:/root/var/log
+      - rest_framework:/usr/local/lib/python3.7/site-packages/rest_framework/static/rest_framework
+    depends_on:
+      - coupon3-redis
+  coupon3-redis:
+    image: redis:alpine
+    restart: always
+    ports:
+      - 6444:6379
+    volumes:
+      - ./data/redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+  nginx-proxy:
+    image: jwilder/nginx-proxy:alpine
+    restart: always
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs:ro
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
+
+  nginx-proxy-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    depends_on:
+      - "nginx-proxy"
+      - "nginx"
+    volumes:
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+
+  nginx:
+    container_name: "nginx-container"
+    build:
+      context: .
+      dockerfile: ./Dockerfile_nginx
+    volumes:
+      - dhparam:/etc/nginx/dhparam
+      - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs:ro
+      - ./web:/app
+      - ./log:/var/log/nginx
+      - rest_framework:/usr/share/nginx/html/static/rest_framework
+
+    restart: always
+
+    environment:
+      - VIRTUAL_HOST=li1895-202.members.linode.com
+      - VIRTUAL_NETWORK=nginx-proxy
+      - VIRTUAL_PORT=80
+      - LETSENCRYPT_HOST=li1895-202.members.linode.com
+      - LETSENCRYPT_EMAIL=max@conquers.co
+    depends_on:
+      - "frontend"
+volumes:
+  rest_framework:
