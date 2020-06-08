@@ -21,11 +21,14 @@ from api import views
 from django.conf import settings
 from django.conf.urls.static import static
 from api import docs
+from .views import IndexView
 
 urlpatterns = [
     path('api/', include(get_urls())),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('backend/conquers/admin/', admin.site.urls),
+    path('', IndexView.as_view()),
+    path('here/', IndexView.as_view()),
     # path('api/ecpay/payment/', views.PaymenetViewSet.as_view()),
     # path('api/ecpay/shipping/', views.ShippingViewSet.as_view()),
     # path('api/ecpay/redirect/', views.RedirectViewSet.as_view()),
