@@ -60,7 +60,7 @@ MIDDLEWARE = [
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://dailyinfo-redis:6379/0",
+        "LOCATION": "redis://conpon3-redis:6379/0",
         "TIMEOUT": 60 * 60,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
@@ -69,8 +69,6 @@ CACHES = {
 }
 
 CRONJOBS = [
-    ('*/10 * * * *', 'api.cron.get_traffic'),
-    ('*/10 * * * *', 'api.cron.get_oil'),
 ]
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
