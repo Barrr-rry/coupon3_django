@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+	<!-- Basic Page Needs -->
+	<meta charset="UTF-8">
+	<!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+	<title>Explore Map Zoom In - Dailist</title>
+
+	<meta name="author" content="themsflat.com">
+
+	<!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Boostrap style -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+
+	<!-- Theme style -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+
+	<!-- Reponsive -->
+	<link rel="stylesheet" type="text/css" href="stylesheets/responsive.css">
+
+	<!-- Favicon -->
+    <link href="images/icon/icon.png" rel="shortcut icon">
+
+</head>
+	<body class="slider header_sticky">
+		
+		<!-- Preloader -->
+		<div class="preloader">
+			<div class="clear-loading loading-effect-2">
+				<span></span>
+			</div>
+		</div><!-- /.preloader -->
+
+		<div class="header">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="header-wrap">
+							<div id="logo" class="logo">
+								<a href="index.html" title="">
+									Dailist
+								</a>
+							</div><!-- /.logo -->
+							<div class="nav-wrap">
+								<nav id="mainnav" class="mainnav">
+									 <ul class="menu">
+									 	<li>
+									 		<a href="#" title="">Explore</a>
+									 		<ul class="submenu">
+									 			<li>
+									 				<a href="explore-v1.html" title="">Explore Map Zoom In</a>
+									 			</li>
+									 			<li>
+									 				<a href="explore-v2.html" title="">Explore Map Zoom Out</a>
+									 			</li>
+									 			<li>
+									 				<a href="explore-v3.html" title="">Explore Map List</a>
+									 			</li>
+									 			<li>
+									 				<a href="explore-v4.html" title="">Explore Grid</a>
+									 			</li>
+									 			<li>
+									 				<a href="explore-v5.html" title="">Explore List</a>
+									 			</li>
+									 			<li>
+									 				<a href="explore-detail.html" title="">Explore Details</a>
+									 			</li>
+									 		</ul>
+									 	</li>
+									 	<li>
+									 		<a href="#" title="">Pages</a>
+									 		<ul class="submenu">
+									 			<li>
+									 				<a href="index.html" title="">Index Layout</a>
+									 			</li>
+									 			<li>
+									 				<a href="404.html" title="">404 Page</a>
+									 			</li>
+									 			<li>
+									 				<a href="addlisting.html" title="">Add Listings</a>
+									 			</li>
+									 			<li>
+									 				<a href="comingsoon.html" title="">Comming Soon</a>
+									 			</li>
+									 			<li>
+									 				<a href="contact.html" title="">Contact</a>
+									 			</li>
+									 			<li>
+									 				<a href="price.html" title="">Price Page</a>
+									 			</li>
+									 			<li>
+									 				<a href="work.html" title="">How It Works</a>
+									 			</li>
+									 		</ul>
+									 	</li>
+									 	<li>
+									 		<a href="blog.html" title="">Blog</a>
+									 		<ul class="submenu">
+									 			<li>
+									 				<a href="blog.html" title="">Blog</a>
+									 			</li>
+									 			<li>
+									 				<a href="blog-single.html" title="">Blog Single</a>
+									 			</li>
+									 		</ul>
+									 	</li>
+									 	<li>
+									 		<a href="login.html" title="">Log In</a>
+									 	</li>
+									 	<li>
+									 		<a href="register.html" title="">Sign Up</a>
+									 	</li>
+									 </ul>
+								</nav><!-- /.mainnav -->
+								<div class="button-header">
+									<a href="http://corpthemes.com/html/dailist/register.html" title=""><i class="ti-plus"></i>Add Your Properties</a>
+								</div>
+								<div class="show-search">
+									<button><span class="ti-search"></span></button>
+									<div class="submenu top-search search-header">
+					                    <form role="search" method="get" class="search-form" action="#">
+											<label>
+												<input type="search" class="search-field" placeholder="Search …" value="" name="search">
+											</label>
+											<button class="search-submit-form" title="Search now"><i class="fa fa-search" aria-hidden="true"></i></button>
+										</form>                
+									</div>
+								</div><!-- /.show-search -->
+								<div class="btn-menu">
+		                            <span></span>
+		                        </div><!-- //mobile menu button -->
+							</div><!-- /.nav-wrap -->
+						</div><!-- /.header-wrap -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</div><!-- /.header -->
+		
+		<section class="flat-map-zoom-in">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="flat-filter">
+							<div class="wrap-box-search style2">
+								<form action="#" method="get" accept-charset="utf-8">
+									<span>
+										<input type="text" placeholder="What are you looking for ?" name="search">
+									</span>
+									<span class="location">
+										<span class="ti-location-pin"></span>
+										<input type="text" placeholder="Location" name="location">
+									</span>
+									<span class="categories">
+										<span class="ti-angle-down"></span>
+										<select name="categories">
+											<option value="">All Categories</option>
+											<option value="">All Categories</option>
+											<option value="">All Categories</option>
+										</select>
+									</span>
+									<div class="clearfix"></div>
+									<div class="box-slider">
+										<input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="155" data-slider-step="1" data-slider-value="50"/>
+										<span>Radius (meter)</span>
+									</div>
+								</form><!-- /form -->
+							</div><!-- /.wrap-box-search -->
+							<div class="clearfix"></div>
+							<div class="filter">
+								<div class="filter-title">
+									<h5>Filter by tag:</h5>
+									<span class="ti-angle-down"></span>
+								</div>
+								<div class="clearfix"></div>
+								<div class="select-filter">
+									<ul class="list-filter third">
+										<li class="active">
+											<span class="ti-check-box"></span>Wireless Internet
+										</li>
+										<li>
+											<span class="ti-layout-width-full"></span>Street Parking
+										</li>
+										<li>
+											<span class="ti-layout-width-full"></span>Kitchen
+										</li>
+										<li class="active">
+											<span class="ti-check-box"></span>Bike Parking
+										</li>
+									</ul>
+									<ul class="list-filter third">
+										<li>
+											<span class="ti-layout-width-full"></span>Pets Friendly
+										</li>
+										<li>
+											<span class="ti-layout-width-full"></span>Cable TV
+										</li>
+										<li class="active">
+											<span class="ti-check-box"></span>Smoking Allowed
+										</li>
+										<li>
+											<span class="ti-layout-width-full"></span>Good for Kids
+										</li>
+									</ul>
+									<ul class="list-filter third">
+										<li>
+											<span class="ti-layout-width-full"></span>Pool
+										</li>
+										<li>
+											<span class="ti-layout-width-full"></span>Washer
+										</li>
+										<li>
+											<span class="ti-layout-width-full"></span>Hair Dryer
+										</li>
+										<li>
+											<span class="ti-layout-width-full"></span>Wheelchair Accessible
+										</li>
+									</ul>
+									<div class="clearfix"></div>
+								</div><!-- /.select-filter -->
+							</div><!-- /.filter -->
+							<div class="filter-result">
+								<div class="result">
+									5 Results Found
+								</div>
+								<ul class="arrange">
+									<li class="active">
+										<span class="ti-view-grid"></span>
+									</li>
+									<li>
+										<span class="ti-view-list"></span>
+									</li>
+								</ul>
+							</div><!-- /.filter-result -->
+							<div class="wrap-imagebox style1">
+								<div class="imagebox style3">
+									<div class="box-imagebox">
+										<div class="box-header">
+											<div class="box-image">
+												<img src="images/page/img-v3-01.png" alt="">
+												<a href="#" title="">Preview</a>
+												<div class="overlay"></div>
+												<div class="queue">
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star-half-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div><!-- /.box-header -->
+										<div class="box-content">
+											<div class="box-title ad">
+												<span>Ad</span><a href="#" title="">AN Restaurant</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+											</div>
+											<ul class="rating">
+												<li>5 rating</li>
+												<li>Moderate</li>
+												<li>Restaurant</li>
+											</ul>
+											<div class="box-desc">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+											</div>
+										</div><!-- /.box-content -->
+										<ul class="location">
+											<li class="address"><span class="ti-location-pin"></span>Hanoi, Vietnam</li>
+											<li class="closed">Closed Now !</li>
+										</ul><!-- /.location -->
+									</div><!-- /.box-imagebox -->
+								</div><!-- /.imagebox style3 -->
+								<div class="imagebox style3">
+									<div class="box-imagebox">
+										<div class="box-header">
+											<div class="box-image">
+												<img src="images/page/img-v3-02.png" alt="">
+												<a href="#" title="">Preview</a>
+												<div class="overlay"></div>
+												<div class="queue">
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div><!-- /.box-header -->
+										<div class="box-content">
+											<div class="box-title">
+												<a href="#" title="">Acantara</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+											</div>
+											<ul class="rating">
+												<li>10 rating</li>
+												<li>Ultra High End</li>
+												<li>Hotel</li>
+											</ul>
+											<div class="box-desc">
+												Lorem ipsum dolor sit amet, consectetur<br /> adipisicing elit, sed do eiusmod tempor<br /> incididunt ut labore et dolore magna aliqua. 
+											</div>
+										</div><!-- /.box-content -->
+										<ul class="location">
+											<li class="address"><span class="ti-location-pin"></span>Seoul, Korea</li>
+											<li class="open">Open Now !</li>
+										</ul><!-- /.location -->
+									</div><!-- /.box-imagebox -->
+								</div><!-- /.imagebox style3 -->
+								<div class="height33 clearfix"></div>
+								<div class="imagebox style3">
+									<div class="box-imagebox">
+										<div class="box-header">
+											<div class="box-image">
+												<img src="images/page/img-v3-03.png" alt="">
+												<a href="#" title="">Preview</a>
+												<div class="overlay"></div>
+												<div class="queue">
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div><!-- /.box-header -->
+										<div class="box-content">
+											<div class="box-title">
+												<a href="#" title="">Intercontinental</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+											</div>
+											<ul class="rating">
+												<li>6 rating</li>
+												<li>Pricey</li>
+												<li>Hotel</li>
+											</ul>
+											<div class="box-desc">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+											</div>
+										</div><!-- /.box-content -->
+										<ul class="location">
+											<li class="address"><span class="ti-location-pin"></span>Seoul, Korea</li>
+											<li class="open">Open Now !</li>
+										</ul><!-- /.location -->
+									</div><!-- /.box-imagebox -->
+								</div><!-- /.imagebox style3 -->
+								<div class="imagebox style3">
+									<div class="box-imagebox">
+										<div class="box-header">
+											<div class="box-image">
+												<img src="images/page/img-v3-04.png" alt="">
+												<a href="#" title="">Preview</a>
+												<div class="overlay"></div>
+												<div class="queue">
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star-half-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div><!-- /.box-header -->
+										<div class="box-content">
+											<div class="box-title">
+												<a href="#" title="">Picking Grape in Vietnam</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+											</div>
+											<ul class="rating">
+												<li>6 rating</li>
+												<li>Inexpensive</li>
+												<li>Play</li>
+											</ul>
+											<div class="box-desc">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+											</div>
+										</div><!-- /.box-content -->
+										<ul class="location">
+											<li class="address"><span class="ti-location-pin"></span>Vinh Long, Vietnam</li>
+											<li class="open">Open Now !</li>
+										</ul><!-- /.location -->
+									</div><!-- /.box-imagebox -->
+								</div><!-- /.imagebox style3 -->
+								<div class="clearfix height33"></div>
+								<div class="imagebox style3">
+									<div class="box-imagebox">
+										<div class="box-header">
+											<div class="box-image">
+												<img src="images/page/img-v3-01.png" alt="">
+												<a href="#" title="">Preview</a>
+												<div class="overlay"></div>
+												<div class="queue">
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star" aria-hidden="true"></i>
+													<i class="fa fa-star-half-o" aria-hidden="true"></i>
+												</div>
+											</div>
+										</div><!-- /.box-header -->
+										<div class="box-content">
+											<div class="box-title ad">
+												<span>Ad</span><a href="#" title="">AN Restaurant</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+											</div>
+											<ul class="rating">
+												<li>5 rating</li>
+												<li>Moderate</li>
+												<li>Restaurant</li>
+											</ul>
+											<div class="box-desc">
+												Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+											</div>
+										</div><!-- /.box-content -->
+										<ul class="location">
+											<li class="address"><span class="ti-location-pin"></span>Hanoi, Vietnam</li>
+											<li class="closed">Closed Now !</li>
+										</ul><!-- /.location -->
+									</div><!-- /.box-imagebox -->
+								</div><!-- /.imagebox style3 -->
+								<div class="clearfix"></div>
+								<div class="btn-more">
+									<a href="#" title="">Load More</a>
+								</div>
+							</div><!-- /.wrap-imagebox -->
+						</div><!-- /.flat-filter -->
+					</div><!-- /.col-md-6 -->
+					<div class="col-lg-6">
+						<section class="pdmap" id="flat-map">
+				            <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam" data-image="images/icon/map.png" data-name="Themesflat Map"></div>
+				            <div class="gm-map">                
+				                <div class="map s1"></div>                        
+				            </div>
+				        </section><!-- /#flat-map-2 -->
+					</div><!-- /.col-md-6 -->
+				</div><!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</section><!-- /.flat-map-zoom-in -->
+
+		<section class="flat-row flat-subscribe">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-7">
+						<div class="subscribe-text">
+							Subscribe and be notified about new locations
+						</div>
+					</div><!-- /.col-sm-7 -->
+					<div class="col-sm-5">
+						<div class="subscribe-form">
+							<form action="#" method="get" accept-charset="utf-8">
+								<div class="subscribe-content">
+									<div class="input-field">
+										<input type="email" name="yourEmail" placeholder="Your Email" />
+									</div>
+									<button><span class="arrow_right"></span></button>
+								</div>
+							</form>
+						</div><!-- /.subscribe-form -->
+					</div><!-- /.col-sm-5 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</section><!-- /.flat-subscibe -->
+
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="widget widget-about">
+							<div class="logo-ft">
+								<a href="#" title="">
+									Dailylist
+								</a>
+							</div>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+							</p>
+						</div><!-- /.widget-about -->
+					</div><!-- /.col-md-3 -->
+					<div class="col-md-3">
+						<div class="widget widget-categories">
+							<h3 class="widget-title">Categories</h3>
+							<ul class="one-half">
+								<li>
+									<a href="#" title="">Foot</a>
+								</li>
+								<li>
+									<a href="#" title="">Hotel</a>
+								</li>
+								<li>
+									<a href="#" title="">Play</a>
+								</li>
+								<li>
+									<a href="#" title="">Automove</a>
+								</li>
+							</ul>
+							<ul class="one-half">
+								<li>
+									<a href="#" title="">Shop</a>
+								</li>
+								<li>
+									<a href="#" title="">Fitness</a>
+								</li>
+								<li>
+									<a href="#" title="">Nightlife</a>
+								</li>
+								<li>
+									<a href="#" title="">Park</a>
+								</li>
+							</ul>
+							<div class="clearfix"></div>
+						</div><!-- /.widget-categories -->
+					</div><!-- /.col-md-3 -->
+					<div class="col-md-3">
+						<div class="widget widget-contact">
+							<h3 class="widget-title">Contact</h3>
+							<ul class="contact-infomation">
+								<li class="address">
+									PO Box 16122 Collins Street West Victoria 8007 Australia
+								</li>
+								<li class="phone">
+									(84) 90 532 9119
+								</li>
+								<li class="email">
+									Dailist.support@gmail.com
+								</li>
+							</ul>
+						</div><!-- /.widget-contact -->
+					</div><!-- /.col-md-3 -->
+					<div class="col-md-3">
+						<div class="widget widget-map">
+							<img src="images/page/bg-ft.png" alt="">
+						</div><!-- /.widget-map -->
+					</div><!-- /.col-md-3 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</footer><!-- /footer -->
+		
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="social-ft">
+							<li>
+								<a href="#" title="">
+									<i class="ti-facebook" aria-hidden="true"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="">
+									<i class="ti-twitter-alt" aria-hidden="true"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="">
+									<i class="ti-instagram" aria-hidden="true"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="">
+									<i class="ti-google" aria-hidden="true"></i>
+								</a>
+							</li>
+							<li>
+								<a href="#" title="">
+									<i class="ti-pinterest" aria-hidden="true"></i>
+								</a>
+							</li>
+						</ul><!-- /.social-ft -->
+						<div class="copyright">
+							© 2017 Copyright by Deercreative. All rights reserved.
+						</div><!-- /.copyright -->
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div><!-- /.footer-bottom -->
+
+
+		<div class="button-go-top">
+			<a href="#" title="" class="go-top">
+				<i class="fa fa-chevron-up"></i>
+			</a><!-- /.go-top -->
+		</div><!-- /.button-go-top -->
+		
+		<!-- Javascript -->
+	    <script type="text/javascript" src="javascript/jquery.min.js"></script>
+	    <script type="text/javascript" src="javascript/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="javascript/easing.js"></script>
+	    <script type="text/javascript" src="javascript/owl.carousel.js"></script>
+	    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+	    <script type="text/javascript" src="javascript/snazzy-info-window.min.js"></script>
+   		<script type="text/javascript" src="javascript/gmap3.min.js"></script>
+   		<script type="text/javascript" src="javascript/bootstrap-slider.min.js"></script>
+	    
+	    <script type="text/javascript" src="javascript/main.js"></script>
+
+	</body>
+</html>
