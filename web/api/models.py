@@ -82,7 +82,7 @@ class DiscountType(DefaultAbstract):
 
 
 class StoreDiscount(DefaultAbstract):
-    store = models.ForeignKey(Store, related_name="", on_delete=models.CASCADE, help_text="")
+    store = models.ForeignKey(Store, related_name="store_discount", on_delete=models.CASCADE, help_text="")
     discount_type = models.ForeignKey(DiscountType, related_name="store_discount", on_delete=models.CASCADE,
                                       help_text="折扣fk")
     name = models.CharField(max_length=128, help_text="折扣標題")
