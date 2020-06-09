@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -13,16 +14,16 @@
 	<!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- Boostrap style -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+    <!-- Boostrap style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
 
-	<!-- Theme style -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
 
-	<!-- Reponsive -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/responsive.css">
+    <!-- Reponsive -->
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
 
-	<!-- Favicon -->
+    <!-- Favicon -->
     <link href="images/icon/icon.png" rel="shortcut icon">
 
 </head>
@@ -454,7 +455,7 @@
 					</div><!-- /.col-md-3 -->
 					<div class="col-md-3">
 						<div class="widget widget-map">
-							<img src="images/page/bg-ft.png" alt="">
+							<img src="{% static "images/page/bg-ft.png" %}" alt="">
 						</div><!-- /.widget-map -->
 					</div><!-- /.col-md-3 -->
 				</div><!-- /.row -->
@@ -506,15 +507,14 @@
 			</a><!-- /.go-top -->
 		</div><!-- /.button-go-top -->
 		<!-- Javascript -->
-	    <script type="text/javascript" src="javascript/jquery.min.js"></script>
-	    <script type="text/javascript" src="javascript/bootstrap.min.js"></script>
-	    <script type="text/javascript" src="javascript/easing.js"></script>
-	    <script type="text/javascript" src="javascript/owl.carousel.js"></script>
-	    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-   		<script type="text/javascript" src="javascript/gmap3.min.js"></script>
-   		<script type="text/javascript" src="javascript/bootstrap-slider.min.js"></script>
-	    
-	    <script type="text/javascript" src="javascript/main.js"></script>
-
+        <script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'javascript/easing.js' %}"></script>
+        <script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
+        <script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'javascript/parallax.js' %}"></script>
+        <script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
+        <script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
 	</body>
 </html>

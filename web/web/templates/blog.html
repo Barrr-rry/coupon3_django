@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -13,14 +14,14 @@
 	<!-- Mobile Specific Metas -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- Boostrap style -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+    <!-- Boostrap style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
 
-	<!-- Theme style -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
 
-	<!-- Reponsive -->
-	<link rel="stylesheet" type="text/css" href="stylesheets/responsive.css">
+    <!-- Reponsive -->
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
 
 	<!-- Favicon -->
     <link href="images/icon/icon.png" rel="shortcut icon">
@@ -169,7 +170,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/01.png" alt="">
+									<img src="{% static "images/blog/01.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -203,7 +204,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/02.png" alt="">
+									<img src="{% static "images/blog/02.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -237,7 +238,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/03.png" alt="">
+									<img src="{% static "images/blog/03.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -271,7 +272,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/04.png" alt="">
+									<img src="{% static "images/blog/04.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -307,7 +308,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/05.png" alt="">
+									<img src="{% static "images/blog/05.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -341,7 +342,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/06.png" alt="">
+									<img src="{% static "images/blog/06.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -375,7 +376,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/07.png" alt="">
+									<img src="{% static "images/blog/07.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -409,7 +410,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/08.png" alt="">
+									<img src="{% static "images/blog/08.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -445,7 +446,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/09.png" alt="">
+									<img src="{% static "images/blog/09.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -479,7 +480,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/10.png" alt="">
+									<img src="{% static "images/blog/10.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -513,7 +514,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/11.png" alt="">
+									<img src="{% static "images/blog/11.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -547,7 +548,7 @@
 						<article class="blog-post">
 							<div class="featured-post">
 								<a href="#" title="">
-									<img src="images/blog/12.png" alt="">
+									<img src="{% static "images/blog/12.png" %}" alt="">
 									<div class="overlay"></div>
 								</a>
 							</div><!-- /.featured-post -->
@@ -671,7 +672,7 @@
 					</div><!-- /.col-md-3 -->
 					<div class="col-md-3">
 						<div class="widget widget-map">
-							<img src="images/page/bg-ft.png" alt="">
+							<img src="{% static "images/page/bg-ft.png" %}" alt="">
 						</div><!-- /.widget-map -->
 					</div><!-- /.col-md-3 -->
 				</div><!-- /.row -->
@@ -724,15 +725,14 @@
 		</div><!-- /.button-go-top -->
 
 		<!-- Javascript -->
-	    <script type="text/javascript" src="javascript/jquery.min.js"></script>
-	    <script type="text/javascript" src="javascript/bootstrap.min.js"></script>
-	    <script type="text/javascript" src="javascript/easing.js"></script>
-	    <script type="text/javascript" src="javascript/owl.carousel.js"></script>
+	    <script type="text/javascript" src="{% static "javascript/jquery.min.js" %}"></script>
+	    <script type="text/javascript" src="{% static "javascript/bootstrap.min.js" %}"></script>
+	    <script type="text/javascript" src="{% static "javascript/easing.js" %}"></script>
+	    <script type="text/javascript" src="{% static "javascript/owl.carousel.js" %}"></script>
 	    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-   		<script type="text/javascript" src="javascript/gmap3.min.js"></script>
-   		<script type="text/javascript" src="javascript/bootstrap-slider.min.js"></script>
-	    
-	    <script type="text/javascript" src="javascript/main.js"></script>
+   		<script type="text/javascript" src="{% static "javascript/gmap3.min.js" %}"></script>
+   		<script type="text/javascript" src="{% static "javascript/bootstrap-slider.min.js" %}"></script>
+	    <script type="text/javascript" src="{% static "javascript/main.js" %}"></script>
 
 	</body>
 </html>
