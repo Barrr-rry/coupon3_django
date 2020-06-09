@@ -178,7 +178,7 @@ body {
     color: #fff;
 }
 
-a:not(.default-a) {
+a {
     text-decoration: none;
     color: #2c3e50;
     -webkit-transition: all 0.3s ease-in-out;
@@ -188,8 +188,8 @@ a:not(.default-a) {
     transition: all 0.3s ease-in-out;
 }
 
-a:not(.default-a):hover,
-a:not(.default-a):focus {
+a:hover,
+a:focus {
     color: #4ca1af;
     text-decoration: none;
     outline: 0;
