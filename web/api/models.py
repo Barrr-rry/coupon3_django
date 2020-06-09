@@ -66,7 +66,7 @@ class District(DefaultAbstract):
 
 class Store(DefaultAbstract):
     name = models.CharField(max_length=64, help_text="商家名稱")
-    store_type = models.ForeignKey(Store, related_name="store", on_delete=models.CASCADE, help_text="店家類型fk")
+    store_type = models.ForeignKey(StoreType, related_name="store", on_delete=models.CASCADE, help_text="店家類型fk")
     phone = models.CharField(max_length=64, help_text="電話")
     website = models.CharField(max_length=64, null=True, help_text="網站")
     address = models.CharField(max_length=64, help_text="商家地址")
@@ -82,7 +82,7 @@ class DiscountType(DefaultAbstract):
 
 
 class StoreDiscount(DefaultAbstract):
-    store = models.ForeignKey(Store, related_name="", on_delete=models.CASCADE, help_text="")
+    store = models.ForeignKey(Store, related_name="store_discount", on_delete=models.CASCADE, help_text="")
     discount_type = models.ForeignKey(DiscountType, related_name="store_discount", on_delete=models.CASCADE,
                                       help_text="折扣fk")
     name = models.CharField(max_length=128, help_text="折扣標題")
