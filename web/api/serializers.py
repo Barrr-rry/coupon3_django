@@ -57,3 +57,28 @@ class FileSerializer(serializers.ModelSerializer):
 
     def get_file(self, instance):
         return instance.file.name
+
+
+class StoreSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = Store
+
+
+class DiscountTypeSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = DiscountType
+
+
+class DistrictSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = District
+
+
+class CountySerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = County
+
+
+class StoreTypeSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = StoreType

@@ -149,3 +149,33 @@ class FileViewSet(MyMixin):
     parser_classes = (MultiPartParser, FormParser)
     authentication_classes = []
     permission_classes = []
+
+
+@router_url('store')
+class StoreViewSet(MyMixin):
+    queryset = Store.objects.all()
+    serializer_class = serializers.StoreSerializer
+
+
+@router_url('districtstore')
+class DistrictViewSet(MyMixin):
+    queryset = District.objects.all()
+    serializer_class = serializers.DistrictSerializer
+
+
+@router_url('discountTypestore')
+class DiscountTypeViewSet(MyMixin):
+    queryset = DiscountType.objects.all()
+    serializer_class = serializers.DiscountTypeSerializer
+
+
+@router_url('countystore')
+class CountyViewSet(MyMixin):
+    queryset = County.objects.all()
+    serializer_class = serializers.CountySerializer
+
+
+@router_url('storetypestore')
+class StoreTypeViewSet(MyMixin):
+    queryset = StoreType.objects.all()
+    serializer_class = serializers.StoreTypeSerializer
