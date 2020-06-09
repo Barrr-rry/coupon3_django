@@ -30,7 +30,7 @@ urlpatterns = [
     path('', IndexView.as_view()),
     path('404/', NotFoundView.as_view()),
     path('addlisting/', AddlistingView.as_view()),
-    path('addlisting_2/', Addlisting2View.as_view()),
+    path('addlisting2/', Addlisting2View.as_view()),
     path('blog/', BlogView.as_view()),
     path('blog-single/', BlogSingleView.as_view()),
     path('comingsoon/', ComingsoonView.as_view()),

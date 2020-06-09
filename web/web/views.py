@@ -9,16 +9,12 @@ class NotFoundView(TemplateView):
     template_name = '404.html'
 
 
-class IndexView(TemplateView):
-    template_name = 'index.html'
-
-
 class AddlistingView(TemplateView):
     template_name = 'addlisting.html'
 
 
 class Addlisting2View(TemplateView):
-    template_name = 'addlisting_2.html'
+    template_name = 'addlisting2.html'
 
 
 class BlogView(TemplateView):
