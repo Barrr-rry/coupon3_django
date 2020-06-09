@@ -70,7 +70,7 @@ services:
       - ./log:/var/log/nginx
       #      - rest_framework:/usr/share/nginx/html/static/rest_framework
 #      - static_vol:/usr/share/nginx/html/static
-      - .web/web/templates/static:/usr/share/nginx/html/static
+      - ./web/web/templates/static:/usr/share/nginx/html/static
 
     restart: always
 
