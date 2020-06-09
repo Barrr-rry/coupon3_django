@@ -1625,4 +1625,12 @@ article.post-single .entry-post .entry-header .entry-meta-post li.topic {
         transform: rotate(360deg);
     }
 }
+
+.discount-type-border {
+    border: 1px solid #2c3e50;
+    color: #2c3e50;
+    font-size: 18px;
+    padding: 0px 10px;
+    border-radius: 5px;
+}
 	
