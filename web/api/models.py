@@ -89,6 +89,10 @@ class StoreDiscount(DefaultAbstract):
     description = models.CharField(max_length=128, help_text="敘述")
 
 
-class StoreImage(models.Model):
+class StoreImage(DefaultAbstract):
     store = models.ForeignKey(Store, related_name="storeimage", on_delete=models.CASCADE, help_text="商家fk")
     picture = models.CharField(max_length=128, help_text="商家圖片")
+
+
+class File(DefaultAbstract):
+    file = models.FileField()
