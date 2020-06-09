@@ -17,6 +17,9 @@ import uuid
 from django.contrib.auth.hashers import make_password
 from django.core import validators
 from django.utils.timezone import make_aware
+from api.models import (
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+)
 
 fmt = '%Y-%m-%d %H:%M:%S'
 to_datetime = lambda x: make_aware(datetime.datetime.strptime(x, '%Y-%m-%d %H:%M'))
@@ -44,3 +47,38 @@ def response_time(self, instance, key):
         return None
     else:
         return getattr(instance, key).strftime(fmt)
+
+
+class FileSerializer(serializers.ModelSerializer):
+    filename = serializers.SerializerMethodField()
+
+    class Meta(CommonMeta):
+        model = File
+
+    def get_file(self, instance):
+        return instance.file.name
+
+
+class StoreSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = Store
+
+
+class DiscountTypeSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = DiscountType
+
+
+class DistrictSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = District
+
+
+class CountySerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = County
+
+
+class StoreTypeSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = StoreType

@@ -48,6 +48,9 @@ from collections import defaultdict
 import pandas as pd
 import uuid
 from api.util import pickle_redis, to_datetime
+from api.models import (
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+)
 
 router = routers.DefaultRouter()
 nested_routers = []
@@ -137,3 +140,42 @@ def get_urls():
     for nested_router in nested_routers:
         urls += nested_router.get_urls()
     return urls
+
+
+@router_url('file')
+class FileViewSet(MyMixin):
+    queryset = File.objects.all()
+    serializer_class = serializers.FileSerializer
+    parser_classes = (MultiPartParser, FormParser)
+    authentication_classes = []
+    permission_classes = []
+
+
+@router_url('store')
+class StoreViewSet(MyMixin):
+    queryset = Store.objects.all()
+    serializer_class = serializers.StoreSerializer
+
+
+@router_url('districtstore')
+class DistrictViewSet(MyMixin):
+    queryset = District.objects.all()
+    serializer_class = serializers.DistrictSerializer
+
+
+@router_url('discountTypestore')
+class DiscountTypeViewSet(MyMixin):
+    queryset = DiscountType.objects.all()
+    serializer_class = serializers.DiscountTypeSerializer
+
+
+@router_url('countystore')
+class CountyViewSet(MyMixin):
+    queryset = County.objects.all()
+    serializer_class = serializers.CountySerializer
+
+
+@router_url('storetypestore')
+class StoreTypeViewSet(MyMixin):
+    queryset = StoreType.objects.all()
+    serializer_class = serializers.StoreTypeSerializer

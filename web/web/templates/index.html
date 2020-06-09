@@ -17,6 +17,10 @@
   <!-- Boostrap style -->
   <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
 
+  <!-- REVOLUTION LAYERS STYLES -->
+  <link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}">
+
   <!-- Theme style -->
   <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
 
@@ -24,7 +28,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
 
   <!-- Favicon -->
-  <link href="images/icon/icon.png" rel="shortcut icon">
+  <link href="{% static 'images/icon/icon.png' %}" rel="shortcut icon">
 
 </head>
 <body class="header_sticky">
@@ -43,14 +47,14 @@
         <div class="header-wrap">
           <div id="logo" class="logo">
             <a href="index.html" title="">
-              Dailist
+              小資振興
             </a>
           </div><!-- /.logo -->
           <div class="nav-wrap">
             <nav id="mainnav" class="mainnav">
               <ul class="menu">
                 <li>
-                  <a href="#" title="">Explore</a>
+                  <a href="#" title="">懶人包</a>
                   <ul class="submenu">
                     <li>
                       <a href="explore-v1.html" title="">Explore Map Zoom In</a>
@@ -73,7 +77,7 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="#" title="">Learn</a>
+                  <a href="#" title="">加碼商家</a>
                   <ul class="submenu">
                     <li>
                       <a href="index.html" title="">Index Layout</a>
@@ -99,7 +103,7 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="blog.html" title="">Blog</a>
+                  <a href="blog.html" title="">地圖找商家</a>
                   <ul class="submenu">
                     <li>
                       <a href="blog.html" title="">Blog</a>
@@ -110,17 +114,17 @@
                   </ul>
                 </li>
                 <li>
-                  <a href="login.html" title="">Log In</a>
+                  <a href="login.html" title="">常見問題</a>
                 </li>
                 <li>
-                  <a href="register.html" title="">Sign Up</a>
+                  <a href="register.html" title="">免費刊登商家活動</a>
                 </li>
               </ul>
             </nav><!-- /.mainnav -->
-            <div class="button-header">
-              <a href="http://corpthemes.com/html/dailist/register.html" title=""><i class="ti-plus"></i>Add Your
-                Properties</a>
-            </div>
+            {#            <div class="button-header">#}
+            {#              <a href="http://corpthemes.com/html/dailist/register.html" title=""><i class="ti-plus"></i>Add Your#}
+            {#                Properties</a>#}
+            {#            </div>#}
             <div class="show-search">
               <button><span class="ti-search"></span></button>
               <div class="submenu top-search search-header">
@@ -143,36 +147,84 @@
   </div><!-- /.container-fluid -->
 </div><!-- /.header -->
 
+<section class="tp-banner">
+  <div id="rev_slider_1078_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="classic4export"
+       data-source="gallery"
+       style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
+    <!-- START REVOLUTION SLIDER 5.3.0.2 auto mode -->
+    <div id="rev_slider_1078_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.3.0.2">
+      <div class="slotholder"></div>
+      <ul><!-- SLIDE  -->
+
+        <!-- SLIDE 1 -->
+        <li data-index="rs-3049" data-transition="slideremovedown" data-slotamount="7" data-hideafterloop="0"
+            data-hideslideonmobile="off" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut"
+            data-masterspeed="2000" data-rotate="0" data-saveperformance="off" data-title="Ken Burns" data-param1=""
+            data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8=""
+            data-param9="" data-param10="" data-description="">
+
+          <!-- MAIN IMAGE -->
+          <img src="{% static 'images/slider/01.png' %}" alt="" data-bgposition="center center" data-kenburns="off"
+               data-duration="30000" data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="120"
+               data-rotatestart="0" data-rotateend="0" data-offsetstart="0 0" data-offsetend="0 0" data-bgparallax="10"
+               class="rev-slidebg" data-no-retina>
+        </li>
+
+        <!-- SLIDE 2 -->
+        <li data-index="rs-3048" data-transition="slideremoveright" data-slotamount="default" data-hideafterloop="0"
+            data-hideslideonmobile="off" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut"
+            data-masterspeed="2000" data-rotate="0" data-saveperformance="off" data-title="HTML5 Video" data-param1=""
+            data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8=""
+            data-param9="" data-param10="" data-description="">
+          <!-- MAIN IMAGE -->
+          <img src="{% static 'images/slider/02.png' %}" alt="" data-bgposition="center center" data-bgfit="cover"
+               data-bgparallax="10" class="rev-slidebg" data-no-retina>
+        </li>
+
+        <li data-index="rs-3048" data-transition="slideremoveright" data-slotamount="default" data-hideafterloop="0"
+            data-hideslideonmobile="off" data-easein="Power4.easeInOut" data-easeout="Power4.easeInOut"
+            data-masterspeed="2000" data-rotate="0" data-saveperformance="off" data-title="HTML5 Video" data-param1=""
+            data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8=""
+            data-param9="" data-param10="" data-description="">
+          <!-- MAIN IMAGE -->
+          <img src="{% static 'images/slider/03.png' %}" alt="" data-bgposition="center center" data-bgfit="cover"
+               data-bgparallax="10" class="rev-slidebg" data-no-retina>
+        </li>
+      </ul>
+    </div>
+  </div><!-- END REVOLUTION SLIDER -->
+</section><!-- /.tp-banner -->
+
 <section class="page-title style2 parallax parallax1">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="page-title-heading">
-          Discover the Best Places
+          來劍湖山，滿三千再加碼送兩千！
         </div>
         <div class="text-heading">
-          Expolore top-rated attractions, activities and more
+          心動不如馬上行動
         </div>
-        <div class="wrap-box-search">
-          <form action="#" method="get" accept-charset="utf-8">
-								<span>
-									<input type="text" placeholder="What are you looking for ?" name="search">
-								</span>
-            <span class="location">
-									<span class="ti-location-pin"></span>
-									<input type="text" placeholder="Location" name="location">
-								</span>
-            <span class="categories">
-									<span class="ti-angle-down"></span>
-									<select name="categories">
-										<option value="">All Categories</option>
-										<option value="">All Categories</option>
-										<option value="">All Categories</option>
-									</select>
-								</span>
-            <button type="submit" class="search-btn">Search</button>
-          </form><!-- /form -->
-        </div><!-- /.wrap-box-search -->
+        {#        <div class="wrap-box-search">#}
+        {#          <form action="#" method="get" accept-charset="utf-8">#}
+        {#								<span>#}
+        {#									<input type="text" placeholder="What are you looking for ?" name="search">#}
+        {#								</span>#}
+        {#            <span class="location">#}
+        {#									<span class="ti-location-pin"></span>#}
+        {#									<input type="text" placeholder="Location" name="location">#}
+        {#								</span>#}
+        {#            <span class="categories">#}
+        {#									<span class="ti-angle-down"></span>#}
+        {#									<select name="categories">#}
+        {#										<option value="">All Categories</option>#}
+        {#										<option value="">All Categories</option>#}
+        {#										<option value="">All Categories</option>#}
+        {#									</select>#}
+        {#								</span>#}
+        {#            <button type="submit" class="search-btn">Search</button>#}
+        {#          </form><!-- /form -->#}
+        {#        </div><!-- /.wrap-box-search -->#}
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
@@ -188,56 +240,56 @@
             <li>
               <a href="#" title="">
                 <img src="{% static 'images/page/cutlery.png' %}" alt="">
-                <span>Foot</span>
+                <span>美食</span>
               </a>
 
             </li>
             <li>
               <a href="#" title="">
                 <img src="{% static 'images/page/double-bed.png' %}" alt="">
-                <span>Hotel</span>
+                <span>住宿</span>
               </a>
 
             </li>
             <li class="active">
               <a href="#" title="">
                 <img src="{% static 'images/page/guitar.png' %}" alt="">
-                <span>Play</span>
+                <span>娛樂</span>
               </a>
 
             </li>
             <li>
               <a href="#" title="">
                 <img src="{% static 'images/page/rent-a-car.png' %}" alt="">
-                <span>Automove</span>
+                <span>租賃</span>
               </a>
 
             </li>
             <li>
               <a href="#" title="">
                 <img src="{% static 'images/page/shopping-bag.png' %}" alt="">
-                <span>Shop</span>
+                <span>購物</span>
               </a>
 
             </li>
             <li>
               <a href="#" title="">
                 <img src="{% static 'images/page/dumbbell.png' %}" alt="">
-                <span>Fitness</span>
+                <span>旅遊</span>
               </a>
 
             </li>
             <li>
               <a href="#" title="">
                 <img src="{% static 'images/page/cocktail.png' %}" alt="">
-                <span>Nightlife</span>
+                <span>刷卡</span>
               </a>
 
             </li>
             <li>
               <a href="#" title="">
                 <img src="{% static 'images/page/park.png' %}" alt="">
-                <span>Park</span>
+                <span>美妝便利店</span>
               </a>
 
             </li>
@@ -877,33 +929,33 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-{#        <ul class="social-ft">#}
-{#          <li>#}
-{#            <a href="#" title="">#}
-{#              <i class="ti-facebook" aria-hidden="true"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#          <li>#}
-{#            <a href="#" title="">#}
-{#              <i class="ti-twitter-alt" aria-hidden="true"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#          <li>#}
-{#            <a href="#" title="">#}
-{#              <i class="ti-instagram" aria-hidden="true"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#          <li>#}
-{#            <a href="#" title="">#}
-{#              <i class="ti-google" aria-hidden="true"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#          <li>#}
-{#            <a href="#" title="">#}
-{#              <i class="ti-pinterest" aria-hidden="true"></i>#}
-{#            </a>#}
-{#          </li>#}
-{#        </ul><!-- /.social-ft -->#}
+        {#        <ul class="social-ft">#}
+        {#          <li>#}
+        {#            <a href="#" title="">#}
+        {#              <i class="ti-facebook" aria-hidden="true"></i>#}
+        {#            </a>#}
+        {#          </li>#}
+        {#          <li>#}
+        {#            <a href="#" title="">#}
+        {#              <i class="ti-twitter-alt" aria-hidden="true"></i>#}
+        {#            </a>#}
+        {#          </li>#}
+        {#          <li>#}
+        {#            <a href="#" title="">#}
+        {#              <i class="ti-instagram" aria-hidden="true"></i>#}
+        {#            </a>#}
+        {#          </li>#}
+        {#          <li>#}
+        {#            <a href="#" title="">#}
+        {#              <i class="ti-google" aria-hidden="true"></i>#}
+        {#            </a>#}
+        {#          </li>#}
+        {#          <li>#}
+        {#            <a href="#" title="">#}
+        {#              <i class="ti-pinterest" aria-hidden="true"></i>#}
+        {#            </a>#}
+        {#          </li>#}
+        {#        </ul><!-- /.social-ft -->#}
         <div class="copyright">
           © 2017 Copyright by Deercreative. All rights reserved.
         </div><!-- /.copyright -->
@@ -929,5 +981,29 @@
 <script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
 <script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
 
+
+<!-- Revolution Slider -->
+<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'revolution/js/slider.js' %}"></script>
+
+<!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+<script type="text/javascript"
+        src="{% static 'revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
 </body>
 </html>
