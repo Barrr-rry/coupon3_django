@@ -16,7 +16,7 @@ services:
       - ./web:/app
       - ./log:/root/var/log
 #      - rest_framework:/usr/local/lib/python3.7/site-packages/rest_framework/static/rest_framework
-      - static:/app/templates/static
+      - static:/app/web/templates/static
     depends_on:
       - coupon3-redis
   coupon3-redis:
