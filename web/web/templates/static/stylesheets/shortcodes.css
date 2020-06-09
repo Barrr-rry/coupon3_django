@@ -479,6 +479,7 @@
 }
 
 .imagebox.style5 .box-content {
+    width: 100%;
     padding: 0px;
     position: absolute;
     top: 50%;

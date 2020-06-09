@@ -28,7 +28,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('backend/conquers/admin/', admin.site.urls),
     path('', IndexView.as_view()),
-    path('here/', IndexView.as_view()),
     # path('api/ecpay/payment/', views.PaymenetViewSet.as_view()),
     # path('api/ecpay/shipping/', views.ShippingViewSet.as_view()),
     # path('api/ecpay/redirect/', views.RedirectViewSet.as_view()),
