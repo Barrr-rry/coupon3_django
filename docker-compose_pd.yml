@@ -15,8 +15,8 @@ services:
     volumes:
       - ./web:/app
       - ./log:/root/var/log
-#      - rest_framework:/usr/local/lib/python3.7/site-packages/rest_framework/static/rest_framework
-      - static:/app/web/templates/static
+      #      - rest_framework:/usr/local/lib/python3.7/site-packages/rest_framework/static/rest_framework
+      - static_vol:/app/web/templates/static
     depends_on:
       - coupon3-redis
   coupon3-redis:
@@ -68,8 +68,9 @@ services:
       - certs:/etc/nginx/certs:ro
       - ./web:/app
       - ./log:/var/log/nginx
-#      - rest_framework:/usr/share/nginx/html/static/rest_framework
-      - static:/usr/share/nginx/html/static
+      #      - rest_framework:/usr/share/nginx/html/static/rest_framework
+      - static_vol:/usr/share/nginx/html/static
+      - .web/web/templates/static:/usr/share/nginx/html/static
 
     restart: always
 
@@ -82,8 +83,8 @@ services:
     depends_on:
       - coupon3-web
 volumes:
-#  rest_framework:
-  static:
+  #  rest_framework:
+  static_vol:
   certs:
   html:
   vhost:
