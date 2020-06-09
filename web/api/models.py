@@ -50,28 +50,45 @@ class DefaultAbstract(models.Model):
         self.save()
 
 
-class Oil(DefaultAbstract):
-    CPC_oil_92 = models.FloatField(help_text="中油:92", null=True)
-    CPC_oil_95 = models.FloatField(help_text="中油:95", null=True)
-    CPC_oil_98 = models.FloatField(help_text="中油:98", null=True)
-    CPC_diesel_oil = models.FloatField(help_text="中油:柴油", null=True)
-
-    FPC_oil_92 = models.FloatField(help_text="中台塑:92", null=True)
-    FPC_oil_95 = models.FloatField(help_text="中台塑:95", null=True)
-    FPC_oil_98 = models.FloatField(help_text="中台塑:98", null=True)
-    FPC_diesel_oil = models.FloatField(help_text="台塑:柴油", null=True)
-    announce_status = models.BooleanField(default=False, help_text="油價通知公告")
-    diesel_change = models.FloatField(help_text="柴油上漲多少錢 if 負數 then 下跌", null=True)
-    oil_change = models.FloatField(help_text="上漲多少錢 if 負數 then 下跌", null=True)
-    last_updated_at = models.DateTimeField(null=True, help_text='最後更新時間（網頁）')
+class StoreType(DefaultAbstract):
+    name = models.CharField(max_length=128, help_text="類型名稱")
+    icon = models.CharField(max_length=128, help_text="標籤名稱")
 
 
-class Traffic(DefaultAbstract):
-    data_type = models.CharField(max_length=256, help_text="種類 ex: 事故", null=True)
-    region = models.CharField(max_length=256, help_text="區域 ex: 高雄支線-國道10號", null=True)
-    subject = models.CharField(max_length=256, help_text="主題 ex: 中正一路和輔仁路交會路口 自小客與機車", null=True)
-    from_created_at = models.DateTimeField(null=True, help_text='card 右邊的時間')
-    from_edit_at = models.DateTimeField(null=True, help_text='card 左邊的時間')
-    fake_id = models.CharField(max_length=256, help_text="主題 ex: 爬蟲抓到card 的id 如果重複抓就用更新的", unique=True)
-    lat = models.FloatField(help_text="經度", null=True)
-    long = models.FloatField(help_text="經度", null=True)
+class County(DefaultAbstract):
+    name = models.CharField(max_length=128, help_text="縣市名稱")
+
+
+class District(DefaultAbstract):
+    county = models.ForeignKey(County, related_name="district", on_delete=models.CASCADE, help_text="縣市fk")
+    name = models.CharField(max_length=128, help_text="行政區名稱")
+
+
+class Store(DefaultAbstract):
+    name = models.CharField(max_length=64, help_text="商家名稱")
+    store_type = models.ForeignKey(Store, related_name="store", on_delete=models.CASCADE, help_text="店家類型fk")
+    phone = models.CharField(max_length=64, help_text="電話")
+    website = models.CharField(max_length=64, null=True, help_text="網站")
+    address = models.CharField(max_length=64, help_text="商家地址")
+    latitude = models.FloatField(max_length=64, help_text="經度")
+    longitude = models.FloatField(max_length=64, help_text="緯度")
+    county = models.ForeignKey(County, related_name="store", on_delete=models.CASCADE, help_text="縣市fk")
+    district = models.ForeignKey(District, related_name="store", on_delete=models.CASCADE, help_text="行政區fk")
+    status = models.SmallIntegerField(default=0, help_text="商家狀態 0：待審核；1：審核通過（上架）；2：審核失敗（不顯示）")
+
+
+class DiscountType(DefaultAbstract):
+    name = models.CharField(max_length=128, help_text="折扣名稱")
+
+
+class StoreDiscount(DefaultAbstract):
+    store = models.ForeignKey(Store, related_name="", on_delete=models.CASCADE, help_text="")
+    discount_type = models.ForeignKey(DiscountType, related_name="store_discount", on_delete=models.CASCADE,
+                                      help_text="折扣fk")
+    name = models.CharField(max_length=128, help_text="折扣標題")
+    description = models.CharField(max_length=128, help_text="敘述")
+
+
+class StoreImage(models.Model):
+    store = models.ForeignKey(Store, related_name="storeimage", on_delete=models.CASCADE, help_text="商家fk")
+    picture = models.CharField(max_length=128, help_text="商家圖片")
