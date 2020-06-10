@@ -1118,6 +1118,42 @@
 
   let storeCreatePage = () => {
     let files = []
+    let discount_id = 0
+    let appendDiscount = () => {
+      discount_id += 1
+      $('.store-disocunt-area').append(`
+      <div class="store-discount d-flex" data-id="${discount_id}">
+        <div class="store-discount-content col">
+          <div class="wrap-listing your-name">
+            <label>活動名稱</label>
+            <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">
+            <label>活動類型</label>
+            <input type="text" name="yourname" placeholder="請選擇活動類型">
+          </div><!-- /.wrap-listing -->
+          <div class="wrap-listing your-name">
+            <label>活動內容</label>
+            <textarea rows="4" cols="5" name="description" placeholder="請輸入活動內容與注意事項"></textarea>
+          </div><!-- /.wrap-listing -->
+        </div>
+        <div class="col-auto d-flex align-items-center">
+        <i class="fa fa-times pointer close-image" aria-hidden="true"
+        data-id="${discount_id}"
+        ></i>
+        </div>
+      </div>
+      `)
+    }
+    $('.store-discount-btn').on('click', () => {
+      appendDiscount()
+      $('.close-image').off('click')
+      $('.close-image').on('click', function () {
+        let _id = $(this).attr('data-id')
+        $(`.store-discount[data-id=${_id}]`).remove()
+      })
+
+    })
+
+    // image
     let appendImage = (res) => {
       $('.upload-images').append(`
         <div class="imgbox d-flex align-items-start" data-id="${res.id}">
