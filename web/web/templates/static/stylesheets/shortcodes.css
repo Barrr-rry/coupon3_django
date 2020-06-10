@@ -2147,6 +2147,21 @@ form.form-listing .inner-box button.submit-form-listing {
     transition: all 0.3s ease-in-out;
 }
 
+button.only-submit-form-listing {
+    display: block;
+    width: 100%;
+    font-size: 24px;
+    font-weight: 500;
+    height: 94px;
+    line-height: 98px;
+    letter-spacing: 0.1px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
 form.form-listing .inner-box button.submit-form-listing:hover {
     background-color: #2c3e50;
 }
