@@ -1,8 +1,13 @@
 from django.contrib import admin
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 from django.db.models.fields.reverse_related import ManyToOneRel, ManyToManyRel
+from api.models import (
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+)
 
-modellist = []
+modellist = (
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+)
 
 for md in modellist:
     list_display = []

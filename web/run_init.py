@@ -19,6 +19,7 @@ test_email = 'max@conquers.co'
 
 
 def main(for_test=False, config_data=None):
+    generate_super_admin()
     generate_stort_type(5)
     generate_county()
     generate_district()
@@ -26,6 +27,17 @@ def main(for_test=False, config_data=None):
     generate_discount_type(5)
     generate_store_discount()
     generate_store_image()
+
+
+def generate_super_admin():
+    from django.contrib.auth.models import User
+
+    # create admin
+    if not User.objects.first():
+        user = User.objects.create_user('admin', password='1111')
+        user.is_superuser = True
+        user.is_staff = True
+        user.save()
 
 
 def generate_stort_type(count):
