@@ -59,26 +59,73 @@ class FileSerializer(serializers.ModelSerializer):
         return instance.file.name
 
 
-class StoreSerializer(serializers.ModelSerializer):
+class StoreImageSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = StoreImage
+
+
+class StringListField(serializers.ListField):
+    child = serializers.CharField()
+
+
+class StoreDiscountSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = StoreDiscount
+
+
+class StoreDiscountWriteSerializer(serializers.ModelSerializer):
+    class Meta(CommonMeta):
+        model = StoreDiscount
+        exclude = [
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'deleted_status',
+            'store'
+        ]
+
+
+class StoreSerializer(DefaultModelSerializer):
+    storeimage_data = StringListField(required=False, help_text='StoreImage', write_only=True)
+    storediscount_data = StoreDiscountWriteSerializer(many=True, required=False, write_only=True,
+                                                      help_text='StoreDiscount')
+
     class Meta(CommonMeta):
         model = Store
 
+    def create(self, validated_data):
+        with transaction.atomic():
+            storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
+            storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
+            instance = super().create(validated_data)
+            for pic in storeimage_data:
+                StoreImage.objects.create(
+                    store=instance,
+                    picture=pic
+                )
+            for el in storediscount_data:
+                StoreDiscount.objects.create(
+                    store=instance,
+                    **el
+                )
+            return instance
 
-class DiscountTypeSerializer(serializers.ModelSerializer):
+
+class DiscountTypeSerializer(DefaultModelSerializer):
     class Meta(CommonMeta):
         model = DiscountType
 
 
-class DistrictSerializer(serializers.ModelSerializer):
+class DistrictSerializer(DefaultModelSerializer):
     class Meta(CommonMeta):
         model = District
 
 
-class CountySerializer(serializers.ModelSerializer):
+class CountySerializer(DefaultModelSerializer):
     class Meta(CommonMeta):
         model = County
 
 
-class StoreTypeSerializer(serializers.ModelSerializer):
+class StoreTypeSerializer(DefaultModelSerializer):
     class Meta(CommonMeta):
         model = StoreType

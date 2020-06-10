@@ -157,25 +157,25 @@ class StoreViewSet(MyMixin):
     serializer_class = serializers.StoreSerializer
 
 
-@router_url('districtstore')
+@router_url('district')
 class DistrictViewSet(MyMixin):
     queryset = District.objects.all()
     serializer_class = serializers.DistrictSerializer
 
 
-@router_url('discountTypestore')
+@router_url('discounttype')
 class DiscountTypeViewSet(MyMixin):
     queryset = DiscountType.objects.all()
     serializer_class = serializers.DiscountTypeSerializer
 
 
-@router_url('countystore')
+@router_url('county')
 class CountyViewSet(MyMixin):
     queryset = County.objects.all()
     serializer_class = serializers.CountySerializer
 
 
-@router_url('storetypestore')
+@router_url('storetype')
 class StoreTypeViewSet(MyMixin):
     queryset = StoreType.objects.all()
     serializer_class = serializers.StoreTypeSerializer

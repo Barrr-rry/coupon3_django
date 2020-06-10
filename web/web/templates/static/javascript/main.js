@@ -1119,8 +1119,21 @@
   let storeCreatePage = () => {
     let files = []
     let discount_id = 0
+    let discount_type_list = []
+    $.ajax({
+      url: '/api/discounttype/',
+      method: 'get'
+    }).done(res => {
+      discount_type_list = res
+    })
+
+    // 活動折扣
     let appendDiscount = () => {
       discount_id += 1
+      let options = ''
+      for (let el of discount_type_list) {
+        options += `<option value="${el.id}">${el.name}</option>`
+      }
       $('.store-disocunt-area').append(`
       <div class="store-discount d-flex" data-id="${discount_id}">
         <div class="store-discount-content col">
@@ -1128,7 +1141,9 @@
             <label>活動名稱</label>
             <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">
             <label>活動類型</label>
-            <input type="text" name="yourname" placeholder="請選擇活動類型">
+            <select name="discount_type" placeholder="請選擇活動類型">
+              ${options}
+            </select>
           </div><!-- /.wrap-listing -->
           <div class="wrap-listing your-name">
             <label>活動內容</label>
@@ -1192,11 +1207,13 @@
         name: "required",
         address: "required",
         phone: "required",
+        store_discount_name: "required",
       },
       messages: {
         name: "請输入商家名字",
         address: "請输入地址",
         phone: "請输入電話",
+        store_discount_name: "請输入活動名稱",
       },
       submitHandler(form) {
         let data = $(form).serializeArray()
@@ -1219,8 +1236,41 @@
             ret[el.name] = el.value
           }
         }
-        $.post('/api/store/', ret, () => {
-          window.location.reload()
+        let storediscount = []
+        if (ret.store_discount_name) {
+          if (Array.isArray(ret.store_discount_name)) {
+            for (let i = 0; i < ret.store_discount_name.length; i++) {
+              storediscount.push({
+                name: ret.store_discount_name[i],
+                description: ret.description[i],
+                discount_type: ret.discount_type[i],
+              })
+            }
+          } else {
+            storediscount.push({
+              name: ret.store_discount_name,
+              description: ret.description,
+              discount_type: ret.discount_type,
+            })
+          }
+
+
+          delete ret.store_discount_name
+          delete ret.description
+          delete ret.discount_type
+        }
+        ret.storediscount_data = storediscount
+        let storeimage_data = files.map(x => x.filename)
+        ret.storeimage_data = storeimage_data
+        console.log(ret)
+        $.ajax({
+          url: '/api/store/',
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify(ret),
+          dataType: "json",
+        }).done(res => {
+          // window.location.reload()
         })
       }
     });
