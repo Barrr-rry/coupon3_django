@@ -1116,7 +1116,26 @@
     });
   }; // Remove Preloader
 
-  let storeFunction = () => {
+  let storeCreatePage = () => {
+    let files = []
+    let appendImage = (res) => {
+      $('.upload-images').append(`
+        <div class="imgbox d-flex align-items-start" data-id="${res.id}">
+          <img src="/media/${res.filename}" alt="">
+          <i class="fa fa-times pointer close-image" aria-hidden="true"
+          data-id="${res.id}"
+          ></i>
+        </div>
+        `)
+    }
+    let setImageClick = () => {
+      $('.close-image').off('click')
+      $('.close-image').on('click', function () {
+        let _id = $(this).attr('data-id')
+        $(`.imgbox[data-id="${_id}"]`).remove()
+        files = files.filter(x => parseInt(x.id) !== parseInt(_id))
+      })
+    }
     $('input[name="upload-file"]').change((e) => {
       let form = new FormData()
       form.append("file", e.target.files[0])
@@ -1127,7 +1146,9 @@
         data: form,
         contentType: false, //required
       }).done((res) => {
-        debugger
+        files.push(res)
+        appendImage(res)
+        setImageClick()
       })
     })
     $("#createStore").validate({
@@ -1185,7 +1206,7 @@
     parallax();
     goTop();
     removePreloader();
-    storeFunction();
+    storeCreatePage();
   });
 
 })(jQuery);
