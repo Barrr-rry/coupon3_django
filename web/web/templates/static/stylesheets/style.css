@@ -1633,4 +1633,10 @@ article.post-single .entry-post .entry-header .entry-meta-post li.topic {
     padding: 0px 10px;
     border-radius: 5px;
 }
-	
+.upload-images{
+    padding: 0px 30px;
+}
+.upload-images img {
+    width: 100px;
+    height: 100px;
+}

@@ -55,7 +55,7 @@ class FileSerializer(serializers.ModelSerializer):
     class Meta(CommonMeta):
         model = File
 
-    def get_file(self, instance):
+    def get_filename(self, instance):
         return instance.file.name
 
 

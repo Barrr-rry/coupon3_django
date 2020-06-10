@@ -1117,6 +1117,19 @@
   }; // Remove Preloader
 
   let storeFunction = () => {
+    $('input[name="upload-file"]').change((e) => {
+      let form = new FormData()
+      form.append("file", e.target.files[0])
+      $.ajax({
+        method: 'POST',
+        url: '/api/file/',
+        processData: false,
+        data: form,
+        contentType: false, //required
+      }).done((res) => {
+        debugger
+      })
+    })
     $("#createStore").validate({
       rules: {
         name: "required",

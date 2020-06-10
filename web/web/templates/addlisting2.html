@@ -11,14 +11,7 @@
 
   <meta name="author" content="themsflat.com">
 
-  <!-- Boostrap style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
-
-  <!-- Reponsive -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+  {% include 'includes/css.html' %}
 
   <!-- Favicon -->
   <link href="images/icon/icon.png" rel="shortcut icon">
@@ -235,13 +228,19 @@
             <div class="clearfix"></div>
           </div><!-- /.inner-box -->
           <div class="inner-box style3">
+            <div class="row upload-images">
+              <div class="imgbox">
+                <img src="/media/帳戶資訊.png" alt="">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </div>
+            </div>
             <label>請上傳商家照片</label>
             <div class="browse">
               <p>拖曳圖片至此</p>
               <span>或</span>
               <div class="upload">
                 <span>選取圖片</span>
-                <input type="file" name="upload-file">
+                <input type="file" name="upload-file" data-target="file-uploader" accept="image/*" multiple="multiple"/>
               </div>
             </div>
             <div class="clearfix"></div>

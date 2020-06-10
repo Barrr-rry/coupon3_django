@@ -1,0 +1,180 @@
+@mixin icon-bg($url,$w,$h:$w)
+  background-image: url($url)
+  width: $w
+  height: $h
+  background-repeat: no-repeat
+  background-position: center
+  background-size: cover
+
+@mixin size($w,$h:$w)
+  width: $w
+  height: $h
+
+@mixin max-size($w,$h:$w)
+  max-width: $w
+  max-height: $h
+  +size(100%)
+
+@mixin test($color:black)
+  border: solid 1px $color
+
+@mixin h-center()
+  position: absolute
+  left: 50%
+  transform: translateX(-50%)
+
+@mixin v-center()
+  position: absolute
+  top: 50%
+  transform: translateY(-50%)
+
+@mixin center()
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translateX(-50%) translateY(- 50%)
+
+@mixin not-draggable()
+  user-drag: none
+  user-select: none
+  -moz-user-select: none
+  -webkit-user-drag: none
+  -webkit-user-select: none
+  -ms-user-select: none
+
+@mixin flex-width($col)
+  flex-basis: $col/12%
+  max-width: $col/12%
+
+@mixin flex-height($row)
+  flex-basis: $row/12%
+  max-height: $row/12%
+
+
+@mixin to-flex($direction)
+  display: flex
+  flex-direction: $direction
+
+.to-flex-col
+  +to-flex(column)
+
+@for $i from 1 through 12
+  .flex-grow-#{$i}
+    flex-grow: $i
+
+// overflow hidden
+.overflow-hidden
+  overflow: hidden
+
+@mixin padding-h($px)
+  padding-left: $px
+  padding-right: $px
+
+@mixin padding-v($px)
+  padding-top: $px
+  padding-bottom: $px
+
+
+@mixin margin-h($px)
+  margin-left: $px
+  margin-right: $px
+
+@mixin margin-v($px)
+  margin-top: $px
+  margin-bottom: $px
+
+@mixin col-width($px,$percent)
+  flex: 0 0 calc((100% - #{$px}) / #{$percent})
+  max-width: calc((100% - #{$px}) / #{$percent})
+
+// responsive
+
+
+$sm: 576px
+$md: 768px
+$lg: 992px
+$xl: 1200px
+
+::selection
+  background-color: rgba(0, 0, 0, 0) !important
+
+@mixin xs-width-include()
+  @media all and (max-width: $sm - 1)
+    @content
+
+@mixin sm-width-include()
+  +xs-width
+    @content
+  @media all and (min-width: $sm) and (max-width: $md - 1)
+    @content
+
+@mixin md-width-include()
+  +sm-width
+    @content
+  +xs-width
+    @content
+  @media all and (min-width: $md) and (max-width: $lg - 1)
+    @content
+
+@mixin lg-width-include()
+  +md-width
+    @content
+  +sm-width
+    @content
+  +xs-width
+    @content
+  @media all and (min-width: $lg) and (max-width: $xl - 1)
+    @content
+
+@mixin xl-width-include()
+  +lg-width
+    @content
+  +md-width
+    @content
+  +sm-width
+    @content
+  +xs-width
+    @content
+  @media all and (min-width: $xl)
+    @content
+
+
+@mixin xs-width()
+  @media all and (max-width: $sm - 1)
+    @content
+
+@mixin sm-width()
+  @media all and (min-width: $sm) and (max-width: $md - 1)
+    @content
+
+@mixin md-width()
+  @media all and (min-width: $md) and (max-width: $lg - 1)
+    @content
+
+@mixin lg-width()
+  @media all and (min-width: $lg) and (max-width: $xl - 1)
+    @content
+
+@mixin xl-width()
+  @media all and (min-width: $xl)
+    @content
+
+@mixin min-width($width)
+  @media all and (min-width: $width)
+    @content
+
+@mixin max-width($width)
+  @media all and (max-width: $width)
+    @content
+
+
+@mixin desktop-width()
+  +md-width
+    @content
+  +lg-width
+    @content
+  +xl-width
+    @content
+
+*
+  box-sizing: border-box
