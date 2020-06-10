@@ -156,9 +156,6 @@ class StoreViewSet(MyMixin):
     queryset = Store.objects.all()
     serializer_class = serializers.StoreSerializer
 
-    def create(self, request, *args, **kwargs):
-        return HttpResponseRedirect('/')
-
 
 @router_url('districtstore')
 class DistrictViewSet(MyMixin):

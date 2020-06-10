@@ -1120,9 +1120,38 @@
     $("#createStore").validate({
       rules: {
         name: "required",
+        address: "required",
+        phone: "required",
       },
       messages: {
-        name: "请输入商家名字",
+        name: "請输入商家名字",
+        address: "請输入地址",
+        phone: "請输入電話",
+      },
+      submitHandler(form) {
+        let data = $(form).serializeArray()
+        // let ret = {}
+        let ret = {
+          county: 1,
+          district: 1,
+          latitude: 0.23,
+          longitude: 0.22
+        }
+        for (let el of data) {
+          if (ret.hasOwnProperty(el.name)) {
+            let temp = ret[el.name]
+            if (!Array.isArray(temp)) {
+              temp = [temp]
+            }
+            temp.push(el.value)
+            ret[el.name] = temp
+          } else {
+            ret[el.name] = el.value
+          }
+        }
+        $.post('/api/store/', ret, () => {
+          window.location.reload()
+        })
       }
     });
   }
