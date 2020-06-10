@@ -1,4 +1,12 @@
 from django.views.generic.base import View, TemplateView
+from api.models import (
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+)
+from api import serializers
+
+
+class TestView(TemplateView):
+    template_name = 'test.html'
 
 
 class IndexView(TemplateView):
@@ -15,6 +23,12 @@ class AddlistingView(TemplateView):
 
 class Addlisting2View(TemplateView):
     template_name = 'addlisting2.html'
+
+    def get_context_data(self, *args, **kwargs):
+        ret = dict(
+            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+        )
+        return ret
 
 
 class BlogView(TemplateView):

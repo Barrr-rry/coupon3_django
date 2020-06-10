@@ -46,10 +46,7 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('price/', PriceView.as_view()),
     path('register/', RegisterView.as_view()),
-
-    # path('api/ecpay/payment/', views.PaymenetViewSet.as_view()),
-    # path('api/ecpay/shipping/', views.ShippingViewSet.as_view()),
-    # path('api/ecpay/redirect/', views.RedirectViewSet.as_view()),
+    path('test/', TestView.as_view()),
 ]
 
 if settings.DEBUG:

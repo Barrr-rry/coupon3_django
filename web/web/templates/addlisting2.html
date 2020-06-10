@@ -162,33 +162,22 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <form action="#" class="form-listing" method="get" accept-charset="utf-8">
-          <!--
-                        <div class="inner-box">
-                            <p>If you don’t have an account you can create one below by entering your email address/username.<br />
-                            Your account details will be confirmed via email.</p>
-                            <div class="btn-more">
-                                <a href="#" title="">Sign in</a>
-                            </div>
-                            <div class="clearfix"></div>
-
-                        </div>--><!-- /.inner-box -->
-
+        <form id="createStore" action="" class="form-listing" method="post" accept-charset="utf-8">
           <div class="inner-box form">
             <div class="one-half">
               <div class="wrap-listing price">
                 <label>商家分類</label>
                 <span class="ti-angle-down"></span>
-                <select name="category">
-                  <option value="">美食</option>
-                  <option value="">住宿</option>
-                  <option value="">旅遊</option>
+                <select name="store_type">
+                  {% for el in store_type %}
+                    <option value="{{ el.id }}">{{ el.name }}</option>
+                  {% endfor %}
                 </select>
               </div><!-- /.wrap-listing -->
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing your-name">
               <label>商家名稱</label>
-              <input type="email" name="yourname" placeholder="請輸入商家名稱">
+              <input type="text" name="name" placeholder="請輸入商家名稱">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing phone">
               <label>聯絡電話</label>
@@ -407,16 +396,7 @@
     <i class="fa fa-chevron-up"></i>
   </a><!-- /.go-top -->
 </div><!-- /.button-go-top -->
-<!-- Javascript -->
-<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/easing.js' %}"></script>
-<script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-<script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/parallax.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
+{% include 'includes/js.html' %}
 
 </body>
 </html>
