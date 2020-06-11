@@ -14,7 +14,14 @@
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  {% include 'includes/css.html' %}
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
 
   <!-- Favicon -->
   <link href="images/icon/icon.png" rel="shortcut icon">
@@ -260,18 +267,18 @@
                 <div class="box-header">
                   <div class="box-image">
                     <img src="/media/{{ el.image_1 }}" alt="">
-                    <a href="#" title="">Preview</a>
+                    <a href="/store/{{ el.id }}" title="">Preview</a>
                     <div class="overlay"></div>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-content">
                   <div class="box-title ad">
-                    <a href="#" title="">{{el.name}}</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <a href="/store/{{ el.id }}" title="">{{ el.name }}</a><i class="fa fa-check-circle" aria-hidden="true"></i>
                   </div>
                   <ul class="rating">
-                    <li>{{el.county_name}}</li>
-                    <li>{{el.district_name}}</li>
-                    <li>{{el.store_type_name}}</li>
+                    <li>{{ el.county_name }}</li>
+                    <li>{{ el.district_name }}</li>
+                    <li>{{ el.store_type_name }}</li>
                   </ul>
                   <div class="box-desc">
                     {{ el.storediscount_names }}

@@ -1305,13 +1305,13 @@
             <div class="box-header">
               <div class="box-image">
                 <img src="/media/${data.image_1}" alt="">
-                <a href="#" title="">Preview</a>
+                <a href="/store/${data.id}" title="">Preview</a>
                 <div class="overlay"></div>
               </div>
             </div><!-- /.box-header -->
             <div class="box-content">
               <div class="box-title ad">
-                <a href="#" title="">${data.name}</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+                <a href="/store/${data.id}" title="">${data.name}</a><i class="fa fa-check-circle" aria-hidden="true"></i>
               </div>
               <ul class="rating">
                 <li>${data.county_name}</li>
