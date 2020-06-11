@@ -68,7 +68,14 @@ class StringListField(serializers.ListField):
     child = serializers.CharField()
 
 
+class DiscountTypeSerializer(DefaultModelSerializer):
+    class Meta(CommonMeta):
+        model = DiscountType
+
+
 class StoreDiscountSerializer(serializers.ModelSerializer):
+    discount_type = DiscountTypeSerializer(many=False)
+
     class Meta(CommonMeta):
         model = StoreDiscount
 
@@ -89,6 +96,7 @@ class StoreSerializer(DefaultModelSerializer):
     storeimage_data = StringListField(required=False, help_text='StoreImage', write_only=True)
     storediscount_data = StoreDiscountWriteSerializer(many=True, required=False, write_only=True,
                                                       help_text='StoreDiscount')
+    storediscount = StoreDiscountSerializer(many=True)
 
     class Meta(CommonMeta):
         model = Store
@@ -109,11 +117,6 @@ class StoreSerializer(DefaultModelSerializer):
                     **el
                 )
             return instance
-
-
-class DiscountTypeSerializer(DefaultModelSerializer):
-    class Meta(CommonMeta):
-        model = DiscountType
 
 
 class DistrictSerializer(DefaultModelSerializer):

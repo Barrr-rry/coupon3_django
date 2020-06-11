@@ -198,13 +198,12 @@
       <div class="col-md-8">
         <div class="title-left">
           <div class="box-title">
-            <a href="#" title="">AN Restaurant</a>
+            <a href="#" title="">{{ instance.name }}</a>
           </div><!-- /.box-title -->
           <ul class="box-address">
-            <li class="address"><i class="fa fa-map-marker" aria-hidden="true"></i>2 / 51 Hoang Cau Street, Hanoi,
-              Vietnam
+            <li class="address"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ instance.address }}
             </li>
-            <li class="phone"><i class="fa fa-phone" aria-hidden="true"></i>(+84) 936 736 288</li>
+            <li class="phone"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}</li>
           </ul><!-- /.box-address -->
         </div><!-- /.title-left -->
       </div><!-- /.col-md-8 -->
@@ -218,20 +217,22 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8">
-        <div class="text-box">
-          <h3><span class="discount-type-border">買就送</span> 活動名稱</h3>
-          <div class="text-desc">
-            <p>
-              活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述</p>
+        {% for el in instance.storediscount %}
+          <div class="text-box">
+            <h3><span class="discount-type-border">{{ el.discount_type.name }}</span>{{ el.name }}</h3>
+            <div class="text-desc">
+              <p>
+                {{ el.description }}</p>
+            </div>
           </div>
-        </div>
-        <div class="text-box">
-          <h3><span class="discount-type-border">買就送</span> 活動名稱</h3>
-          <div class="text-desc">
-            <p>
-              活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述</p>
-          </div>
-        </div>
+        {% endfor %}
+        {#        <div class="text-box">#}
+        {#          <h3><span class="discount-type-border">買就送</span> 活動名稱</h3>#}
+        {#          <div class="text-desc">#}
+        {#            <p>#}
+        {#              活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述</p>#}
+        {#          </div>#}
+        {#        </div>#}
       </div><!-- /.col-md-8 -->
       <div class="col-md-4">
         <div class="sidebar">
@@ -244,12 +245,14 @@
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
-              <li class="address"><i class="fa fa-map-marker" aria-hidden="true"></i>2 / 51 Hoang Cau Street, Hanoi,
-                Vietnam
+              <li class="address"><i class="fa fa-map-marker" aria-hidden="true"></i>
+                {{ instance.name }}
               </li>
-              <li><i class="fa fa-phone" aria-hidden="true"></i><a href="#">(+84) 936 736 288</a></li>
-              <li><i class="fa fa-globe" aria-hidden="true"></i><a href="#" title="">http://www.anrestaurant.com</a>
-              </li>
+              <li><i class="fa fa-phone" aria-hidden="true"></i><a href="#">{{ instance.address }}</a></li>
+              {% if instance.website %}
+                <li><i class="fa fa-globe" aria-hidden="true"></i><a href="#" title="">{{ instance.website }}</a>
+                </li>
+              {% endif %}
             </ul>
           </div>
         </div>
@@ -404,39 +407,9 @@
 </div><!-- /.button-go-top -->
 
 <!-- Javascript -->
-<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/easing.js' %}"></script>
-<script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-<script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/parallax.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
+{% include 'includes/js.html' %}
 
-<!-- Revolution Slider -->
-<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.tools.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'revolution/js/slider.js' %}"></script>
 
-<!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
-<script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
 
 </body>
 </html>

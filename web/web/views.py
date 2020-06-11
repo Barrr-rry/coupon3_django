@@ -50,6 +50,11 @@ class ContactView(TemplateView):
 class StoreIdView(TemplateView):
     template_name = 'store_id.html'
 
+    def get_context_data(self, *args, **kwargs):
+        instance = Store.objects.get(pk=kwargs.get('store_id'))
+        ret = dict(instance=serializers.StoreSerializer(instance=instance).data)
+        return ret
+
 
 class ExploreV1View(TemplateView):
     template_name = 'explore-v1.html'
