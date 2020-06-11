@@ -10407,4 +10407,10 @@ a.text-dark:hover, a.text-dark:focus {
   width: calc(100% - 50px);
 }
 
+.contact-select-border {
+  border-radius: 10px;
+  border-color: #fff;
+  color: #fff;
+}
+
 /*# sourceMappingURL=main.css.map */

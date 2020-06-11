@@ -141,17 +141,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="page-title-heading">
-          Contact
+          聯絡我們
         </div>
-        <ul class="breadcrumbs">
-          <li>
-            <a href="index.html" title="">Home</a>
-            <span class="arrow_right"></span>
-          </li>
-          <li>
-            Pages
-          </li>
-        </ul>
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
@@ -166,12 +157,14 @@
           <div class="iconbox style2">
             <div class="box-header">
               <div class="iconbox-icon">
-                <img src="images/page/address.png" alt="">
+                <img src="{% static "images/page/address.png" %}" alt="">
               </div>
             </div><!-- /.box-header -->
             <div class="box-content">
               <div class="box-desc">
-                <p>PO Box 16122 Collins Street West Victoria 8007 Australia</p>
+                <p>
+                  <a href="https://line.me/R/ti/p/%40410vpbla">LINE 好友: 410bvpla</a>
+                </p>
               </div>
             </div><!-- /.box-content -->
           </div><!-- /.iconbox style2 -->
@@ -182,13 +175,13 @@
           <div class="iconbox style2">
             <div class="box-header">
               <div class="iconbox-icon">
-                <img src="images/page/email.png" alt="">
+                <img src="{% static "images/page/email.png" %}" alt="">
               </div>
             </div><!-- /.box-header -->
             <div class="box-content">
               <div class="box-desc">
-                <p>Dailist.support@gmail.com</p>
-                <p>Dailist.info@gmail.com</p>
+                <p>3CP@conquers.co</p>
+                <p>service@conquers.co</p>
               </div>
             </div><!-- /.box-content -->
           </div><!-- /.iconbox style2 -->
@@ -199,13 +192,13 @@
           <div class="iconbox style2">
             <div class="box-header">
               <div class="iconbox-icon">
-                <img src="images/page/phone.png" alt="">
+                <img src="{% static "images/page/phone.png" %}" alt="">
               </div>
             </div><!-- /.box-header -->
             <div class="box-content">
               <div class="box-desc">
-                <p>+ (84) 90 532 9119</p>
-                <p>+ (84) 90 532 9110</p>
+                <p>07 - 285 5820 分機 9</p>
+                <p>07 - 285 5820 分機 915</p>
               </div>
             </div><!-- /.box-content -->
           </div><!-- /.iconbox style2 -->
@@ -219,19 +212,32 @@
   <div class="contact-form parallax parallax1 fill-width">
     <div class="contact-us row">
       <div class="col-6 col-sm-offset-3">
-        <h3>Contact Us</h3>
+        <h3>聯絡我們</h3>
         <form action="#" method="get" accept-charset="utf-8">
           <div class="wrap-contact name">
-            <input type="text" class="your-name" placeholder="Your name" name="yourname">
+            <input type="text" class="your-name" placeholder="請輸入姓名" name="yourname">
           </div>
           <div class="wrap-contact email">
-            <input type="email" class="your-email" placeholder="Your email" name="youremail">
+            <input type="email" class="your-email" placeholder="請輸入電子信箱" name="youremail">
+          </div>
+          <div class="wrap-contact name">
+            <input type="text" class="your-name" placeholder="請輸入電話" name="yourname">
+          </div>
+          <div class="wrap-contact email">
+            <select name="store_type" class="contact-select-border">
+              <option value="操作問題">操作問題</option>
+              <option value="回報錯誤">回報錯誤</option>
+              <option value="商業合作">商業合作</option>
+              <option value="首頁廣告">首頁廣告</option>
+              <option value="意見回饋">意見回饋</option>
+              <option value="其他">其他</option>
+            </select>
           </div>
           <div class="wrap-contact message">
-            <textarea class="you-message" placeholder="Your message"></textarea>
+            <textarea class="you-message" placeholder="請輸入詳細敘述，如合作、問題、報錯內容"></textarea>
           </div>
           <div class="btn-more">
-            <a href="#" title="">Send message</a>
+            <a href="#" title="">送出表單</a>
           </div>
         </form>
       </div>
@@ -333,7 +339,7 @@
       </div><!-- /.col-md-3 -->
       <div class="col-md-3">
         <div class="widget widget-map">
-          <img src="images/page/bg-ft.png" alt="">
+          <img src="{% static "images/page/bg-ft.png" %}" alt="">
         </div><!-- /.widget-map -->
       </div><!-- /.col-md-3 -->
     </div><!-- /.row -->
