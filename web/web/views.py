@@ -21,8 +21,8 @@ class AddlistingView(TemplateView):
     template_name = 'addlisting.html'
 
 
-class Addlisting2View(TemplateView):
-    template_name = 'addlisting2.html'
+class StoreCreateView(TemplateView):
+    template_name = 'store_create.html'
 
     def get_context_data(self, *args, **kwargs):
         ret = dict(
@@ -47,8 +47,8 @@ class ContactView(TemplateView):
     template_name = 'contact.html'
 
 
-class ExploreDetailView(TemplateView):
-    template_name = 'explore-detail.html'
+class StoreIdView(TemplateView):
+    template_name = 'store_id.html'
 
 
 class ExploreV1View(TemplateView):
@@ -63,8 +63,8 @@ class ExploreV3View(TemplateView):
     template_name = 'explore-v3.html'
 
 
-class ExploreV4View(TemplateView):
-    template_name = 'explore-v4.html'
+class StoreView(TemplateView):
+    template_name = 'store.html'
 
 
 class ExploreV5View(TemplateView):
