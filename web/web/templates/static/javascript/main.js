@@ -1296,6 +1296,56 @@
       })
     })
   }
+  let storePage = () => {
+    let appendStore = (data) => {
+      let desc_list = data.storediscount.map(x => x.name)
+      let html = `
+      <div class="mb-50px col-md-4 store">
+        <div class="imagebox style1">
+          <div class="box-imagebox">
+            <div class="box-header">
+              <div class="box-image">
+                <img src="/media/${data.images[0]}" alt="">
+                <a href="#" title="">Preview</a>
+                <div class="overlay"></div>
+              </div>
+            </div><!-- /.box-header -->
+            <div class="box-content">
+              <div class="box-title ad">
+                <a href="#" title="">${data.name}</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+              </div>
+              <ul class="rating">
+                <li>${data.county_name}</li>
+                <li>${data.district_name}</li>
+                <li>${data.store_type_name}</li>
+              </ul>
+              <div class="box-desc">
+                ${desc_list.join(', ')}
+              </div>
+            </div><!-- /.box-content -->
+            <ul class="location">
+              <li class="address"><span class="ti-location-pin"></span>電話: ${data.phone}</li>
+              <li class="closed">刪除</li>
+            </ul><!-- /.location -->
+          </div><!-- /.box-imagebox -->
+        </div><!-- /.imagebox style1 -->
+      </div><!-- /.col-md-4 -->
+      `
+      $('.store-box').append(html)
+    }
+    $(".more-click").on('click', () => {
+      let offset = $('.store').length
+      $.ajax({
+        url: `/api/store/?limit=6&offset=${offset}`,
+        method: 'get'
+      }).done(res => {
+        for (let data of res.results) {
+          console.log(data)
+          appendStore(data)
+        }
+      })
+    })
+  }
   $(function () {
     responsiveMenu();
     headerFixed();
@@ -1315,6 +1365,7 @@
     removePreloader();
     storeCreatePage();
     contactUs();
+    storePage();
   });
 
 })(jQuery);

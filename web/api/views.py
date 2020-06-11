@@ -155,6 +155,8 @@ class FileViewSet(MyMixin):
 class StoreViewSet(MyMixin):
     queryset = Store.objects.all()
     serializer_class = serializers.StoreSerializer
+    pagination_class = LimitOffsetPagination
+    filter_backends = (filters.StoreFilter,)
 
 
 @router_url('district')

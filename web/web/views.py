@@ -71,6 +71,14 @@ class ExploreV3View(TemplateView):
 class StoreView(TemplateView):
     template_name = 'store.html'
 
+    def get_context_data(self, *args, **kwargs):
+        queryset = Store.objects.filter(status=1)
+        ret = dict(
+            data=serializers.StoreSerializer(many=True, instance=queryset[:6]).data,
+            count=queryset.count()
+        )
+        return ret
+
 
 class ExploreV5View(TemplateView):
     template_name = 'explore-v5.html'

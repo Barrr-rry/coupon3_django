@@ -23,7 +23,7 @@ def main(for_test=False, config_data=None):
     generate_stort_type(5)
     generate_county()
     generate_district()
-    generate_store(5)
+    generate_store(80)
     generate_discount_type(5)
     generate_store_discount()
     generate_store_image()
@@ -118,7 +118,7 @@ def generate_store_image():
     for store in stores:
         StoreImage.objects.create(
             store=store,
-            picture='123'
+            picture='帳戶資訊.png'
         )
 
 
