@@ -101,9 +101,19 @@ class StoreSerializer(DefaultModelSerializer):
     district_name = serializers.CharField(source='district.name', read_only=True)
     store_type_name = serializers.CharField(source='store_type.name', read_only=True)
     images = serializers.SerializerMethodField()
+    storediscount_names = serializers.SerializerMethodField()
+    image_1 = serializers.SerializerMethodField()
 
     class Meta(CommonMeta):
         model = Store
+
+    def get_image_1(self, instance, *args, **kwargs):
+        target = instance.storeimage.first()
+        return '' if not target else target.picture
+
+    def get_storediscount_names(self, instance, *args, **kwargs):
+        names = map(lambda x: x.name, instance.storediscount.all())
+        return ", ".join(names)
 
     def get_images(self, instance, *args, **kwargs):
         ret = []
