@@ -14,14 +14,7 @@
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- Boostrap style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
-
-  <!-- Reponsive -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+  {% include 'includes/css.html' %}
 
   <!-- Favicon -->
   <link href="images/icon/icon.png" rel="shortcut icon">
@@ -223,32 +216,25 @@
 </section><!-- /.flat-iconbox style2 -->
 
 <section class="flat-contact">
-  <div class="contact-map">
-    <section class="pdmap style1" id="flat-map">
-      <div class="flat-maps" data-address="84 Trần Quang Diệu, Ô Chợ Dừa, Đống Đa, Hà Nội, Việt Nam" data-height="700"
-           data-image="images/icon/map.png" data-name="Themesflat Map"></div>
-      <div class="gm-map">
-        <div class="map-2"></div>
+  <div class="contact-form parallax parallax1 fill-width">
+    <div class="contact-us row">
+      <div class="col-6 col-sm-offset-3">
+        <h3>Contact Us</h3>
+        <form action="#" method="get" accept-charset="utf-8">
+          <div class="wrap-contact name">
+            <input type="text" class="your-name" placeholder="Your name" name="yourname">
+          </div>
+          <div class="wrap-contact email">
+            <input type="email" class="your-email" placeholder="Your email" name="youremail">
+          </div>
+          <div class="wrap-contact message">
+            <textarea class="you-message" placeholder="Your message"></textarea>
+          </div>
+          <div class="btn-more">
+            <a href="#" title="">Send message</a>
+          </div>
+        </form>
       </div>
-    </section><!-- /#flat-map -->
-  </div><!-- /.contact-map -->
-  <div class="contact-form parallax parallax1">
-    <div class="contact-us">
-      <h3>Contact Us</h3>
-      <form action="#" method="get" accept-charset="utf-8">
-        <div class="wrap-contact name">
-          <input type="text" class="your-name" placeholder="Your name" name="yourname">
-        </div>
-        <div class="wrap-contact email">
-          <input type="email" class="your-email" placeholder="Your email" name="youremail">
-        </div>
-        <div class="wrap-contact message">
-          <textarea class="you-message" placeholder="Your message"></textarea>
-        </div>
-        <div class="btn-more">
-          <a href="#" title="">Send message</a>
-        </div>
-      </form>
     </div><!-- /.contact-us -->
     <div class="overlay"></div>
   </div><!-- /.contact-form -->
