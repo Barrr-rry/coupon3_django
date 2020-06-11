@@ -9,6 +9,7 @@ import json
 from django.db.models import Q
 import random
 from run_init import main, test_email
+from api.models import Store
 
 
 class DefaultTestMixin:
@@ -83,11 +84,16 @@ class TestStore(DefaultTestMixin, APITestCase):
             county=1,
             district=1
         )
+        before_count = Store.objects.count()
         r = self.user.post(url, data)
+        after_count = Store.objects.count()
         # status 201
         self.assertEqual(r.status_code, 201)
         # response type
         self.assertIsInstance(r.data, dict)
+        instance = Store.objects.filter(id=r.data['id']).first()
+        self.assertIsNotNone(instance)
+        self.assertNotEqual(before_count, after_count)
 
 
 class TestStoretype(DefaultTestMixin, APITestCase):
