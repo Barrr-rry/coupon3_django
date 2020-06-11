@@ -47,6 +47,7 @@ urlpatterns = [
     path('price/', PriceView.as_view()),
     path('register/', RegisterView.as_view()),
     path('test/', TestView.as_view()),
+    path('qa/', QAView.as_view()),
 ]
 
 if settings.DEBUG:

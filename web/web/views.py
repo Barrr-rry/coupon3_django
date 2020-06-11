@@ -47,6 +47,10 @@ class ContactView(TemplateView):
     template_name = 'contact.html'
 
 
+class QAView(TemplateView):
+    template_name = 'QA.html'
+
+
 class StoreIdView(TemplateView):
     template_name = 'store_id.html'
 
