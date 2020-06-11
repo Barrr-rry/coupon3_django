@@ -1116,6 +1116,23 @@
     });
   }; // Remove Preloader
 
+  let formSerailize = (data) => {
+    let ret = {}
+    for (let el of data) {
+      if (ret.hasOwnProperty(el.name)) {
+        let temp = ret[el.name]
+        if (!Array.isArray(temp)) {
+          temp = [temp]
+        }
+        temp.push(el.value)
+        ret[el.name] = temp
+      } else {
+        ret[el.name] = el.value
+      }
+    }
+    return ret
+  }
+
   let storeCreatePage = () => {
     let files = []
     let discount_id = 0
@@ -1219,22 +1236,11 @@
         let data = $(form).serializeArray()
         // let ret = {}
         let ret = {
+          ...(formSerailize(data)),
           county: 1,
           district: 1,
           latitude: 0.23,
           longitude: 0.22
-        }
-        for (let el of data) {
-          if (ret.hasOwnProperty(el.name)) {
-            let temp = ret[el.name]
-            if (!Array.isArray(temp)) {
-              temp = [temp]
-            }
-            temp.push(el.value)
-            ret[el.name] = temp
-          } else {
-            ret[el.name] = el.value
-          }
         }
         let storediscount = []
         if (ret.store_discount_name) {
@@ -1260,8 +1266,7 @@
           delete ret.discount_type
         }
         ret.storediscount_data = storediscount
-        let storeimage_data = files.map(x => x.filename)
-        ret.storeimage_data = storeimage_data
+        ret.storeimage_data = files.map(x => x.filename)
         console.log(ret)
         $.ajax({
           url: '/api/store/',
@@ -1274,6 +1279,22 @@
         })
       }
     });
+
+  }
+  let contactUs = () => {
+    $('.contact-btn').on('click', (e) => {
+      let data = $('.contact-form-self').serializeArray()
+      let ret = formSerailize(data)
+      $.ajax({
+        url: '/api/contact/',
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(ret),
+        dataType: "json",
+      }).done(res => {
+        window.location.reload()
+      })
+    })
   }
   $(function () {
     responsiveMenu();
@@ -1293,6 +1314,7 @@
     goTop();
     removePreloader();
     storeCreatePage();
+    contactUs();
   });
 
 })(jQuery);

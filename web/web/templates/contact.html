@@ -213,18 +213,18 @@
     <div class="contact-us row">
       <div class="col-6 col-sm-offset-3">
         <h3>聯絡我們</h3>
-        <form action="#" method="get" accept-charset="utf-8">
+        <form action="#" method="get" accept-charset="utf-8" class="contact-form-self">
           <div class="wrap-contact name">
-            <input type="text" class="your-name" placeholder="請輸入姓名" name="yourname">
+            <input type="text" class="your-name" placeholder="請輸入姓名" name="name">
           </div>
           <div class="wrap-contact email">
-            <input type="email" class="your-email" placeholder="請輸入電子信箱" name="youremail">
+            <input type="email" class="your-email" placeholder="請輸入電子信箱" name="email">
           </div>
           <div class="wrap-contact name">
-            <input type="text" class="your-name" placeholder="請輸入電話" name="yourname">
+            <input type="text" class="your-name" placeholder="請輸入電話" name="phone">
           </div>
           <div class="wrap-contact email">
-            <select name="store_type" class="contact-select-border">
+            <select name="contact_type" class="contact-select-border">
               <option value="操作問題">操作問題</option>
               <option value="回報錯誤">回報錯誤</option>
               <option value="商業合作">商業合作</option>
@@ -234,10 +234,10 @@
             </select>
           </div>
           <div class="wrap-contact message">
-            <textarea class="you-message" placeholder="請輸入詳細敘述，如合作、問題、報錯內容"></textarea>
+            <textarea class="content" placeholder="請輸入詳細敘述，如合作、問題、報錯內容"></textarea>
           </div>
-          <div class="btn-more">
-            <a href="#" title="">送出表單</a>
+          <div class="btn-more contact-btn">
+            <a href="javascript:void(0);">送出表單</a>
           </div>
         </form>
       </div>
