@@ -179,3 +179,59 @@ class CountyViewSet(MyMixin):
 class StoreTypeViewSet(MyMixin):
     queryset = StoreType.objects.all()
     serializer_class = serializers.StoreTypeSerializer
+
+
+@router_url('contact', basename='contact')
+class ContactView(viewsets.ViewSet):
+    schema = ManualSchema(
+        fields=[
+            coreapi.Field(
+                "email",
+                required=True,
+                location="form",
+                schema=coreschema.String()
+            ),
+            coreapi.Field(
+                "name",
+                required=True,
+                location="form",
+                schema=coreschema.String()
+            ),
+            coreapi.Field(
+                "phone",
+                required=True,
+                location="form",
+                schema=coreschema.String()
+            ),
+            coreapi.Field(
+                "contact_type",
+                required=True,
+                location="form",
+                schema=coreschema.String()
+            ),
+            coreapi.Field(
+                "content",
+                required=True,
+                location="form",
+                schema=coreschema.String()
+            ),
+        ],
+        description="""
+        目前無說明
+        """
+    )
+
+    def create(self, request, *args, **kwargs):
+        from api.mail import send_mail
+        email = request.data.get('email')
+        name = request.data.get('name')
+        phone = request.data.get('phone')
+        contact_type = request.data.get('contact_type')
+        content = request.data.get('content')
+        msg = f'''
+        聯絡人: {name} 手機: {phone}
+        類型: {contact_type}
+        內容:{content}
+        '''
+        send_mail('Contact Us', email, msg)
+        return Response(data=dict(msg='ok'))
