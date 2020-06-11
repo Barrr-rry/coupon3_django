@@ -1297,6 +1297,17 @@
     })
   }
   let storePage = () => {
+    // store activity
+    $('.activity').on('click', function () {
+      let $span = $(this).find('span')
+      if ($span.hasClass('ti-check-box')) {
+        $span.removeClass('ti-check-box')
+      } else {
+        $span.addClass('ti-check-box')
+      }
+    })
+
+    // add store
     let appendStore = (data) => {
       let html = `
       <div class="mb-50px col-md-4 store">

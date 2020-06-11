@@ -75,7 +75,10 @@ class StoreView(TemplateView):
         queryset = Store.objects.filter(status=1)
         ret = dict(
             data=serializers.StoreSerializer(many=True, instance=queryset[:6]).data,
-            count=queryset.count()
+            count=queryset.count(),
+            storetypes=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
+            district=serializers.DistrictSerializer(many=True, instance=District.objects.all()).data,
+            discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
         )
         return ret
 

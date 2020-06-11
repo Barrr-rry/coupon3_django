@@ -25,7 +25,11 @@
 
   <!-- Favicon -->
   <link href="images/icon/icon.png" rel="shortcut icon">
-
+  <style>
+    .mb-50px {
+      margin-bottom: 50px;
+    }
+  </style>
 </head>
 <body class="header_sticky">
 
@@ -154,13 +158,17 @@
 								</span>
             <span class="location">
 									<span class="ti-location-pin"></span>
-									<input type="text" placeholder="行政區" name="location">
+                  <select name="district" placeholder="行政區">
+                    {% for el in district %}
+                      <option value="{{ el.id }}">{{ el.name }}</option>
+                    {% endfor %}
+									</select>
 								</span>
             <span class="categories">
-									<select name="categories" placeholder="所有分類">
-										<option value="">All Categories</option>
-										<option value="">All Categories</option>
-										<option value="">All Categories</option>
+									<select name="store_type" placeholder="所有分類">
+                    {% for el in storetypes %}
+                      <option value="{{ el.id }}">{{ el.name }}</option>
+                    {% endfor %}
 									</select>
 								</span>
             <button type="submit" class="search-btn">搜尋</button>
@@ -184,60 +192,11 @@
           <div class="clearfix"></div>
           <div class="select-filter">
             <ul class="list-filter quarter">
-              <li class="active">
-                <span class="ti-check-box"></span>Wireless Internet
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Street Parking
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Kitchen
-              </li>
-              <li class="active">
-                <span class="ti-check-box"></span>Bike Parking
-              </li>
-            </ul>
-            <ul class="list-filter quarter">
-              <li>
-                <span class="ti-layout-width-full"></span>Pets Friendly
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Cable TV
-              </li>
-              <li class="active">
-                <span class="ti-check-box"></span>Smoking Allowed
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Good for Kids
-              </li>
-            </ul>
-            <ul class="list-filter quarter">
-              <li>
-                <span class="ti-layout-width-full"></span>Pool
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Washer
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Hair Dryer
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Wheelchair Accessible
-              </li>
-            </ul>
-            <ul class="list-filter quarter">
-              <li>
-                <span class="ti-layout-width-full"></span>Ultra High End
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Pricey
-              </li>
-              <li class="active">
-                <span class="ti-check-box"></span>Most Reviewed
-              </li>
-              <li>
-                <span class="ti-layout-width-full"></span>Highest Rated
-              </li>
+              {% for el in discounttype %}
+                <li class="active activity">
+                  <span class="ti-check-box" data-id="{{ el.id }}"></span>{{ el.name }}
+                </li>
+              {% endfor %}
             </ul>
             <div class="clearfix"></div>
           </div><!-- /.select-filter -->
@@ -273,7 +232,8 @@
                 </div><!-- /.box-header -->
                 <div class="box-content">
                   <div class="box-title ad">
-                    <a href="/store/{{ el.id }}" title="">{{ el.name }}</a><i class="fa fa-check-circle" aria-hidden="true"></i>
+                    <a href="/store/{{ el.id }}" title="">{{ el.name }}</a><i class="fa fa-check-circle"
+                                                                              aria-hidden="true"></i>
                   </div>
                   <ul class="rating">
                     <li>{{ el.county_name }}</li>
