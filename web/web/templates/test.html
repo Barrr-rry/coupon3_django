@@ -6,32 +6,10 @@
   <title>菜鸟教程(runoob.com)</title>
   <script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
   <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-  <script>
-    $().ready(function () {
-
-      $("#file-uploader").change(function (e) {
-        let form = new FormData()
-        form.append("file", e.target.files[0])
-        $.ajax({
-          method: 'POST',
-          url: '/api/file/',
-          processData: false,
-          data: form,
-          contentType: false, //required
-        })
-      });
-    });
-  </script>
-  <style>
-    .error {
-      color: red;
-    }
-  </style>
 </head>
+<script data-ad-client="ca-pub-1234567890123456" async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Homepage Leaderboard -->
 <body>
-<form runat="server">
-  <input type="file" id="file-uploader" data-target="file-uploader" accept="image/*" multiple="multiple"/>
-  <img id="blah" src="#" alt="your image"/>
-</form>
 </body>
 </html>

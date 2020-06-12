@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django_crontab',
 ]
 MIDDLEWARE = [
+    'django_samesite_none.middleware.SameSiteNoneMiddleware',
     'api.middleware.defaultmiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
