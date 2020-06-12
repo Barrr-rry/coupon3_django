@@ -24,10 +24,6 @@ class NotFoundView(TemplateView):
     template_name = '404.html'
 
 
-class AddlistingView(TemplateView):
-    template_name = 'addlisting.html'
-
-
 class StoreCreateView(TemplateView):
     template_name = 'store_create.html'
 
@@ -36,18 +32,6 @@ class StoreCreateView(TemplateView):
             store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         )
         return ret
-
-
-class BlogView(TemplateView):
-    template_name = 'blog.html'
-
-
-class BlogSingleView(TemplateView):
-    template_name = 'blog-single.html'
-
-
-class ComingsoonView(TemplateView):
-    template_name = 'comingsoon.html'
 
 
 class ContactView(TemplateView):
@@ -67,16 +51,8 @@ class StoreIdView(TemplateView):
         return ret
 
 
-class ExploreV1View(TemplateView):
-    template_name = 'explore-v1.html'
-
-
 class StoreMapView(TemplateView):
     template_name = 'store_map.html'
-
-
-class ExploreV3View(TemplateView):
-    template_name = 'explore-v3.html'
 
 
 class StoreView(TemplateView):
@@ -105,27 +81,3 @@ class StoreView(TemplateView):
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
         )
         return ret
-
-
-class ExploreV5View(TemplateView):
-    template_name = 'explore-v5.html'
-
-
-class Index2View(TemplateView):
-    template_name = 'index2.html'
-
-
-class IndexCopyView(TemplateView):
-    template_name = 'index拷貝.html'
-
-
-class LoginView(TemplateView):
-    template_name = 'login.html'
-
-
-class PriceView(TemplateView):
-    template_name = 'price.html'
-
-
-class RegisterView(TemplateView):
-    template_name = 'register.html'
