@@ -15,9 +15,11 @@ def filter_query(filter_dict, queryset):
             q = or_q(q, Q(name__contains=keyword))
             q = or_q(q, Q(storediscount__discount_type__name__contains=keyword))
 
+    filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
         q = and_q(q, Q(district=filter_dict['district']))
 
+    filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
     if filter_dict['store_type'] is not None:
         q = and_q(q, Q(store_type=filter_dict['store_type']))
 
@@ -47,12 +49,12 @@ class StoreFilter(filters.BaseFilterBackend):
         storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
         ids = request.query_params.get('ids', None)
         filter_dict = dict([('search', search),
-                         ('district', district),
-                         ('store_type', store_type),
-                         ('order_by', order_by),
-                         ('storediscount_discount_type', storediscount_discount_type),
-                         ('ids', ids)]
-                        )
+                            ('district', district),
+                            ('store_type', store_type),
+                            ('order_by', order_by),
+                            ('storediscount_discount_type', storediscount_discount_type),
+                            ('ids', ids)]
+                           )
         return filter_query(filter_dict, queryset)
 
     def get_schema_fields(self, view):

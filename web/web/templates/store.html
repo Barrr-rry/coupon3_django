@@ -49,18 +49,20 @@
         <div class="wrap-box-search style1">
           <form method="get" accept-charset="utf-8">
 								<span>
-									<input type="text" placeholder="請輸入商家名稱或活動名稱" name="search">
+									<input type="text" placeholder="請輸入商家名稱或活動名稱" name="search"
+                         value="{{ search }}"
+                  >
 								</span>
             <span class="location">
 									<span class="ti-location-pin"></span>
-                  <select name="district" placeholder="行政區">
-                    {% for el in district %}
+                  <select name="district" placeholder="行政區" value="{{ district }}">
+                    {% for el in district_list %}
                       <option value="{{ el.id }}">{{ el.name }}</option>
                     {% endfor %}
 									</select>
 								</span>
             <span class="categories">
-									<select name="store_type" placeholder="所有分類">
+									<select name="store_type" placeholder="所有分類" value="store_type">
                     {% for el in storetypes %}
                       <option value="{{ el.id }}">{{ el.name }}</option>
                     {% endfor %}
