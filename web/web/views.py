@@ -82,6 +82,13 @@ class StoreView(TemplateView):
         storetypes.insert(0, dict(id='all', name='全部'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         district_list.insert(0, dict(id='all', name='全部'))
+        if storediscount_discount_type is not None:
+            dtype = storediscount_discount_type.split(',')
+        else:
+            dtype = []
+        if storediscount_discount_type != 'all':
+            dtype = list(map(int, dtype))
+
         ret = dict(
             search=search if search is not None else '',
             data=serializers.StoreSerializer(many=True, instance=queryset[:6]).data,
@@ -90,6 +97,8 @@ class StoreView(TemplateView):
             district=district,
             store_type=store_type,
             district_list=district_list,
+            len_storediscount_discount_type=len(dtype),
+            storediscount_discount_type=dtype,
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
         )
         return ret
