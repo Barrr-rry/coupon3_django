@@ -26,8 +26,10 @@ def filter_query(filter_dict, queryset):
     if filter_dict['order_by']:
         queryset = queryset.order_by(filter_dict['order_by'])
 
+    filter_dict['storediscount_discount_type'] = None if filter_dict['storediscount_discount_type'] == 'all' else \
+        filter_dict['storediscount_discount_type']
     if filter_dict['storediscount_discount_type'] is not None:
-        for storediscount in filter_dict['storediscount_discount_type']:
+        for storediscount in filter_dict['storediscount_discount_type'].split(','):
             q = or_q(q, Q(storediscount__discount_type=storediscount))
 
     if filter_dict['ids']:

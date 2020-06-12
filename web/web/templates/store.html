@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="wrap-box-search style1">
-          <form method="get" accept-charset="utf-8">
+          <form method="get" accept-charset="utf-8" id="search-form">
 								<span>
 									<input type="text" placeholder="請輸入商家名稱或活動名稱" name="search"
                          value="{{ search }}"
@@ -68,7 +68,7 @@
                     {% endfor %}
 									</select>
 								</span>
-            <button type="submit" class="search-btn">搜尋</button>
+            <button type="button" class="search-btn" id="search-btn">搜尋</button>
           </form><!-- /form -->
         </div><!-- /.wrap-box-search -->
       </div><!-- /.col-md-12 -->
