@@ -41,10 +41,20 @@ def generate_super_admin():
 
 
 def generate_stort_type(count):
-    for i in range(count):
+    names = [
+        ('美食', 'cutlery.png'),
+        ('住宿', 'double-bed.png'),
+        ('娛樂', 'guitar.png'),
+        ('租賃', 'rent-a-car.png'),
+        ('購物', 'shopping-bag.png'),
+        ('旅遊', 'dumbbell.png'),
+        ('刷卡', 'cocktail.png'),
+        ('美妝便利店', 'park.png'),
+    ]
+    for name, icon in names:
         StoreType.objects.create(
-            name=f'類型{i}',
-            icon='store_type',
+            name=name,
+            icon=icon,
         )
 
 

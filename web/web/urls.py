@@ -37,7 +37,7 @@ urlpatterns = [
     path('contact/', ContactView.as_view()),
     path('store/<int:store_id>/', StoreIdView.as_view()),
     path('explore-v1/', ExploreV1View.as_view()),
-    path('explore-v2/', ExploreV2View.as_view()),
+    path('store_map/', StoreMapView.as_view()),
     path('explore-v3/', ExploreV3View.as_view()),
     path('store/', StoreView.as_view()),
     path('explore-v5/', ExploreV5View.as_view()),

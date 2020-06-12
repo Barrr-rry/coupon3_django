@@ -13,6 +13,12 @@ class TestView(TemplateView):
 class IndexView(TemplateView):
     template_name = 'index.html'
 
+    def get_context_data(self, *args, **kwargs):
+        ret = dict(
+            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+        )
+        return ret
+
 
 class NotFoundView(TemplateView):
     template_name = '404.html'
@@ -65,8 +71,8 @@ class ExploreV1View(TemplateView):
     template_name = 'explore-v1.html'
 
 
-class ExploreV2View(TemplateView):
-    template_name = 'explore-v2.html'
+class StoreMapView(TemplateView):
+    template_name = 'store_map.html'
 
 
 class ExploreV3View(TemplateView):

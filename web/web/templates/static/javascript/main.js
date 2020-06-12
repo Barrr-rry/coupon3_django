@@ -1275,7 +1275,7 @@
           data: JSON.stringify(ret),
           dataType: "json",
         }).done(res => {
-          // window.location.reload()
+          window.location.href = `/store/${res.id}/`
         })
       }
     });

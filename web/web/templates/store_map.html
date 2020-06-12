@@ -7,7 +7,7 @@
   <!-- Basic Page Needs -->
   <meta charset="UTF-8">
   <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-  <title>Explore Map Zoom In - Dailist</title>
+  <title>Explore Map Zoom Outs - Dailist</title>
 
   <meta name="author" content="themsflat.com">
 
@@ -25,7 +25,6 @@
 
   <!-- Favicon -->
   <link href="images/icon/icon.png" rel="shortcut icon">
-
 
 </head>
 <body class="slider header_sticky">
@@ -57,7 +56,7 @@
                       <a href="explore-v1.html" title="">Explore Map Zoom In</a>
                     </li>
                     <li>
-                      <a href="store_map.html" title="">Explore Map Zoom Out</a>
+                      <a href="explore-v2.html" title="">Explore Map Zoom Out</a>
                     </li>
                     <li>
                       <a href="explore-v3.html" title="">Explore Map List</a>
@@ -147,7 +146,7 @@
 <section class="flat-map-zoom-in">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-md-6">
         <div class="flat-filter">
           <div class="wrap-box-search style2">
             <form action="#" method="get" accept-charset="utf-8">
@@ -384,7 +383,7 @@
                 </div><!-- /.box-content -->
                 <ul class="location">
                   <li class="address"><span class="ti-location-pin"></span>Vinh Long, Vietnam</li>
-                  <li class="open">Open Now !</li>
+                  <li class="closed">Open Now !</li>
                 </ul><!-- /.location -->
               </div><!-- /.box-imagebox -->
             </div><!-- /.imagebox style3 -->
@@ -433,14 +432,13 @@
           </div><!-- /.wrap-imagebox -->
         </div><!-- /.flat-filter -->
       </div><!-- /.col-md-6 -->
-      <div class="col-lg-6">
+      <div class="col-md-6">
         <section class="pdmap" id="flat-map">
-          <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
-               data-image="images/icon/map.png" data-name="Themesflat Map"></div>
+          <div class="flat-maps" data-name="Themesflat Map"></div>
           <div class="gm-map">
-            <div class="map s1"></div>
+            <div class="map-1"></div>
           </div>
-        </section><!-- /#flat-map-2 -->
+        </section><!-- /#flat-map -->
       </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -449,12 +447,12 @@
 <section class="flat-row flat-subscribe">
   <div class="container">
     <div class="row">
-      <div class="col-sm-7">
+      <div class="col-md-7">
         <div class="subscribe-text">
           Subscribe and be notified about new locations
         </div>
-      </div><!-- /.col-sm-7 -->
-      <div class="col-sm-5">
+      </div><!-- /.col-md-7 -->
+      <div class="col-md-5">
         <div class="subscribe-form">
           <form action="#" method="get" accept-charset="utf-8">
             <div class="subscribe-content">
@@ -465,7 +463,7 @@
             </div>
           </form>
         </div><!-- /.subscribe-form -->
-      </div><!-- /.col-sm-5 -->
+      </div><!-- /.col-md-5 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
 </section><!-- /.flat-subscibe -->
@@ -517,7 +515,6 @@
               <a href="#" title="">Park</a>
             </li>
           </ul>
-          <div class="clearfix"></div>
         </div><!-- /.widget-categories -->
       </div><!-- /.col-md-3 -->
       <div class="col-md-3">
@@ -549,6 +546,9 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div class="copyright">
+          © 2017 Copyright by Deercreative. All rights reserved.
+        </div><!-- /.copyright -->
         <ul class="social-ft">
           <li>
             <a href="#" title="">
@@ -576,14 +576,10 @@
             </a>
           </li>
         </ul><!-- /.social-ft -->
-        <div class="copyright">
-          © 2017 Copyright by Deercreative. All rights reserved.
-        </div><!-- /.copyright -->
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
 </div><!-- /.footer-bottom -->
-
 
 <div class="button-go-top">
   <a href="#" title="" class="go-top">
@@ -592,17 +588,7 @@
 </div><!-- /.button-go-top -->
 
 <!-- Javascript -->
-<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/easing.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
-<script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-<script type="text/javascript" src="{% static 'javascript/snazzy-info-window.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap-slider.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
+{% include 'includes/js.html' %}}
 
 
 </body>
