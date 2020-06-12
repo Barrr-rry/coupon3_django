@@ -1298,13 +1298,38 @@
   }
   let storePage = () => {
     // store activity
-    $('.activity').on('click', function () {
-      let $span = $(this).find('span')
+    $('.list-filter li').on('click', function () {
+      let $self = $(this)
+      let $span = $self.find('span')
       if ($span.hasClass('ti-check-box')) {
         $span.removeClass('ti-check-box')
+        $span.addClass('ti-layout-width-full')
       } else {
+        $span.removeClass('ti-layout-width-full')
         $span.addClass('ti-check-box')
       }
+    })
+    $('#search-btn').on('click', () => {
+      $('#search-form')
+      let data = $('#search-form').serializeArray()
+      data = formSerailize(data)
+      let querys = []
+
+      for (let key in data) {
+        querys.push(`${key}=${data[key]}`)
+      }
+
+      if ($('.filter li').length === $('.ti-check-box').length) {
+        querys.push('storediscount_discount_type=all')
+      } else {
+        let ids = []
+        $('.ti-check-box').each(function () {
+          ids.push($(this).attr('data-id'))
+        })
+
+        querys.push(`storediscount_discount_type=${ids.join(',')}`)
+      }
+      window.location.href = `/store/?${querys.join('&')}`
     })
 
     // add store
@@ -1360,8 +1385,7 @@
           }
         })
       })
-    }
-    else {
+    } else {
       $(".more-click").on('click', () => {
         let offset = $('.store').length
         $.ajax({

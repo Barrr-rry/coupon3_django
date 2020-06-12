@@ -78,11 +78,18 @@ class StoreView(TemplateView):
                             ('ids', ids)]
                            )
         queryset = filters.filter_query(filter_dict, queryset)
+        storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+        storetypes.insert(0, dict(id='all', name='全部'))
+        district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
+        district_list.insert(0, dict(id='all', name='全部'))
         ret = dict(
+            search=search if search is not None else '',
             data=serializers.StoreSerializer(many=True, instance=queryset[:6]).data,
             count=queryset.count(),
-            storetypes=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
-            district=serializers.DistrictSerializer(many=True, instance=District.objects.all()).data,
+            storetypes=storetypes,
+            district=district,
+            store_type=store_type,
+            district_list=district_list,
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
         )
         return ret
