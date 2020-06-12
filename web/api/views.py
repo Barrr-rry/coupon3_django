@@ -158,6 +158,12 @@ class StoreViewSet(MyMixin):
     pagination_class = LimitOffsetPagination
     filter_backends = (filters.StoreFilter,)
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.action == 'list':
+            queryset = Store.objects.filter(status=1)
+        return queryset
+
 
 @router_url('district')
 class DistrictViewSet(MyMixin):
