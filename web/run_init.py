@@ -125,10 +125,11 @@ def generate_store_discount():
 def generate_store_image():
     stores = Store.objects.all()
     for store in stores:
-        StoreImage.objects.create(
-            store=store,
-            picture='帳戶資訊.png'
-        )
+        for pic in ['富士山.jpeg', '清境農場.jpeg', '溫泉.jpeg', '環球影城.jpeg', '迪士尼.jpeg']:
+            StoreImage.objects.create(
+                store=store,
+                picture=pic
+            )
 
 
 if __name__ == '__main__':
