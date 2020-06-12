@@ -1298,11 +1298,14 @@
   }
   let storePage = () => {
     // store activity
-    $('.activity').on('click', function () {
-      let $span = $(this).find('span')
+    $('.list-filter li').on('click', function () {
+      let $self = $(this)
+      let $span = $self.find('span')
       if ($span.hasClass('ti-check-box')) {
         $span.removeClass('ti-check-box')
+        $span.addClass('ti-layout-width-full')
       } else {
+        $span.removeClass('ti-layout-width-full')
         $span.addClass('ti-check-box')
       }
     })
@@ -1360,8 +1363,7 @@
           }
         })
       })
-    }
-    else {
+    } else {
       $(".more-click").on('click', () => {
         let offset = $('.store').length
         $.ajax({
