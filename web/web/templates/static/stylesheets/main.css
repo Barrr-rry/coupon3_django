@@ -10424,4 +10424,8 @@ a.text-dark:hover, a.text-dark:focus {
   z-index: 99;
 }
 
+.flat-contact .contact-form .contact-us {
+  padding: 180px 300px;
+}
+
 /*# sourceMappingURL=main.css.map */
