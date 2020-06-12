@@ -1326,8 +1326,9 @@
         $('.ti-check-box').each(function () {
           ids.push($(this).attr('data-id'))
         })
-
-        querys.push(`storediscount_discount_type=${ids.join(',')}`)
+        if (ids.length) {
+          querys.push(`storediscount_discount_type=${ids.join(',')}`)
+        }
       }
       window.location.href = `/store/?${querys.join('&')}`
     })

@@ -91,7 +91,11 @@
             <ul class="list-filter quarter">
               {% for el in discounttype %}
                 <li class="active">
-                  <span class="ti-check-box" data-id="{{ el.id }}"></span>{{ el.name }}
+                  {% if 'all' in storediscount_discount_type or el.id in storediscount_discount_type or  len_storediscount_discount_type == 0 %}
+                    <span class="ti-check-box" data-id="{{ el.id }}"></span>{{ el.name }}
+                  {% else %}
+                    <span class="ti-layout-width-full" data-id="{{ el.id }}"></span>{{ el.name }}
+                  {% endif %}
                 </li>
               {% endfor %}
             </ul>
