@@ -73,7 +73,7 @@ class Store(DefaultAbstract):
     phone = models.CharField(max_length=64, help_text="電話")
     person = models.CharField(max_length=64, help_text="聯絡人", null=True)
     email = models.CharField(max_length=64, help_text="信箱", null=True)
-    website = models.CharField(max_length=64, null=True, help_text="網站")
+    website = models.CharField(max_length=64, null=True, blank=True, help_text="網站")
     address = models.CharField(max_length=64, help_text="商家地址")
     latitude = models.FloatField(max_length=64, help_text="經度")
     longitude = models.FloatField(max_length=64, help_text="緯度")
