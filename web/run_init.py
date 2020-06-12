@@ -23,7 +23,7 @@ def main(for_test=False, config_data=None):
     generate_stort_type(5)
     generate_county()
     generate_district()
-    generate_store(80)
+    generate_store(1000)
     generate_discount_type(5)
     generate_store_discount()
     generate_store_image()
@@ -100,7 +100,6 @@ def generate_store(count):
             county=county,
             district=district,
             status=random.randint(0, 2)
-
         )
 
 

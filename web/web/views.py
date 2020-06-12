@@ -97,9 +97,10 @@ class StoreView(TemplateView):
                             ('storediscount_discount_type', storediscount_discount_type),
                             ('ids', ids)]
                            )
+        queryset = filters.filter_query(filter_dict, queryset)
         ret = dict(
-            data=serializers.StoreSerializer(many=True, instance=filters.filter_query(filter_dict, queryset)[:6]).data,
-            count=filters.filter_query(filter_dict, queryset).count(),
+            data=serializers.StoreSerializer(many=True, instance=queryset[:6]).data,
+            count=queryset.count(),
             storetypes=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
             district=serializers.DistrictSerializer(many=True, instance=District.objects.all()).data,
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,

@@ -1343,21 +1343,41 @@
       `
       $('.store-box').append(html)
     }
-    $(".more-click").on('click', () => {
-      let offset = $('.store').length
-      $.ajax({
-        url: `/api/store/?limit=6&offset=${offset}`,
-        method: 'get'
-      }).done(res => {
-        for (let data of res.results) {
-          appendStore(data)
-        }
-        // close more
-        if (!res.next) {
-          $(".more-click").remove()
-        }
+    let filter_href = window.location.href.split('?')
+    if (filter_href.length > 1) {
+      $(".more-click").on('click', () => {
+        let offset = $('.store').length
+        $.ajax({
+          url: `/api/store/?limit=6&offset=${offset}&${filter_href[1]}`,
+          method: 'get'
+        }).done(res => {
+          for (let data of res.results) {
+            appendStore(data)
+          }
+          // close more
+          if (!res.next) {
+            $(".more-click").remove()
+          }
+        })
       })
-    })
+    }
+    else {
+      $(".more-click").on('click', () => {
+        let offset = $('.store').length
+        $.ajax({
+          url: `/api/store/?limit=6&offset=${offset}`,
+          method: 'get'
+        }).done(res => {
+          for (let data of res.results) {
+            appendStore(data)
+          }
+          // close more
+          if (!res.next) {
+            $(".more-click").remove()
+          }
+        })
+      })
+    }
   }
   $(function () {
     responsiveMenu();
