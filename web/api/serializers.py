@@ -96,7 +96,7 @@ class StoreSerializer(DefaultModelSerializer):
     storeimage_data = StringListField(required=False, help_text='StoreImage', write_only=True)
     storediscount_data = StoreDiscountWriteSerializer(many=True, required=False, write_only=True,
                                                       help_text='StoreDiscount')
-    storediscount = StoreDiscountSerializer(many=True)
+    storediscount = StoreDiscountSerializer(many=True, read_only=True)
     county_name = serializers.CharField(source='county.name', read_only=True)
     district_name = serializers.CharField(source='district.name', read_only=True)
     store_type_name = serializers.CharField(source='store_type.name', read_only=True)

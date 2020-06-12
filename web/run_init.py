@@ -23,7 +23,7 @@ def main(for_test=False, config_data=None):
     generate_stort_type(5)
     generate_county()
     generate_district()
-    generate_store(1000)
+    generate_store(80)
     generate_discount_type(5)
     generate_store_discount()
     generate_store_image()
@@ -125,7 +125,8 @@ def generate_store_discount():
 def generate_store_image():
     stores = Store.objects.all()
     for store in stores:
-        for pic in ['富士山.jpeg', '清境農場.jpeg', '溫泉.jpeg', '環球影城.jpeg', '迪士尼.jpeg']:
+        for pic in ['景點_安平古堡.jpg', '景點照片_劍湖山.jpg', '景點照片_台北心潮飯點.jpg',
+                    '景點照片_日月潭.jpg', '景點照片_野柳.jpg', '景點照片_金城武樹.jpg']:
             StoreImage.objects.create(
                 store=store,
                 picture=pic
