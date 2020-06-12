@@ -8,66 +8,52 @@ or_q = lambda q, other_fn: other_fn if q is None else q | other_fn
 and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
 
 
+def filter_query(filter_dict, queryset):
+    q = None
+    if filter_dict['search'] is not None:
+        for keyword in filter_dict['search'].strip().split():
+            q = or_q(q, Q(name__contains=keyword))
+            q = or_q(q, Q(storediscount__discount_type__name__contains=keyword))
+
+    if filter_dict['district'] is not None:
+        q = and_q(q, Q(district=filter_dict['district']))
+
+    if filter_dict['store_type'] is not None:
+        q = and_q(q, Q(store_type=filter_dict['store_type']))
+
+    if filter_dict['order_by']:
+        queryset = queryset.order_by(filter_dict['order_by'])
+
+    if filter_dict['storediscount_discount_type'] is not None:
+        for storediscount in filter_dict['storediscount_discount_type']:
+            q = or_q(q, Q(storediscount__discount_type=storediscount))
+
+    if filter_dict['ids']:
+        ids = filter_dict['ids'].split(',')
+        q = and_q(q, Q(id__in=ids))
+
+    if q:
+        return queryset.filter(q)
+    else:
+        return queryset
+
+
 class StoreFilter(filters.BaseFilterBackend):
-
     def filter_queryset(self, request, queryset, view):
-        q = None
-        keywords = request.query_params.get('keywords')
-        if keywords is not None:
-            for keyword in keywords.strip().split():
-                q = or_q(q, Q(product_number__contains=keyword))
-                q = or_q(q, Q(brand__en_name__contains=keyword))
-                q = or_q(q, Q(brand__cn_name__contains=keyword))
-                q = or_q(q, Q(name__contains=keyword))
-
-        brand = request.query_params.get('brand')
-        if brand is not None:
-            q = and_q(q, Q(brand=brand))
-
-        tag = request.query_params.get('tag')
-        if tag is not None:
-            q = and_q(q, Q(tag=tag))
-
-        order_by = request.query_params.get('order_by')
-        if order_by:
-            queryset = queryset.order_by(order_by)
-
-        category = request.query_params.get('category')
-        if category is not None:
-            q = and_q(q, Q(category=category))
-
-        no_tag = request.query_params.get('no_tag')
-        if no_tag is not None:
-            q = and_q(q, Q(tag__isnull=True))
-
-        order_by = request.query_params.get('order_by')
-        if order_by:
-            queryset = queryset.order_by(order_by)
-
-        only_tag = request.query_params.get('only_tag')
-        if only_tag is not None:
-            q = and_q(q, Q(tag__isnull=False))
-
-        inventory_status = request.query_params.get('inventory_status')
-        if inventory_status is not None:
-            q = and_q(q, Q(inventory_status=inventory_status))
-
-        max_price = request.query_params.get('max_price')
-        min_price = request.query_params.get('min_price')
-        if max_price is not None:
-            q = and_q(q, Q(price__lte=max_price))
-        if min_price is not None:
-            q = and_q(q, Q(price__gte=min_price))
-
-        ids = request.query_params.get('ids')
-        if ids:
-            ids = ids.split(',')
-            q = and_q(q, Q(id__in=ids))
-
-        if q:
-            return queryset.filter(q)
-        else:
-            return queryset
+        search = request.query_params.get('search')
+        district = request.query_params.get('district', None)
+        store_type = request.query_params.get('store_type', None)
+        order_by = request.query_params.get('order_by', None)
+        storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
+        ids = request.query_params.get('ids', None)
+        filter_dict = dict([('search', search),
+                         ('district', district),
+                         ('store_type', store_type),
+                         ('order_by', order_by),
+                         ('storediscount_discount_type', storediscount_discount_type),
+                         ('ids', ids)]
+                        )
+        return filter_query(filter_dict, queryset)
 
     def get_schema_fields(self, view):
         if view.action != 'list':
@@ -92,84 +78,39 @@ class StoreFilter(filters.BaseFilterBackend):
                 )
             ),
             coreapi.Field(
-                name='keywords',
+                name='search',
                 required=False,
                 location='query',
                 schema=coreschema.String(
-                    title='keywords',
-                    description='str: 請輸入Keywords'
+                    title='search',
+                    description='str: 請輸入Search'
                 )
             ),
             coreapi.Field(
-                name='brand',
+                name='district',
                 required=False,
                 location='query',
                 schema=coreschema.Number(
-                    title='brand',
-                    description='int: 品牌'
+                    title='district',
+                    description='int: 行政區'
                 )
             ),
             coreapi.Field(
-                name='tag',
+                name='store_type',
                 required=False,
                 location='query',
                 schema=coreschema.Number(
-                    title='tag',
-                    description='int: 標籤'
+                    title='store_type',
+                    description='int: 店家類型'
                 )
             ),
             coreapi.Field(
-                name='category',
+                name='storediscount_discount_type',
                 required=False,
                 location='query',
                 schema=coreschema.Number(
-                    title='category',
-                    description='int: 分類'
-                )
-            ),
-            coreapi.Field(
-                name='no_tag',
-                required=False,
-                location='query',
-                schema=coreschema.String(
-                    title='no_tag',
-                    description='str: 沒有標籤'
-                )
-            ),
-            coreapi.Field(
-                name='inventory_status',
-                required=False,
-                location='query',
-                schema=coreschema.Number(
-                    title='inventory_status',
-                    description='int: 庫存狀況 1：有庫存；2：無庫存；3：預品'
-                )
-            ),
-            coreapi.Field(
-                name='max_price',
-                required=False,
-                location='query',
-                schema=coreschema.Number(
-                    title='max_price',
-                    description='int: 金額上限'
-                )
-            ),
-            coreapi.Field(
-                name='min_price',
-                required=False,
-                location='query',
-                schema=coreschema.Number(
-                    title='min_price',
-                    description='int: 金額下限'
-                )
-            ),
-            coreapi.Field(
-                name='order_by',
-                required=False,
-                location='query',
-                schema=coreschema.String(
-                    title='order_by',
-                    description='str: 排序'
+                    title='storediscount_discount_type',
+                    description='int: 店家折扣'
                 )
             ),
         )
