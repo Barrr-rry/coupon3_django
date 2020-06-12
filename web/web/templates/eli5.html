@@ -1,0 +1,130 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <title>Work - Dailist</title>
+
+  <meta name="author" content="themsflat.com">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+
+  <!-- Favicon -->
+  <link href="images/icon/icon.png" rel="shortcut icon">
+
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="clear-loading loading-effect-2">
+    <span></span>
+  </div>
+</div><!-- /.preloader -->
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+<section class="page-title parallax parallax1">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title-heading">
+          常見問題
+        </div>
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+  <div class="overlay"></div>
+</section><!-- /.page-title -->
+
+<section class="flat-row flat-introduce">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="introduce-header">
+          <p>
+            振興券常用問題一覽，陸續新增中！
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>Create An Account</h3>
+            <span>1</span>
+          </div>
+          <div class="introduce-content">
+            Creating an account with Dailist is easy, with the social login feature it allows your visitors to login
+            easily, so that they won’t have the “login / Signup” friction. If not, You can upload photos, add helpful
+            links to your website or to social media, set an address and hours of operation and other informations that
+            you may find relevant.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>Submit Your Listing</h3>
+            <span>2</span>
+          </div>
+          <div class="introduce-content">
+            Upon confirmation, your listing will appear throughout the website and will be searchable by visitors
+            interested on similar places. A badge will be added to your listing to mark it as official.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>Get More Interest In Your Place</h3>
+            <span>3</span>
+          </div>
+          <div class="introduce-content">
+            When using Dailist your site will be a thing of beauty. Let’s be honest. The problem with most listing
+            directories, while highly functional, is that many of them aren’t very pretty. It’s why the beautiful ones
+            are so popular, because they match great photography with fantastic functionality.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-md-12">
+        <div class="introduce-footer">
+          <p>還有問題嗎？</p>
+          <div class="btn-more">
+            <a href="" title="">聯絡我們</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include 'includes/footer.html' %}
+
+<!-- Javascript -->
+{% include 'includes/js.html' %}
+
+</body>
+</html>

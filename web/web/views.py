@@ -38,6 +38,10 @@ class ContactView(TemplateView):
     template_name = 'contact.html'
 
 
+class ELI5View(TemplateView):
+    template_name = 'eli5.html'
+
+
 class QAView(TemplateView):
     template_name = 'QA.html'
 
