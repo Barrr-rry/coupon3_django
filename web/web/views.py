@@ -70,8 +70,8 @@ class ExploreV1View(TemplateView):
     template_name = 'explore-v1.html'
 
 
-class ExploreV2View(TemplateView):
-    template_name = 'explore-v2.html'
+class StoreMapView(TemplateView):
+    template_name = 'store_map.html'
 
 
 class ExploreV3View(TemplateView):
