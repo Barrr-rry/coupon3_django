@@ -12,6 +12,12 @@ class TestView(TemplateView):
 class IndexView(TemplateView):
     template_name = 'index.html'
 
+    def get_context_data(self, *args, **kwargs):
+        ret = dict(
+            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+        )
+        return ret
+
 
 class NotFoundView(TemplateView):
     template_name = '404.html'
