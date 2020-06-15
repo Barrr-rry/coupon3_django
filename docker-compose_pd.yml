@@ -17,6 +17,7 @@ services:
       - ./log:/root/var/log
       #      - rest_framework:/usr/local/lib/python3.7/site-packages/rest_framework/static/rest_framework
       - static_vol:/app/web/templates/static
+      - admin_css:/usr/local/lib/python3.7/site-packages/django/contrib/admin/static/admin/css
     depends_on:
       - coupon3-redis
   coupon3-redis:
@@ -71,6 +72,7 @@ services:
       #      - rest_framework:/usr/share/nginx/html/static/rest_framework
 #      - static_vol:/usr/share/nginx/html/static
       - ./web/web/templates/static:/usr/share/nginx/html/static
+      - admin_css:/usr/share/nginx/html/static
 
     restart: always
 
@@ -84,6 +86,7 @@ services:
       - coupon3-web
 volumes:
   #  rest_framework:
+  admin_css:
   static_vol:
   certs:
   html:
