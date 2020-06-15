@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y cron
 RUN service cron start
 RUN python manage.py crontab add
 
-COPY /usr/local/lib/python3.7/site-packages/django/contrib/admin/static /app/web/templates/static
-COPY /usr/local/lib/python3.7/site-packages/rest_framework/static /app/web/templates/static
+RUN cp -r /usr/local/lib/python3.7/site-packages/django/contrib/admin/static/admin /app/web/templates/static
+RUN cp -r /usr/local/lib/python3.7/site-packages/rest_framework/static /app/web/templates/static
 # Copy hello-cron file to the cron.d directory
 #COPY ./django-cron /etc/cron.d/django-cron
 # Give execution rights on the cron job
