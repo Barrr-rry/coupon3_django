@@ -89,12 +89,8 @@
               <span class="ti-target"></span>
               <input type="text" name="address" placeholder="請輸入商家地址或活動地址">
             </div><!-- /.wrap-listing -->
-            <div class="pdmap style2" id="flat-map">
-              <div class="flat-maps" data-address="Thành phố New York, Tiểu bang New York"
-                   data-name="Themesflat Map"></div>
-              <div class="gm-map">
-                <div class="map-3"></div>
-              </div>
+            <div class="pdmap style2" id="map" style="height: 320px">
+
             </div><!-- /#flat-map -->
             <div class="clearfix"></div>
           </div><!-- /.inner-box -->
@@ -129,6 +125,23 @@
 
 {% include 'includes/footer.html' %}
 {% include 'includes/js.html' %}
+<script>
+  $(document).ready(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError)
+    } else {
+      alert('您的瀏覽器不支援定位系統')
+      const position = {
+        coords: {
+          latitude: '23.8523405',
+          longitude: '120.9009427'
+        },
+        zoom: 7
+      }
+      showPosition(position)
+    }
+  })
+</script>
 
 </body>
 </html>
