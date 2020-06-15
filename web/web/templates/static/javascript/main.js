@@ -16,6 +16,88 @@
  * RemovePreloader
  */
 
+const showError = (error) => {
+  console.log('error:', error)
+  const position = {
+    coords: {
+      latitude: '23.8523405',
+      longitude: '120.9009427'
+    },
+    zoom: 7
+  }
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      alert('讀取不到您目前的位置 PERMISSION_DENIED')
+      showPosition(position)
+      break
+    case error.POSITION_UNAVAILABLE:
+      alert('讀取不到您目前的位置 POSITION_UNAVAILABLE')
+      showPosition(position)
+      break
+    case error.TIMEOUT:
+      alert('讀取位置逾時')
+      showPosition(position)
+      break
+    case error.UNKNOWN_ERROR:
+      alert('Error')
+      showPosition(position)
+      break
+  }
+}
+const showPosition = (position) => {
+    const map = L.map('map').setView([position.coords.latitude, position.coords.longitude], position.zoom || 17)
+
+    let popup = L.popup()
+
+    function onMapClick(e) {
+      popup
+        .setLatLng(e.latlng)
+        .setContent("經緯度座標：" + e.latlng.toString())
+        .openOn(map);
+    }
+
+    map.on('click', onMapClick)
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map)
+
+    // 創建icon圖標
+    const greenIcon = new L.Icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    })
+    const orangeIcon = new L.Icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    })
+    const greyIcon = new L.Icon({
+      iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
+      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    })
+    const blueMarker = L.icon.pulse({iconSize: [20, 20], color: '#2e72f0', fillColor: '#2e72f0'})
+
+    // 設定所在位置的icon
+    const selfPos = L.marker([position.coords.latitude, position.coords.longitude], {icon: blueMarker}).bindPopup('目前位置')
+    map.addLayer(selfPos)
+
+    // 使用 MarkerClusterGroup 將各個地點群組化
+    const markers = new L.MarkerClusterGroup()
+
+  }
+
 ;(function ($) {
 
   'use strict'

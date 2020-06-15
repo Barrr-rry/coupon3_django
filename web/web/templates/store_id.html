@@ -14,18 +14,7 @@
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- Boostrap style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
-
-  <!-- REVOLUTION LAYERS STYLES -->
-  <link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
-
-  <!-- Reponsive -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+  {% include 'includes/css.html' %}
 
   <!-- Favicon -->
   <link href="images/icon/icon.png" rel="shortcut icon">
@@ -119,8 +108,7 @@
           <div class="box pdmap style1" id="flat-map-4">
             <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
                  data-image="images/icon/map.png" data-name="Themesflat Map"></div>
-            <div class="gm-map">
-            </div>
+            <div id="map" style="width: 370px;height: 220px"></div>
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
@@ -145,7 +133,18 @@
 
 <!-- Javascript -->
 {% include 'includes/js.html' %}
-
+<script>
+  $(document).ready(() => {
+    const position = {
+      coords: {
+        latitude: {{instance.latitude}},
+        longitude: {{instance.longitude}}
+      },
+      zoom: 12
+    }
+    showPosition(position)
+  })
+</script>
 
 </body>
 </html>

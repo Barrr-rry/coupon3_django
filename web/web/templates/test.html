@@ -10,7 +10,7 @@
   <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"></link>
 </head>
 <body>
-<div id="map" class="map" style="height: 100vh;"></div>
+<div id="map" class="map" style="height: 370px;width: 370px"></div>
 </body>
 <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
 <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
@@ -107,7 +107,6 @@
 
 
   $(document).ready(() => {
-    console.log('yoo')
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError)
     } else {
