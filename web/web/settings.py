@@ -62,7 +62,7 @@ MIDDLEWARE = [
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://conpon3-redis:6379/0",
+        "LOCATION": "redis://coupon3-redis:6379/0",
         "TIMEOUT": 60 * 60,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",

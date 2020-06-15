@@ -10,7 +10,7 @@ services:
       - ./log:/root/var/log
     depends_on:
       - conpon3-redis
-  conpon3-redis:
+  coupon3-redis:
     image: redis:alpine
     restart: always
     volumes:
