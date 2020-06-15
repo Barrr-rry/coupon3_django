@@ -1,5 +1,7 @@
 FROM python:3.7
 COPY ./web /app
+COPY /usr/local/lib/python3.7/site-packages/django/contrib/admin/static /app/web/templates/static
+COPY /usr/local/lib/python3.7/site-packages/rest_framework/static /app/web/templates/static
 ENV ENV prod
 WORKDIR /app
 RUN pip install -r requirements.txt
