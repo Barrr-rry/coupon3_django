@@ -14,14 +14,7 @@
   <!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <!-- Boostrap style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
-
-  <!-- Theme style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
-
-  <!-- Reponsive -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+  <!-- Boostrap style -->{% include 'includes/css.html' %}
 
   <!-- Favicon -->
   <link href="images/icon/icon.png" rel="shortcut icon">
@@ -40,7 +33,7 @@
 
 <section class="flat-map-zoom-in">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row" style="display: flex">
       <div class="col-md-6">
         <div class="flat-filter">
           <div class="wrap-box-search style2">
@@ -328,12 +321,8 @@
         </div><!-- /.flat-filter -->
       </div><!-- /.col-md-6 -->
       <div class="col-md-6">
-        <section class="pdmap" id="flat-map">
-          <div class="flat-maps" data-name="Themesflat Map"></div>
-          <div class="gm-map">
-            <div class="map-1"></div>
-          </div>
-        </section><!-- /#flat-map -->
+        <div id="map" style="height: 100%"></div>
+
       </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
   </div><!-- /.container-fluid -->
@@ -343,6 +332,23 @@
 {% include 'includes/footer.html' %}
 <!-- Javascript -->
 {% include 'includes/js.html' %}}
+<script>
+  $(document).ready(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError)
+    } else {
+      alert('您的瀏覽器不支援定位系統')
+      const position = {
+        coords: {
+          latitude: '23.8523405',
+          longitude: '120.9009427'
+        },
+        zoom: 7
+      }
+      showPosition(position)
+    }
+  })
+</script>
 
 
 </body>
