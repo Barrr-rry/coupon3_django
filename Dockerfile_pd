@@ -1,7 +1,5 @@
 FROM python:3.7
 COPY ./web /app
-COPY /usr/local/lib/python3.7/site-packages/django/contrib/admin/static /app/web/templates/static
-COPY /usr/local/lib/python3.7/site-packages/rest_framework/static /app/web/templates/static
 ENV ENV prod
 WORKDIR /app
 RUN pip install -r requirements.txt
@@ -9,6 +7,9 @@ RUN pip install -r requirements.txt
 RUN apt-get update && apt-get install -y cron
 RUN service cron start
 RUN python manage.py crontab add
+
+COPY /usr/local/lib/python3.7/site-packages/django/contrib/admin/static /app/web/templates/static
+COPY /usr/local/lib/python3.7/site-packages/rest_framework/static /app/web/templates/static
 # Copy hello-cron file to the cron.d directory
 #COPY ./django-cron /etc/cron.d/django-cron
 # Give execution rights on the cron job
