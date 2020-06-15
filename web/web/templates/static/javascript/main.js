@@ -1411,7 +1411,7 @@
     searchButton();
     filterToggle();
     CountDown();
-    googleMap();
+    // googleMap();
     slideSearch();
     loadMore();
     loadMore_s2();
