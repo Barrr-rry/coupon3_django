@@ -108,7 +108,7 @@
           <div class="result">
             共有 {{ count }} 筆搜尋結果
           </div>
-          <a href="/store_map" class="mr-5" style="font-size: xx-large; float:right">
+          <a href="/store_map" class="mr-5 link-map" style="font-size: xx-large; float:right">
               地圖模式
           </a>
         </div><!-- /.filter-result -->
@@ -121,30 +121,43 @@
           <div class="mb-50px col-md-4 store">
             <div class="imagebox style1">
               <div class="box-imagebox">
-                <div class="box-header">
-                  <div class="box-image">
-                    <img src="/media/{{ el.image_1 }}" alt="">
-                    <a href="/store/{{ el.id }}" title="">查看詳情</a>
-                    <div class="overlay"></div>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-content">
-                  <div class="box-title ad">
-                    <a href="/store/{{ el.id }}" title="">{{ el.name }}</a><i class="fa fa-check-circle"
-                                                                              aria-hidden="true"></i>
-                  </div>
-                  <ul class="rating">
-                    <li>{{ el.county_name }}</li>
-                    <li>{{ el.district_name }}</li>
-                    <li>{{ el.store_type_name }}</li>
-                  </ul>
-                  <div class="box-desc">
-                    {{ el.storediscount_names }}
-                  </div>
-                </div><!-- /.box-content -->
-                <ul class="location">
-                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>
-                </ul><!-- /.location -->
+                <div class="link_block">
+                  <a href="/store/{{ el.id }}" class="link"></a>
+                  <div class="box-header">
+                    <div class="box-image">
+                      <img src="/media/{{ el.image_1 }}" alt="">
+                      <a title="">查看詳情</a>
+                      <div class="overlay"></div>
+                    </div>
+                  </div><!-- /.box-header -->
+                  <div class="box-content">
+                    <div class="box-title ad">
+                      <a href="/store/{{ el.id }}" title="">{{ el.name }}</a>
+<!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
+                    </div>
+                    <ul class="rating">
+                      <li><span>{{ el.county_name }}</span></li>
+                      <li><span>{{ el.district_name }}</span></li>
+                      <li>
+                        <img src="/media/park_s_gray.svg" alt="">
+                        <span>{{ el.store_type_name }}</span>
+                      </li>
+                    </ul>
+                    <div class="box-desc">
+                      {{ el.storediscount_names }}
+                    </div>
+                  </div><!-- /.box-content -->
+                </div>
+                <ul class="tag_block">
+                  <li class="tag"><a href="">贈品贈品</a></li>
+                  <li class="tag"><a href="">全店打折</a></li>
+                  <li class="tag"><a href="">全店打折</a></li>
+                  <!--這邊可以只顯示3筆嗎，要維持一行-->
+                  <li class="right"><a href="">刪除</a></li>
+                </ul>
+<!--                <ul class="location">-->
+<!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+<!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
               </div><!-- /.box-imagebox -->
             </div><!-- /.imagebox style1 -->
           </div><!-- /.col-md-4 -->
