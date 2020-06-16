@@ -24,7 +24,6 @@ SECRET_KEY = 'v!1n#$97dvwqai!vjwm3588%2p2g!w+*zgc*%q%m9-3c6ff%pg2x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('ENV') != 'prod'
-DEBUG = True
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
