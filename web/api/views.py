@@ -244,3 +244,43 @@ class ContactView(viewsets.ViewSet):
         '''
         send_mail('Contact Us', msg)
         return Response(data=dict(msg='ok'))
+
+
+@router_url('location', basename='location')
+class LocationView(viewsets.ViewSet):
+    schema = ManualSchema(
+        fields=[
+            coreapi.Field(
+                "task_type",
+                required=True,
+                location="query",
+                schema=coreschema.Number()
+            ),
+            coreapi.Field(
+                "msg",
+                required=True,
+                location="query",
+                schema=coreschema.String()
+            ),
+        ]
+    )
+
+    def list(self, request, *args, **kwargs):
+        """
+        1: get_latlon 2: get_addr
+        """
+        from crawler import task
+        task_type = int(request.query_params.get('task_type'))
+        msg = request.query_params.get('msg')
+        fn_mapping = {
+            1: 'get_latlon',
+            2: 'get_addr'
+        }
+        task_id = task.enqueue_task(fn_mapping[task_type], msg)
+        ret = None
+        while True:
+            ret = task.get_task_result(task_id)
+            if ret:
+                break
+        logger.info(f'loc=> {msg}:{ret}')
+        return Response(dict(data=ret))
