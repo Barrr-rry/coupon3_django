@@ -10741,9 +10741,8 @@ footer .widget-about .logo-ft a {
   opacity: 0.2;
 }
 
-.parallax1 {
+.parallax-200 {
   background-color: #281224;
-  background-image: url("/media/bg_dark.png");
   background-repeat: no-repeat;
   background-position: bottom left;
   background-size: auto;
