@@ -42,14 +42,14 @@ def generate_super_admin():
 
 def generate_stort_type(count):
     names = [
-        ('美食', 'cutlery.png'),
-        ('住宿', 'double-bed.png'),
-        ('娛樂', 'guitar.png'),
-        ('租賃', 'rent-a-car.png'),
-        ('購物', 'shopping-bag.png'),
-        ('旅遊', 'dumbbell.png'),
-        ('刷卡', 'cocktail.png'),
-        ('美妝便利店', 'park.png'),
+        ('美食', 'cutlery.svg'),
+        ('住宿', 'double-bed.svg'),
+        ('娛樂', 'guitar.svg'),
+        ('租賃', 'rent-a-car.svg'),
+        ('購物', 'shopping-bag.svg'),
+        ('旅遊', 'dumbbell.svg'),
+        ('刷卡', 'cocktail.svg'),
+        ('美妝便利店', 'park.svg'),
     ]
     for name, icon in names:
         StoreType.objects.create(

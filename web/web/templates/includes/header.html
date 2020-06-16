@@ -8,25 +8,32 @@
         <div class="header-wrap">
           <div id="logo" class="logo">
             <a href="/" title="">
-              小 資 振 興
+              <svg width="170" height="38">
+                <image xlink:href="/media/logo-w.svg" width="170" height="38"/>
+              </svg>
             </a>
           </div><!-- /.logo -->
           <div class="nav-wrap">
             <nav id="mainnav" class="mainnav">
               <ul class="menu">
                 <li>
+                  <img src="/media/menu_idea_icon.svg" alt="">
                   <a href="/eli5/" title="">懶人包</a>
                 </li>
                 <li>
+                  <img src="/media/menu_gift_icon.svg" alt="">
                   <a href="/store/" title="">加碼商家</a>
                 </li>
                 <li>
+                  <img src="/media/menu_map_icon.svg" alt="">
                   <a href="/store_map/" title="">地圖找商家</a>
                 </li>
                 <li>
+                  <img src="/media/menu_question_icon.svg" alt="">
                   <a href="/qa/" title="">常見問題</a>
                 </li>
                 <li>
+                  <img src="/media/menu_sale_icon.svg" alt="">
                   <a href="/store/create/" title="">免費刊登商家活動</a>
                 </li>
               </ul>
@@ -37,16 +44,40 @@
                             </div>
                             -->
             <!-- 這個搜尋框請幫改 -->
+            <div class="wrap-box-search style2">
+              <form method="get" accept-charset="utf-8">
+                <span class="location">
+                  <span class="ti-location-pin"></span>
+                  <input type="text" placeholder="輸入地區或地址" name="location">
+                  <a href="">
+                    <svg width="20" height="20">
+                      <image xlink:href="/media/search-bar-arget.svg" width="20" height="20"/>
+                    </svg>
+                  </a>
+                </span>
+              </form><!-- /form -->
+            </div><!-- /.wrap-box-search -->
             <div class="show-search">
               <button><span class="ti-search"></span></button>
               <div class="submenu top-search search-header">
-                <form role="search" method="get" class="search-form" action="/store/">
-                  <label>
-                    <input type="search" class="search-field" placeholder="Search …" value="" name="search">
-                  </label>
-                  <button class="search-submit-form" title="Search now"><i class="fa fa-search" aria-hidden="true"></i>
-                  </button>
-                </form>
+                <form method="get" accept-charset="utf-8">
+                  <span class="location">
+                    <span class="ti-location-pin"></span>
+                    <input type="text" placeholder="輸入地區或地址" name="location">
+                    <a href="">
+                      <svg width="25" height="25">
+                        <image xlink:href="/media/search-bar-arget.svg" width="25" height="25"/>
+                      </svg>
+                    </a>
+                  </span>
+                </form><!-- /form -->
+<!--                <form role="search" method="get" class="search-form" action="/store/">-->
+<!--                  <label>-->
+<!--                    <input type="search" class="search-field" placeholder="Search …" value="" name="search">-->
+<!--                  </label>-->
+<!--                  <button class="search-submit-form" title="Search now"><i class="fa fa-search" aria-hidden="true"></i>-->
+<!--                  </button>-->
+<!--                </form>-->
               </div>
             </div>
             <!-- /.show-search -->
