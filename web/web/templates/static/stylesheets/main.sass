@@ -465,12 +465,12 @@ footer
         letter-spacing: 2px
         color: #aaaaaa
         margin-top: 15px
-    ul.tag
-      padding: 16px 25px 15px
+    ul.tag_block
+      padding: 16px 0px 15px 25px
       border-top: 1px solid #ebebeb
       overflow: hidden
       height: 58px
-      li
+      li.tag
         display: inline-block
         margin-bottom: 20px
         a
@@ -483,6 +483,18 @@ footer
             background: #f25b22
             color: #ffffff
             font-weight: 400
+      li.right
+        display: inline-block
+        float: right
+        a
+          display: inline-block
+          padding-right: 25px
+          font-weight: 400
+          color: rgba(204,36,38,0.7)
+          &:hover
+            color: rgba(204,36,38,1)
+
+
 
 
 
@@ -605,13 +617,16 @@ footer
       margin: 0px 0px 15px
   .imagebox
     .box-imagebox
-      ul.tag
-        li
+      ul.tag_block
+        li.tag
           a
             background: rgb(242, 91, 34,.8)
             color: #ffffff
             font-weight: 400
             border: 1px solid rgba(255,255,255,0)
+        li.end
+          a
+
 
 
 
