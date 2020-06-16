@@ -1,6 +1,6 @@
 version: '3'
 services:
-  conpon3-web:
+  coupon3-web:
     container_name: conpon3-django-web
     build: .
     ports:

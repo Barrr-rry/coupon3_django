@@ -139,8 +139,11 @@
   $(document).ready(() => {
     const position = {
       coords: {
-        latitude: {{instance.latitude}},
-        longitude: {{instance.longitude}}
+        {#latitude: {{instance.latitude}},#}
+        {#longitude: {{instance.longitude}}#}
+        {#('22.629995', '120.296872')#}
+        latitude: 22.629995,
+        longitude: 120.296872
       },
       zoom: 12
     }
