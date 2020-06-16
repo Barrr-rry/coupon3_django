@@ -108,14 +108,9 @@
           <div class="result">
             共有 {{ count }} 筆搜尋結果
           </div>
-          <ul class="arrange">
-            <li class="active">
-              <span class="ti-view-grid"></span>
-            </li>
-            <li>
-              <span class="ti-view-list"></span>
-            </li>
-          </ul>
+          <a href="/store_map" class="mr-5" style="font-size: xx-large; float:right">
+              地圖模式
+          </a>
         </div><!-- /.filter-result -->
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
@@ -129,7 +124,7 @@
                 <div class="box-header">
                   <div class="box-image">
                     <img src="/media/{{ el.image_1 }}" alt="">
-                    <a href="/store/{{ el.id }}" title="">Preview</a>
+                    <a href="/store/{{ el.id }}" title="">查看詳情</a>
                     <div class="overlay"></div>
                   </div>
                 </div><!-- /.box-header -->
@@ -149,7 +144,6 @@
                 </div><!-- /.box-content -->
                 <ul class="location">
                   <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>
-                  <li class="closed">刪除</li>
                 </ul><!-- /.location -->
               </div><!-- /.box-imagebox -->
             </div><!-- /.imagebox style1 -->

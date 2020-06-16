@@ -24,6 +24,7 @@ SECRET_KEY = 'v!1n#$97dvwqai!vjwm3588%2p2g!w+*zgc*%q%m9-3c6ff%pg2x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('ENV') != 'prod'
+DEBUG = True
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.AutoSchema',
@@ -61,7 +62,7 @@ MIDDLEWARE = [
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://conpon3-redis:6379/0",
+        "LOCATION": "redis://coupon3-redis:6379/0",
         "TIMEOUT": 60 * 60,
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
