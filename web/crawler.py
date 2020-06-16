@@ -133,9 +133,11 @@ def loop_queue():
     while True:
         tasks = task.get_task_queue()
         if not tasks:
-            time.sleep(1)
             continue
         (task_type, task_args, task_id) = tasks
+        if len(task_args) <= 2:
+            logger.info(f'task_args too small: {task_args}')
+            continue
         fn = get_addr if task_type == 'get_addr' else get_latlon
         driver.get("http://www.map.com.tw/")
         ret = fn(driver, task_args)
@@ -151,5 +153,6 @@ if __name__ == '__main__':
 
     # queue.enqueue('get_latlon', '高雄市中正四路148號', str(uuid.uuid4()))
     # queue.enqueue('get_latlon', '高雄市中正四路148號', str(uuid.uuid4()))
+    task.enqueue_task('get_addr', '22.89503442930087,120.54229259490967')
     logger.info('execute loop queue')
     loop_queue()
