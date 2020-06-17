@@ -15,10 +15,6 @@ form.form-listing .inner-box .browse .upload span
 .clear
   clear: both
 
-//#mainnav-mobi
-//position: fixed
-//top: 100px
-
 .flat-imagebox
   background-color: #f1f1f1
   padding: 100px 0 120px
@@ -50,6 +46,9 @@ form.form-listing .inner-box .browse .upload span
     //background: #F26422
     background: #cccccc
 
+.loading-effect-2 > span, .loading-effect-2 > span:before, .loading-effect-2 > span:after
+  border: 2px solid #f25b22
+
 a
   color: #999999
 
@@ -77,7 +76,7 @@ a
 
 .header
   background-color: #F26422
-  background-image: url("/media/bg_top.png")
+  background-image: url("/media/bg_top.svg")
   background-repeat: no-repeat
   background-position: top right
   box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.25)
@@ -262,7 +261,7 @@ footer
 
 .flat-highlights
   background-color: #281224
-  background-image: url("/media/bg_dark_mobile.png")
+  background-image: url("/media/bg_dark_mobile.svg")
   background-repeat: no-repeat
   background-position: bottom left
 
@@ -996,7 +995,11 @@ form.form-listing
       margin-bottom: 20px
 
 @media only screen and (max-width: 1199px)
+
+  .flat-highlights
+    background-image: url("/media/bg_dark_tablet.svg")
   .header
+    background-image: url("/media/bg_top_tablet.svg")
     .show-search
       display: inline-block
 
@@ -1087,8 +1090,9 @@ form.form-listing
           height: auto
           margin-left: 24px
   .parallax-200
-    background-image: url("/media/bg_dark_mobile.png")
-    background-position: 45% 50px !important
+    background-image: url("/media/bg_dark_mobile_2.svg")
+    //background-position: 45% 50px !important
+    background-position: 33% -102px !important
     background-size: cover
 
   .wrap-box-search.style1
@@ -1136,7 +1140,7 @@ form.form-listing
           top: 46px
 
 
-@media only screen and (max-width: 991px)
+@media only screen and (max-width: 991px )
   form.form-listing
     .inner-box
       .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
@@ -1160,6 +1164,25 @@ form.form-listing
         max-width: 100%
         flex: none
 
+  .flat-imagebox
+    &.style5
+      .col-md-6
+        max-width: 100%
+        flex: none
+
+        .imagebox.style5.link-activity .box-image
+          background-position: bottom left
+          background-size: cover
+
+      .col-md-3
+        max-width: 50%
+        flex: none
+
+  .page-title.style2
+    a.text-heading
+      background-color: rgba(242, 91, 34, 0.9)
+      border: none
+
 
 #map
   height: 300px !important
@@ -1182,52 +1205,41 @@ form.form-listing
     &:hover
       background-color: #CC2426
 
-  .flat-imagebox
-    &.style5
-      .col-md-6
-        max-width: 100%
-        flex: none
 
-        .imagebox.style5.link-activity .box-image
-          background-position: bottom left
-          background-size: cover
-
-      .col-md-3
-        max-width: 50%
-        flex: none
-
-  .page-title.style2
-    a.text-heading
-      background-color: rgba(242, 91, 34, 0.9)
-      border: none
 
 
 @media only screen and (max-width: 767px)
-  .flat-imagebox.style5 .col-md-6
-    .imagebox.style5
-      //background: rgba(204,36,38,1)
-      &.item
-        .box-image
-          .overlay
-            opacity: 1
-
-            span
-              width: 92%
-              left: 4%
-
-        .box-content
-          a
-            color: #FFFFFF
-
-          p
-            color: #FFFFFF
-
-          img.bg
-            opacity: 0.2
-
-      &.link-activity
+  .flat-highlights
+    background-image: url("/media/bg_dark_mobile_2.svg")
+  .header
+    background-image: url("/media/bg_top_mobile.svg")
+  .flat-imagebox.style5
+    .col-md-6 .imagebox.style5
+       &.link-activity
         .box-image
           background-position: 96% 20px
+
+    .col-md-3
+      max-width: 100%
+      .box-image
+        .overlay
+          opacity: 1
+
+          span
+            width: 92%
+            left: 4%
+
+      .box-content
+        a
+          color: #FFFFFF
+
+        p
+          color: #FFFFFF
+
+        img.bg
+          opacity: 0.2
+
+
 
   .footer-bottom
     padding: 0 24px 40px 24px
