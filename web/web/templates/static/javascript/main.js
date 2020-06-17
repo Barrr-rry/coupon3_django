@@ -22,6 +22,7 @@ const default_position = {
   },
   zoom: 7
 }
+let now_position = {}
 
 let marker = []
 let clearAllMarker = (map) => {
@@ -1585,11 +1586,12 @@ const showSelfPosition = (position) => {
     let setError = () => {
       setCookie("lat", default_position.coords.latitude, 365)
       setCookie("lon", default_position.coords.longitude, 365)
+      now_position = default_position
     }
     let setPosition = (position) => {
-      console.log('position:', position)
       setCookie("lat", position.coords.latitude, 365)
       setCookie("lon", position.coords.longitude, 365)
+      now_position = position
     }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(setPosition, setError)
@@ -1598,9 +1600,25 @@ const showSelfPosition = (position) => {
       setError()
     }
   }
+  let searchAPI = () => {
+    $('#position').on('click', function () {
+      let msg = `${now_position.coords.latitude}, ${now_position.coords.longitude}`
+      $.ajax({
+        url: `/api/location/?task_type=2&msg=${msg}`,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+      }).done(res => {
+        let $input = $('input[name="search"]')
+        $input.val(res.data)
+      })
+
+    })
+  }
 
   $(function () {
     initPosition();
+    searchAPI();
     responsiveMenu();
     headerFixed();
     slideTeam();
