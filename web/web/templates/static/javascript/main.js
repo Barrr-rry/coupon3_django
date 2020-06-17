@@ -15,6 +15,40 @@
  * GoTop
  * RemovePreloader
  */
+let share = (social) => {
+  const webTitle = `振興券`,
+    webUrl = location.href
+  let shareUrl = (social === 'line') ? `振興券：${webUrl}?openExternalBrowser=1` : webUrl
+  window.open('https://www.addtoany.com/add_to/' + social + '?linkurl=' + shareUrl + '&amp;linkname=' + encodeURI(webTitle))
+}
+let copy = (content) => {
+  function isOS() {
+    return navigator.userAgent.match(/ipad|iphone/i);
+  }
+
+  let textArea = document.createElement('textArea')
+  let range
+  let selection
+  textArea.value = content
+  document.body.appendChild(textArea)
+  if (isOS()) {
+    range = document.createRange()
+    range.selectNodeContents(textArea)
+    selection = window.getSelection()
+    selection.removeAllRanges()
+    selection.addRange(range)
+    textArea.setSelectionRange(0, 999999)
+  } else {
+    textArea.select()
+  }
+  try {
+    let successful = document.execCommand('copy');
+    let msg = successful ? 'successful' : 'unsuccessful';
+    this.$toast.success(this.$t('copy_coupon'))
+  } catch (err) {
+  }
+  document.body.removeChild(textArea)
+}
 
 const showError = (error) => {
   console.log('error:', error)
