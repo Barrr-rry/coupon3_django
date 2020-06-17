@@ -1463,33 +1463,45 @@ const showSelfPosition = (position) => {
       <div class="mb-50px col-md-4 store">
         <div class="imagebox style1">
           <div class="box-imagebox">
-            <div class="box-header">
-              <div class="box-image">
-                <img src="/media/${data.image_1}" alt="">
-                <a href="/store/${data.id}" title="">Preview</a>
-                <div class="overlay"></div>
-              </div>
-            </div><!-- /.box-header -->
-            <div class="box-content">
-              <div class="box-title ad">
-                <a href="/store/${data.id}" title="">${data.name}</a><i class="fa fa-check-circle" aria-hidden="true"></i>
-              </div>
-              <ul class="rating">
-                <li>${data.county_name}</li>
-                <li>${data.district_name}</li>
-                <li>${data.store_type_name}</li>
-              </ul>
-              <div class="box-desc">
-                ${data.storediscount_names}
-              </div>
-            </div><!-- /.box-content -->
-            <ul class="location">
-              <li class="address"><span class="ti-location-pin"></span>電話: ${data.phone}</li>
-              <li class="closed">刪除</li>
-            </ul><!-- /.location -->
+            <div class="link_block">
+              <a href="/store/${data.id}" class="link"></a>
+              <div class="box-header">
+                <div class="box-image">
+                  <img src="/media/${data.image_1}" alt="">
+                  <a title="">查看詳情</a>
+                  <div class="overlay"></div>
+                </div>
+              </div><!-- /.box-header -->
+              <div class="box-content">
+                <div class="box-title ad">
+                  <a href="/store/${data.id}" title="">${data.name}</a>
+                  <!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
+                </div>
+                <ul class="rating">
+                  <li><span>${data.county_name}</span></li>
+                  <li><span>${data.district_name}</span></li>
+                  <li>
+                    <img src="/media/park_s_gray.svg" alt="">
+                    <span>${data.store_type_name}</span>
+                  </li>
+                </ul>
+                <div class="box-desc">
+                  <div class="sale-list">
+                    ${data.storediscount_names}
+                  </div>
+                </div>
+              </div><!-- /.box-content -->
+            </div>
+            <ul class="tag_block">
+              <li class="tag"><a href="">贈品贈品</a></li>
+              <li class="tag"><a href="">全店打折</a></li>
+              <li class="tag"><a href="">全店打折</a></li>
+              <!--這邊可以只顯示3筆嗎，要維持一行-->
+              <li class="right"><a href="">分享</a></li>
+            </ul>
           </div><!-- /.box-imagebox -->
         </div><!-- /.imagebox style1 -->
-      </div><!-- /.col-md-4 -->
+      </div>
       `
       $('.store-box').append(html)
     }
