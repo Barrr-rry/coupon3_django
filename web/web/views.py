@@ -97,6 +97,12 @@ class StoreView(TemplateView):
             nlon = x['longitude']
             ret = (abs(nlat - lat) ** 2 + abs(nlon - lon) ** 2) ** (1 / 2)
             x['distance'] = ret
+            m = ret / 0.00001
+            if m > 1000:
+                m = str(round(m / 1000, 1)) + '公里'
+            else:
+                m = str(round(m)) + '公尺'
+            x['distance_name'] = m
             return ret
 
         data = sorted(data, key=distance)
