@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .to-flex-col {
   display: flex;
   flex-direction: column;
@@ -10393,6 +10394,11 @@ a.text-dark:hover, a.text-dark:focus {
 
 body {
   color: #333333;
+  background-color: #F1F1F1;
+}
+
+form.form-listing .inner-box .browse .upload span {
+  background-color: #f25b22;
 }
 
 .clear {
@@ -11006,9 +11012,7 @@ footer .widget-about .logo-ft a {
 }
 
 .header_sticky .flat-title {
-  box-shadow: none;
-  background-color: #F1F1F1;
-  padding-top: 80px;
+  padding: 40px 0 50px;
 }
 .header_sticky .flat-title .title-left .box-title {
   margin-bottom: 12px;
@@ -11028,7 +11032,7 @@ footer .widget-about .logo-ft a {
   margin-bottom: 12px;
 }
 .header_sticky .flat-title .title-left ul.box-address li.address {
-  margin-bottom: 0px;
+  margin-bＦottom: 0px;
 }
 .header_sticky .flat-title ul.social-ft {
   text-align: right;
@@ -11057,8 +11061,7 @@ footer .widget-about .logo-ft a {
   background-color: #f25b22;
 }
 .header_sticky .flat-explore-detail {
-  background-color: #F1F1F1;
-  padding: 45px 0 120px;
+  padding: 50px 0 120px;
 }
 .header_sticky .flat-explore-detail .col-md-8 {
   padding-right: 50px;
@@ -11424,10 +11427,10 @@ form.form-listing .only-submit-form-listing:hover {
 }
 @media only screen and (max-width: 991px) {
   form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
-    padding-right: 0px;
+    padding-right: 0;
   }
   form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2) {
-    padding-left: 0px;
+    padding-left: 0;
   }
   form.form-listing .inner-box .submit-form-listing:hover {
     background: #ffffff !important;
@@ -11442,44 +11445,79 @@ form.form-listing .only-submit-form-listing:hover {
     max-width: 100%;
     flex: none;
   }
-  .header_sticky .flat-explore-detail #map {
-    height: 400px !important;
-  }
 }
+#map {
+  height: 300px !important;
+  text-align: center;
+}
+#map .map_btn {
+  position: absolute;
+  width: 200px;
+  left: 50%;
+  bottom: 26px;
+  padding: 5px 10px;
+  margin-left: -100px;
+  border-radius: 50px;
+  z-index: 500;
+  background-color: #f25b22;
+  color: #fff;
+  font-size: 18px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+#map .map_btn:hover {
+  background-color: #CC2426;
+}
+#map .flat-imagebox.style5 .col-md-6 {
+  max-width: 100%;
+  flex: none;
+}
+#map .flat-imagebox.style5 .col-md-6 .imagebox.style5.link-activity .box-image {
+  background-position: bottom left;
+  background-size: cover;
+}
+#map .flat-imagebox.style5 .col-md-3 {
+  max-width: 50%;
+  flex: none;
+}
+#map .page-title.style2 a.text-heading {
+  background-color: rgba(242, 91, 34, 0.9);
+  border: none;
+}
+
 @media only screen and (max-width: 767px) {
-  .imagebox.style5.item .box-image .overlay {
+  .flat-imagebox.style5 .col-md-6 .imagebox.style5.item .box-image .overlay {
     opacity: 1;
   }
-  .imagebox.style5.item .box-image .overlay span {
+  .flat-imagebox.style5 .col-md-6 .imagebox.style5.item .box-image .overlay span {
     width: 92%;
     left: 4%;
   }
-  .imagebox.style5.item .box-content a {
+  .flat-imagebox.style5 .col-md-6 .imagebox.style5.item .box-content a {
     color: #FFFFFF;
   }
-  .imagebox.style5.item .box-content p {
+  .flat-imagebox.style5 .col-md-6 .imagebox.style5.item .box-content p {
     color: #FFFFFF;
   }
-  .imagebox.style5.item .box-content img.bg {
+  .flat-imagebox.style5 .col-md-6 .imagebox.style5.item .box-content img.bg {
     opacity: 0.2;
   }
-  .imagebox.style5.link-activity .box-image {
+  .flat-imagebox.style5 .col-md-6 .imagebox.style5.link-activity .box-image {
     background-position: 96% 20px;
   }
 
   .footer-bottom {
-    padding: 0px 24px 40px 24px;
+    padding: 0 24px 40px 24px;
   }
   .footer-bottom .item {
     display: block;
-    margin: 0px 0px 15px;
+    margin: 0 0 15px;
   }
   .footer-bottom .copyright {
     display: block;
-    margin: 0px 0px 15px;
+    margin: 0 0 15px;
   }
 
-  .imagebox .box-imagebox ul.tag_block li.tag a {
+  .col-md-6 .imagebox .box-imagebox ul.tag_block li.tag a {
     background: rgba(242, 91, 34, 0.8);
     color: #ffffff;
     font-weight: 400;

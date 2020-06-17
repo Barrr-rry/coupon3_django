@@ -7,6 +7,11 @@
 // body
 body
   color: #333333
+  background-color: #F1F1F1
+
+form.form-listing .inner-box .browse .upload span
+  background-color: #f25b22
+
 .clear
   clear: both
 
@@ -56,10 +61,12 @@ a
     li
       font-size: 18px
       letter-spacing: 2px
+
       span
         display: inline-block
         font-size: 18px
         letter-spacing: 2px
+
   .page-title-heading
     span
       display: inline-block
@@ -451,21 +458,23 @@ footer
       &.search-span
         a
           right: 25px
+
       > span
         color: #999999
+
       .ti-location-pin
         left: 22px
         font-size: 18px
+
       input
         font-size: 16px
         letter-spacing: 1px
         padding: 8px 30px 8px 50px
+
       select
         font-size: 16px
         letter-spacing: 1px
         padding: 8px 30px
-
-
 
 
 .flat-imagebox
@@ -502,6 +511,7 @@ footer
       //display: inline-block
       //margin-left: 20px
       padding-top: 20px
+
       a
         display: inline-block
         font-size: 14px
@@ -512,6 +522,7 @@ footer
         padding: 2px 15px
         margin-right: 3px
         margin-bottom: 10px
+
         &:hover, &.active
           color: #ffffff
           background-color: #999999
@@ -522,6 +533,7 @@ footer
       letter-spacing: 3px
       font-weight: 400
       margin-right: 0px !important
+
       &:after
         clear: both
 
@@ -648,9 +660,7 @@ footer
 // store-id
 .header_sticky
   .flat-title
-    box-shadow: none
-    background-color: #F1F1F1
-    padding-top: 80px
+    padding: 40px 0 50px
 
     .title-left
       .box-title
@@ -672,7 +682,7 @@ footer
             margin-bottom: 12px
 
           &.address
-            margin-bottom: 0px
+            margin-bＦottom: 0px
 
     ul.social-ft
       text-align: right
@@ -701,8 +711,7 @@ footer
             background-color: #f25b22
 
   .flat-explore-detail
-    background-color: #F1F1F1
-    padding: 45px 0 120px
+    padding: 50px 0 120px
 
     .col-md-8
       padding-right: 50px
@@ -1058,19 +1067,24 @@ form.form-listing
     form
       > span
         text-align: left
+
         .ti-location-pin
           z-index: 1
           display: inline-block
           width: 20px
+
         a
           top: 14px
+
         select
           padding: 8px 30px 8px 50px
+
       .categories
         .ti-angle-down
           z-index: 1
           margin-right: 12px
           margin-top: 2px
+
       button
         margin-top: 20px
 
@@ -1084,10 +1098,10 @@ form.form-listing
   form.form-listing
     .inner-box
       .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
-        padding-right: 0px
+        padding-right: 0
 
       .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2)
-        padding-left: 0px
+        padding-left: 0
 
       .submit-form-listing
         &:hover
@@ -1104,47 +1118,83 @@ form.form-listing
         max-width: 100%
         flex: none
 
-      #map
-        height: 400px !important
+#map
+  height: 300px !important
+  text-align: center
+  .map_btn
+    position: absolute
+    width: 200px
+    left: 50%
+    bottom: 26px
+    padding: 5px 10px
+    margin-left: -100px
+    border-radius: 50px
+    z-index: 500
+    background-color: #f25b22
+    color: #fff
+    font-size: 18px
+    box-shadow: 0px 2px 4px rgba(0,0,0,0.2)
+    &:hover
+      background-color: #CC2426
+
+  .flat-imagebox
+    &.style5
+      .col-md-6
+        max-width: 100%
+        flex: none
+
+        .imagebox.style5.link-activity .box-image
+          background-position: bottom left
+          background-size: cover
+
+      .col-md-3
+        max-width: 50%
+        flex: none
+
+  .page-title.style2
+    a.text-heading
+      background-color: rgba(242, 91, 34, 0.9)
+      border: none
 
 
 @media only screen and (max-width: 767px)
-  .imagebox.style5
-    //background: rgba(204,36,38,1)
-    &.item
-      .box-image
-        .overlay
-          opacity: 1
+  .flat-imagebox.style5 .col-md-6
+    .imagebox.style5
+      //background: rgba(204,36,38,1)
+      &.item
+        .box-image
+          .overlay
+            opacity: 1
 
-          span
-            width: 92%
-            left: 4%
+            span
+              width: 92%
+              left: 4%
 
-      .box-content
-        a
-          color: #FFFFFF
+        .box-content
+          a
+            color: #FFFFFF
 
-        p
-          color: #FFFFFF
+          p
+            color: #FFFFFF
 
-        img.bg
-          opacity: 0.2
+          img.bg
+            opacity: 0.2
 
-    &.link-activity
-      .box-image
-        background-position: 96% 20px
+      &.link-activity
+        .box-image
+          background-position: 96% 20px
 
   .footer-bottom
-    padding: 0px 24px 40px 24px
+    padding: 0 24px 40px 24px
 
     .item
       display: block
-      margin: 0px 0px 15px
+      margin: 0 0 15px
 
     .copyright
       display: block
-      margin: 0px 0px 15px
-  .imagebox
+      margin: 0 0 15px
+  .col-md-6 .imagebox
     .box-imagebox
       ul.tag_block
         li.tag
@@ -1196,6 +1246,7 @@ form.form-listing
         button.submit-form-listing
           height: 60px
           line-height: 60px
+
       button.only-submit-form-listing
         height: 60px
         line-height: 60px
@@ -1207,6 +1258,7 @@ form.form-listing
     .col-md-12
       padding-right: 0
       padding-left: 0
+
       .highlights ul.menu-list li a span
         font-size: 15px
 
@@ -1214,6 +1266,7 @@ form.form-listing
     a.text-heading
       background-color: rgba(242, 91, 34, 0.9)
       border: none
+
     .page-title-heading
       margin-bottom: 45px
 
