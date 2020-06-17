@@ -1395,10 +1395,9 @@ const showSelfPosition = (position) => {
         // let ret = {}
         let ret = {
           ...(formSerailize(data)),
+          // todo county district
           county: 1,
           district: 1,
-          latitude: 0.23,
-          longitude: 0.22
         }
         let storediscount = []
         if (ret.store_discount_name) {
