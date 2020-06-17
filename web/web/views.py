@@ -67,7 +67,7 @@ class StoreView(TemplateView):
         queryset = Store.objects.filter(status=1)
         search = self.request.GET.get('search', None)
         district = self.request.GET.get('district', None)
-        county = self.request.GET.get('county', None)
+        county = self.request.GET.get('county', 'all')
         store_type = self.request.GET.get('store_type', None)
         order_by = self.request.GET.get('order_by', None)
         storediscount_discount_type = self.request.GET.get('storediscount_discount_type', None)
@@ -80,12 +80,35 @@ class StoreView(TemplateView):
                             ('storediscount_discount_type', storediscount_discount_type),
                             ('ids', ids)]
                            )
+
+        lat = float(self.request.COOKIES.get('lat', 23.8523405))
+        lon = float(self.request.COOKIES.get('lon', 120.9009427))
+        sort = self.request.GET.get('sort', 'distance')
         queryset = filters.filter_query(filter_dict, queryset)
+        if sort == 'new':
+            queryset = queryset.order_by('-created_at')
+        if sort == 'old':
+            queryset = queryset.order_by('created_at')
+
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         storetypes.insert(0, dict(id='all', name='全部'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         district_list.insert(0, dict(id='all', name='全部'))
         data = serializers.StoreSerializer(many=True, instance=queryset).data
+
+        def distance(x):
+            nlat = x['latitude']
+            nlon = x['longitude']
+            ret = (abs(nlat - lat) ** 2 + abs(nlon - lon) ** 2) ** (1 / 2)
+            x['distance'] = ret
+            return ret
+
+        data = sorted(data, key=distance)
+        if sort == 'distance':
+            data = sorted(data, key=distance)
+        if sort == '-distance':
+            data = sorted(data, key=distance, reverse=True)
+
         json_data = json.dumps(data)
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
@@ -102,6 +125,7 @@ class StoreView(TemplateView):
             storetypes=storetypes,
             district=district,
             county=county,
+            sort=sort,
             store_type=store_type,
             district_list=district_list,
             len_storediscount_discount_type=len(dtype),

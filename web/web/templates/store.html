@@ -59,10 +59,10 @@
           </a>
           <div class="clear"></div>
           <div class="sort">
-            <a class="active" href="">由近到遠 ( 預設 )</a>
-            <a href="">由遠到近</a>
-            <a href="">由新到舊</a>
-            <a href="">由舊到新</a>
+            <a data-sort="distance" href="">由近到遠</a>
+            <a data-sort="-distance" href="">由遠到近</a>
+            <a data-sort="new" href="">由新到舊</a>
+            <a data-sort="old" href="">由舊到新</a>
           </div>
         </div><!-- /.filter-result -->
       </div><!-- /.col-md-12 -->
@@ -140,8 +140,30 @@
 <!-- Javascript -->
 <script type="text/javascript">
   let store_data = {{ json_data|safe }};
+  let sort = '{{ sort }}';
 </script>
 {% include 'includes/js.html' %}
+<script>
+  $(document).ready(() => {
+    let href_split = window.location.href.split('?')
+    $('.sort a').each(function () {
+      let $el = $(this)
+      let sort = $el.attr('data-sort')
+      let split_str = ''
+      if (href_split.length) {
+        split_str = `&sort=${sort}`
+      } else {
+        split_str = `?sort=${sort}`
+      }
+      $el.attr('href', `${window.location.href + split_str}`)
+    })
+
+
+    // init active sort
+    let $el = $(`a[data-sort=${sort}]`)
+    $el.addClass('active')
+  })
+</script>
 
 
 </body>

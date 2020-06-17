@@ -15,6 +15,14 @@
  * GoTop
  * RemovePreloader
  */
+const default_position = {
+  coords: {
+    latitude: '23.8523405',
+    longitude: '120.9009427'
+  },
+  zoom: 7
+}
+
 let share = (social) => {
   const webTitle = `振興券`,
     webUrl = location.href
@@ -1518,7 +1526,45 @@ const showSelfPosition = (position) => {
       }
     })
   }
+  let initPosition = () => {
+    function setCookie(cname, cvalue, exdays) {
+      let d = new Date()
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+      let expires = "expires=" + d.toGMTString()
+      // document.cookie = cname + "=" + cvalue + " " + expires
+      document.cookie = cname + "=" + cvalue
+    }
+
+    function getCookie(cname) {
+      let name = cname + "="
+      let ca = document.cookie.split('')
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ""
+    }
+
+    let setError = () => {
+      console.log('set error')
+      setCookie("lat", default_position.coords.latitude, 365)
+      setCookie("lon", default_position.coords.longitude, 365)
+    }
+    let setPosition = (position) => {
+      console.log('position:', position)
+      setCookie("lat", position.coords.latitude, 365)
+      setCookie("lon", position.coords.longitude, 365)
+    }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(setPosition, setError)
+    } else {
+      alert('您的瀏覽器不支援定位系統')
+      setError()
+    }
+  }
+
   $(function () {
+    initPosition();
     responsiveMenu();
     headerFixed();
     slideTeam();

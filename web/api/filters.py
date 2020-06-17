@@ -18,7 +18,6 @@ def filter_query(filter_dict, queryset):
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
         q = and_q(q, Q(district=filter_dict['district']))
-
     filter_dict['county'] = None if filter_dict['county'] == 'all' else filter_dict['county']
     if filter_dict['county'] is not None:
         q = and_q(q, Q(county=filter_dict['county']))
