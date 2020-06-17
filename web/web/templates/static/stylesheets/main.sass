@@ -56,6 +56,13 @@ a
     li
       font-size: 18px
       letter-spacing: 2px
+      span
+        display: inline-block
+        font-size: 18px
+        letter-spacing: 2px
+  .page-title-heading
+    span
+      display: inline-block
 
 // header component
 #logo
@@ -496,6 +503,7 @@ footer
       //margin-left: 20px
       padding-top: 20px
       a
+        display: inline-block
         font-size: 14px
         font-weight: 400
         color: #999999
@@ -503,6 +511,7 @@ footer
         border-radius: 50px
         padding: 2px 15px
         margin-right: 3px
+        margin-bottom: 10px
         &:hover, &.active
           color: #ffffff
           background-color: #999999
@@ -1046,16 +1055,29 @@ form.form-listing
     background-size: cover
 
   .wrap-box-search.style1
-    form > span
-      text-align: left
-      .ti-location-pin
-        z-index: 1
-        display: inline-block
-        width: 20px
-      a
-        top: 14px
-      select
-        padding: 8px 30px 8px 50px
+    form
+      > span
+        text-align: left
+        .ti-location-pin
+          z-index: 1
+          display: inline-block
+          width: 20px
+        a
+          top: 14px
+        select
+          padding: 8px 30px 8px 50px
+      .categories
+        .ti-angle-down
+          z-index: 1
+          margin-right: 12px
+          margin-top: 2px
+      button
+        margin-top: 20px
+
+  .imagebox.style5
+    &.link-activity
+      .box-image
+        background-position: 85% 20px
 
 
 @media only screen and (max-width: 991px)
@@ -1107,6 +1129,11 @@ form.form-listing
 
         img.bg
           opacity: 0.2
+
+    &.link-activity
+      .box-image
+        background-position: 96% 20px
+
   .footer-bottom
     padding: 0px 24px 40px 24px
 
@@ -1159,7 +1186,36 @@ form.form-listing
   .flat-contact .contact-form .contact-us
     padding: 0 50px 120px
 
+  .flat-listing
+    padding-top: 25px
 
+    form.form-listing
+      .inner-box
+        padding: 30px 25px
+        //padding-top: 30px
+        button.submit-form-listing
+          height: 60px
+          line-height: 60px
+      button.only-submit-form-listing
+        height: 60px
+        line-height: 60px
+
+  .wrap-box-search.style1 form > span input
+    padding: 8px 55px 8px 50px
+
+  .flat-highlights
+    .col-md-12
+      padding-right: 0
+      padding-left: 0
+      .highlights ul.menu-list li a span
+        font-size: 15px
+
+  .page-title.style2
+    a.text-heading
+      background-color: rgba(242, 91, 34, 0.9)
+      border: none
+    .page-title-heading
+      margin-bottom: 45px
 
 @media only screen and (max-width: 600px)
   .imagebox.style5

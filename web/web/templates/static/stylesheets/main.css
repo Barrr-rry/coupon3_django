@@ -10445,6 +10445,14 @@ a:hover {
   font-size: 18px;
   letter-spacing: 2px;
 }
+.page-title ul.breadcrumbs li span {
+  display: inline-block;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+.page-title .page-title-heading span {
+  display: inline-block;
+}
 
 #logo {
   margin-top: 32px;
@@ -10857,6 +10865,7 @@ footer .widget-about .logo-ft a {
   padding-top: 20px;
 }
 .flat-imagebox .filter-result .sort a {
+  display: inline-block;
   font-size: 14px;
   font-weight: 400;
   color: #999999;
@@ -10864,6 +10873,7 @@ footer .widget-about .logo-ft a {
   border-radius: 50px;
   padding: 2px 15px;
   margin-right: 3px;
+  margin-bottom: 10px;
 }
 .flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a.active {
   color: #ffffff;
@@ -11399,6 +11409,18 @@ form.form-listing .only-submit-form-listing:hover {
   .wrap-box-search.style1 form > span select {
     padding: 8px 30px 8px 50px;
   }
+  .wrap-box-search.style1 form .categories .ti-angle-down {
+    z-index: 1;
+    margin-right: 12px;
+    margin-top: 2px;
+  }
+  .wrap-box-search.style1 form button {
+    margin-top: 20px;
+  }
+
+  .imagebox.style5.link-activity .box-image {
+    background-position: 85% 20px;
+  }
 }
 @media only screen and (max-width: 991px) {
   form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
@@ -11440,6 +11462,9 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .imagebox.style5.item .box-content img.bg {
     opacity: 0.2;
+  }
+  .imagebox.style5.link-activity .box-image {
+    background-position: 96% 20px;
   }
 
   .footer-bottom {
@@ -11491,6 +11516,41 @@ form.form-listing .only-submit-form-listing:hover {
 
   .flat-contact .contact-form .contact-us {
     padding: 0 50px 120px;
+  }
+
+  .flat-listing {
+    padding-top: 25px;
+  }
+  .flat-listing form.form-listing .inner-box {
+    padding: 30px 25px;
+  }
+  .flat-listing form.form-listing .inner-box button.submit-form-listing {
+    height: 60px;
+    line-height: 60px;
+  }
+  .flat-listing form.form-listing button.only-submit-form-listing {
+    height: 60px;
+    line-height: 60px;
+  }
+
+  .wrap-box-search.style1 form > span input {
+    padding: 8px 55px 8px 50px;
+  }
+
+  .flat-highlights .col-md-12 {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .flat-highlights .col-md-12 .highlights ul.menu-list li a span {
+    font-size: 15px;
+  }
+
+  .page-title.style2 a.text-heading {
+    background-color: rgba(242, 91, 34, 0.9);
+    border: none;
+  }
+  .page-title.style2 .page-title-heading {
+    margin-bottom: 45px;
   }
 }
 @media only screen and (max-width: 600px) {
