@@ -14,6 +14,7 @@ def filter_query(filter_dict, queryset):
         for keyword in filter_dict['search'].strip().split():
             q = or_q(q, Q(name__contains=keyword))
             q = or_q(q, Q(storediscount__discount_type__name__contains=keyword))
+            q = or_q(q, Q(district__name__contains=keyword))
 
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
