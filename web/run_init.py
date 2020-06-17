@@ -60,13 +60,16 @@ def generate_stort_type(count):
 
 def generate_county():
     County.objects.create(
-        name='高雄市'
+        name='高雄市',
+        picture='景點照片_劍湖山.jpg',
     )
     County.objects.create(
-        name='台南市'
+        name='台南市',
+        picture='景點照片_劍湖山.jpg',
     )
     County.objects.create(
-        name='台北市'
+        name='台北市',
+        picture='景點照片_劍湖山.jpg',
     )
 
 

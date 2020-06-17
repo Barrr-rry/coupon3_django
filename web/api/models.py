@@ -60,6 +60,7 @@ class StoreType(DefaultAbstract):
 
 class County(DefaultAbstract):
     name = models.CharField(max_length=128, help_text="縣市名稱")
+    picture = models.CharField(max_length=128, help_text="縣市圖片")
 
 
 class District(DefaultAbstract):

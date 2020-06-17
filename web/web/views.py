@@ -66,12 +66,14 @@ class StoreView(TemplateView):
         queryset = Store.objects.filter(status=1)
         search = self.request.GET.get('search', None)
         district = self.request.GET.get('district', None)
+        county = self.request.GET.get('county', None)
         store_type = self.request.GET.get('store_type', None)
         order_by = self.request.GET.get('order_by', None)
         storediscount_discount_type = self.request.GET.get('storediscount_discount_type', None)
         ids = self.request.GET.get('ids', None)
         filter_dict = dict([('search', search),
                             ('district', district),
+                            ('county', county),
                             ('store_type', store_type),
                             ('order_by', order_by),
                             ('storediscount_discount_type', storediscount_discount_type),
@@ -100,5 +102,17 @@ class StoreView(TemplateView):
             len_storediscount_discount_type=len(dtype),
             storediscount_discount_type=dtype,
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
+        )
+        return ret
+
+
+class StoreCountyView(TemplateView):
+    template_name = 'store_county.html'
+
+    def get_context_data(self, *args, **kwargs):
+        queryset = County.objects.all()
+        data = serializers.CountySerializer(many=True, instance=queryset).data
+        ret = dict(
+            data=data,
         )
         return ret
