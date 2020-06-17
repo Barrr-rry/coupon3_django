@@ -92,6 +92,9 @@ class StoreView(TemplateView):
         district_list.insert(0, dict(id='all', name='全部'))
         data = serializers.StoreSerializer(many=True, instance=queryset).data
 
+        if not county:
+            county = 'all'
+
         def distance(x):
             nlat = x['latitude']
             nlon = x['longitude']
