@@ -138,6 +138,9 @@
 {% include 'includes/footer.html' %}
 
 <!-- Javascript -->
+<script type="text/javascript">
+  let store_data = {{ json_data|safe }};
+</script>
 {% include 'includes/js.html' %}
 
 

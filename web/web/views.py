@@ -4,6 +4,7 @@ from api.models import (
 )
 from api import serializers
 from api import filters
+import json
 
 
 class TestView(TemplateView):
@@ -84,6 +85,8 @@ class StoreView(TemplateView):
         storetypes.insert(0, dict(id='all', name='全部'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         district_list.insert(0, dict(id='all', name='全部'))
+        data = serializers.StoreSerializer(many=True, instance=queryset).data
+        json_data = json.dumps(data)
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
         else:
@@ -93,7 +96,8 @@ class StoreView(TemplateView):
 
         ret = dict(
             search=search if search is not None else '',
-            data=serializers.StoreSerializer(many=True, instance=queryset[:6]).data,
+            data=data[:6],
+            json_data=json_data,
             count=queryset.count(),
             storetypes=storetypes,
             district=district,
