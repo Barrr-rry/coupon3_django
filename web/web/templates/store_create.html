@@ -43,7 +43,7 @@
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
-<!--  <div class="overlay"></div>-->
+  <!--  <div class="overlay"></div>-->
 </section><!-- /.page-title -->
 
 <section class="flat-listing">
@@ -51,6 +51,8 @@
     <div class="row">
       <div class="col-md-12">
         <form id="createStore" action="" class="form-listing" method="post" accept-charset="utf-8">
+          <input type="hidden" name="latitude" id="latitude">
+          <input type="hidden" name="longitude" id="longitude">
           <div class="inner-box form">
             <div class="one-half">
               <div class="wrap-listing price">
@@ -134,13 +136,6 @@
 {% include 'includes/js.html' %}
 <script>
   $(document).ready(() => {
-    let marker = []
-    let clearAllMarker = (map) => {
-      while (marker.length) {
-        let target = marker.pop()
-        map.removeLayer(target)
-      }
-    }
     let showPosition = (position) => {
       let map = initMap(position)
       map.off('click')
@@ -208,6 +203,8 @@
           },
           zoom: 15
         }
+        $('#latitude').val(lat)
+        $('#longitude').val(lon)
         showPosition(position)
       })
     })

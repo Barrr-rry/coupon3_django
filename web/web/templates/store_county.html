@@ -44,40 +44,7 @@
 
 {% include 'includes/header.html' %}<!-- /.header -->
 
-<section class="page-title style1 parallax parallax1 parallax-200">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="wrap-box-search style1">
-          <form method="get" accept-charset="utf-8" id="search-form">
-								<span>
-									<input type="text" placeholder="請輸入商家名稱或活動名稱" name="search"
-                         value="{{ search }}"
-                  >
-								</span>
-            <span class="location">
-									<span class="ti-location-pin"></span>
-                  <select name="district" placeholder="行政區" value="{{ district }}">
-                    {% for el in district_list %}
-                      <option value="{{ el.id }}">{{ el.name }}</option>
-                    {% endfor %}
-									</select>
-								</span>
-            <span class="categories">
-									<select name="store_type" placeholder="所有分類" value="store_type">
-                    {% for el in storetypes %}
-                      <option value="{{ el.id }}">{{ el.name }}</option>
-                    {% endfor %}
-									</select>
-								</span>
-            <button type="button" class="search-btn" id="search-btn">搜尋</button>
-          </form><!-- /form -->
-        </div><!-- /.wrap-box-search -->
-      </div><!-- /.col-md-12 -->
-    </div><!-- /.row -->
-  </div><!-- /.container -->
-  <!--  <div class="overlay"></div>-->
-</section><!-- /.page-title -->
+{% include 'includes/search.html' %}
 
 <section class="flat-row flat-imagebox style3">
   <div class="container">

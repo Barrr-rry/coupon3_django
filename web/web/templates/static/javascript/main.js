@@ -15,6 +15,43 @@
  * GoTop
  * RemovePreloader
  */
+const default_position = {
+  coords: {
+    latitude: '23.8523405',
+    longitude: '120.9009427'
+  },
+  zoom: 7
+}
+let now_position = {}
+
+let marker = []
+let clearAllMarker = (map) => {
+  while (marker.length) {
+    let target = marker.pop()
+    map.removeLayer(target)
+  }
+}
+
+let initStoreDataMarker = (start, end) => {
+  for (let i = start; i < end; i++) {
+    let el = store_data[i]
+    let li = el.storediscount.map(x => `<li>${x.name}</li>`)
+    let ul = `
+        <ul>
+        ${li}
+        </ul>
+        `
+    let html = `
+        <div>${el.name}</div>
+        ${ul}
+        <a href="/store/${el.id}"><button type="button" class="search-btn" id="search-btn">導覽到頁面</button></a>
+        `
+    const pos = L.marker([el.latitude, el.longitude], {icon: greenIcon}).bindPopup(html).openPopup()
+    marker.push(pos)
+    _map.addLayer(pos)
+  }
+}
+
 let share = (social) => {
   const webTitle = `振興券`,
     webUrl = location.href
@@ -121,14 +158,14 @@ const showSelfPosition = (position) => {
 
     let popup = L.popup()
 
-    function onMapClick(e) {
-      popup
-        .setLatLng(e.latlng)
-        .setContent("經緯度座標：" + e.latlng.toString())
-        .openOn(map);
-    }
-
-    map.on('click', onMapClick)
+    // function onMapClick(e) {
+    //   popup
+    //     .setLatLng(e.latlng)
+    //     .setContent("經緯度座標：" + e.latlng.toString())
+    //     .openOn(map);
+    // }
+    //
+    // map.on('click', onMapClick)
 
 
     // 設定所在位置的icon
@@ -1358,10 +1395,9 @@ const showSelfPosition = (position) => {
         // let ret = {}
         let ret = {
           ...(formSerailize(data)),
+          // todo county district
           county: 1,
           district: 1,
-          latitude: 0.23,
-          longitude: 0.22
         }
         let storediscount = []
         if (ret.store_discount_name) {
@@ -1459,8 +1495,14 @@ const showSelfPosition = (position) => {
 
     // add store
     let appendStore = (data) => {
+      let class_name = ''
+      if ($('#map').length) {
+        class_name = 'mb-50px col-lg-6 col-md-12 store'
+      } else {
+        class_name = 'mb-50px col-md-4 store'
+      }
       let html = `
-      <div class="mb-50px col-md-4 store">
+      <div class="${class_name}">
         <div class="imagebox style1">
           <div class="box-imagebox">
             <div class="link_block">
@@ -1513,12 +1555,69 @@ const showSelfPosition = (position) => {
         let data = store_data[i]
         appendStore(data)
       }
+      if ($('#map').length) {
+        initStoreDataMarker(offset, max_offset)
+      }
       if (max_offset === store_data.length) {
         $(".more-click").remove()
       }
     })
   }
+  let initPosition = () => {
+    function setCookie(cname, cvalue, exdays) {
+      let d = new Date()
+      d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))
+      let expires = "expires=" + d.toGMTString()
+      // document.cookie = cname + "=" + cvalue + " " + expires
+      document.cookie = cname + "=" + cvalue
+    }
+
+    function getCookie(cname) {
+      let name = cname + "="
+      let ca = document.cookie.split('')
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ""
+    }
+
+    let setError = () => {
+      setCookie("lat", default_position.coords.latitude, 365)
+      setCookie("lon", default_position.coords.longitude, 365)
+      now_position = default_position
+    }
+    let setPosition = (position) => {
+      setCookie("lat", position.coords.latitude, 365)
+      setCookie("lon", position.coords.longitude, 365)
+      now_position = position
+    }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(setPosition, setError)
+    } else {
+      alert('您的瀏覽器不支援定位系統')
+      setError()
+    }
+  }
+  let searchAPI = () => {
+    $('#position').on('click', function () {
+      let msg = `${now_position.coords.latitude}, ${now_position.coords.longitude}`
+      $.ajax({
+        url: `/api/location/?task_type=2&msg=${msg}`,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+      }).done(res => {
+        let $input = $('input[name="search"]')
+        $input.val(res.data)
+      })
+
+    })
+  }
+
   $(function () {
+    initPosition();
+    searchAPI();
     responsiveMenu();
     headerFixed();
     slideTeam();
@@ -1526,7 +1625,7 @@ const showSelfPosition = (position) => {
     filterToggle();
     CountDown();
     // googleMap();
-    slideSearch();
+    // slideSearch();
     loadMore();
     loadMore_s2();
     loadMore_s3();
