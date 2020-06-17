@@ -10865,7 +10865,7 @@ footer .widget-about .logo-ft a {
   padding: 2px 15px;
   margin-right: 3px;
 }
-.flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a:active {
+.flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a.active {
   color: #ffffff;
   background-color: #999999;
   border-color: #f1f1f1;
@@ -11383,6 +11383,21 @@ form.form-listing .only-submit-form-listing:hover {
     background-image: url("/media/bg_dark_mobile.png");
     background-position: 45% 50px !important;
     background-size: cover;
+  }
+
+  .wrap-box-search.style1 form > span {
+    text-align: left;
+  }
+  .wrap-box-search.style1 form > span .ti-location-pin {
+    z-index: 1;
+    display: inline-block;
+    width: 20px;
+  }
+  .wrap-box-search.style1 form > span a {
+    top: 14px;
+  }
+  .wrap-box-search.style1 form > span select {
+    padding: 8px 30px 8px 50px;
   }
 }
 @media only screen and (max-width: 991px) {
