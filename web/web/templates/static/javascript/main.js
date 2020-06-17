@@ -1467,8 +1467,14 @@ const showSelfPosition = (position) => {
 
     // add store
     let appendStore = (data) => {
+      let class_name = ''
+      if ($('#map').length) {
+        class_name = 'mb-50px col-lg-6 col-md-12 store'
+      } else {
+        class_name = 'mb-50px col-md-4 store'
+      }
       let html = `
-      <div class="mb-50px col-md-4 store">
+      <div class="${class_name}">
         <div class="imagebox style1">
           <div class="box-imagebox">
             <div class="link_block">
@@ -1546,7 +1552,6 @@ const showSelfPosition = (position) => {
     }
 
     let setError = () => {
-      console.log('set error')
       setCookie("lat", default_position.coords.latitude, 365)
       setCookie("lon", default_position.coords.longitude, 365)
     }
@@ -1572,7 +1577,7 @@ const showSelfPosition = (position) => {
     filterToggle();
     CountDown();
     // googleMap();
-    slideSearch();
+    // slideSearch();
     loadMore();
     loadMore_s2();
     loadMore_s3();

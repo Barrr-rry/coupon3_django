@@ -56,10 +56,6 @@ class StoreIdView(TemplateView):
         return ret
 
 
-class StoreMapView(TemplateView):
-    template_name = 'store_map.html'
-
-
 class StoreView(TemplateView):
     template_name = 'store.html'
 
@@ -133,6 +129,10 @@ class StoreView(TemplateView):
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
         )
         return ret
+
+
+class StoreMapView(StoreView):
+    template_name = 'store_map.html'
 
 
 class StoreCountyView(TemplateView):

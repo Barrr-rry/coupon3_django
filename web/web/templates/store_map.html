@@ -36,16 +36,12 @@
 <section class="flat-map-zoom-in">
   <div class="container-fluid">
     <div class="row" style="display: flex">
-      <div class="col-md-6">
+      <div class="col-xl-6 col-md-12">
         <div class="flat-filter">
           <div class="wrap-box-search style2">
             <form method="get" accept-charset="utf-8">
 									<span>
 										<input type="text" placeholder="What are you looking for ?" name="search">
-									</span>
-              <span class="location">
-										<span class="ti-location-pin"></span>
-										<input type="text" placeholder="Location" name="location">
 									</span>
               <span class="categories">
 										<span class="ti-angle-down"></span>
@@ -56,273 +52,99 @@
 										</select>
 									</span>
               <div class="clearfix"></div>
-              <div class="box-slider">
-                <input id="ex8" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="155"
-                       data-slider-step="1" data-slider-value="50"/>
-                <span>Radius (meter)</span>
-              </div>
             </form><!-- /form -->
           </div><!-- /.wrap-box-search -->
           <div class="clearfix"></div>
-          <div class="filter">
-            <div class="filter-title">
-              <h5>Filter by tag:</h5>
-              <span class="ti-angle-down"></span>
-            </div>
-            <div class="clearfix"></div>
-            <div class="select-filter">
-              <ul class="list-filter third">
-                <li class="active">
-                  <span class="ti-check-box"></span>Wireless Internet
-                </li>
-                <li>
-                  <span class="ti-layout-width-full"></span>Street Parking
-                </li>
-                <li>
-                  <span class="ti-layout-width-full"></span>Kitchen
-                </li>
-                <li class="active">
-                  <span class="ti-check-box"></span>Bike Parking
-                </li>
-              </ul>
-              <ul class="list-filter third">
-                <li>
-                  <span class="ti-layout-width-full"></span>Pets Friendly
-                </li>
-                <li>
-                  <span class="ti-layout-width-full"></span>Cable TV
-                </li>
-                <li class="active">
-                  <span class="ti-check-box"></span>Smoking Allowed
-                </li>
-                <li>
-                  <span class="ti-layout-width-full"></span>Good for Kids
-                </li>
-              </ul>
-              <ul class="list-filter third">
-                <li>
-                  <span class="ti-layout-width-full"></span>Pool
-                </li>
-                <li>
-                  <span class="ti-layout-width-full"></span>Washer
-                </li>
-                <li>
-                  <span class="ti-layout-width-full"></span>Hair Dryer
-                </li>
-                <li>
-                  <span class="ti-layout-width-full"></span>Wheelchair Accessible
-                </li>
-              </ul>
-              <div class="clearfix"></div>
-            </div><!-- /.select-filter -->
-          </div><!-- /.filter -->
-          <div class="filter-result">
-            <div class="result">
-              5 Results Found
-            </div>
-            <ul class="arrange">
-              <li class="active">
-                <span class="ti-view-grid"></span>
-              </li>
-              <li>
-                <span class="ti-view-list"></span>
-              </li>
-            </ul>
-          </div><!-- /.filter-result -->
-          <div class="wrap-imagebox style1">
-            <div class="imagebox style3">
-              <div class="box-imagebox">
-                <div class="box-header">
-                  <div class="box-image">
-                    <img src="{% static "images/page/img-v3-01.png" %}" alt="">
-                    <a href="#" title="">Preview</a>
-                    <div class="overlay"></div>
-                    <div class="queue">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+          <section class="flat-row flat-imagebox style3">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="filter-result style2">
+                    <div class="result">
+                      共有 {{ count }} 筆搜尋結果
+                    </div>
+                    <a href="/store_map" class="mr-5 link-map" style="font-size: xx-large; float:right">
+                      地圖模式
+                    </a>
+                    <div class="clear"></div>
+                    <div class="sort">
+                      <a data-sort="distance" href="">由近到遠</a>
+                      <a data-sort="-distance" href="">由遠到近</a>
+                      <a data-sort="new" href="">由新到舊</a>
+                      <a data-sort="old" href="">由舊到新</a>
+                    </div>
+                  </div><!-- /.filter-result -->
+                </div><!-- /.col-md-12 -->
+              </div><!-- /.row -->
+              {#原本 style 3 改掉才不會出問題#}
+              <div class="wrap-imagebox ma-0px">
+                <div class="d-flex store-box">
+                  {% for el in data %}
+                    <div class="mb-50px col-lg-6 col-md-12 store">
+                      <div class="imagebox style1">
+                        <div class="box-imagebox">
+                          <div class="link_block">
+                            <a href="/store/{{ el.id }}" class="link"></a>
+                            <div class="box-header">
+                              <div class="box-image">
+                                <img src="/media/{{ el.image_1 }}" alt="">
+                                <a title="">查看詳情</a>
+                                <div class="overlay"></div>
+                              </div>
+                            </div><!-- /.box-header -->
+                            <div class="box-content">
+                              <div class="box-title ad">
+                                <a href="/store/{{ el.id }}" title="">{{ el.name }}</a>
+                                <!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
+                              </div>
+                              <ul class="rating">
+                                <li><span>{{ el.county_name }}</span></li>
+                                <li><span>{{ el.district_name }}</span></li>
+                                <li>
+                                  <img src="/media/park_s_gray.svg" alt="">
+                                  <span>{{ el.store_type_name }}</span>
+                                </li>
+                              </ul>
+                              <div class="box-desc">
+                                <div class="sale-list">
+                                  {{ el.storediscount_names }}
+                                </div>
+                              </div>
+                            </div><!-- /.box-content -->
+                          </div>
+                          <ul class="tag_block">
+                            <li class="tag"><a href="">贈品贈品</a></li>
+                            <li class="tag"><a href="">全店打折</a></li>
+                            <li class="tag"><a href="">全店打折</a></li>
+                            <!--這邊可以只顯示3筆嗎，要維持一行-->
+                            <li class="right"><a href="">分享</a></li>
+                          </ul>
+                          <!--                <ul class="location">-->
+                          <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+                          <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
+                        </div><!-- /.box-imagebox -->
+                      </div><!-- /.imagebox style1 -->
+                    </div><!-- /.col-md-4 -->
+                  {% endfor %}
+                </div><!-- /.row -->
+
+                {% if count > 6 %}
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="btn-more more-click">
+                        <a href="javascript:void(0);" title="">顯示更多</a>
+                      </div>
                     </div>
                   </div>
-                </div><!-- /.box-header -->
-                <div class="box-content">
-                  <div class="box-title ad">
-                    <span>Ad</span><a href="#" title="">AN Restaurant</a><i class="fa fa-check-circle"
-                                                                            aria-hidden="true"></i>
-                  </div>
-                  <ul class="rating">
-                    <li>5 rating</li>
-                    <li>Moderate</li>
-                    <li>Restaurant</li>
-                  </ul>
-                  <div class="box-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                  </div>
-                </div><!-- /.box-content -->
-                <ul class="location">
-                  <li class="address"><span class="ti-location-pin"></span>Hanoi, Vietnam</li>
-                  <li class="closed">Closed Now !</li>
-                </ul><!-- /.location -->
-              </div><!-- /.box-imagebox -->
-            </div><!-- /.imagebox style3 -->
-            <div class="imagebox style3">
-              <div class="box-imagebox">
-                <div class="box-header">
-                  <div class="box-image">
-                    <img src="{% static "images/page/img-v3-02.png" %}" alt="">
-                    <a href="#" title="">Preview</a>
-                    <div class="overlay"></div>
-                    <div class="queue">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-content">
-                  <div class="box-title">
-                    <a href="#" title="">Acantara</a><i class="fa fa-check-circle" aria-hidden="true"></i>
-                  </div>
-                  <ul class="rating">
-                    <li>10 rating</li>
-                    <li>Ultra High End</li>
-                    <li>Hotel</li>
-                  </ul>
-                  <div class="box-desc">
-                    Lorem ipsum dolor sit amet, consectetur<br/> adipisicing elit, sed do eiusmod tempor<br/> incididunt
-                    ut labore et dolore magna aliqua.
-                  </div>
-                </div><!-- /.box-content -->
-                <ul class="location">
-                  <li class="address"><span class="ti-location-pin"></span>Seoul, Korea</li>
-                  <li class="open">Open Now !</li>
-                </ul><!-- /.location -->
-              </div><!-- /.box-imagebox -->
-            </div><!-- /.imagebox style3 -->
-            <div class="height33 clearfix"></div>
-            <div class="imagebox style3">
-              <div class="box-imagebox">
-                <div class="box-header">
-                  <div class="box-image">
-                    <img src="{% static "images/page/img-v3-03.png" %}" alt="">
-                    <a href="#" title="">Preview</a>
-                    <div class="overlay"></div>
-                    <div class="queue">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-content">
-                  <div class="box-title">
-                    <a href="#" title="">Intercontinental</a><i class="fa fa-check-circle" aria-hidden="true"></i>
-                  </div>
-                  <ul class="rating">
-                    <li>6 rating</li>
-                    <li>Pricey</li>
-                    <li>Hotel</li>
-                  </ul>
-                  <div class="box-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                  </div>
-                </div><!-- /.box-content -->
-                <ul class="location">
-                  <li class="address"><span class="ti-location-pin"></span>Seoul, Korea</li>
-                  <li class="open">Open Now !</li>
-                </ul><!-- /.location -->
-              </div><!-- /.box-imagebox -->
-            </div><!-- /.imagebox style3 -->
-            <div class="imagebox style3">
-              <div class="box-imagebox">
-                <div class="box-header">
-                  <div class="box-image">
-                    <img src="{% static "images/page/img-v3-04.png" %}" alt="">
-                    <a href="#" title="">Preview</a>
-                    <div class="overlay"></div>
-                    <div class="queue">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-content">
-                  <div class="box-title">
-                    <a href="#" title="">Picking Grape in Vietnam</a><i class="fa fa-check-circle"
-                                                                        aria-hidden="true"></i>
-                  </div>
-                  <ul class="rating">
-                    <li>6 rating</li>
-                    <li>Inexpensive</li>
-                    <li>Play</li>
-                  </ul>
-                  <div class="box-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                  </div>
-                </div><!-- /.box-content -->
-                <ul class="location">
-                  <li class="address"><span class="ti-location-pin"></span>Vinh Long, Vietnam</li>
-                  <li class="closed">Open Now !</li>
-                </ul><!-- /.location -->
-              </div><!-- /.box-imagebox -->
-            </div><!-- /.imagebox style3 -->
-            <div class="clearfix height33"></div>
-            <div class="imagebox style3">
-              <div class="box-imagebox">
-                <div class="box-header">
-                  <div class="box-image">
-                    <img src="{% static "images/page/img-v3-01.png" %}" alt="">
-                    <a href="#" title="">Preview</a>
-                    <div class="overlay"></div>
-                    <div class="queue">
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star" aria-hidden="true"></i>
-                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                    </div>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-content">
-                  <div class="box-title ad">
-                    <span>Ad</span><a href="#" title="">AN Restaurant</a><i class="fa fa-check-circle"
-                                                                            aria-hidden="true"></i>
-                  </div>
-                  <ul class="rating">
-                    <li>5 rating</li>
-                    <li>Moderate</li>
-                    <li>Restaurant</li>
-                  </ul>
-                  <div class="box-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.
-                  </div>
-                </div><!-- /.box-content -->
-                <ul class="location">
-                  <li class="address"><span class="ti-location-pin"></span>Hanoi, Vietnam</li>
-                  <li class="closed">Closed Now !</li>
-                </ul><!-- /.location -->
-              </div><!-- /.box-imagebox -->
-            </div><!-- /.imagebox style3 -->
-            <div class="clearfix"></div>
-            <div class="btn-more">
-              <a href="#" title="">Load More</a>
-            </div>
-          </div><!-- /.wrap-imagebox -->
+                {% endif %}
+
+              </div>
+
+            </div><!-- /.container -->
+          </section>
         </div><!-- /.flat-filter -->
       </div><!-- /.col-md-6 -->
-      <div class="col-md-6">
+      <div class="col-xl-6 col-md-12">
         <div id="map" style="height: 100%"></div>
 
       </div><!-- /.col-md-6 -->
@@ -333,21 +155,38 @@
 
 {% include 'includes/footer.html' %}
 <!-- Javascript -->
-{% include 'includes/js.html' %}}
+<script type="text/javascript">
+  let store_data = {{ json_data|safe }};
+  let sort = '{{ sort }}';
+  let now_position = {}
+</script>
+{% include 'includes/js.html' %}
 <script>
   $(document).ready(() => {
+    let href_split = window.location.href.split('?')
+    $('.sort a').each(function () {
+      let $el = $(this)
+      let sort = $el.attr('data-sort')
+      let split_str = ''
+      if (href_split.length) {
+        split_str = `&sort=${sort}`
+      } else {
+        split_str = `?sort=${sort}`
+      }
+      $el.attr('href', `${window.location.href + split_str}`)
+    })
+
+
+    // init active sort
+    let $el = $(`a[data-sort=${sort}]`)
+    $el.addClass('active')
+
+
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, showError)
+      navigator.geolocation.getCurrentPosition(showSelfPosition, showError)
     } else {
       alert('您的瀏覽器不支援定位系統')
-      const position = {
-        coords: {
-          latitude: '23.8523405',
-          longitude: '120.9009427'
-        },
-        zoom: 7
-      }
-      showPosition(position)
+      setError()
     }
   })
 </script>
