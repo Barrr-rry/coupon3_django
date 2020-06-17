@@ -10581,6 +10581,10 @@ footer .widget-about .logo-ft a {
   width: calc(100% - 50px);
 }
 
+.wrap-listing label {
+  display: flex;
+}
+
 .contact-select-border {
   border-radius: 10px;
   border-color: #fff;
