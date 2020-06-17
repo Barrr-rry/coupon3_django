@@ -114,13 +114,6 @@
             </div>
           </div>
         {% endfor %}
-        {#        <div class="text-box">#}
-        {#          <h3><span class="discount-type-border">買就送</span> 活動名稱</h3>#}
-        {#          <div class="text-desc">#}
-        {#            <p>#}
-        {#              活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述活動敘述</p>#}
-        {#          </div>#}
-        {#        </div>#}
       </div><!-- /.col-md-8 -->
       <div class="col-md-4">
         <div class="sidebar">
@@ -156,15 +149,22 @@
   $(document).ready(() => {
     const position = {
       coords: {
-        {#latitude: {{instance.latitude}},#}
-        {#longitude: {{instance.longitude}}#}
-        {#('22.629995', '120.296872')#}
-        latitude: 22.629995,
-        longitude: 120.296872
+        latitude: {{instance.latitude}},
+        longitude: {{instance.longitude}}
       },
       zoom: 12
     }
-    showPosition(position)
+    showSelfPosition(position)
+    $('.share-fb').on('click', () => {
+      share('facebook')
+    })
+    $('.share-line').on('click', () => {
+      share('line')
+    })
+    $('.share-url').on('click', () => {
+      copy(window.location.href)
+    })
+
   })
 </script>
 
