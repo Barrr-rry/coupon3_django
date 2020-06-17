@@ -72,13 +72,30 @@
             <a href="#" title="">{{ instance.name }}</a>
           </div><!-- /.box-title -->
           <ul class="box-address">
+            <li class="phone"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}</li>
             <li class="address"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ instance.address }}
             </li>
-            <li class="phone"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}</li>
           </ul><!-- /.box-address -->
         </div><!-- /.title-left -->
       </div><!-- /.col-md-8 -->
       <div class="col-md-4">
+        <ul class="social-ft">
+          <li>
+            <a class="share-fb" href="#" title="">
+              <img src="/media/share_fb.svg" alt="">
+            </a>
+          </li>
+          <li>
+            <a class="share-line" href="#" title="">
+              <img src="/media/share_line.svg" alt="">
+            </a>
+          </li>
+          <li>
+            <a class="share-url" href="#" title="">
+              <img src="/media/share_url.svg" alt="">
+            </a>
+          </li>
+        </ul>
       </div><!-- /.col-md-4 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
@@ -90,7 +107,7 @@
       <div class="col-md-8">
         {% for el in instance.storediscount %}
           <div class="text-box">
-            <h3><span class="discount-type-border">{{ el.discount_type.name }}</span>{{ el.name }}</h3>
+            <h3><span class="discount-type-border">{{ el.discount_type.name }}</span><span>{{ el.name }}</span></h3>
             <div class="text-desc">
               <p>
                 {{ el.description }}</p>
@@ -107,10 +124,10 @@
       </div><!-- /.col-md-8 -->
       <div class="col-md-4">
         <div class="sidebar">
-          <div class="box pdmap style1" id="flat-map-4">
+          <div class="pdmap style1" id="flat-map-4">
             <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
                  data-image="images/icon/map.png" data-name="Themesflat Map"></div>
-            <div id="map" style="width: 370px;height: 220px"></div>
+            <div id="map" style="width: 100%;height: 220px"></div>
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
