@@ -10387,6 +10387,10 @@ a.text-dark:hover, a.text-dark:focus {
   visibility: hidden !important;
 }
 
+.relative {
+  position: relative;
+}
+
 body {
   color: #333333;
 }
@@ -10594,6 +10598,13 @@ footer .widget-about .logo-ft a {
   border-radius: 10px;
   border-color: #fff;
   color: #fff;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 17px;
+  color: white;
+  top: 17px;
 }
 
 .contact-btn span {
@@ -11220,6 +11231,9 @@ form.form-listing .only-submit-form-listing:hover {
     width: 94%;
     left: 3%;
   }
+}
+button.swal2-confirm {
+  line-height: 100%;
 }
 
 /*# sourceMappingURL=main.css.map */

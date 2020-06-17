@@ -1379,7 +1379,10 @@ const showSelfPosition = (position) => {
         data: JSON.stringify(ret),
         dataType: "json",
       }).done(res => {
-        window.location.reload()
+        Swal.fire({
+          text: '您的意見我們已經收到，我們將儘速聯繫您！',
+          confirmButtonText: '確定'
+        })
       })
     })
   }
