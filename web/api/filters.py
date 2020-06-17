@@ -50,12 +50,14 @@ class StoreFilter(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         search = request.query_params.get('search')
         district = request.query_params.get('district', None)
+        county = request.query_params.get('county', None)
         store_type = request.query_params.get('store_type', None)
         order_by = request.query_params.get('order_by', None)
         storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
         ids = request.query_params.get('ids', None)
         filter_dict = dict([('search', search),
                             ('district', district),
+                            ('county', county),
                             ('store_type', store_type),
                             ('order_by', order_by),
                             ('storediscount_discount_type', storediscount_discount_type),
@@ -101,6 +103,15 @@ class StoreFilter(filters.BaseFilterBackend):
                 schema=coreschema.Number(
                     title='district',
                     description='int: 行政區'
+                )
+            ),
+            coreapi.Field(
+                name='county',
+                required=False,
+                location='query',
+                schema=coreschema.Number(
+                    title='county',
+                    description='int: 縣市'
                 )
             ),
             coreapi.Field(

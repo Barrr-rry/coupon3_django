@@ -97,6 +97,7 @@ class StoreView(TemplateView):
             count=queryset.count(),
             storetypes=storetypes,
             district=district,
+            county=county,
             store_type=store_type,
             district_list=district_list,
             len_storediscount_discount_type=len(dtype),
