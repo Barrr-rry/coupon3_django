@@ -91,7 +91,10 @@
             </a>
           </li>
           <li>
-            <a class="share-url" href="#" title="">
+            <a class="share-url" href="#" title=""
+               data-url="/store/{{ instance.id }}/"
+               data-name="{{ instance.name }}"
+            >
               <img src="/media/share_url.svg" alt="">
             </a>
           </li>
@@ -161,8 +164,14 @@
     $('.share-line').on('click', () => {
       share('line')
     })
-    $('.share-url').on('click', () => {
-      copy(window.location.href)
+    $('.share-url').on('click', function () {
+      let $el = $(this)
+      let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！${window.location.origin}/${$el.attr('data-url')}`
+      copy(msg)
+      Swal.fire({
+        text: '網址已複製',
+        confirmButtonText: '確定'
+      })
     })
 
   })
