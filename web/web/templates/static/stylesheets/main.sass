@@ -53,7 +53,7 @@ a
 
 // header component
 #logo
-  margin-top: 28px
+  margin-top: 32px
 
 .header
   background-color: #F26422
@@ -167,10 +167,13 @@ footer
       margin-right: 6px
 
     a
-      display: inline-block
-      padding: 8px 15px
-      color: #CC2426
-      background-color: #FFFFFF
+      color: #555555
+
+      &.link-contact
+        display: inline-block
+        padding: 8px 15px
+        color: #CC2426
+        background-color: #FFFFFF
 
       &:hover
         color: #CC2426
@@ -207,32 +210,6 @@ footer
 .wrap-listing
   label
     display: flex
-
-// contact
-.contact-select-border
-  border-radius: 10px
-  border-color: #fff
-  color: #fff
-
-.select-arrow
-  position: absolute
-  right: 17px
-  color: white
-  top: 17px
-
-.contact-btn
-  span
-    color: #fff
-    background-color: #2c3e50
-    padding: 15px 30px
-    border-radius: 30px
-    font-size: 16px
-    font-weight: 400
-    position: relative
-    z-index: 99
-
-.flat-contact .contact-form .contact-us
-  padding: 180px 75px
 
 
 // index
@@ -652,6 +629,7 @@ footer
     ul.social-ft
       text-align: right
       margin-top: 100px
+
       li
         display: inline-block
 
@@ -664,10 +642,13 @@ footer
           background-color: #CCCCCC
           text-align: center
           margin-left: 15px
+
           &.share-fb:hover
             background-color: #315A9D
+
           &.share-line:hover
             background-color: #00BE00
+
           &.share-url:hover
             background-color: #f25b22
 
@@ -820,6 +801,104 @@ form.form-listing
     &:hover
       background: #9c0b0e
 
+// contact
+.contact-select-border
+  border-radius: 10px
+  border-color: #fff
+  color: #fff
+
+.select-arrow
+  position: absolute
+  right: 17px
+  color: white
+  top: 17px
+
+.contact-btn
+  span
+    color: #fff
+    background-color: #2c3e50
+    padding: 15px 30px
+    border-radius: 30px
+    font-size: 16px
+    font-weight: 400
+    position: relative
+    z-index: 99
+
+.flat-contact .contact-form .contact-us
+  //padding: 180px 75px
+  padding: 50px 100px 180px
+
+.flat-iconbox
+  background-color: #F1F1F1
+
+  &.style2
+    padding: 160px 0
+
+  .box-desc a
+    color: #333333
+    font-size: 16px
+    letter-spacing: 2px
+    line-height: 32px
+
+    &:hover
+      color: #f25b22
+
+  .box-header .iconbox-icon
+    height: auto
+
+.flat-contact
+  background-color: #F1F1F1
+
+  .contact-form
+    float: none
+
+    .contact-us
+      h3
+        color: #333333
+        text-align: center
+        font-size: 26px
+        letter-spacing: 2px
+        margin-bottom: 50px
+
+      form
+        .wrap-contact.name, .wrap-contact.email, .wrap-contact.message
+          input, textarea
+            border: 1px solid #CCCCCC
+            background-color: rgba(255, 255, 255, 0.5)
+            font-size: 14px
+            letter-spacing: 1px
+            font-weight: 400
+            color: #666666
+
+          textarea
+            height: 200px
+
+
+          input::-webkit-input-placeholder, textarea::-webkit-input-placeholder
+            color: #999999
+
+          input::-moz-placeholder, textarea::-moz-placeholder
+            color: #999999
+
+          input::-moz-placeholder, textarea::-moz-placeholder
+            color: #999999
+
+          input:-ms-input-placeholder, textarea:-ms-input-placeholder
+            color: #999999
+
+        .contact-select-border
+          background-color: rgba(255, 255, 255, 0.5)
+          font-size: 14px
+          letter-spacing: 1px
+          font-weight: 400
+          color: #666666
+          border-color: #CCCCCC
+
+        .select-arrow
+          color: #666666
+
+        .btn-more
+          text-align: center
 
 //RWD
 
@@ -946,6 +1025,16 @@ form.form-listing
     .only-submit-form-listing
       background: #9c0b0e
 
+  .header_sticky
+    .flat-explore-detail
+      .col-md-8, .col-md-4
+        max-width: 100%
+        flex: none
+
+      #map
+        height: 400px !important
+
+
 @media only screen and (max-width: 767px)
   .imagebox.style5
     //background: rgba(204,36,38,1)
@@ -987,9 +1076,37 @@ form.form-listing
             font-weight: 400
             border: 1px solid rgba(255, 255, 255, 0)
 
-        li.end
-          a
+  .header_sticky
+    .flat-explore-detail
+      #map
+        height: 200px !important
 
+    .flat-title ul.social-ft
+      text-align: left
+      margin-top: 20px
+
+      li a
+        margin-left: 0
+        margin-right: 15px
+
+        &.share-fb
+          background-color: #315A9D
+
+        &.share-line
+          background-color: #00BE00
+
+        &.share-url
+          background-color: #f25b22
+
+  .flat-iconbox
+    &.style2
+      padding: 80px 0
+
+      .iconbox.style2
+        margin-bottom: 60px
+
+  .flat-contact .contact-form .contact-us
+    padding: 0 50px 120px
 
 @media only screen and (max-width: 600px)
   .imagebox.style5

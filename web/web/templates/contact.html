@@ -31,7 +31,7 @@
 
 {% include 'includes/header.html' %}<!-- /.header -->
 
-<section class="page-title parallax parallax1">
+<section class="page-title parallax parallax1 parallax-200">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -41,7 +41,7 @@
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
-  <div class="overlay"></div>
+<!--  <div class="overlay"></div>-->
 </section><!-- /.page-title -->
 
 <section class="flat-row flat-iconbox style2">
@@ -52,7 +52,8 @@
           <div class="iconbox style2">
             <div class="box-header">
               <div class="iconbox-icon">
-                <img src="{% static "images/page/address.png" %}" alt="">
+<!--                <img src="{% static "images/page/address.png" %}" alt="">-->
+                <img src="/media/contact_line.svg" alt="">
               </div>
             </div><!-- /.box-header -->
             <div class="box-content">
@@ -70,7 +71,8 @@
           <div class="iconbox style2">
             <div class="box-header">
               <div class="iconbox-icon">
-                <img src="{% static "images/page/email.png" %}" alt="">
+<!--                <img src="{% static "images/page/email.png" %}" alt="">-->
+                <img src="/media/contact_mail.svg" alt="">
               </div>
             </div><!-- /.box-header -->
             <div class="box-content">
@@ -91,7 +93,8 @@
           <div class="iconbox style2">
             <div class="box-header">
               <div class="iconbox-icon">
-                <img src="{% static "images/page/phone.png" %}" alt="">
+<!--                <img src="{% static "images/page/phone.png" %}" alt="">-->
+                <img src="/media/contact_phone.svg" alt="">
               </div>
             </div><!-- /.box-header -->
             <div class="box-content">
@@ -112,9 +115,9 @@
 </section><!-- /.flat-iconbox style2 -->
 
 <section class="flat-contact">
-  <div class="contact-form parallax parallax1 fill-width">
+  <div class="container contact-form parallax fill-width">
     <div class="contact-us row">
-      <div class="col-sm-12 col-md-6 col-md-offset-3">
+      <div class="col-md-12">
         <h3>聯絡我們</h3>
         <form method="get" accept-charset="utf-8" class="contact-form-self">
           <div class="wrap-contact name">
@@ -146,7 +149,7 @@
         </form>
       </div>
     </div><!-- /.contact-us -->
-    <div class="overlay"></div>
+<!--    <div class="overlay"></div>-->
   </div><!-- /.contact-form -->
   <div class="clearfix"></div>
 </section><!-- /.flat-contact -->
