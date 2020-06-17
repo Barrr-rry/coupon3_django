@@ -10433,6 +10433,11 @@ a:hover {
   color: #F26422;
 }
 
+.page-title ul.breadcrumbs li {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
 #logo {
   margin-top: 28px;
 }
@@ -10891,6 +10896,10 @@ footer .widget-about .logo-ft a {
   background-color: rgba(204, 36, 38, 0.8);
   border-radius: 0px;
 }
+.imagebox .box-imagebox .box-content {
+  padding: 30px 25px 18px;
+  min-height: 200px;
+}
 .imagebox .box-imagebox .box-content .box-title.ad a {
   padding-left: 0px;
   font-size: 26px;
@@ -10918,6 +10927,15 @@ footer .widget-about .logo-ft a {
   letter-spacing: 2px;
   color: #aaaaaa;
   margin-top: 15px;
+}
+.imagebox .box-imagebox .box-content .box-desc .sale-list {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}
+.imagebox .box-imagebox .box-content .box-desc .sale-list:before {
+  content: "-";
 }
 .imagebox .box-imagebox ul.tag_block {
   padding: 16px 0px 15px 25px;
@@ -10953,6 +10971,99 @@ footer .widget-about .logo-ft a {
 }
 .imagebox .box-imagebox ul.tag_block li.right a:hover {
   color: #cc2426;
+}
+
+.flat-listing {
+  background: #f1f1f1;
+  padding: 80px 0 120px;
+}
+
+form.form-listing .inner-box {
+  border-radius: 0;
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.08);
+  padding: 50px 75px;
+}
+form.form-listing .inner-box label {
+  color: #333333;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+form.form-listing .inner-box select {
+  border-color: #CCCCCC;
+  border-radius: 5px;
+  color: #666666;
+  font-weight: 400;
+}
+form.form-listing .inner-box .ti-angle-down {
+  color: #999999;
+}
+form.form-listing .inner-box input {
+  color: #666666;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  margin-bottom: 35px;
+}
+form.form-listing .inner-box input::-webkit-input-placeholder {
+  color: #999999;
+}
+form.form-listing .inner-box input::-moz-placeholder {
+  color: #999999;
+}
+form.form-listing .inner-box input::-moz-placeholder {
+  color: #999999;
+}
+form.form-listing .inner-box input:-ms-input-placeholder {
+  color: #999999;
+}
+form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
+  padding-right: 20px;
+}
+form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2) {
+  padding-left: 20px;
+}
+form.form-listing .inner-box .submit-form-listing {
+  background: #ffffff;
+  border-radius: 50px;
+  color: #f26423;
+  border: 2px solid rgba(242, 100, 35, 0.5);
+}
+form.form-listing .inner-box .submit-form-listing:hover {
+  background: #f26423 !important;
+  color: #ffffff;
+}
+form.form-listing .inner-box .browse {
+  background-color: #FBFBFB;
+  border: 2px dashed #cccccc;
+  padding: 60px 0;
+}
+form.form-listing .inner-box .browse p {
+  font-size: 18px;
+}
+form.form-listing .inner-box .browse span {
+  font-size: 18px;
+}
+form.form-listing .inner-box .browse .upload span {
+  background: #f26423;
+}
+form.form-listing .inner-box.style3 label {
+  margin-bottom: 10px;
+}
+form.form-listing .store-discount {
+  border-top: 1px solid #cccccc;
+  padding: 25px 0 25px;
+}
+form.form-listing .store-discount:first-of-type {
+  border-top: none;
+  padding: 0 0 25px;
+}
+form.form-listing .only-submit-form-listing {
+  border-radius: 50px;
+  background: #f26423;
+  color: #ffffff;
+}
+form.form-listing .only-submit-form-listing:hover {
+  background: #9c0b0e;
 }
 
 @media only screen and (max-width: 1440px) {
@@ -11049,6 +11160,22 @@ footer .widget-about .logo-ft a {
     background-image: url("/media/bg_dark_mobile.png");
     background-position: 45% 50px !important;
     background-size: cover;
+  }
+}
+@media only screen and (max-width: 991px) {
+  form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
+    padding-right: 0px;
+  }
+  form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2) {
+    padding-left: 0px;
+  }
+  form.form-listing .inner-box .submit-form-listing:hover {
+    background: #ffffff !important;
+    color: #f26423;
+    border: 2px solid rgba(242, 100, 35, 0.5);
+  }
+  form.form-listing .only-submit-form-listing {
+    background: #9c0b0e;
   }
 }
 @media only screen and (max-width: 767px) {

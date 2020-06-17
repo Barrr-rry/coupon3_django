@@ -43,6 +43,12 @@ a
   &:hover
     color: #F26422
 
+.page-title
+  ul.breadcrumbs
+    li
+      font-size: 18px
+      letter-spacing: 2px
+
 // header component
 #logo
   margin-top: 28px
@@ -529,6 +535,9 @@ footer
             border-radius: 0px
 
     .box-content
+      padding: 30px 25px 18px
+      min-height: 200px
+
       .box-title.ad
         a
           padding-left: 0px
@@ -558,6 +567,15 @@ footer
         letter-spacing: 2px
         color: #aaaaaa
         margin-top: 15px
+
+        .sale-list
+          overflow: hidden
+          text-overflow: ellipsis
+          white-space: nowrap
+          width: 100%
+
+          &:before
+            content: "-"
 
     ul.tag_block
       padding: 16px 0px 15px 25px
@@ -593,6 +611,102 @@ footer
 
           &:hover
             color: rgba(204, 36, 38, 1)
+
+
+// create
+.flat-listing
+  background: #f1f1f1
+  padding: 80px 0 120px
+
+form.form-listing
+  .inner-box
+    border-radius: 0
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.08)
+    padding: 50px 75px
+
+    label
+      color: #333333
+      letter-spacing: 2px
+      margin-bottom: 10px
+
+    select
+      border-color: #CCCCCC
+      border-radius: 5px
+      color: #666666
+      font-weight: 400
+
+    .ti-angle-down
+      color: #999999
+
+    input
+      color: #666666
+      font-size: 14px
+      letter-spacing: 1px
+      font-weight: 400
+      margin-bottom: 35px
+
+    input::-webkit-input-placeholder
+      color: #999999
+
+    input::-moz-placeholder
+      color: #999999
+
+    input::-moz-placeholder
+      color: #999999
+
+    input:-ms-input-placeholder
+      color: #999999
+
+    .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
+      padding-right: 20px
+
+    .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2)
+      padding-left: 20px
+
+    .submit-form-listing
+      background: #ffffff
+      border-radius: 50px
+      //color: #333333
+      color: #f26423
+      border: 2px solid rgba(242, 100, 35, 0.5)
+
+      &:hover
+        background: #f26423 !important
+        color: #ffffff
+
+    .browse
+      background-color: #FBFBFB
+      border: 2px dashed #cccccc
+      padding: 60px 0
+
+      p
+        font-size: 18px
+
+      span
+        font-size: 18px
+
+      .upload span
+        background: #f26423
+
+    &.style3
+      label
+        margin-bottom: 10px
+
+  .store-discount
+    border-top: 1px solid #cccccc
+    padding: 25px 0 25px
+
+    &:first-of-type
+      border-top: none
+      padding: 0 0 25px
+
+  .only-submit-form-listing
+    border-radius: 50px
+    background: #f26423
+    color: #ffffff
+
+    &:hover
+      background: #9c0b0e
 
 
 //RWD
@@ -700,6 +814,25 @@ footer
     background-image: url("/media/bg_dark_mobile.png")
     background-position: 45% 50px !important
     background-size: cover
+
+
+@media only screen and (max-width: 991px)
+  form.form-listing
+    .inner-box
+      .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
+        padding-right: 0px
+
+      .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2)
+        padding-left: 0px
+
+      .submit-form-listing
+        &:hover
+          background: #ffffff !important
+          color: #f26423
+          border: 2px solid rgba(242, 100, 35, 0.5)
+
+    .only-submit-form-listing
+      background: #9c0b0e
 
 @media only screen and (max-width: 767px)
   .imagebox.style5
