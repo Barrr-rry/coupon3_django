@@ -168,7 +168,7 @@
       let $el = $(this)
       let sort = $el.attr('data-sort')
       let split_str = ''
-      if (href_split.length) {
+      if (href_split.length > 1) {
         split_str = `&sort=${sort}`
       } else {
         split_str = `?sort=${sort}`
@@ -180,13 +180,16 @@
     // init active sort
     let $el = $(`a[data-sort=${sort}]`)
     $el.addClass('active')
+    let positionFunction = (position) => {
+      showSelfPosition(position)
+      initStoreDataMarker(0, 6)
+    }
 
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showSelfPosition, showError)
+      navigator.geolocation.getCurrentPosition(positionFunction, showError)
     } else {
       alert('您的瀏覽器不支援定位系統')
-      setError()
     }
   })
 </script>

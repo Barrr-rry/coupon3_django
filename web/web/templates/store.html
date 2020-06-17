@@ -150,7 +150,7 @@
       let $el = $(this)
       let sort = $el.attr('data-sort')
       let split_str = ''
-      if (href_split.length) {
+      if (href_split.length > 1) {
         split_str = `&sort=${sort}`
       } else {
         split_str = `?sort=${sort}`

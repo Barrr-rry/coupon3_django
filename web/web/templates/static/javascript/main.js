@@ -23,6 +23,34 @@ const default_position = {
   zoom: 7
 }
 
+let marker = []
+let clearAllMarker = (map) => {
+  while (marker.length) {
+    let target = marker.pop()
+    map.removeLayer(target)
+  }
+}
+
+let initStoreDataMarker = (start, end) => {
+  for (let i = start; i < end; i++) {
+    let el = store_data[i]
+    let li = el.storediscount.map(x => `<li>${x.name}</li>`)
+    let ul = `
+        <ul>
+        ${li}
+        </ul>
+        `
+    let html = `
+        <div>${el.name}</div>
+        ${ul}
+        <a href="/store/${el.id}"><button type="button" class="search-btn" id="search-btn">導覽到頁面</button></a>
+        `
+    const pos = L.marker([el.latitude, el.longitude], {icon: greenIcon}).bindPopup(html).openPopup()
+    marker.push(pos)
+    _map.addLayer(pos)
+  }
+}
+
 let share = (social) => {
   const webTitle = `振興券`,
     webUrl = location.href
@@ -129,14 +157,14 @@ const showSelfPosition = (position) => {
 
     let popup = L.popup()
 
-    function onMapClick(e) {
-      popup
-        .setLatLng(e.latlng)
-        .setContent("經緯度座標：" + e.latlng.toString())
-        .openOn(map);
-    }
-
-    map.on('click', onMapClick)
+    // function onMapClick(e) {
+    //   popup
+    //     .setLatLng(e.latlng)
+    //     .setContent("經緯度座標：" + e.latlng.toString())
+    //     .openOn(map);
+    // }
+    //
+    // map.on('click', onMapClick)
 
 
     // 設定所在位置的icon
@@ -1526,6 +1554,9 @@ const showSelfPosition = (position) => {
       for (let i = offset; i < max_offset; i++) {
         let data = store_data[i]
         appendStore(data)
+      }
+      if ($('#map').length) {
+        initStoreDataMarker(offset, max_offset)
       }
       if (max_offset === store_data.length) {
         $(".more-click").remove()

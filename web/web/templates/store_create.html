@@ -127,13 +127,6 @@
 {% include 'includes/js.html' %}
 <script>
   $(document).ready(() => {
-    let marker = []
-    let clearAllMarker = (map) => {
-      while (marker.length) {
-        let target = marker.pop()
-        map.removeLayer(target)
-      }
-    }
     let showPosition = (position) => {
       let map = initMap(position)
       map.off('click')
