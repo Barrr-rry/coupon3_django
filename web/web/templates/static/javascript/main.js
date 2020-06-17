@@ -1505,40 +1505,18 @@ const showSelfPosition = (position) => {
       `
       $('.store-box').append(html)
     }
-    let filter_href = window.location.href.split('?')
-    if (filter_href.length > 1) {
-      $(".more-click").on('click', () => {
-        let offset = $('.store').length
-        $.ajax({
-          url: `/api/store/?limit=6&offset=${offset}&${filter_href[1]}`,
-          method: 'get'
-        }).done(res => {
-          for (let data of res.results) {
-            appendStore(data)
-          }
-          // close more
-          if (!res.next) {
-            $(".more-click").remove()
-          }
-        })
-      })
-    } else {
-      $(".more-click").on('click', () => {
-        let offset = $('.store').length
-        $.ajax({
-          url: `/api/store/?limit=6&offset=${offset}`,
-          method: 'get'
-        }).done(res => {
-          for (let data of res.results) {
-            appendStore(data)
-          }
-          // close more
-          if (!res.next) {
-            $(".more-click").remove()
-          }
-        })
-      })
-    }
+    $(".more-click").on('click', () => {
+      let index = 6
+      let offset = $('.store').length
+      let max_offset = Math.min(offset + index, store_data.length)
+      for (let i = offset; i < max_offset; i++) {
+        let data = store_data[i]
+        appendStore(data)
+      }
+      if (max_offset === store_data.length) {
+        $(".more-click").remove()
+      }
+    })
   }
   $(function () {
     responsiveMenu();
