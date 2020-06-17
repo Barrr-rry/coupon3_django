@@ -3,7 +3,7 @@ from email.mime.image import MIMEImage
 
 
 def send_mail(subject, text):
-    from_email = '3CP@conquers.co@gmail.com'
+    from_email = '3CP@conquers.co'
     text_content = f'''
     {text}        
     '''

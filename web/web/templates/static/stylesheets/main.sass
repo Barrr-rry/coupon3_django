@@ -2,6 +2,8 @@
 @import "base"
 @import "vender"
 
+.relative
+  position: relative
 // body
 body
   color: #333333
@@ -212,6 +214,12 @@ footer
   border-color: #fff
   color: #fff
 
+.select-arrow
+  position: absolute
+  right: 17px
+  color: white
+  top: 17px
+
 .contact-btn
   span
     color: #fff
@@ -224,7 +232,7 @@ footer
     z-index: 99
 
 .flat-contact .contact-form .contact-us
-  padding: 180px 0px
+  padding: 180px 75px
 
 
 // index
@@ -991,3 +999,8 @@ form.form-listing
           span
             width: 94%
             left: 3%
+
+
+// swal component
+button.swal2-confirm
+  line-height: 100%

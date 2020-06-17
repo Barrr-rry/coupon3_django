@@ -34,6 +34,7 @@ urlpatterns = [
     path('store/<int:store_id>/', StoreIdView.as_view()),
     path('store_map/', StoreMapView.as_view()),
     path('store/', StoreView.as_view()),
+    path('store/county/', StoreCountyView.as_view()),
     path('test/', TestView.as_view()),
     path('qa/', QAView.as_view()),
     path('eli5/', ELI5View.as_view()),
