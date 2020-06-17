@@ -11135,23 +11135,23 @@ form.form-listing .inner-box select {
 form.form-listing .inner-box .ti-angle-down {
   color: #999999;
 }
-form.form-listing .inner-box input {
+form.form-listing .inner-box input, form.form-listing .inner-box textarea {
   color: #666666;
   font-size: 14px;
   letter-spacing: 1px;
   font-weight: 400;
   margin-bottom: 35px;
 }
-form.form-listing .inner-box input::-webkit-input-placeholder {
+form.form-listing .inner-box input::-webkit-input-placeholder, form.form-listing .inner-box textarea::-webkit-input-placeholder, form.form-listing .inner-box select::-webkit-input-placeholder {
+  color: #999999 !important;
+}
+form.form-listing .inner-box input::-moz-placeholder, form.form-listing .inner-box textarea::-moz-placeholder, form.form-listing .inner-box select::-moz-placeholder {
   color: #999999;
 }
-form.form-listing .inner-box input::-moz-placeholder {
+form.form-listing .inner-box input::-moz-placeholder, form.form-listing .inner-box textarea::-moz-placeholder, form.form-listing .inner-box select::-moz-placeholder {
   color: #999999;
 }
-form.form-listing .inner-box input::-moz-placeholder {
-  color: #999999;
-}
-form.form-listing .inner-box input:-ms-input-placeholder {
+form.form-listing .inner-box input:-ms-input-placeholder, form.form-listing .inner-box textarea:-ms-input-placeholder, form.form-listing .inner-box select:-ms-input-placeholder {
   color: #999999;
 }
 form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
@@ -11169,6 +11169,34 @@ form.form-listing .inner-box .submit-form-listing {
 form.form-listing .inner-box .submit-form-listing:hover {
   background: #f26423 !important;
   color: #ffffff;
+}
+form.form-listing .inner-box .wrap-listing.location {
+  width: 100%;
+}
+form.form-listing .inner-box .wrap-listing.location input {
+  display: inline-block;
+  width: 90%;
+}
+form.form-listing .inner-box .wrap-listing.location a.enter {
+  display: inline-block;
+  width: 9%;
+  float: right;
+  background-color: #f26423;
+  border-radius: 6px;
+  padding: 13px;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+}
+form.form-listing .inner-box .wrap-listing.location a.enter:hover {
+  background-color: #9c0b0e;
+}
+form.form-listing .inner-box .wrap-listing.location a.map {
+  position: absolute;
+  color: #E02020;
+  right: 12%;
+  top: 46px;
 }
 form.form-listing .inner-box .browse {
   background-color: #FBFBFB;
@@ -11424,6 +11452,18 @@ form.form-listing .only-submit-form-listing:hover {
   .imagebox.style5.link-activity .box-image {
     background-position: 85% 20px;
   }
+
+  form.form-listing .inner-box .wrap-listing.location input {
+    width: 80%;
+    float: left;
+  }
+  form.form-listing .inner-box .wrap-listing.location a.enter {
+    width: 18%;
+  }
+  form.form-listing .inner-box .wrap-listing.location a.map {
+    right: 22%;
+    top: 46px;
+  }
 }
 @media only screen and (max-width: 991px) {
   form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
@@ -11565,6 +11605,18 @@ form.form-listing .only-submit-form-listing:hover {
   .flat-listing form.form-listing .inner-box button.submit-form-listing {
     height: 60px;
     line-height: 60px;
+  }
+  .flat-listing form.form-listing .wrap-listing.location input {
+    width: 100%;
+    float: left;
+  }
+  .flat-listing form.form-listing .wrap-listing.location a.enter {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .flat-listing form.form-listing .wrap-listing.location a.map {
+    right: 5%;
+    top: 46px;
   }
   .flat-listing form.form-listing button.only-submit-form-listing {
     height: 60px;

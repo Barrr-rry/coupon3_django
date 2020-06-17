@@ -788,23 +788,23 @@ form.form-listing
     .ti-angle-down
       color: #999999
 
-    input
+    input, textarea
       color: #666666
       font-size: 14px
       letter-spacing: 1px
       font-weight: 400
       margin-bottom: 35px
 
-    input::-webkit-input-placeholder
+    input::-webkit-input-placeholder, textarea::-webkit-input-placeholder, select::-webkit-input-placeholder
+      color: #999999 !important
+
+    input::-moz-placeholder, textarea::-moz-placeholder, select::-moz-placeholder
       color: #999999
 
-    input::-moz-placeholder
+    input::-moz-placeholder, textarea::-moz-placeholder, select::-moz-placeholder
       color: #999999
 
-    input::-moz-placeholder
-      color: #999999
-
-    input:-ms-input-placeholder
+    input:-ms-input-placeholder, textarea:-ms-input-placeholder, select:-ms-input-placeholder
       color: #999999
 
     .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
@@ -823,6 +823,34 @@ form.form-listing
       &:hover
         background: #f26423 !important
         color: #ffffff
+
+    .wrap-listing.location
+      width: 100%
+
+      input
+        display: inline-block
+        width: 90%
+
+      a.enter
+        display: inline-block
+        width: 9%
+        float: right
+        background-color: #f26423
+        border-radius: 6px
+        padding: 13px
+        color: #fff
+        text-align: center
+        font-size: 16px
+        font-weight: 400
+        &:hover
+          background-color: #9c0b0e
+
+      a.map
+        position: absolute
+        color: #E02020
+        right: 12%
+        top: 46px
+
 
     .browse
       background-color: #FBFBFB
@@ -1093,6 +1121,20 @@ form.form-listing
       .box-image
         background-position: 85% 20px
 
+  form.form-listing
+    .inner-box
+      .wrap-listing.location
+        input
+          width: 80%
+          float: left
+
+        a.enter
+          width: 18%
+
+        a.map
+          right: 22%
+          top: 46px
+
 
 @media only screen and (max-width: 991px)
   form.form-listing
@@ -1118,9 +1160,11 @@ form.form-listing
         max-width: 100%
         flex: none
 
+
 #map
   height: 300px !important
   text-align: center
+
   .map_btn
     position: absolute
     width: 200px
@@ -1133,7 +1177,8 @@ form.form-listing
     background-color: #f25b22
     color: #fff
     font-size: 18px
-    box-shadow: 0px 2px 4px rgba(0,0,0,0.2)
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
+
     &:hover
       background-color: #CC2426
 
@@ -1247,9 +1292,23 @@ form.form-listing
           height: 60px
           line-height: 60px
 
+      .wrap-listing.location
+        input
+          width: 100%
+          float: left
+
+        a.enter
+          width: 100%
+          margin-bottom: 10px
+
+        a.map
+          right: 5%
+          top: 46px
+
       button.only-submit-form-listing
         height: 60px
         line-height: 60px
+
 
   .wrap-box-search.style1 form > span input
     padding: 8px 55px 8px 50px
