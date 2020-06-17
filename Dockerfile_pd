@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM joyzoursky/python-chromedriver:3.7
 COPY ./web /app
 ENV ENV prod
 WORKDIR /app
