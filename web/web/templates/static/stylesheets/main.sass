@@ -875,12 +875,24 @@ form.form-listing
     input:-ms-input-placeholder, textarea:-ms-input-placeholder, select:-ms-input-placeholder
       color: #999999
 
+    .wrap-listing
+      position: relative
+
+    label.error
+      position: absolute
+      bottom: 0
+      right: 0
+      color: #f26423
+      font-size: 14px
+
     .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child, .one-half
       padding-right: 20px
+      label.error
+        right: 20px
 
     .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2), .one-half-right
       padding-left: 20px
-      padding-right: 0px
+      padding-right: 0
 
     .submit-form-listing
       background: #ffffff
@@ -1235,10 +1247,15 @@ form.form-listing
 @media only screen and (max-width: 991px)
   form.form-listing
     .inner-box
-      .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
-        padding-right: 0
+      label.error
+        bottom: -35px
 
-      .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2)
+      .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child, .one-half
+        padding-right: 0
+        label.error
+          right: 0
+
+      .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2), .one-half-right
         padding-left: 0
 
       .submit-form-listing

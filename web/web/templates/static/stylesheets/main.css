@@ -11221,12 +11221,25 @@ form.form-listing .inner-box input::-moz-placeholder, form.form-listing .inner-b
 form.form-listing .inner-box input:-ms-input-placeholder, form.form-listing .inner-box textarea:-ms-input-placeholder, form.form-listing .inner-box select:-ms-input-placeholder {
   color: #999999;
 }
+form.form-listing .inner-box .wrap-listing {
+  position: relative;
+}
+form.form-listing .inner-box label.error {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #f26423;
+  font-size: 14px;
+}
 form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child, form.form-listing .inner-box .one-half {
   padding-right: 20px;
 }
+form.form-listing .inner-box .wrap-listing.your-email label.error, form.form-listing .inner-box .wrap-listing.phone label.error, form.form-listing .inner-box .one-half:first-child label.error, form.form-listing .inner-box .one-half label.error {
+  right: 20px;
+}
 form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2), form.form-listing .inner-box .one-half-right {
   padding-left: 20px;
-  padding-right: 0px;
+  padding-right: 0;
 }
 form.form-listing .inner-box .submit-form-listing {
   background: #ffffff;
@@ -11562,10 +11575,16 @@ form.form-listing .only-submit-form-listing:hover {
   }
 }
 @media only screen and (max-width: 991px) {
-  form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
+  form.form-listing .inner-box label.error {
+    bottom: -35px;
+  }
+  form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child, form.form-listing .inner-box .one-half {
     padding-right: 0;
   }
-  form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2) {
+  form.form-listing .inner-box .wrap-listing.your-email label.error, form.form-listing .inner-box .wrap-listing.phone label.error, form.form-listing .inner-box .one-half:first-child label.error, form.form-listing .inner-box .one-half label.error {
+    right: 0;
+  }
+  form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2), form.form-listing .inner-box .one-half-right {
     padding-left: 0;
   }
   form.form-listing .inner-box .submit-form-listing:hover {
