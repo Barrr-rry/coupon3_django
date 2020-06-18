@@ -23,7 +23,7 @@ def main(for_test=False, config_data=None):
     generate_stort_type(5)
     generate_county()
     generate_district()
-    generate_store(80)
+    generate_store()
     generate_discount_type(5)
     generate_store_discount()
     generate_store_image()
@@ -59,50 +59,58 @@ def generate_stort_type(count):
 
 
 def generate_county():
-    County.objects.create(
-        name='高雄市',
-        picture='景點照片_劍湖山.jpg',
-    )
-    County.objects.create(
-        name='台南市',
-        picture='景點照片_劍湖山.jpg',
-    )
-    County.objects.create(
-        name='台北市',
-        picture='景點照片_劍湖山.jpg',
-    )
+    county = ''
+    with open('./county.txt') as f:
+        county = f.read()
+    county = county.split('\n')
+    for el in county:
+        target = el.split(',')
+        County.objects.create(
+            name=target[0],
+            latitude=target[1],
+            longitude=target[2],
+            picture='景點照片_劍湖山.jpg'
+
+        )
 
 
 def generate_district():
-    countys = County.objects.all()
-    for county in countys:
-        District.objects.create(
-            name='三民區',
-            county=county
-        )
-        District.objects.create(
-            name='左營區',
-            county=county
-        )
+    location = ''
+    with open('./location.txt') as f:
+        location = f.read()
+    location = location.split('\n')
+    for el in location:
+        target = el.split(',')
+        countys = County.objects.all()
+        for county in countys:
+            if county.name == target[0][:3]:
+                district = target[0][3:]
+                District.objects.create(
+                    name=district,
+                    county=county,
+                    latitude=target[1],
+                    longitude=target[2]
+                )
 
 
-def generate_store(count):
+def generate_store():
     store_type = StoreType.objects.all()
-    countys = County.objects.all()
-    for i in range(count):
-        county = random.choice(countys)
-        district = random.choice(District.objects.filter(county=county).all())
+    querset = District.objects.all()
+    i = 0
+    for el in querset:
+        i += 1
+        county = el.county
         Store.objects.create(
             name=f'商店{i}',
             store_type=random.choice(store_type),
             phone=f'09{get_random_number(8)}',
             website='https://conquers.co/',
-            address=f'{county.name}{district.name}{random.randint(1, 999)}號',
-            latitude=f'22.{i}3366{i}7',
-            longitude=f'120.{i}9572{i}6',
+            address=f'{county.name}{el.name}{random.randint(1, 999)}號',
             county=county,
-            district=district,
-            status=random.randint(0, 2)
+            district=el,
+            status=random.randint(0, 2),
+            latitude=el.latitude+round(random.uniform(0, 1), 6),
+            longitude=el.longitude+round(random.uniform(0, 1), 6),
         )
 
 

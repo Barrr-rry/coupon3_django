@@ -54,9 +54,10 @@ let initStoreDataMarker = (start, end) => {
 
 let share = (social) => {
   const webTitle = `振興券`,
-    webUrl = location.href
+    webUrl = window.location.href
   let shareUrl = (social === 'line') ? `振興券：${webUrl}?openExternalBrowser=1` : webUrl
-  window.open('https://www.addtoany.com/add_to/' + social + '?linkurl=' + shareUrl + '&amp;linkname=' + encodeURI(webTitle))
+  console.log('share:', shareUrl)
+  window.open('https://www.addtoany.com/add_to/' + social + '?linkurl=' + shareUrl + '&amp;linkname=' + encodeURI(shareUrl))
 }
 let copy = (content) => {
   function isOS() {
@@ -1291,14 +1292,14 @@ const showSelfPosition = (position) => {
     return ret
   }
 
-  jQuery.validator.addMethod("isEmail", function(value, element) {
-    var email =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  jQuery.validator.addMethod("isEmail", function (value, element) {
+    var email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return this.optional(element) || email.test(value);
   }, "請填寫正確的信箱");
 
-  jQuery.validator.addMethod("isPhone", function(value, element) {
-    var tel =  /[0-9]{2}\-[0-9]{7}/
-    var phone =  /^09\d{8}$/
+  jQuery.validator.addMethod("isPhone", function (value, element) {
+    var tel = /[0-9]{2}\-[0-9]{7}/
+    var phone = /^09\d{8}$/
     return this.optional(element) || tel.test(value) || phone.test(value);
   }, "請填寫正確的電話");
 

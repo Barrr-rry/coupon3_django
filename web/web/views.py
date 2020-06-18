@@ -7,6 +7,9 @@ from api import filters
 import json
 from crawler import task
 from log import logger
+import uuid
+
+token = str(uuid.uuid4())
 
 
 class TestView(TemplateView):

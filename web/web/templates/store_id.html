@@ -81,12 +81,12 @@
       <div class="col-md-4">
         <ul class="social-ft">
           <li>
-            <a class="share-fb" href="#" title="">
+            <a class="share-fb share-to" data-sns="facebook" href="#" title="">
               <img src="/media/share_fb.svg" alt="">
             </a>
           </li>
           <li>
-            <a class="share-line" href="#" title="">
+            <a class="share-line share-to" href="#" title="" data-sns="line">
               <img src="/media/share_line.svg" alt="">
             </a>
           </li>
@@ -160,12 +160,7 @@
       zoom: 12
     }
     showSelfPosition(position)
-    $('.share-fb').on('click', () => {
-      share('facebook')
-    })
-    $('.share-line').on('click', () => {
-      share('line')
-    })
+    $('.share-to').snsShare('快來看看{{instance.name}}用三倍券的超棒優惠！', window.location.href)
     $('.share-url').on('click', function () {
       let $el = $(this)
       let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！${window.location.origin}/${$el.attr('data-url')}`
