@@ -75,7 +75,7 @@ class StoreIdView(BaseView):
     def get_context_data(self, *args, **kwargs):
         instance = Store.objects.get(pk=kwargs.get('store_id'))
         ret = dict(instance=serializers.StoreSerializer(instance=instance).data,
-                   token=self.token,)
+                   token=self.token, )
         lat = instance.latitude
         lon = instance.longitude
         google = f'https://www.google.com.tw/maps/search/{lat},+{lon}/@{lat},{lon},17z?hl=zh-TW'
@@ -191,7 +191,13 @@ class StoreView(BaseView):
         if storediscount_discount_type != 'all':
             dtype = list(map(int, dtype))
 
+        split_list = self.request.build_absolute_uri().split('?')
+        suffix = ''
+        if len(split_list) > 1:
+            suffix = f'?{split_list[-1]}'
+
         ret = dict(
+            suffix=suffix,
             search=search if search is not None else '',
             data=data[:6],
             json_data=json_data,
