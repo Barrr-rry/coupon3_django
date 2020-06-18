@@ -5,6 +5,8 @@ from api.models import (
 from api import serializers
 from api import filters
 import json
+from crawler import task
+from log import logger
 
 
 class TestView(TemplateView):
@@ -81,8 +83,6 @@ class StoreView(TemplateView):
                             ('ids', ids)]
                            )
 
-        lat = float(self.request.COOKIES.get('lat', 23.8523405))
-        lon = float(self.request.COOKIES.get('lon', 120.9009427))
         sort = self.request.GET.get('sort', 'distance')
         queryset = filters.filter_query(filter_dict, queryset)
         if sort == 'new':
@@ -98,6 +98,16 @@ class StoreView(TemplateView):
 
         if not county:
             county = 'all'
+
+        task_id = task.enqueue_task('get_latlon', search)
+        gps = None
+        while True:
+            gps = task.get_task_result(task_id)
+            if gps:
+                break
+        logger.info(f'loc=> {search}:{gps}')
+        lat = float(gps[0])
+        lon = float(gps[1])
 
         def distance(x):
             nlat = x['latitude']
