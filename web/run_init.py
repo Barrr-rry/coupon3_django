@@ -97,7 +97,7 @@ def generate_store(count):
             store_type=random.choice(store_type),
             phone=f'09{get_random_number(8)}',
             website='https://conquers.co/',
-            address=f'{county.name}{district.name}6號',
+            address=f'{county.name}{district.name}{random.randint(1, 999)}號',
             latitude=f'22.{i}3366{i}7',
             longitude=f'120.{i}9572{i}6',
             county=county,
