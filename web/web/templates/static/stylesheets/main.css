@@ -10819,7 +10819,8 @@ footer .widget-about .logo-ft a {
 }
 
 .introduce .introduce-title span {
-  color: #5f5f5f;
+  color: #888888;
+  opacity: 0.2;
 }
 
 .flat-introduce {
@@ -10828,13 +10829,72 @@ footer .widget-about .logo-ft a {
 .flat-introduce .introduce-header {
   border-bottom: 1px solid #e0e0e0;
 }
+.flat-introduce .introduce-header a.tab {
+  display: inline-block;
+  padding: 6px 18px;
+  margin: 0px 10px 20px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #f25b22;
+  border: 1px solid #f25b22;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.flat-introduce .introduce-header a.tab:hover, .flat-introduce .introduce-header a.tab.active {
+  background-color: #f25b22;
+  color: #ffffff;
+}
 .flat-introduce .d-flex {
   margin-bottom: 50px;
 }
-.flat-introduce .d-flex .introduce-title h3 {
+.flat-introduce .d-flex .introduce .introduce-title h3 {
   margin: 20px 0 24px;
+  font-size: 28px;
+  letter-spacing: 2px;
+  line-height: 45px;
 }
-.flat-introduce .introduce-footer {
+.flat-introduce .d-flex .introduce .introduce-content {
+  display: inline-block;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+.flat-introduce .d-flex .introduce .introduce-content p {
+  display: block;
+  margin-bottom: 10px;
+}
+.flat-introduce .d-flex .introduce .introduce-content .para {
+  margin-bottom: 30px;
+}
+.flat-introduce .d-flex .introduce .introduce-content .indent {
+  padding-left: 20px;
+}
+.flat-introduce .d-flex .introduce .introduce-content ul {
+  margin-bottom: 10px;
+}
+.flat-introduce .d-flex .introduce .introduce-content ul li {
+  position: relative;
+  padding-left: 20px;
+}
+.flat-introduce .d-flex .introduce .introduce-content ul li:before {
+  content: "◆";
+  position: absolute;
+  display: inline-block;
+  left: 0px;
+  padding-right: 5px;
+  color: #666666;
+  font-size: 13px;
+}
+.flat-introduce .d-flex .introduce .introduce-content .highlight {
+  display: inline-block;
+  padding: 0px 8px;
+  background-color: #aaaaaa;
+  color: #fff;
+  font-weight: 400;
+  border-radius: 6px;
+}
+.flat-introduce .introduc-footer {
   border-top: 1px solid #e0e0e0;
 }
 

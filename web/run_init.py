@@ -108,7 +108,7 @@ def generate_store():
             address=f'{county.name}{el.name}{random.randint(1, 999)}號',
             county=county,
             district=el,
-            status=random.randint(0, 2),
+            status=1,
             latitude=el.latitude+round(random.uniform(0, 1), 6),
             longitude=el.longitude+round(random.uniform(0, 1), 6),
         )
