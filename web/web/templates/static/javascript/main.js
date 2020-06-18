@@ -1314,11 +1314,14 @@ const showSelfPosition = (position) => {
         <div class="store-discount-content col">
           <div class="wrap-listing your-name">
             <label>活動名稱</label>
-            <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">
-            <label>活動類型</label>
-            <select name="discount_type" placeholder="請選擇活動類型">
-              ${options}
-            </select>
+            <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">         
+            <div class="discount_type">
+              <label>活動類型</label>
+              <span class="ti-angle-down"></span>
+              <select name="discount_type" placeholder="請選擇活動類型">
+                ${options}
+              </select>
+            </div>
           </div><!-- /.wrap-listing -->
           <div class="wrap-listing your-name">
             <label>活動內容</label>

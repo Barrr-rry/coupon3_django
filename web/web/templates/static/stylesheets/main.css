@@ -11236,6 +11236,15 @@ form.form-listing .only-submit-form-listing:hover {
   background: #9c0b0e;
 }
 
+.discount_type {
+  position: relative;
+}
+.discount_type .ti-angle-down {
+  position: absolute;
+  right: 30px;
+  bottom: 19px;
+}
+
 .contact-select-border {
   border-radius: 10px;
   border-color: #fff;
