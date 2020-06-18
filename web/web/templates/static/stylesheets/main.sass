@@ -655,7 +655,7 @@ footer
     ul.tag_block
       padding: 16px 0px 15px 25px
       border-top: 1px solid #ebebeb
-      overflow: hidden
+      //overflow: hidden
       height: 58px
 
       li.tag
@@ -675,6 +675,7 @@ footer
             font-weight: 400
 
       li.right
+        position: relative
         display: inline-block
         float: right
 
@@ -686,6 +687,85 @@ footer
 
           &:hover
             color: rgba(204, 36, 38, 1)
+
+      input[type="checkbox"]
+        display: none
+
+      //.checkbox:checked + .label
+      //  background: #7B7484
+      //  color: #231733
+
+      .checkbox:checked ~ .social
+        opacity: 1
+        transform: scale(1) translateY(-90px)
+
+      .label
+        cursor: pointer
+        display: inline-block
+        padding-right: 25px
+        font-weight: 400
+        color: rgba(204, 36, 38, 0.7)
+        background-color: #fff
+        font-size: 16px
+
+      .social
+        position: absolute
+        right: 10px
+        transform-origin: 90% 0
+        transform: scale(0) translateY(-190px)
+        opacity: 0
+        transition: .5s
+        z-index: 1000
+
+      ul
+        position: relative
+        left: 0
+        right: 0
+        margin: -5px auto 0
+        color: #fff
+        height: 46px
+        width: 180px
+        background: #f26423
+        padding: 0
+        list-style: none
+        &:after
+          content: ''
+          display: block
+          position: absolute
+          left: 120px
+          right: 0
+          margin: 46px auto
+          height: 0
+          width: 0
+          border-left: 20px solid transparent
+          border-right: 20px solid transparent
+          border-top: 20px solid #f26423
+        li
+          font-size: 20px
+          cursor: pointer
+          width: 60px
+          margin: 0
+          padding: 9px 0
+          text-align: center
+          float: left
+          display: block
+          height: 46px
+          opacity: 0.95
+          &:hover
+            opacity: 1
+          &[class*="line"]
+            background: #00BE00
+          &[class*="facebook"]
+            background: #315A9D
+          &[class*="url"]
+            background: #f26423
+            img
+              width: 30px
+          img
+            width: 25px
+
+
+
 
 
 // store-county
