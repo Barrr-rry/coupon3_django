@@ -1520,10 +1520,14 @@ const showSelfPosition = (position) => {
                   <!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
                 </div>
                 <ul class="rating">
-                  <li><span>${data.county_name}</span></li>
                   <li><span>${data.district_name}</span></li>
                   <li>
-                    <img src="/media/park_s_gray.svg" alt="">
+                    <img src="/media/map_gray.svg" alt="">
+                    <span>{{ el.store_type_name }}</span>
+                    <span>${data.distance_name}</span>
+                  </li>
+                  <li>
+                    <img src="/media/park_gray.svg" alt="">
                     <span>${data.store_type_name}</span>
                   </li>
                 </ul>
