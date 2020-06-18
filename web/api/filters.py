@@ -11,20 +11,6 @@ and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
 
 def filter_query(filter_dict, queryset):
     q = None
-    msg = filter_dict['search']
-    keywords = []
-    for el in County.objects.all():
-        if el.name in msg:
-            msg = msg.replace(el.name, '')
-            keywords.append(el.name)
-
-    for el in District.objects.all():
-        if el.name in msg:
-            msg = msg.replace(el.name, '')
-            keywords.append(el.name)
-    if not msg and keywords:
-        filter_dict['search'] = " ".join(keywords)
-
     if filter_dict['search'] is not None:
         for keyword in filter_dict['search'].strip().split():
             q = or_q(q, Q(name__contains=keyword))

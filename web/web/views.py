@@ -79,36 +79,42 @@ class StoreView(TemplateView):
         keywords = []
         county_instance = None
         district_instance = None
-        for el in County.objects.all():
-            if el.name in msg:
-                msg = msg.replace(el.name, '')
-                keywords.append(el.name)
-                county_instance = el
-                break
-
-        for el in District.objects.all():
-            if el.name in msg:
-                msg = msg.replace(el.name, '')
-                keywords.append(el.name)
-                district_instance = el
-                break
-
-        # 縣市或者區域
-        if not msg and keywords:
-            search = " ".join(keywords)
-            target_instnace = district_instance if district_instance else county_instance
-            lat = target_instnace.latitude
-            lon = target_instnace.longitude
+        # 沒有輸入search lat lon 用本身經緯度
+        if msg is None:
+            lat = float(self.request.COOKIES.get('lat', 23.8523405))
+            lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
-            task_id = task.enqueue_task('get_latlon', search)
-            gps = None
-            while True:
-                gps = task.get_task_result(task_id)
-                if gps:
+
+            for el in County.objects.all():
+                if el.name in msg:
+                    msg = msg.replace(el.name, '')
+                    keywords.append(el.name)
+                    county_instance = el
                     break
-            logger.info(f'loc=> {search}:{gps}')
-            lat = float(gps[0])
-            lon = float(gps[1])
+
+            for el in District.objects.all():
+                if el.name in msg:
+                    msg = msg.replace(el.name, '')
+                    keywords.append(el.name)
+                    district_instance = el
+                    break
+
+            # 縣市或者區域
+            if not msg and keywords:
+                search = " ".join(keywords)
+                target_instnace = district_instance if district_instance else county_instance
+                lat = target_instnace.latitude
+                lon = target_instnace.longitude
+            else:
+                task_id = task.enqueue_task('get_latlon', search)
+                gps = None
+                while True:
+                    gps = task.get_task_result(task_id)
+                    if gps:
+                        break
+                logger.info(f'loc=> {search}:{gps}')
+                lat = float(gps[0])
+                lon = float(gps[1])
 
         filter_dict = dict([('search', search),
                             ('district', district),
