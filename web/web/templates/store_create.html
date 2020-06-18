@@ -89,7 +89,7 @@
               <label>縣市</label>
               <span class="ti-angle-down"></span>
               <select name="county">
-                {% for el in store_type %}
+                {% for el in county_list %}
                   <option value="{{ el.id }}">{{ el.name }}</option>
                 {% endfor %}
               </select>
@@ -98,7 +98,7 @@
               <label>區域</label>
               <span class="ti-angle-down"></span>
               <select name="district">
-                {% for el in store_type %}
+                {% for el in district_list %}
                   <option value="{{ el.id }}">{{ el.name }}</option>
                 {% endfor %}
               </select>
