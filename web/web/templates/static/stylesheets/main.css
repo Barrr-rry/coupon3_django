@@ -10397,6 +10397,10 @@ body {
   background-color: #F1F1F1;
 }
 
+.row.display-initial {
+  display: initial;
+}
+
 form.form-listing .inner-box .browse .upload span {
   background-color: #f25b22;
 }
@@ -10681,6 +10685,9 @@ footer .widget-about .logo-ft a {
 .flat-highlights .highlights ul.menu-list li a span {
   margin-top: 10px;
 }
+.flat-highlights .highlights ul.menu-list li .index_icon {
+  filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%);
+}
 .flat-highlights .highlights ul.menu-list li svg {
   color: #FFFFFF;
 }
@@ -10689,6 +10696,9 @@ footer .widget-about .logo-ft a {
 }
 .flat-highlights .highlights ul.menu-list li:hover svg {
   color: #ffc332;
+}
+.flat-highlights .highlights ul.menu-list li:hover .index_icon {
+  filter: invert(85%) sepia(39%) saturate(2917%) hue-rotate(333deg) brightness(111%) contrast(101%);
 }
 .flat-highlights .highlights ul.menu-list li:after {
   background-color: #ffc332;
