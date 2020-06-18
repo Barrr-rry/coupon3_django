@@ -120,7 +120,8 @@
                             data-url="store/{{ el.id }}">
                           <img src="/media/share_line.svg" alt="">
                         </li>
-                        <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}" data-url="store/{{ el.id }}">
+                        <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
+                            data-url="store/{{ el.id }}">
                           <img src="/media/share_fb.svg" alt="">
                         </li>
                         <li class="share-url entypo-url" data-name="{{ el.name }}" data-url="store/{{ el.id }}">
@@ -184,24 +185,6 @@
     $el.addClass('active')
 
 
-    $('.share-to').snsShare((self) => {
-      let $el = $(self)
-      let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！`
-      return msg
-    }, (self) => {
-      let $el = $(self)
-      let url = `${window.location.origin}/${$el.attr('data-url')}`
-      return url
-    })
-    $('.share-url').on('click', function () {
-      let $el = $(this)
-      let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！${window.location.origin}/${$el.attr('data-url')}`
-      copy(msg)
-      Swal.fire({
-        text: '網址已複製',
-        confirmButtonText: '確定'
-      })
-    })
   })
 </script>
 
