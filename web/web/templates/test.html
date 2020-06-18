@@ -5,13 +5,28 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="{% static 'stylesheets/L.Icon.Pulse.css' %}">
 
+  <meta property="og:url" content="{{ request.get_full_path }}">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
   <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"></link>
   <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"></link>
 </head>
 <body>
 <ul>
-  <li>123123123</li>
-</ul>
+  <div class="container">
+    <button class="share-to btn" data-sns="facebook">Facebook</button>
+    <button class="share-to btn" data-sns="twitter">Twitter</button>
+    <button class="share-to btn" data-sns="google+">Google+</button>
+    <button class="share-to btn" data-sns="plurk">Plurk</button>
+    <button class="share-to btn" data-sns="line">Line</button>
+  </div>
+
+  <!-- JavaScript -->
+  {% include 'includes/js.html' %}
+  <script type="text/javascript" src="{% static 'javascript/jquery.snsShare.js' %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $('.share-to').snsShare('Hello World!', 'https://samejack.github.io/SnsShare/');
+    });
+  </script>
 </body>
 </html>
