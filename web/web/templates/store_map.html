@@ -42,15 +42,15 @@
                 <div class="col-md-12">
                   <form method="get" accept-charset="utf-8">
                         <span>
-                          <input type="text" placeholder="What are you looking for ?" name="search">
+                          <input type="text" placeholder="輸入行政區、地址、商家名或活動" name="search">
                         </span>
                     <span class="categories">
                           <span class="ti-angle-down"></span>
-                          <select name="categories">
-                            <option value="">All Categories</option>
-                            <option value="">All Categories</option>
-                            <option value="">All Categories</option>
-                          </select>
+                          <select name="store_type" placeholder="所有商家種類" value="store_type">
+                            {% for el in storetypes %}
+                              <option value="{{ el.id }}">{{ el.name }}</option>
+                            {% endfor %}
+                        </select>
                         </span>
                     <div class="clearfix"></div>
                   </form><!-- /form -->
