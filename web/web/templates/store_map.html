@@ -99,13 +99,15 @@
                             <div class="box-content">
                               <div class="box-title ad">
                                 <a href="/store/{{ el.id }}" title="">{{ el.name }}</a>
-                                <!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
                               </div>
                               <ul class="rating">
-                                <li><span>{{ el.county_name }}</span></li>
                                 <li><span>{{ el.district_name }}</span></li>
                                 <li>
-                                  <img src="/media/park_s_gray.svg" alt="">
+                                  <img src="/media/map_gray.svg" alt="">
+                                  <span>{{ el.distance_name }}</span>
+                                </li>
+                                <li>
+                                  <img src="/media/park_gray.svg" alt="">
                                   <span>{{ el.store_type_name }}</span>
                                 </li>
                               </ul>
@@ -121,7 +123,29 @@
                             <li class="tag"><a href="">全店打折</a></li>
                             <li class="tag"><a href="">全店打折</a></li>
                             <!--這邊可以只顯示3筆嗎，要維持一行-->
-                            <li class="right"><a href="">分享</a></li>
+                            <li class="right">
+                              <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
+                              <label for="share_{{ el.id }}" class="label entypo-export">
+                                <!--                      <a href="">分享</a>-->
+                                分享
+                              </label>
+                              <div class="social">
+                                <ul>
+                                  <li class="share-to entypo-line" data-sns="line" data-name="{{ el.name }}"
+                                      data-url="store/{{ el.id }}">
+                                    <img src="/media/share_line.svg" alt="">
+                                  </li>
+                                  <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
+                                      data-url="store/{{ el.id }}">
+                                    <img src="/media/share_fb.svg" alt="">
+                                  </li>
+                                  <li class="share-url entypo-url" data-name="{{ el.name }}"
+                                      data-url="store/{{ el.id }}">
+                                    <img src="/media/share_url.svg" alt="">
+                                  </li>
+                                </ul>
+                              </div>
+                            </li>
                           </ul>
                           <!--                <ul class="location">-->
                           <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
