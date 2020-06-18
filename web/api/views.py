@@ -157,6 +157,7 @@ class StoreViewSet(MyMixin):
     serializer_class = serializers.StoreSerializer
     pagination_class = LimitOffsetPagination
     filter_backends = (filters.StoreFilter,)
+    # todo 目前是沒有遇到他的list 不然 搜尋根web/view 不太一樣需要再調整
 
     def get_queryset(self):
         queryset = super().get_queryset()

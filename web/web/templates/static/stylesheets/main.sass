@@ -300,6 +300,7 @@ footer
 
           span
             margin-top: 10px
+
         .index_icon
           filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%)
 
@@ -312,6 +313,7 @@ footer
 
           svg
             color: #ffc332
+
           .index_icon
             filter: invert(85%) sepia(39%) saturate(2917%) hue-rotate(333deg) brightness(111%) contrast(101%)
 
@@ -623,8 +625,8 @@ footer
           color: #aaaaaa
           font-weight: 400
           font-size: 16px
-          letter-spacing: 2px
           vertical-align: middle
+          letter-spacing: 1px
 
           img
             display: inline-block
@@ -698,9 +700,29 @@ footer
 .flat-map-zoom-in
   .wrap-box-search
     background: transparent
+
     &.style2
       form > span
         width: 50%
+
+        input, select
+          color: #666666
+          font-size: 14px
+          letter-spacing: 1px
+          font-weight: 400
+          background-color: rgba(255, 255, 255, 0.5)
+        //margin-bottom: 35px
+        input::-webkit-input-placeholder, select::-webkit-input-placeholder
+          color: #999999 !important
+
+        input::-moz-placeholder, select::-moz-placeholder
+          color: #999999
+
+        input::-moz-placeholder, select::-moz-placeholder
+          color: #999999
+
+        input:-ms-input-placeholder, select:-ms-input-placeholder
+          color: #999999
 
 
 // store-id
@@ -853,12 +875,25 @@ form.form-listing
     input:-ms-input-placeholder, textarea:-ms-input-placeholder, select:-ms-input-placeholder
       color: #999999
 
+    .wrap-listing
+      position: relative
+
+    label.error
+      position: absolute
+      bottom: 0
+      right: 0
+      color: #f26423
+      font-size: 14px
+
     .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child, .one-half
       padding-right: 20px
 
+      label.error
+        right: 20px
+
     .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2), .one-half-right
       padding-left: 20px
-      padding-right: 0px
+      padding-right: 0
 
     .submit-form-listing
       background: #ffffff
@@ -889,6 +924,7 @@ form.form-listing
         text-align: center
         font-size: 16px
         font-weight: 400
+
         &:hover
           background-color: #9c0b0e
 
@@ -935,6 +971,7 @@ form.form-listing
 
 .discount_type
   position: relative
+
   .ti-angle-down
     position: absolute
     right: 30px
@@ -1056,6 +1093,7 @@ form.form-listing
     background-image: url("/media/bg_dark_tablet.svg")
   .header
     background-image: url("/media/bg_top_tablet.svg")
+
     .show-search
       display: inline-block
 
@@ -1198,17 +1236,32 @@ form.form-listing
   .flat-map-zoom-in
     .container-fluid
       padding: 0
+
       .flat-filter
         padding-top: 80px
 
+  .flat-map-zoom-in .wrap-box-search.style2 .ti-angle-down
+    top: 17px !important
+    right: 30px !important
 
-@media only screen and (max-width: 991px )
+  .md-100
+    flex: none
+    max-width: 50%
+
+
+@media only screen and (max-width: 991px)
   form.form-listing
     .inner-box
-      .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
+      label.error
+        bottom: -35px
+
+      .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child, .one-half
         padding-right: 0
 
-      .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2)
+        label.error
+          right: 0
+
+      .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2), .one-half-right
         padding-left: 0
 
       .submit-form-listing
@@ -1248,12 +1301,9 @@ form.form-listing
   .imagebox .box-imagebox .link_block .box-header .box-image:after, .imagebox:hover .box-header .box-image a
     opacity: 0
 
-
-
-
-
-
-
+  .md-100
+    flex: none
+    max-width: 100%
 
 
 @media only screen and (max-width: 767px)
@@ -1263,12 +1313,13 @@ form.form-listing
     background-image: url("/media/bg_top_mobile.svg")
   .flat-imagebox.style5
     .col-md-6 .imagebox.style5
-       &.link-activity
+      &.link-activity
         .box-image
           background-position: 96% 20px
 
     .col-md-3
       max-width: 100%
+
       .box-image
         .overlay
           opacity: 1
@@ -1286,7 +1337,6 @@ form.form-listing
 
         img.bg
           opacity: 0.2
-
 
 
   .footer-bottom
@@ -1388,6 +1438,7 @@ form.form-listing
 
     .page-title-heading
       margin-bottom: 45px
+
 
 @media only screen and (max-width: 600px)
   .imagebox.style5
