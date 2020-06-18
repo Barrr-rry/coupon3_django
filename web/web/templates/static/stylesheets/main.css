@@ -10984,8 +10984,8 @@ footer .widget-about .logo-ft a {
   color: #aaaaaa;
   font-weight: 400;
   font-size: 16px;
-  letter-spacing: 2px;
   vertical-align: middle;
+  letter-spacing: 1px;
 }
 .imagebox .box-imagebox .box-content ul.rating li img {
   display: inline-block;
@@ -11572,6 +11572,11 @@ form.form-listing .only-submit-form-listing:hover {
   .flat-map-zoom-in .wrap-box-search.style2 .ti-angle-down {
     top: 17px !important;
     right: 30px !important;
+  }
+
+  .md-100 {
+    flex: none;
+    max-width: 50%;
   }
 }
 @media only screen and (max-width: 991px) {
