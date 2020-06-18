@@ -102,7 +102,7 @@
                 <span class="ti-angle-down"></span>
                 <select name="district">
                   {% for el in district_list %}
-                  <option value="{{ el.id }}">{{ el.name }}</option>
+                    <option value="{{ el.id }}">{{ el.name }}</option>
                   {% endfor %}
                 </select>
               </div><!-- /.wrap-listing -->
@@ -155,8 +155,8 @@
 </section><!-- /.flat-listing -->
 
 <script>
-  let county_list = {{ county_list| safe }};
-  let district_list = {{ district_list| safe }};
+  let county_list = {{ county_list_json| safe }};
+  let district_list = {{ district_list_json| safe }};
 </script>
 {% include 'includes/footer.html' %}
 {% include 'includes/js.html' %}
@@ -233,6 +233,17 @@
         $('#longitude').val(lon)
         showPosition(position)
       })
+    })
+
+
+    $('select[name="county"]').on('change', function () {
+      let $el = $(this)
+      let $district = $('select[name="district"]')
+      $district.find('option').remove()
+      let filters = district_list.filter(x => x.county === parseInt($el.val()))
+      for (let el of filters) {
+        $district.append(`<option value=${el.id}>${el.name}</option>`)
+      }
     })
   })
 </script>
