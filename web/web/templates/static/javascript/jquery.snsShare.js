@@ -7,6 +7,10 @@
  * @version 1.0.0
  * @license Apache License Version 2.0 (https://github.com/samejack/SnsShare/blob/master/LICENSE)
  */
+function isFunction(functionToCheck) {
+  return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+}
+
 jQuery.fn.snsShare = function (message, url) {
 
   var getAtagElement, makeMouseClickEvent, types;
@@ -44,15 +48,21 @@ jQuery.fn.snsShare = function (message, url) {
   types = ['facebook', 'google+', 'line', 'twitter', 'plurk'];
 
   // fix URL
-  if (typeof(url) === 'undefined') {
+  if (typeof (url) === 'undefined') {
     url = window.location;
   }
 
   return this.each(function () {
     jQuery(this).click(function () {
+      if (isFunction(message)) {
+        message = message(this)
+      }
+      if (isFunction(url)) {
+        url = url(this)
+      }
       var element, snsType = jQuery(this).attr('data-sns'), protocol;
-      if (typeof(snsType) === 'string' && jQuery.inArray(snsType, types) !== -1) {
-        if (typeof(message) === 'undefined') {
+      if (typeof (snsType) === 'string' && jQuery.inArray(snsType, types) !== -1) {
+        if (typeof (message) === 'undefined') {
           message = window.location;
         }
         protocol = location.protocol;
