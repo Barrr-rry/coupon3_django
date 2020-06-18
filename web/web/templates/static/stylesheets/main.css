@@ -10826,8 +10826,15 @@ footer .widget-about .logo-ft a {
 .flat-introduce {
   background: #f1f1f1;
 }
+.flat-introduce .row.eli5_list {
+  margin-bottom: 120px;
+}
+.flat-introduce .row:nth-child(3) .introduce .introduce-title h3 {
+  margin: 20px 0 24px;
+}
 .flat-introduce .introduce-header {
   border-bottom: 1px solid #e0e0e0;
+  padding: 10px 0 75px;
 }
 .flat-introduce .introduce-header a.tab {
   display: inline-block;
@@ -10848,36 +10855,36 @@ footer .widget-about .logo-ft a {
 .flat-introduce .d-flex {
   margin-bottom: 50px;
 }
-.flat-introduce .d-flex .introduce .introduce-title h3 {
+.flat-introduce .introduce .introduce-title h3 {
   margin: 20px 0 24px;
   font-size: 28px;
   letter-spacing: 2px;
   line-height: 45px;
 }
-.flat-introduce .d-flex .introduce .introduce-content {
+.flat-introduce .introduce .introduce-content {
   display: inline-block;
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 400;
 }
-.flat-introduce .d-flex .introduce .introduce-content p {
+.flat-introduce .introduce .introduce-content p {
   display: block;
   margin-bottom: 10px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .para {
+.flat-introduce .introduce .introduce-content .para {
   margin-bottom: 30px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .indent {
+.flat-introduce .introduce .introduce-content .indent {
   padding-left: 20px;
 }
-.flat-introduce .d-flex .introduce .introduce-content ul {
+.flat-introduce .introduce .introduce-content ul {
   margin-bottom: 10px;
 }
-.flat-introduce .d-flex .introduce .introduce-content ul li {
+.flat-introduce .introduce .introduce-content ul li {
   position: relative;
   padding-left: 20px;
 }
-.flat-introduce .d-flex .introduce .introduce-content ul li:before {
+.flat-introduce .introduce .introduce-content ul li:before {
   content: "◆";
   position: absolute;
   display: inline-block;
@@ -10886,7 +10893,7 @@ footer .widget-about .logo-ft a {
   color: #666666;
   font-size: 13px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .highlight {
+.flat-introduce .introduce .introduce-content .highlight {
   display: inline-block;
   padding: 0px 8px;
   background-color: #aaaaaa;
@@ -11901,6 +11908,10 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .page-title.style2 .page-title-heading {
     margin-bottom: 45px;
+  }
+
+  .flat-introduce .introduce-image {
+    margin-top: 20px;
   }
 }
 @media only screen and (max-width: 600px) {
