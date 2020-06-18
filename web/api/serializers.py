@@ -20,6 +20,7 @@ from django.utils.timezone import make_aware
 from api.models import (
     StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
 )
+from crawler import task
 
 fmt = '%Y-%m-%d %H:%M:%S'
 to_datetime = lambda x: make_aware(datetime.datetime.strptime(x, '%Y-%m-%d %H:%M'))
@@ -136,6 +137,16 @@ class StoreSerializer(DefaultModelSerializer):
                     store=instance,
                     **el
                 )
+            if not(instance.latitude and instance.longitude):
+                task_id = task.enqueue_task('get_latlon', instance.address)
+                gps = None
+                while True:
+                    gps = task.get_task_result(task_id)
+                    if gps:
+                        break
+                instance.latitude = float(gps[0])
+                instance.longitude = float(gps[1])
+                instance.save()
             return instance
 
 

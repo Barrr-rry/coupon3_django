@@ -1452,6 +1452,8 @@ const showSelfPosition = (position) => {
         }
         ret.storediscount_data = storediscount
         ret.storeimage_data = files.map(x => x.filename)
+        ret.latitude = null
+        ret.longitude = null
         console.log(ret)
         $.ajax({
           url: '/api/store/',
