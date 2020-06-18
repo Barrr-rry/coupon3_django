@@ -9,28 +9,34 @@ from crawler import task
 from log import logger
 import uuid
 
-token = str(uuid.uuid4())
+
+class BaseView(TemplateView):
+    token = str(uuid.uuid4())
+
+    def get_context_data(self, *args, **kwargs):
+        return dict(token=self.token)
 
 
-class TestView(TemplateView):
+class TestView(BaseView):
     template_name = 'test.html'
 
 
-class IndexView(TemplateView):
+class IndexView(BaseView):
     template_name = 'index.html'
 
     def get_context_data(self, *args, **kwargs):
         ret = dict(
-            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
+            token=self.token,
         )
         return ret
 
 
-class NotFoundView(TemplateView):
+class NotFoundView(BaseView):
     template_name = '404.html'
 
 
-class StoreCreateView(TemplateView):
+class StoreCreateView(BaseView):
     template_name = 'store_create.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -44,34 +50,43 @@ class StoreCreateView(TemplateView):
             store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
             district_list=district_list,
             county_list=county_list,
+            token=self.token,
             district_list_json=district_list_json,
             county_list_json=county_list_json,
         )
         return ret
 
 
-class ContactView(TemplateView):
+class ContactView(BaseView):
     template_name = 'contact.html'
 
 
-class ELI5View(TemplateView):
+class ELI5View(BaseView):
     template_name = 'eli5.html'
 
 
-class QAView(TemplateView):
+class QAView(BaseView):
     template_name = 'QA.html'
 
 
-class StoreIdView(TemplateView):
+class StoreIdView(BaseView):
     template_name = 'store_id.html'
 
     def get_context_data(self, *args, **kwargs):
         instance = Store.objects.get(pk=kwargs.get('store_id'))
-        ret = dict(instance=serializers.StoreSerializer(instance=instance).data)
+        ret = dict(instance=serializers.StoreSerializer(instance=instance).data,
+                   token=self.token, )
+        lat = instance.latitude
+        lon = instance.longitude
+        google = f'https://www.google.com.tw/maps/search/{lat},+{lon}/@{lat},{lon},17z?hl=zh-TW'
+        ret = dict(
+            instance=serializers.StoreSerializer(instance=instance).data,
+            google=google
+        )
         return ret
 
 
-class StoreView(TemplateView):
+class StoreView(BaseView):
     template_name = 'store.html'
 
     def get_context_data(self, *args, **kwargs):
@@ -89,7 +104,7 @@ class StoreView(TemplateView):
         county_instance = None
         district_instance = None
         # 沒有輸入search lat lon 用本身經緯度
-        if msg is None:
+        if msg is None or not search:
             lat = float(self.request.COOKIES.get('lat', 23.8523405))
             lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
@@ -176,7 +191,13 @@ class StoreView(TemplateView):
         if storediscount_discount_type != 'all':
             dtype = list(map(int, dtype))
 
+        split_list = self.request.build_absolute_uri().split('?')
+        suffix = ''
+        if len(split_list) > 1:
+            suffix = f'?{split_list[-1]}'
+
         ret = dict(
+            suffix=suffix,
             search=search if search is not None else '',
             data=data[:6],
             json_data=json_data,
@@ -190,6 +211,7 @@ class StoreView(TemplateView):
             len_storediscount_discount_type=len(dtype),
             storediscount_discount_type=dtype,
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
+            token=self.token,
         )
         return ret
 
@@ -198,13 +220,17 @@ class StoreMapView(StoreView):
     template_name = 'store_map.html'
 
 
-class StoreCountyView(TemplateView):
+class StoreCountyView(BaseView):
     template_name = 'store_county.html'
 
     def get_context_data(self, *args, **kwargs):
         queryset = County.objects.all()
         data = serializers.CountySerializer(many=True, instance=queryset).data
+        storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+        storetypes.insert(0, dict(id='all', name='全部'))
         ret = dict(
             data=data,
+            token=self.token,
+            storetypes=storetypes,
         )
         return ret

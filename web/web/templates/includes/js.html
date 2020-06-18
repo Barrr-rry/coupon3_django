@@ -1,47 +1,47 @@
 {% load staticfiles %}
 
-<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js?token={{ token }}"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js?token={{ token }}"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous?token={{ token }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script type="text/javascript" src="{% static 'javascript/L.Icon.Pulse.js' %}"></script>
+        crossorigin="anonymous?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/L.Icon.Pulse.js' %}?token={{ token }}"></script>
 <!-- Javascript -->
-<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/easing.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap-slider.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/parallax.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script type="text/javascript" src="{% static 'javascript/jquery.snsShare.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}?token={{ token }}"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/easing.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/bootstrap-slider.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/parallax.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}?token={{ token }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/jquery.snsShare.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/main.js' %}?token={{ token }}"></script>
 
 
 <!-- Revolution Slider -->
-<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.tools.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'revolution/js/slider.js' %}"></script>
+<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.tools.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'revolution/js/jquery.themepunch.revolution.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'revolution/js/slider.js' %}?token={{ token }}"></script>
 
 <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.actions.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.actions.min.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.carousel.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.carousel.min.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.kenburn.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.kenburn.min.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.layeranimation.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.layeranimation.min.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.migration.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.migration.min.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.navigation.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.navigation.min.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.parallax.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.parallax.min.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="{% static 'revolution/js/extensions/revolution.extension.slideanims.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.video.min.js' %}"></script>
+        src="{% static 'revolution/js/extensions/revolution.extension.slideanims.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'revolution/js/extensions/revolution.extension.video.min.js' %}?token={{ token }}"></script>

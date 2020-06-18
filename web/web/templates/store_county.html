@@ -15,18 +15,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <!-- Boostrap style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
 
   <!-- Theme style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
 
   <!-- Reponsive -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
 
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
 
-  <!-- Favicon -->
-  <link href="images/icon/icon.png" rel="shortcut icon">
   <style>
     .mb-50px {
       margin-bottom: 50px;

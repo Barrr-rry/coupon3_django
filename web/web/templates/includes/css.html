@@ -10,24 +10,25 @@
 <meta property="og:url" content="{{ request.build_absolute_uri }}">
 <meta property="og:title" content="小資振興｜最多振興優惠整理">
 <meta property="og:description" content="小資振興｜整理各商家優惠、振興卷常見問答、地圖找商家、免費刊登商家活動，讓大家用振興券得到最多優惠">
-<meta property="og:img" content="">
+<meta property="og:img" content="/media/shorticon_48.svg">
 <meta property="og:site_name" content="小資振興｜最多振興優惠整理">
 <meta name="google" content="notranslate" />
 <meta name="robots" content="noindex,nofollow">
+<link rel="shortcut icon" href="/media/shorticon_48.svg">
 
 
 <!-- Boostrap style -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
 <!-- REVOLUTION LAYERS STYLES -->
-<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}?token={{ token }}">
+<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}?token={{ token }}">
 <!-- Theme style -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
 <!-- Reponsive -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
 <!-- 自己的sass -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}">
-<link rel="stylesheet" href="{% static 'stylesheets/L.Icon.Pulse.css' %}">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
-<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"></link>
-<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"></link>
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+<link rel="stylesheet" href="{% static 'stylesheets/L.Icon.Pulse.css' %}?token={{ token }}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css?token={{ token }}"/>
+<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css?token={{ token }}"></link>
+<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css?token={{ token }}"></link>

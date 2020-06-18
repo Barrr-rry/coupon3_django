@@ -1452,6 +1452,8 @@ const showSelfPosition = (position) => {
         }
         ret.storediscount_data = storediscount
         ret.storeimage_data = files.map(x => x.filename)
+        ret.latitude = null
+        ret.longitude = null
         console.log(ret)
         $.ajax({
           url: '/api/store/',
@@ -1521,6 +1523,31 @@ const showSelfPosition = (position) => {
       window.location.href = `/store/?${querys.join('&')}`
     })
 
+    let initStoreShare = () => {
+      $('.share-to').off('click')
+      $('share-url').off('click')
+
+      $('.share-to').snsShare((self) => {
+        let $el = $(self)
+        let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！`
+        return msg
+      }, (self) => {
+        let $el = $(self)
+        let url = `${window.location.origin}/${$el.attr('data-url')}`
+        return url
+      })
+      $('.share-url').on('click', function () {
+        let $el = $(this)
+        let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！${window.location.origin}/${$el.attr('data-url')}`
+        copy(msg)
+        Swal.fire({
+          text: '網址已複製',
+          confirmButtonText: '確定'
+        })
+      })
+    }
+    initStoreShare()
+
     // add store
     let appendStore = (data) => {
       let class_name = ''
@@ -1545,13 +1572,11 @@ const showSelfPosition = (position) => {
               <div class="box-content">
                 <div class="box-title ad">
                   <a href="/store/${data.id}" title="">${data.name}</a>
-                  <!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
                 </div>
                 <ul class="rating">
                   <li><span>${data.district_name}</span></li>
                   <li>
                     <img src="/media/map_gray.svg" alt="">
-                    <span>{{ el.store_type_name }}</span>
                     <span>${data.distance_name}</span>
                   </li>
                   <li>
@@ -1571,8 +1596,31 @@ const showSelfPosition = (position) => {
               <li class="tag"><a href="">全店打折</a></li>
               <li class="tag"><a href="">全店打折</a></li>
               <!--這邊可以只顯示3筆嗎，要維持一行-->
-              <li class="right"><a href="">分享</a></li>
+              <li class="right">
+                <input type="checkbox" class="checkbox" id="share_${data.id}">
+                <label for="share_${data.id}" class="label entypo-export">
+                  <!--                      <a href="">分享</a>-->
+                  分享
+                </label>
+                <div class="social">
+                  <ul>
+                    <li class="share-to entypo-line" data-sns="line" data-name="${data.name}"
+                        data-url="store/${data.id}">
+                      <img src="/media/share_line.svg" alt="">
+                    </li>
+                    <li class="share-to entypo-facebook" data-sns="facebook" data-name="${data.name}" data-url="store/${data.id}">
+                      <img src="/media/share_fb.svg" alt="">
+                    </li>
+                    <li class="share-url entypo-url" data-name="${data.name}" data-url="store/${data.id}">
+                      <img src="/media/share_url.svg" alt="">
+                    </li>
+                  </ul>
+                </div>
+              </li>
             </ul>
+            <!--                <ul class="location">-->
+            <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+            <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
           </div><!-- /.box-imagebox -->
         </div><!-- /.imagebox style1 -->
       </div>
@@ -1593,6 +1641,7 @@ const showSelfPosition = (position) => {
       if (max_offset === store_data.length) {
         $(".more-click").remove()
       }
+      initStoreShare()
     })
   }
   let initPosition = () => {

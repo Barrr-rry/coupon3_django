@@ -16,10 +16,8 @@
 
   <!-- Boostrap style -->{% include 'includes/css.html' %}
 
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
 
-  <!-- Favicon -->
-  <link href="images/icon/icon.png" rel="shortcut icon">
 
 </head>
 <body class="slider header_sticky">
@@ -44,15 +42,15 @@
                 <div class="col-md-12">
                   <form method="get" accept-charset="utf-8">
                         <span>
-                          <input type="text" placeholder="What are you looking for ?" name="search">
+                          <input type="text" placeholder="輸入行政區、地址、商家名或活動" name="search">
                         </span>
                     <span class="categories">
                           <span class="ti-angle-down"></span>
-                          <select name="categories">
-                            <option value="">All Categories</option>
-                            <option value="">All Categories</option>
-                            <option value="">All Categories</option>
-                          </select>
+                          <select name="store_type" placeholder="所有商家種類" value="store_type">
+                            {% for el in storetypes %}
+                              <option value="{{ el.id }}">{{ el.name }}</option>
+                            {% endfor %}
+                        </select>
                         </span>
                     <div class="clearfix"></div>
                   </form><!-- /form -->
@@ -69,8 +67,8 @@
                     <div class="result">
                       共有 {{ count }} 筆搜尋結果
                     </div>
-                    <a href="/store_map" class="mr-5 link-map" style="font-size: xx-large; float:right">
-                      地圖模式
+                    <a href="/store/{{ suffix }}" class="mr-5 link-map" style="font-size: xx-large; float:right">
+                      卡片模式
                     </a>
                     <div class="clear"></div>
                     <div class="sort">
@@ -101,13 +99,15 @@
                             <div class="box-content">
                               <div class="box-title ad">
                                 <a href="/store/{{ el.id }}" title="">{{ el.name }}</a>
-                                <!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
                               </div>
                               <ul class="rating">
-                                <li><span>{{ el.county_name }}</span></li>
                                 <li><span>{{ el.district_name }}</span></li>
                                 <li>
-                                  <img src="/media/park_s_gray.svg" alt="">
+                                  <img src="/media/map_gray.svg" alt="">
+                                  <span>{{ el.distance_name }}</span>
+                                </li>
+                                <li>
+                                  <img src="/media/park_gray.svg" alt="">
                                   <span>{{ el.store_type_name }}</span>
                                 </li>
                               </ul>
@@ -123,7 +123,29 @@
                             <li class="tag"><a href="">全店打折</a></li>
                             <li class="tag"><a href="">全店打折</a></li>
                             <!--這邊可以只顯示3筆嗎，要維持一行-->
-                            <li class="right"><a href="">分享</a></li>
+                            <li class="right">
+                              <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
+                              <label for="share_{{ el.id }}" class="label entypo-export">
+                                <!--                      <a href="">分享</a>-->
+                                分享
+                              </label>
+                              <div class="social">
+                                <ul>
+                                  <li class="share-to entypo-line" data-sns="line" data-name="{{ el.name }}"
+                                      data-url="store/{{ el.id }}">
+                                    <img src="/media/share_line.svg" alt="">
+                                  </li>
+                                  <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
+                                      data-url="store/{{ el.id }}">
+                                    <img src="/media/share_fb.svg" alt="">
+                                  </li>
+                                  <li class="share-url entypo-url" data-name="{{ el.name }}"
+                                      data-url="store/{{ el.id }}">
+                                    <img src="/media/share_url.svg" alt="">
+                                  </li>
+                                </ul>
+                              </div>
+                            </li>
                           </ul>
                           <!--                <ul class="location">-->
                           <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
