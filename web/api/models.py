@@ -61,11 +61,15 @@ class StoreType(DefaultAbstract):
 class County(DefaultAbstract):
     name = models.CharField(max_length=128, help_text="縣市名稱")
     picture = models.CharField(max_length=128, help_text="縣市圖片")
+    latitude = models.FloatField(max_length=64, help_text="經度")
+    longitude = models.FloatField(max_length=64, help_text="緯度")
 
 
 class District(DefaultAbstract):
     county = models.ForeignKey(County, related_name="district", on_delete=models.CASCADE, help_text="縣市fk")
     name = models.CharField(max_length=128, help_text="行政區名稱")
+    latitude = models.FloatField(max_length=64, help_text="經度")
+    longitude = models.FloatField(max_length=64, help_text="緯度")
 
 
 class Store(DefaultAbstract):
