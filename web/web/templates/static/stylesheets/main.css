@@ -10867,17 +10867,17 @@ footer .widget-about .logo-ft a {
 .flat-introduce .d-flex .introduce .introduce-content .para {
   margin-bottom: 30px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .para .indent {
+.flat-introduce .d-flex .introduce .introduce-content .indent {
   padding-left: 20px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .para ul {
+.flat-introduce .d-flex .introduce .introduce-content ul {
   margin-bottom: 10px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .para ul li {
+.flat-introduce .d-flex .introduce .introduce-content ul li {
   position: relative;
   padding-left: 20px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .para ul li:before {
+.flat-introduce .d-flex .introduce .introduce-content ul li:before {
   content: "◆";
   position: absolute;
   display: inline-block;
@@ -10886,7 +10886,7 @@ footer .widget-about .logo-ft a {
   color: #666666;
   font-size: 13px;
 }
-.flat-introduce .d-flex .introduce .introduce-content .para .highlight {
+.flat-introduce .d-flex .introduce .introduce-content .highlight {
   display: inline-block;
   padding: 0px 8px;
   background-color: #aaaaaa;

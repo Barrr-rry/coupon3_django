@@ -488,32 +488,32 @@ footer
         .para
           margin-bottom: 30px
 
-          .indent
+        .indent
+          padding-left: 20px
+
+        ul
+          margin-bottom: 10px
+
+          li
+            position: relative
             padding-left: 20px
 
-          ul
-            margin-bottom: 10px
+            &:before
+              content: "◆"
+              position: absolute
+              display: inline-block
+              left: 0px
+              padding-right: 5px
+              color: #666666
+              font-size: 13px
 
-            li
-              position: relative
-              padding-left: 20px
-
-              &:before
-                content: "◆"
-                position: absolute
-                display: inline-block
-                left: 0px
-                padding-right: 5px
-                color: #666666
-                font-size: 13px
-
-          .highlight
-            display: inline-block
-            padding: 0px 8px
-            background-color: #aaaaaa
-            color: #fff
-            font-weight: 400
-            border-radius: 6px
+        .highlight
+          display: inline-block
+          padding: 0px 8px
+          background-color: #aaaaaa
+          color: #fff
+          font-weight: 400
+          border-radius: 6px
 
 
   .introduc-footer
