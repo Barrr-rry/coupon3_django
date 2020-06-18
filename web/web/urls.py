@@ -22,8 +22,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from api import docs
 from .views import *
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    path('favicon.ico', RedirectView.as_view(url='media/shorticon_48.svg')),
     path('api/', include(get_urls())),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('backend/conquers/admin/', admin.site.urls),
