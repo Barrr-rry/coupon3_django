@@ -67,7 +67,13 @@ class StoreIdView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         instance = Store.objects.get(pk=kwargs.get('store_id'))
-        ret = dict(instance=serializers.StoreSerializer(instance=instance).data)
+        lat = instance.latitude
+        lon = instance.longitude
+        google = f'https://www.google.com.tw/maps/search/{lat},+{lon}/@{lat},{lon},17z?hl=zh-TW'
+        ret = dict(
+            instance=serializers.StoreSerializer(instance=instance).data,
+            google=google
+        )
         return ret
 
 
