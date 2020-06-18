@@ -235,14 +235,19 @@ class ContactView(viewsets.ViewSet):
         name = request.data.get('name')
         phone = request.data.get('phone')
         contact_type = request.data.get('contact_type')
-        content = request.data.get('content')
+        content = request.data.get('content').split('\r\n')
+        new_content = ''
+        for i in content:
+            i += '<br>'
+            new_content += i
         msg = f'''
-        email: {email}
-        聯絡人: {name} 手機: {phone}
-        類型: {contact_type}
-        內容:{content}
+        類型： {contact_type}<br><br>
+        姓名： {name}<br><br>
+        信箱： {email}<br><br>
+        電話： {phone}<br><br>
+        內容： <br>{new_content}
         '''
-        send_mail('Contact Us', msg)
+        send_mail(f'【{contact_type}】來自{name}的訊息', msg)
         return Response(data=dict(msg='ok'))
 
 
