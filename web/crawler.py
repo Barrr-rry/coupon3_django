@@ -38,7 +38,7 @@ class RedisWrap:
     def __init__(self, r):
         self.r = r
 
-    def set(self, task_id, result, ex=60 * 60):
+    def set(self, task_id, result, ex=60 * 60 * 24 * 7):
         self.r.set(task_id, pickle.dumps(result), ex=ex)
 
     def get(self, task_id):
@@ -153,6 +153,10 @@ if __name__ == '__main__':
 
     # queue.enqueue('get_latlon', '高雄市中正四路148號', str(uuid.uuid4()))
     # queue.enqueue('get_latlon', '高雄市中正四路148號', str(uuid.uuid4()))
-    task.enqueue_task('get_addr', '22.89503442930087,120.54229259490967')
+
     logger.info('execute loop queue')
-    loop_queue()
+    while True:
+        try:
+            loop_queue()
+        except Exception as e:
+            logger.warning(f'Exception: {e}')

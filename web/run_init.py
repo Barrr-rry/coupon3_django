@@ -67,8 +67,8 @@ def generate_county():
         target = el.split(',')
         County.objects.create(
             name=target[0],
-            latitude=target[1],
-            longitude=target[2],
+            latitude=target[2],
+            longitude=target[1],
             picture='景點照片_劍湖山.jpg'
 
         )
@@ -88,8 +88,8 @@ def generate_district():
                 District.objects.create(
                     name=district,
                     county=county,
-                    latitude=target[1],
-                    longitude=target[2]
+                    latitude=target[2],
+                    longitude=target[1]
                 )
 
 
