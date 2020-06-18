@@ -11579,6 +11579,11 @@ form.form-listing .only-submit-form-listing:hover {
   .imagebox .box-imagebox .link_block .box-header .box-image:after, .imagebox:hover .box-header .box-image a {
     opacity: 0;
   }
+
+  .md-100 {
+    flex: none;
+    max-width: 100%;
+  }
 }
 @media only screen and (max-width: 767px) {
   .flat-highlights {
