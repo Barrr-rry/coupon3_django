@@ -9,6 +9,9 @@ body
   color: #333333
   background-color: #F1F1F1
 
+.row.display-initial
+  display: initial
+
 form.form-listing .inner-box .browse .upload span
   background-color: #f25b22
 
@@ -297,6 +300,8 @@ footer
 
           span
             margin-top: 10px
+        .index_icon
+          filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%)
 
         svg
           color: #FFFFFF
@@ -307,6 +312,8 @@ footer
 
           svg
             color: #ffc332
+          .index_icon
+            filter: invert(85%) sepia(39%) saturate(2917%) hue-rotate(333deg) brightness(111%) contrast(101%)
 
         &:after
           background-color: #ffc332
@@ -417,7 +424,7 @@ footer
 .parallax-200
   //background-color: #281224
   background-color: #392D2C
-  background-image: url("/media/bg_dark.png")
+  background-image: url("/media/bg_dark.svg")
   background-repeat: no-repeat
   //background-position: bottom left
   background-position: 100% 50px !important
@@ -687,6 +694,15 @@ footer
         min-height: auto
         text-align: center
 
+// store-map
+.flat-map-zoom-in
+  .wrap-box-search
+    background: transparent
+    &.style2
+      form > span
+        width: 50%
+
+
 // store-id
 .header_sticky
   .flat-title
@@ -837,11 +853,12 @@ form.form-listing
     input:-ms-input-placeholder, textarea:-ms-input-placeholder, select:-ms-input-placeholder
       color: #999999
 
-    .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
+    .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child, .one-half
       padding-right: 20px
 
-    .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2)
+    .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2), .one-half-right
       padding-left: 20px
+      padding-right: 0px
 
     .submit-form-listing
       background: #ffffff
@@ -1178,6 +1195,12 @@ form.form-listing
           right: 22%
           top: 46px
 
+  .flat-map-zoom-in
+    .container-fluid
+      padding: 0
+      .flat-filter
+        padding-top: 80px
+
 
 @media only screen and (max-width: 991px )
   form.form-listing
@@ -1225,7 +1248,9 @@ form.form-listing
   .imagebox .box-imagebox .link_block .box-header .box-image:after, .imagebox:hover .box-header .box-image a
     opacity: 0
 
-
+  .md-100
+    flex: none
+    max-width: 100%
 
 
 
@@ -1365,6 +1390,8 @@ form.form-listing
 
     .page-title-heading
       margin-bottom: 45px
+
+
 
 @media only screen and (max-width: 600px)
   .imagebox.style5

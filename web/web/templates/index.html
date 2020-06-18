@@ -92,9 +92,10 @@
 <!--                  <svg width="50" height="50">-->
 <!--                    <image xlink:href="/media/{{ el.icon }}" width="50" height="50"/>-->
 <!--                  </svg>-->
-                  <svg width="50" height="50">
-                    <image xlink:href="/media/{{ el.icon }}"></image>
-                  </svg>
+<!--                  <svg width="50" height="50">-->
+<!--                    <image xlink:href="/media/{{ el.icon }}"></image>-->
+<!--                  </svg>-->
+                  <object data="/media/{{ el.icon }}" class="index_icon"> </object>
                   <span>{{ el.name }}</span>
                 </a>
 
@@ -119,7 +120,7 @@
         </div>
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
-    <div class="row">
+    <div class="row display-initial">
       <div class="col-md-6">
         <div class="imagebox style5 link-activity">
           <div class="box-image">

@@ -1291,6 +1291,17 @@ const showSelfPosition = (position) => {
     return ret
   }
 
+  jQuery.validator.addMethod("isEmail", function(value, element) {
+    var email =  /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return this.optional(element) || email.test(value);
+  }, "請填寫正確的信箱");
+
+  jQuery.validator.addMethod("isPhone", function(value, element) {
+    var tel =  /[0-9]{2}\-[0-9]{7}/
+    var phone =  /^09\d{8}$/
+    return this.optional(element) || tel.test(value) || phone.test(value);
+  }, "請填寫正確的電話");
+
   let storeCreatePage = () => {
     let files = []
     let discount_id = 0
@@ -1383,15 +1394,28 @@ const showSelfPosition = (position) => {
     $("#createStore").validate({
       rules: {
         name: "required",
+        person: "required",
         address: "required",
-        phone: "required",
+        phone: {
+          isPhone: true
+        },
         store_discount_name: "required",
+        email: {
+          required: true,
+          isEmail: true,
+        },
+        website: {
+          url: true
+        }
       },
       messages: {
-        name: "請输入商家名字",
+        name: "請输入商家名稱",
+        person: "請输入聯絡人姓名",
         address: "請输入地址",
-        phone: "請输入電話",
+        phone: "請输入正確電話格式",
         store_discount_name: "請输入活動名稱",
+        email: "請输入正確信箱格式",
+        website: "請输入正確url格式",
       },
       submitHandler(form) {
         let data = $(form).serializeArray()

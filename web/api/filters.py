@@ -28,6 +28,7 @@ def filter_query(filter_dict, queryset):
     if filter_dict['search'] is not None:
         for keyword in filter_dict['search'].strip().split():
             q = or_q(q, Q(name__contains=keyword))
+            q = or_q(q, Q(address__contains=keyword))
             q = or_q(q, Q(storediscount__discount_type__name__contains=keyword))
             q = or_q(q, Q(district__name__contains=keyword))
 
