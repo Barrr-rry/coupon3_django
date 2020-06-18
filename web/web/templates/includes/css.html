@@ -17,17 +17,17 @@
 
 
 <!-- Boostrap style -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
 <!-- REVOLUTION LAYERS STYLES -->
-<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/layers.css' %}?token={{ token }}">
+<link rel="stylesheet" type="text/css" href="{% static 'revolution/css/settings.css' %}?token={{ token }}">
 <!-- Theme style -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
 <!-- Reponsive -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
 <!-- 自己的sass -->
-<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}">
-<link rel="stylesheet" href="{% static 'stylesheets/L.Icon.Pulse.css' %}">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
-<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"></link>
-<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"></link>
+<link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+<link rel="stylesheet" href="{% static 'stylesheets/L.Icon.Pulse.css' %}?token={{ token }}">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css?token={{ token }}"/>
+<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css?token={{ token }}"></link>
+<link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css?token={{ token }}"></link>

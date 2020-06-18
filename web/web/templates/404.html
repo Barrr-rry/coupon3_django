@@ -15,18 +15,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <!-- Boostrap style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
 
   <!-- Theme style -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
 
   <!-- Reponsive -->
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
 
-  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
 
   <!-- Favicon -->
-  <link href="images/icon/icon.png" rel="shortcut icon">
+  <link href="images/icon/icon.png?token={{ token }}" rel="shortcut icon">
 
 </head>
 <body>
@@ -91,15 +91,15 @@
 {% include 'includes/footer.html' %}
 
 <!-- Javascript -->
-<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/easing.js' %}"></script>
+<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/easing.js' %}?token={{ token }}"></script>
 <script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB"></script>
-<script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/parallax.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}"></script>
-<script type="text/javascript" src="{% static 'javascript/main.js' %}"></script>
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/parallax.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}?token={{ token }}"></script>
+<script type="text/javascript" src="{% static 'javascript/main.js' %}?token={{ token }}"></script>
 
 
 </body>
