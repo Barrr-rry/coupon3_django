@@ -12,11 +12,20 @@ and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
 def filter_query(filter_dict, queryset):
     q = None
     if filter_dict['search'] is not None:
-        for keyword in filter_dict['search'].strip().split():
-            q = or_q(q, Q(name__contains=keyword))
-            q = or_q(q, Q(address__contains=keyword))
-            q = or_q(q, Q(storediscount__discount_type__name__contains=keyword))
-            q = or_q(q, Q(district__name__contains=keyword))
+        search = filter_dict['search'].strip().split()
+        if len(search) > 1:
+            county = County.objects.filter(name=search[0]).all()
+            district = District.objects.filter(name=search[1]).all()
+            if len(county) and len(district):
+                q = or_q(q, Q(district__name__contains=search[1]))
+
+        else:
+            for keyword in search:
+                county = County.objects.filter(name=keyword).all()
+                district = District.objects.filter(name=keyword).all()
+                if len(county) > 0 or len(district) > 0:
+                    q = or_q(q, Q(county__name__contains=keyword))
+                    q = or_q(q, Q(district__name__contains=keyword))
 
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
