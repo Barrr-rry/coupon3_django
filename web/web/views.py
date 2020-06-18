@@ -29,8 +29,12 @@ class StoreCreateView(TemplateView):
     template_name = 'store_create.html'
 
     def get_context_data(self, *args, **kwargs):
+        district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
+        county_list = serializers.CountySerializer(many=True, instance=County.objects.all()).data
         ret = dict(
-            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
+            district_list=district_list,
+            county_list=county_list,
         )
         return ret
 
