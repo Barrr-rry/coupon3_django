@@ -11058,6 +11058,25 @@ footer .widget-about .logo-ft a {
 .flat-map-zoom-in .wrap-box-search.style2 form > span {
   width: 50%;
 }
+.flat-map-zoom-in .wrap-box-search.style2 form > span input, .flat-map-zoom-in .wrap-box-search.style2 form > span select {
+  color: #666666;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 400;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.flat-map-zoom-in .wrap-box-search.style2 form > span input::-webkit-input-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select::-webkit-input-placeholder {
+  color: #999999 !important;
+}
+.flat-map-zoom-in .wrap-box-search.style2 form > span input::-moz-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select::-moz-placeholder {
+  color: #999999;
+}
+.flat-map-zoom-in .wrap-box-search.style2 form > span input::-moz-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select::-moz-placeholder {
+  color: #999999;
+}
+.flat-map-zoom-in .wrap-box-search.style2 form > span input:-ms-input-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select:-ms-input-placeholder {
+  color: #999999;
+}
 
 .header_sticky .flat-title {
   padding: 40px 0 50px;
@@ -11535,6 +11554,11 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .flat-map-zoom-in .container-fluid .flat-filter {
     padding-top: 80px;
+  }
+
+  .flat-map-zoom-in .wrap-box-search.style2 .ti-angle-down {
+    top: 17px !important;
+    right: 30px !important;
   }
 }
 @media only screen and (max-width: 991px) {
