@@ -1314,11 +1314,14 @@ const showSelfPosition = (position) => {
         <div class="store-discount-content col">
           <div class="wrap-listing your-name">
             <label>活動名稱</label>
-            <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">
-            <label>活動類型</label>
-            <select name="discount_type" placeholder="請選擇活動類型">
-              ${options}
-            </select>
+            <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">         
+            <div class="discount_type">
+              <label>活動類型</label>
+              <span class="ti-angle-down"></span>
+              <select name="discount_type" placeholder="請選擇活動類型">
+                ${options}
+              </select>
+            </div>
           </div><!-- /.wrap-listing -->
           <div class="wrap-listing your-name">
             <label>活動內容</label>
@@ -1520,10 +1523,14 @@ const showSelfPosition = (position) => {
                   <!--                      <i class="fa fa-check-circle" aria-hidden="true"></i>-->
                 </div>
                 <ul class="rating">
-                  <li><span>${data.county_name}</span></li>
                   <li><span>${data.district_name}</span></li>
                   <li>
-                    <img src="/media/park_s_gray.svg" alt="">
+                    <img src="/media/map_gray.svg" alt="">
+                    <span>{{ el.store_type_name }}</span>
+                    <span>${data.distance_name}</span>
+                  </li>
+                  <li>
+                    <img src="/media/park_gray.svg" alt="">
                     <span>${data.store_type_name}</span>
                   </li>
                 </ul>
