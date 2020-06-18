@@ -10796,7 +10796,7 @@ footer .widget-about .logo-ft a {
 
 .parallax-200 {
   background-color: #392D2C;
-  background-image: url("/media/bg_dark.png");
+  background-image: url("/media/bg_dark.svg");
   background-repeat: no-repeat;
   background-position: 100% 50px !important;
   background-size: auto;
@@ -11042,6 +11042,13 @@ footer .widget-about .logo-ft a {
   text-align: center;
 }
 
+.flat-map-zoom-in .wrap-box-search {
+  background: transparent;
+}
+.flat-map-zoom-in .wrap-box-search.style2 form > span {
+  width: 50%;
+}
+
 .header_sticky .flat-title {
   padding: 40px 0 50px;
 }
@@ -11185,11 +11192,12 @@ form.form-listing .inner-box input::-moz-placeholder, form.form-listing .inner-b
 form.form-listing .inner-box input:-ms-input-placeholder, form.form-listing .inner-box textarea:-ms-input-placeholder, form.form-listing .inner-box select:-ms-input-placeholder {
   color: #999999;
 }
-form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child {
+form.form-listing .inner-box .wrap-listing.your-email, form.form-listing .inner-box .wrap-listing.phone, form.form-listing .inner-box .one-half:first-child, form.form-listing .inner-box .one-half {
   padding-right: 20px;
 }
-form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2) {
+form.form-listing .inner-box .wrap-listing.your-name, form.form-listing .inner-box .wrap-listing.website, form.form-listing .inner-box .one-half:nth-child(2), form.form-listing .inner-box .one-half-right {
   padding-left: 20px;
+  padding-right: 0px;
 }
 form.form-listing .inner-box .submit-form-listing {
   background: #ffffff;
@@ -11510,6 +11518,13 @@ form.form-listing .only-submit-form-listing:hover {
   form.form-listing .inner-box .wrap-listing.location a.map {
     right: 22%;
     top: 46px;
+  }
+
+  .flat-map-zoom-in .container-fluid {
+    padding: 0;
+  }
+  .flat-map-zoom-in .container-fluid .flat-filter {
+    padding-top: 80px;
   }
 }
 @media only screen and (max-width: 991px) {

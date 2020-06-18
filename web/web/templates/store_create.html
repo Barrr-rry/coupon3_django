@@ -81,28 +81,33 @@
               <label>電子信箱</label>
               <input type="text" name="email" placeholder="請輸入電子信箱">
             </div><!-- /.wrap-listing -->
-            <div class="wrap-listing phone">
+            <div class="wrap-listing website">
               <label>網站（ 選填 ）</label>
               <input type="text" name="website" placeholder="http://">
             </div><!-- /.wrap-listing -->
-            <div class="wrap-listing phone">
-              <label>縣市</label>
-              <span class="ti-angle-down"></span>
-              <select name="county">
-                {% for el in store_type %}
-                  <option value="{{ el.id }}">{{ el.name }}</option>
-                {% endfor %}
-              </select>
+            <div class="one-half">
+              <div class="wrap-listing price">
+                <label>縣市</label>
+                <span class="ti-angle-down"></span>
+                <select name="county">
+                  {% for el in store_type %}
+                    <option value="{{ el.id }}">{{ el.name }}</option>
+                  {% endfor %}
+                </select>
+              </div><!-- /.wrap-listing -->
             </div><!-- /.wrap-listing -->
-            <div class="wrap-listing website">
-              <label>區域</label>
-              <span class="ti-angle-down"></span>
-              <select name="district">
-                {% for el in store_type %}
+            <div class="one-half one-half-right">
+              <div class="wrap-listing price">
+                <label>區域</label>
+                <span class="ti-angle-down"></span>
+                <select name="district">
+                  {% for el in store_type %}
                   <option value="{{ el.id }}">{{ el.name }}</option>
-                {% endfor %}
-              </select>
+                  {% endfor %}
+                </select>
+              </div><!-- /.wrap-listing -->
             </div><!-- /.wrap-listing -->
+
             <div class="clearfix"></div>
             <div class="wrap-listing location">
               <label>地址</label>

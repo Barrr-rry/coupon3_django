@@ -417,7 +417,7 @@ footer
 .parallax-200
   //background-color: #281224
   background-color: #392D2C
-  background-image: url("/media/bg_dark.png")
+  background-image: url("/media/bg_dark.svg")
   background-repeat: no-repeat
   //background-position: bottom left
   background-position: 100% 50px !important
@@ -687,6 +687,15 @@ footer
         min-height: auto
         text-align: center
 
+// store-map
+.flat-map-zoom-in
+  .wrap-box-search
+    background: transparent
+    &.style2
+      form > span
+        width: 50%
+
+
 // store-id
 .header_sticky
   .flat-title
@@ -837,11 +846,12 @@ form.form-listing
     input:-ms-input-placeholder, textarea:-ms-input-placeholder, select:-ms-input-placeholder
       color: #999999
 
-    .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child
+    .wrap-listing.your-email, .wrap-listing.phone, .one-half:first-child, .one-half
       padding-right: 20px
 
-    .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2)
+    .wrap-listing.your-name, .wrap-listing.website, .one-half:nth-child(2), .one-half-right
       padding-left: 20px
+      padding-right: 0px
 
     .submit-form-listing
       background: #ffffff
@@ -1177,6 +1187,12 @@ form.form-listing
         a.map
           right: 22%
           top: 46px
+
+  .flat-map-zoom-in
+    .container-fluid
+      padding: 0
+      .flat-filter
+        padding-top: 80px
 
 
 @media only screen and (max-width: 991px )
