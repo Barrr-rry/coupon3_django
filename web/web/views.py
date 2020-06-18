@@ -104,7 +104,7 @@ class StoreView(BaseView):
         county_instance = None
         district_instance = None
         # 沒有輸入search lat lon 用本身經緯度
-        if msg is None:
+        if msg is None or not search:
             lat = float(self.request.COOKIES.get('lat', 23.8523405))
             lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
@@ -226,8 +226,11 @@ class StoreCountyView(BaseView):
     def get_context_data(self, *args, **kwargs):
         queryset = County.objects.all()
         data = serializers.CountySerializer(many=True, instance=queryset).data
+        storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+        storetypes.insert(0, dict(id='all', name='全部'))
         ret = dict(
             data=data,
             token=self.token,
+            storetypes=storetypes,
         )
         return ret
