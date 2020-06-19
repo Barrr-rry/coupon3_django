@@ -8,6 +8,8 @@ import redis
 import pickle
 import uuid
 from log import logger
+from pyquery import PyQuery as pq
+from api.util import get_time
 
 r = redis.StrictRedis(host='coupon3-redis')
 
@@ -86,8 +88,16 @@ task = Task()
 def get_driver():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("no-sandbox")
-    # chrome_option s.add_argument("--disable-extensions")
+    chrome_options.add_argument("--disable-extensions")
     chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--load-images=no")
+    chrome_options.add_argument("--disk-cache=yes")
+    chrome_options.add_argument("--ignore-ssl-errors=true")
+    prefs = {
+        "profile.managed_default_content_settings.images": 2,
+        "permissions.default.stylesheet": 2
+    }
+    chrome_options.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome(options=chrome_options)
     return driver
 
@@ -98,15 +108,14 @@ def get_latlon(driver, addr):
     search.send_keys(addr)
     driver.find_element_by_xpath("/html/body/form/div[10]/div[2]/img[2]").click()
     time.sleep(1)
-    iframe = driver.find_elements_by_tag_name("iframe")[1]
-    driver.switch_to.frame(iframe)
-    coor_btn = driver.find_element_by_xpath("/html/body/form/div[4]/table/tbody/tr[3]/td/table/tbody/tr/td[2]")
-    coor_btn.click()
-    coor = driver.find_element_by_xpath("/html/body/form/div[5]/table/tbody/tr[2]/td")
-    coor = coor.text.strip().split(" ")
-    lat = coor[-1].split("：")[-1]
-    log = coor[0].split("：")[-1]
-    return lat, log
+    doc = driver.page_source
+    dom = pq(doc)
+    lat = dom("#markercm").eq(-1).attr('y')
+    lon = dom("#markercm").eq(-1).attr('x')
+    return dict(
+        ret=[lat, lon],
+        count=len(dom('#markercm'))
+    )
 
 
 def get_addr(driver, latlon_str):
@@ -119,41 +128,53 @@ def get_addr(driver, latlon_str):
     search.send_keys(latlon_str)
     driver.find_element_by_xpath("/html/body/form/div[10]/div[2]/img[2]").click()
     time.sleep(1)
-    iframe = driver.find_elements_by_tag_name("iframe")[1]
-    driver.switch_to.frame(iframe)
-    coor_btn = driver.find_element_by_xpath("/html/body/form/div[4]/table/tbody/tr[3]/td/table/tbody/tr/td[2]")
-    coor_btn.click()
-    el = driver.find_element_by_css_selector('span.highLightTxt')
-    ret = el.text
-    return ret
+    doc = driver.page_source
+    dom = pq(doc)
+    ret = dom('#markercm').eq(-1).attr('contenttip')
+    return dict(
+        ret=ret,
+        count=len(dom('#markercm'))
+    )
 
 
 def loop_queue():
     driver = get_driver()
+    driver.get("http://www.map.com.tw/")
+    # 重新整理
+    reflash = False
     while True:
         tasks = task.get_task_queue()
         if not tasks:
+            if reflash:
+                driver.get("http://www.map.com.tw/")
+                reflash = False
             continue
+        st = time.time()
         (task_type, task_args, task_id) = tasks
-        logger.inf(f'task type:{task_type} args:{task_args}')
+        logger.info(f'task type:{task_type} args:{task_args}')
         if len(task_args) <= 1:
             logger.info(f'task_args too small: {task_args}')
             continue
         fn = get_addr if task_type == 'get_addr' else get_latlon
-        driver.get("http://www.map.com.tw/")
-        ret = fn(driver, task_args)
-        logger.info(f'task={tasks} ret={ret}')
+        dct = fn(driver, task_args)
+        ret = dct['ret']
+        count = dct['count']
+        if count > 20:
+            reflash = True
         task.set_task_response(task_id, ret)
+        ed = time.time()
+        logger.info(f'task={tasks} ret={ret} time: {ed - st}')
 
     driver.quit()
 
 
 if __name__ == '__main__':
     # task.enqueue_task('get_latlon', '高雄市中正四路148號')
-    # task.enqueue_task('get_latlon', '高雄市中正四路148號')
+    # task.enqueue_task('get_latlon', '高雄市中正三路42號')
+    # task.enqueue_task('get_latlon', '高雄市中正三路44號')
+    # task.enqueue_task('get_latlon', '高雄市中正三路46號')
 
-    # queue.enqueue('get_latlon', '高雄市中正四路148號', str(uuid.uuid4()))
-    # queue.enqueue('get_latlon', '高雄市中正四路148號', str(uuid.uuid4()))
+    # task.enqueue_task('get_addr', '24.43353253, 118.3172157')
 
     logger.info('execute loop queue')
     while True:

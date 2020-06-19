@@ -8,6 +8,7 @@ import requests
 import time
 from django.utils.timezone import make_aware
 import datetime
+from contextlib import contextmanager
 
 
 class PickleRedis:
@@ -65,3 +66,11 @@ def get_url(url):
         except Exception as e:
             continue
     return r
+
+
+@contextmanager
+def get_time(logger, msg):
+    st = time.time()
+    yield
+    ed = time.time()
+    logger.info(f'{msg}: {ed - st}')
