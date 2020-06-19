@@ -10862,7 +10862,7 @@ footer .widget-about .logo-ft a {
   background-color: #392D2C;
   background-image: url("/media/bg_dark.svg");
   background-repeat: no-repeat;
-  background-position: 100% 50px !important;
+  background-position: 100% 0 !important;
   background-size: auto;
 }
 
