@@ -67,8 +67,60 @@ class ELI5View(BaseView):
     template_name = 'eli5.html'
 
 
+class ELI5CountyView(BaseView):
+    template_name = 'eli5_county.html'
+
+
+class ELI5FarmingView(BaseView):
+    template_name = 'eli5_farming.html'
+
+
+class ELI5FunView(BaseView):
+    template_name = 'eli5_fun.html'
+
+
+class ELI5TourView(BaseView):
+    template_name = 'eli5_tour.html'
+
+
+class ELI5TrebleView(BaseView):
+    template_name = 'eli5_treble.html'
+
+
+class ELI5VoucherView(BaseView):
+    template_name = 'eli5_voucher.html'
+
+
 class QAView(BaseView):
     template_name = 'QA.html'
+
+
+class QAFarmingView(BaseView):
+    template_name = 'QA_farming.html'
+
+
+class QAFunView(BaseView):
+    template_name = 'QA_fun.html'
+
+
+class QATourView(BaseView):
+    template_name = 'QA_tour.html'
+
+
+class QATrebleView(BaseView):
+    template_name = 'QA_treble.html'
+
+
+class QATrebleCashView(BaseView):
+    template_name = 'QA_treble_cash.html'
+
+
+class QATrebleNonCashView(BaseView):
+    template_name = 'QA_treble_noncash.html'
+
+
+class QAVTrebleStoreiew(BaseView):
+    template_name = 'QA_treble_store.html'
 
 
 class StoreIdView(BaseView):

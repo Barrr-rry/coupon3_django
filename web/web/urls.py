@@ -40,7 +40,19 @@ urlpatterns = [
     path('store/county/', StoreCountyView.as_view()),
     path('test/', TestView.as_view()),
     path('qa/', QAView.as_view()),
-    path('eli5/', ELI5View.as_view()),
+    path('qa/farming/', QAFarmingView.as_view()),
+    path('qa/fun/', QAFunView.as_view()),
+    path('qa/tour/', QATourView.as_view()),
+    path('qa/treble/', QATrebleView.as_view()),
+    path('qa/treble-cash/', QATrebleCashView.as_view()),
+    path('qa/treble-non-cash/', QATrebleNonCashView.as_view()),
+    path('qa/treble-store/', QAVTrebleStoreiew.as_view()),
+    path('eli5/county/', ELI5CountyView.as_view()),
+    path('eli5/farming/', ELI5FarmingView.as_view()),
+    path('eli5/fun/', ELI5FunView.as_view()),
+    path('eli5/tour/', ELI5TourView.as_view()),
+    path('eli5/treble/', ELI5TrebleView.as_view()),
+    path('eli5/voucher', ELI5VoucherView.as_view()),
 ]
 
 if settings.DEBUG:
