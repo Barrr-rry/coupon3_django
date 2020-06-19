@@ -36,17 +36,26 @@
             <div class="flat-filter">
               <div class="wrap-box-search style2">
                 <form method="get" accept-charset="utf-8">
-                        <span>
-                          <input type="text" placeholder="輸入行政區、地址、商家名或活動" name="search">
-                        </span>
+                  <span>
+                    <span class="ti-location-pin"></span>
+                    <input type="text" placeholder="輸入行政區、地址、商家名或活動" name="search">
+                    <a href="javascript:void(0);" id="position" class="search-pin-load">
+                      <svg width="20" height="20">
+                        <image xlink:href="/media/search-bar-arget.svg" width="20" height="20"></image>
+                      </svg>
+                    </a>
+                    <a href="" class="search-pin-load">
+                      <div></div>
+                    </a>
+                  </span>
                   <span class="categories">
-                          <span class="ti-angle-down"></span>
-                          <select name="store_type" placeholder="所有商家種類" value="store_type">
-                            {% for el in storetypes %}
-                              <option value="{{ el.id }}">{{ el.name }}</option>
-                            {% endfor %}
-                        </select>
-                        </span>
+                    <span class="ti-angle-down"></span>
+                    <select name="store_type" placeholder="所有商家種類" value="store_type">
+                      {% for el in storetypes %}
+                        <option value="{{ el.id }}">{{ el.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </span>
                   <div class="clearfix"></div>
                 </form><!-- /form -->
               </div><!-- /.wrap-box-search -->
