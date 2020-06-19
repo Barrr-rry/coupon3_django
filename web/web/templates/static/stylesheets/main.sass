@@ -680,8 +680,8 @@ footer
         display: inline-block
         font-size: 14px
         font-weight: 400
-        color: #999999
-        border: 1px solid #cccccc
+        color: #f25b22
+        border: 1px solid rgba(242, 91, 34, 0.5)
         border-radius: 50px
         padding: 2px 15px
         margin-right: 3px
@@ -689,8 +689,9 @@ footer
 
         &:hover, &.active
           color: #ffffff
-          background-color: #999999
-          border-color: #f1f1f1
+          //background-color: #999999
+          background-color: #f25b22
+          border-color: #f25b22
 
     .link-map
       font-size: 18px !important
@@ -949,6 +950,15 @@ footer
 
   .flat-filter
     padding: 30px 50px 80px 50px
+
+  .store-box-block .imagebox .box-imagebox
+    ul.tag_block
+      height: auto
+      li.right
+        display: block
+        float: none
+        text-align: right
+
 
 #map
   height: 1200px
@@ -1487,6 +1497,7 @@ form.form-listing
 
       .flat-filter
         padding-top: 80px
+
 
   .flat-map-zoom-in .wrap-box-search.style2 .ti-angle-down
     top: 17px !important
