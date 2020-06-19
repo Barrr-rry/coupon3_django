@@ -288,5 +288,4 @@ class LocationView(viewsets.ViewSet):
             ret = task.get_task_result(task_id)
             if ret:
                 break
-        logger.info(f'loc=> {msg}:{ret}')
         return Response(dict(data=ret))
