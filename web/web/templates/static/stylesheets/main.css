@@ -11520,6 +11520,11 @@ form.form-listing .inner-box .wrap-listing.location a.map {
   right: 12%;
   top: 46px;
 }
+form.form-listing .inner-box .wrap-listing.location a.search-pin-load {
+  position: absolute;
+  top: 47px;
+  right: 12%;
+}
 form.form-listing .inner-box .browse {
   background-color: #FBFBFB;
   border: 2px dashed #cccccc;
@@ -11801,6 +11806,9 @@ form.form-listing .only-submit-form-listing:hover {
     right: 22%;
     top: 46px;
   }
+  form.form-listing .inner-box .wrap-listing.location a.search-pin-load {
+    right: 22%;
+  }
 
   .flat-map-zoom-in .container-fluid {
     padding: 0;
@@ -12007,6 +12015,9 @@ form.form-listing .only-submit-form-listing:hover {
   .flat-listing form.form-listing .wrap-listing.location a.map {
     right: 5%;
     top: 46px;
+  }
+  .flat-listing form.form-listing .wrap-listing.location a.search-pin-load {
+    right: 6%;
   }
   .flat-listing form.form-listing button.only-submit-form-listing {
     height: 60px;
