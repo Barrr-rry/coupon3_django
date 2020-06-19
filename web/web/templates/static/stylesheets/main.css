@@ -11199,6 +11199,14 @@ footer .widget-about .logo-ft a {
   text-align: center;
 }
 
+.row.display-block {
+  display: block;
+}
+
+.flat-imagebox.style3 {
+  padding: 0px 0 93px;
+}
+
 .flat-map-zoom-in .wrap-box-search {
   background: transparent;
 }
@@ -11223,6 +11231,27 @@ footer .widget-about .logo-ft a {
 }
 .flat-map-zoom-in .wrap-box-search.style2 form > span input:-ms-input-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select:-ms-input-placeholder {
   color: #999999;
+}
+.flat-map-zoom-in .flat-filter {
+  padding: 30px 50px 80px 50px;
+}
+
+#map {
+  height: 1200px;
+}
+
+.margintop-200 {
+  margin-top: -210px;
+}
+
+.store-box-block {
+  height: 828px;
+  overflow: scroll;
+  padding-bottom: 80px;
+}
+
+.flat-imagebox.style3.padding-0 {
+  padding: 0px;
 }
 
 .header_sticky .flat-title {
@@ -11725,6 +11754,30 @@ form.form-listing .only-submit-form-listing:hover {
     flex: none;
     max-width: 50%;
   }
+
+  .margintop-200 {
+    margin-top: 0;
+  }
+
+  #map {
+    height: 500px;
+  }
+
+  .flat-map-zoom-in .container-fluid .flat-filter {
+    padding-bottom: 20px;
+  }
+
+  .flat-imagebox .filter-result.style2 {
+    padding: 80px 0 0;
+  }
+
+  .store-box-block {
+    height: auto;
+    padding-bottom: 150px;
+  }
+  .store-box-block .btn-more {
+    margin-top: 0;
+  }
 }
 @media only screen and (max-width: 991px) {
   form.form-listing .inner-box label.error {
@@ -11890,6 +11943,14 @@ form.form-listing .only-submit-form-listing:hover {
     line-height: 60px;
   }
 
+  .flat-map-zoom-in .container-fluid .flat-filter {
+    padding: 45px 25px 30px;
+  }
+
+  #map {
+    height: 300px;
+  }
+
   .wrap-box-search.style1 form > span input {
     padding: 8px 55px 8px 50px;
   }
@@ -11912,6 +11973,21 @@ form.form-listing .only-submit-form-listing:hover {
 
   .flat-introduce .introduce-image {
     margin-top: 20px;
+  }
+
+  .imagebox .box-imagebox ul.tag_block {
+    height: auto;
+  }
+  .imagebox .box-imagebox ul.tag_block li.right {
+    display: block;
+    float: none;
+    text-align: right;
+  }
+  .imagebox .box-imagebox .box-content ul.rating li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding-right: 12px;
+    margin-right: 8px;
   }
 }
 @media only screen and (max-width: 600px) {

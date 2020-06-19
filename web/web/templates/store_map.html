@@ -33,13 +33,13 @@
 
 <section class="flat-map-zoom-in">
   <div class="container-fluid">
-    <div class="row" style="display: flex">
-      <div class="col-xl-6 col-md-12">
-        <div class="flat-filter">
-          <div class="wrap-box-search style2">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
+    <div class="row display-block"> <!--style="display: flex"-->
+      <div class="col-xl-12 col-md-12">
+<!--        <div class="container">-->
+          <div class="row">
+            <div class="col-xl-6 col-md-12">
+              <div class="flat-filter">
+                <div class="wrap-box-search style2">
                   <form method="get" accept-charset="utf-8">
                         <span>
                           <input type="text" placeholder="輸入行政區、地址、商家名或活動" name="search">
@@ -54,12 +54,21 @@
                         </span>
                     <div class="clearfix"></div>
                   </form><!-- /form -->
-                </div>
-              </div>
+                </div><!-- /.wrap-box-search -->
+              </div><!-- /.flat-filter -->
             </div>
-          </div><!-- /.wrap-box-search -->
+          </div>
           <div class="clearfix"></div>
-          <section class="flat-row flat-imagebox style3">
+        <!--</div>-->
+      </div><!-- /.col-md-6 -->
+
+      <div class="col-xl-6 col-md-12 col-lg-push-6 margintop-200">
+        <div id="map"></div>
+      </div><!-- /.col-md-6 -->
+
+      <div class="col-xl-6 col-md-12 col-lg-pull-6">
+
+          <section class="flat-row flat-imagebox style3 padding-0">
             <div class="container">
               <div class="row">
                 <div class="col-md-12">
@@ -81,99 +90,95 @@
                 </div><!-- /.col-md-12 -->
               </div><!-- /.row -->
               {#原本 style 3 改掉才不會出問題#}
-              <div class="wrap-imagebox ma-0px">
+              <div class="wrap-imagebox ma-0px store-box-block">
                 <div class="d-flex store-box">
                   {% for el in data %}
-                    <div class="mb-50px col-lg-6 col-md-12 store">
-                      <div class="imagebox style1">
-                        <div class="box-imagebox">
-                          <div class="link_block">
-                            <a href="/store/{{ el.id }}" class="link"></a>
-                            <div class="box-header">
-                              <div class="box-image">
-                                <img src="/media/{{ el.image_1 }}" alt="">
-                                <a title="">查看詳情</a>
-                                <div class="overlay"></div>
+                  <div class="mb-50px col-lg-6 col-md-12 store">
+                    <div class="imagebox style1">
+                      <div class="box-imagebox">
+                        <div class="link_block">
+                          <a href="/store/{{ el.id }}" class="link"></a>
+                          <div class="box-header">
+                            <div class="box-image">
+                              <img src="/media/{{ el.image_1 }}" alt="">
+                              <a title="">查看詳情</a>
+                              <div class="overlay"></div>
+                            </div>
+                          </div><!-- /.box-header -->
+                          <div class="box-content">
+                            <div class="box-title ad">
+                              <a href="/store/{{ el.id }}" title="">{{ el.name }}</a>
+                            </div>
+                            <ul class="rating">
+                              <li><span>{{ el.district_name }}</span></li>
+                              <li>
+                                <img src="/media/map_gray.svg" alt="">
+                                <span>{{ el.distance_name }}</span>
+                              </li>
+                              <li>
+                                <img src="/media/park_gray.svg" alt="">
+                                <span>{{ el.store_type_name }}</span>
+                              </li>
+                            </ul>
+                            <div class="box-desc">
+                              <div class="sale-list">
+                                {{ el.storediscount_names }}
                               </div>
-                            </div><!-- /.box-header -->
-                            <div class="box-content">
-                              <div class="box-title ad">
-                                <a href="/store/{{ el.id }}" title="">{{ el.name }}</a>
-                              </div>
-                              <ul class="rating">
-                                <li><span>{{ el.district_name }}</span></li>
-                                <li>
-                                  <img src="/media/map_gray.svg" alt="">
-                                  <span>{{ el.distance_name }}</span>
+                            </div>
+                          </div><!-- /.box-content -->
+                        </div>
+                        <ul class="tag_block">
+                          <li class="tag"><a href="">贈品贈品</a></li>
+                          <li class="tag"><a href="">全店打折</a></li>
+                          <li class="tag"><a href="">全店打折</a></li>
+                          <!--這邊可以只顯示3筆嗎，要維持一行-->
+                          <li class="right">
+                            <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
+                            <label for="share_{{ el.id }}" class="label entypo-export">
+                              <!--                      <a href="">分享</a>-->
+                              分享
+                            </label>
+                            <div class="social">
+                              <ul>
+                                <li class="share-to entypo-line" data-sns="line" data-name="{{ el.name }}"
+                                    data-url="store/{{ el.id }}">
+                                  <img src="/media/share_line.svg" alt="">
                                 </li>
-                                <li>
-                                  <img src="/media/park_gray.svg" alt="">
-                                  <span>{{ el.store_type_name }}</span>
+                                <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
+                                    data-url="store/{{ el.id }}">
+                                  <img src="/media/share_fb.svg" alt="">
+                                </li>
+                                <li class="share-url entypo-url" data-name="{{ el.name }}"
+                                    data-url="store/{{ el.id }}">
+                                  <img src="/media/share_url.svg" alt="">
                                 </li>
                               </ul>
-                              <div class="box-desc">
-                                <div class="sale-list">
-                                  {{ el.storediscount_names }}
-                                </div>
-                              </div>
-                            </div><!-- /.box-content -->
-                          </div>
-                          <ul class="tag_block">
-                            <li class="tag"><a href="">贈品贈品</a></li>
-                            <li class="tag"><a href="">全店打折</a></li>
-                            <li class="tag"><a href="">全店打折</a></li>
-                            <!--這邊可以只顯示3筆嗎，要維持一行-->
-                            <li class="right">
-                              <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
-                              <label for="share_{{ el.id }}" class="label entypo-export">
-                                <!--                      <a href="">分享</a>-->
-                                分享
-                              </label>
-                              <div class="social">
-                                <ul>
-                                  <li class="share-to entypo-line" data-sns="line" data-name="{{ el.name }}"
-                                      data-url="store/{{ el.id }}">
-                                    <img src="/media/share_line.svg" alt="">
-                                  </li>
-                                  <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
-                                      data-url="store/{{ el.id }}">
-                                    <img src="/media/share_fb.svg" alt="">
-                                  </li>
-                                  <li class="share-url entypo-url" data-name="{{ el.name }}"
-                                      data-url="store/{{ el.id }}">
-                                    <img src="/media/share_url.svg" alt="">
-                                  </li>
-                                </ul>
-                              </div>
-                            </li>
-                          </ul>
-                          <!--                <ul class="location">-->
-                          <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
-                          <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
-                        </div><!-- /.box-imagebox -->
-                      </div><!-- /.imagebox style1 -->
-                    </div><!-- /.col-md-4 -->
+                            </div>
+                          </li>
+                        </ul>
+                        <!--                <ul class="location">-->
+                        <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+                        <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
+                      </div><!-- /.box-imagebox -->
+                    </div><!-- /.imagebox style1 -->
+                  </div><!-- /.col-md-4 -->
                   {% endfor %}
                 </div><!-- /.row -->
 
                 {% if count > 6 %}
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="btn-more more-click">
-                        <a href="javascript:void(0);" title="">顯示更多</a>
-                      </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="btn-more more-click">
+                      <a href="javascript:void(0);" title="">顯示更多</a>
                     </div>
                   </div>
+                </div>
                 {% endif %}
 
               </div>
 
             </div><!-- /.container -->
           </section>
-        </div><!-- /.flat-filter -->
-      </div><!-- /.col-md-6 -->
-      <div class="col-xl-6 col-md-12">
-        <div id="map" style="height: 100%"></div>
 
       </div><!-- /.col-md-6 -->
     </div><!-- /.row -->
