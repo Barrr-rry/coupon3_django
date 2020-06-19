@@ -16,6 +16,7 @@ from .serialierlib import NestedModelSerializer, DefaultModelSerializer, HiddenF
 import uuid
 from django.contrib.auth.hashers import make_password
 from django.core import validators
+from drf_serializer_cache import SerializerCacheMixin
 from django.utils.timezone import make_aware
 from api.models import (
     StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
@@ -93,7 +94,7 @@ class StoreDiscountWriteSerializer(serializers.ModelSerializer):
         ]
 
 
-class StoreSerializer(DefaultModelSerializer):
+class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     storeimage_data = StringListField(required=False, help_text='StoreImage', write_only=True)
     storediscount_data = StoreDiscountWriteSerializer(many=True, required=False, write_only=True,
                                                       help_text='StoreDiscount')
@@ -137,7 +138,7 @@ class StoreSerializer(DefaultModelSerializer):
                     store=instance,
                     **el
                 )
-            if not(instance.latitude and instance.longitude):
+            if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
                 while True:

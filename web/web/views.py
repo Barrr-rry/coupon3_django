@@ -8,6 +8,8 @@ import json
 from crawler import task
 from log import logger
 import uuid
+import time
+from api.util import get_time
 
 
 class BaseView(TemplateView):
@@ -90,7 +92,11 @@ class StoreView(BaseView):
     template_name = 'store.html'
 
     def get_context_data(self, *args, **kwargs):
-        queryset = Store.objects.filter(status=1)
+        st = time.time()
+        task_spend = 0
+        queryset = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
+            select_related('county'). \
+            select_related('district').select_related('store_type').filter(status=1)
         search = self.request.GET.get('search', None)
         district = self.request.GET.get('district', None)
         county = self.request.GET.get('county', 'all')
@@ -108,6 +114,7 @@ class StoreView(BaseView):
         county_instance = None
         district_instance = None
         # 沒有輸入search lat lon 用本身經緯度
+        msg_st = time.time()
         if msg is None or not search:
             lat = float(self.request.COOKIES.get('lat', 23.8523405))
             lon = float(self.request.COOKIES.get('lon', 120.9009427))
@@ -134,6 +141,7 @@ class StoreView(BaseView):
                 lat = target_instnace.latitude
                 lon = target_instnace.longitude
             else:
+                task_st = time.time()
                 task_id = task.enqueue_task('get_latlon', search)
                 gps = None
                 while True:
@@ -142,6 +150,15 @@ class StoreView(BaseView):
                         break
                 lat = float(gps[0])
                 lon = float(gps[1])
+                task_ed = time.time()
+                task_spend = task_ed - task_st
+        msg_ed = time.time()
+
+        sort = self.request.GET.get('sort', 'distance')
+        if sort == 'new':
+            order_by = '-created_at'
+        if sort == 'old':
+            order_by = 'created_at'
 
         filter_dict = dict([('search', search),
                             ('district', district),
@@ -151,7 +168,6 @@ class StoreView(BaseView):
                             ('storediscount_discount_type', storediscount_discount_type),
                             ('ids', ids)]
                            )
-        sort = self.request.GET.get('sort', 'distance')
         queryset = filters.filter_query(filter_dict, queryset)
         if sort == 'new':
             queryset = queryset.order_by('-created_at')
@@ -162,7 +178,9 @@ class StoreView(BaseView):
         storetypes.insert(0, dict(id='all', name='全部'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         district_list.insert(0, dict(id='all', name='全部'))
+        data_st = time.time()
         data = serializers.StoreSerializer(many=True, instance=queryset).data
+        data_ed = time.time()
 
         if not county:
             county = 'all'
@@ -180,12 +198,13 @@ class StoreView(BaseView):
             x['distance_name'] = m
             return ret
 
+        sort_st = time.time()
         data = sorted(data, key=distance)
         if sort == 'distance':
             data = sorted(data, key=distance)
         if sort == '-distance':
             data = sorted(data, key=distance, reverse=True)
-
+        sort_ed = time.time()
         json_data = json.dumps(data)
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
@@ -215,6 +234,10 @@ class StoreView(BaseView):
             storediscount_discount_type=dtype,
             discounttype=serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data,
             token=self.token,
+        )
+        ed = time.time()
+        logger.info(
+            f'search time: {ed - st} task: {task_spend} sort: {sort_ed - sort_st} msg: {msg_ed - msg_st} data: {data_ed - data_st}'
         )
         return ret
 
