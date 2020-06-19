@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 from api import docs
 from .views import *
 from django.views.generic.base import RedirectView
+from django.views.decorators.cache import cache_page
 
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='media/shorticon_48.svg')),
@@ -34,8 +35,8 @@ urlpatterns = [
     path('store/create/', StoreCreateView.as_view()),
     path('contact/', ContactView.as_view()),
     path('store/<int:store_id>/', StoreIdView.as_view()),
-    path('store_map/', StoreMapView.as_view()),
-    path('store/', StoreView.as_view()),
+    path('store_map/', cache_page(60 * 60)(StoreMapView.as_view())),
+    path('store/', cache_page(60 * 60)(StoreView.as_view())),
     path('store/county/', StoreCountyView.as_view()),
     path('test/', TestView.as_view()),
     path('qa/', QAView.as_view()),
