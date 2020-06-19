@@ -29,12 +29,7 @@
 </head>
 <body class="header_sticky">
 
-<!-- Preloader -->
-<div class="preloader">
-  <div class="clear-loading loading-effect-2">
-    <span></span>
-  </div>
-</div><!-- /.preloader -->
+{% include 'includes/preloader.html' %}
 
 {% include 'includes/header.html' %}
 
@@ -72,7 +67,7 @@
     </div><!-- /.col-md-12 -->
   </div><!-- /.row -->
   </div><!-- /.container -->
-<!--  <div class="overlay"></div>-->
+  <!--  <div class="overlay"></div>-->
 </section><!-- /.page-title -->
 
 <section class="flat-highlights">
@@ -87,13 +82,13 @@
               <li>
                 <a href="/store/?store_type={{ el.id }}" title="">
                   <!--<img src="/media/{{ el.icon }}" alt="">-->
-<!--                  <svg width="50" height="50">-->
-<!--                    <image xlink:href="/media/{{ el.icon }}" width="50" height="50"/>-->
-<!--                  </svg>-->
-<!--                  <svg width="50" height="50">-->
-<!--                    <image xlink:href="/media/{{ el.icon }}"></image>-->
-<!--                  </svg>-->
-                  <object data="/media/{{ el.icon }}" class="index_icon"> </object>
+                  <!--                  <svg width="50" height="50">-->
+                  <!--                    <image xlink:href="/media/{{ el.icon }}" width="50" height="50"/>-->
+                  <!--                  </svg>-->
+                  <!--                  <svg width="50" height="50">-->
+                  <!--                    <image xlink:href="/media/{{ el.icon }}"></image>-->
+                  <!--                  </svg>-->
+                  <object data="/media/{{ el.icon }}" class="index_icon"></object>
                   <span>{{ el.name }}</span>
                 </a>
 
@@ -139,7 +134,7 @@
       <div class="col-md-3 col-sm-6">
         <div class="imagebox style5 item">
           <div class="box-image">
-<!--            <img src="/media/home-link-idea-bg.svg" alt="">-->
+            <!--            <img src="/media/home-link-idea-bg.svg" alt="">-->
             <a class="link" href="/eli5/" title=""></a>
             <div class="overlay">
               <span></span>
