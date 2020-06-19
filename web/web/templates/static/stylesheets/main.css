@@ -10731,7 +10731,13 @@ footer .widget-about .logo-ft a {
   background-repeat: no-repeat;
   background-position: bottom left;
 }
+.flat-highlights .highlights ul.menu-list li {
+  min-height: 158px;
+}
 .flat-highlights .highlights ul.menu-list li a {
+  position: absolute;
+  width: 100%;
+  left: 0;
   color: #FFFFFF;
   font-size: 18px;
   letter-spacing: 2px;
@@ -12049,6 +12055,11 @@ form.form-listing .only-submit-form-listing:hover {
   .imagebox.style5.item .box-image .overlay span {
     width: 94%;
     left: 3%;
+  }
+
+  .parallax-200 {
+    background-image: url("/media/bg_dark_mobile_3.svg");
+    background-position: bottom center !important;
   }
 }
 button.swal2-confirm {
