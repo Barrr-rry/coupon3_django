@@ -444,8 +444,15 @@ footer
 .flat-introduce
   background: #f1f1f1
 
+  .row.eli5_list
+    margin-bottom: 120px
+
+  .row:nth-child(3) .introduce .introduce-title h3
+    margin: 20px 0 24px
+
   .introduce-header
     border-bottom: 1px solid #e0e0e0
+    padding: 10px 0 75px
 
     a.tab
       display: inline-block
@@ -466,54 +473,54 @@ footer
   .d-flex
     margin-bottom: 50px
 
-    .introduce
+  .introduce
 
-      .introduce-title
-        h3
-          margin: 20px 0 24px
-          font-size: 28px
-          letter-spacing: 2px
-          line-height: 45px
+    .introduce-title
+      h3
+        margin: 20px 0 24px
+        font-size: 28px
+        letter-spacing: 2px
+        line-height: 45px
 
-      .introduce-content
-        display: inline-block
-        font-size: 16px
-        letter-spacing: 1px
-        font-weight: 400
+    .introduce-content
+      display: inline-block
+      font-size: 16px
+      letter-spacing: 1px
+      font-weight: 400
 
-        p
-          display: block
-          margin-bottom: 10px
+      p
+        display: block
+        margin-bottom: 10px
 
-        .para
-          margin-bottom: 30px
+      .para
+        margin-bottom: 30px
 
-        .indent
+      .indent
+        padding-left: 20px
+
+      ul
+        margin-bottom: 10px
+
+        li
+          position: relative
           padding-left: 20px
 
-        ul
-          margin-bottom: 10px
+          &:before
+            content: "◆"
+            position: absolute
+            display: inline-block
+            left: 0px
+            padding-right: 5px
+            color: #666666
+            font-size: 13px
 
-          li
-            position: relative
-            padding-left: 20px
-
-            &:before
-              content: "◆"
-              position: absolute
-              display: inline-block
-              left: 0px
-              padding-right: 5px
-              color: #666666
-              font-size: 13px
-
-        .highlight
-          display: inline-block
-          padding: 0px 8px
-          background-color: #aaaaaa
-          color: #fff
-          font-weight: 400
-          border-radius: 6px
+      .highlight
+        display: inline-block
+        padding: 0px 8px
+        background-color: #aaaaaa
+        color: #fff
+        font-weight: 400
+        border-radius: 6px
 
 
   .introduc-footer
@@ -1586,6 +1593,11 @@ form.form-listing
 
     .page-title-heading
       margin-bottom: 45px
+
+  .flat-introduce
+    .introduce-image
+      margin-top: 20px
+
 
 
 @media only screen and (max-width: 600px)
