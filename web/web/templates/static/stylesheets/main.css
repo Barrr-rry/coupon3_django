@@ -11744,9 +11744,8 @@ form.form-listing .only-submit-form-listing:hover {
   }
 
   .parallax-200 {
-    background-image: url("/media/bg_dark_mobile_2.svg");
+    background-image: url("/media/bg_dark_tablet.svg");
     background-position: 33% -102px !important;
-    background-size: cover;
   }
 
   .wrap-box-search.style1 form > span {
@@ -11886,6 +11885,12 @@ form.form-listing .only-submit-form-listing:hover {
 @media only screen and (max-width: 767px) {
   .flat-highlights {
     background-image: url("/media/bg_dark_mobile_2.svg");
+  }
+
+  .parallax-200 {
+    background-image: url("/media/bg_dark_mobile_2.svg");
+    background-position: 33% -102px !important;
+    background-size: auto;
   }
 
   .header {
