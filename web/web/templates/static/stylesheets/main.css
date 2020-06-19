@@ -10490,6 +10490,34 @@ a:hover {
   background-color: #CC2426;
 }
 
+.loader {
+  border: 2px solid #f3f3f3;
+  /* Light grey */
+  border-top: 2px solid #E02020;
+  /* animation */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 #logo {
   margin-top: 32px;
 }
@@ -10513,7 +10541,7 @@ a:hover {
 .header .wrap-box-search {
   display: inline-block;
   background-color: rgba(255, 255, 255, 0);
-  margin-top: 0px;
+  margin-top: 0;
 }
 .header .wrap-box-search form > span > span {
   z-index: 1;
@@ -10523,6 +10551,9 @@ a:hover {
   position: absolute;
   right: 30px;
   top: 15px;
+}
+.header .wrap-box-search a.search-pin-icon:active .loader {
+  opacity: 1;
 }
 .header .wrap-box-search.style2 form > span {
   width: 300px;
@@ -11201,10 +11232,6 @@ footer .widget-about .logo-ft a {
 
 .row.display-block {
   display: block;
-}
-
-.flat-imagebox.style3 {
-  padding: 0px 0 93px;
 }
 
 .flat-map-zoom-in .wrap-box-search {
