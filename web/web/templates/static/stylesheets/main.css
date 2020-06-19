@@ -11890,7 +11890,7 @@ form.form-listing .only-submit-form-listing:hover {
   .parallax-200 {
     background-image: url("/media/bg_dark_mobile_2.svg");
     background-position: 33% -102px !important;
-    background-size: auto;
+    background-size: cover;
   }
 
   .header {
