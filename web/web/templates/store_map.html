@@ -22,12 +22,7 @@
 </head>
 <body class="slider header_sticky">
 
-<!-- Preloader -->
-<div class="preloader">
-  <div class="clear-loading loading-effect-2">
-    <span></span>
-  </div>
-</div><!-- /.preloader -->
+{% include 'includes/preloader.html' %}
 
 {% include 'includes/header.html' %}<!-- /.header -->
 
@@ -35,16 +30,16 @@
   <div class="container-fluid">
     <div class="row display-block"> <!--style="display: flex"-->
       <div class="col-xl-12 col-md-12">
-<!--        <div class="container">-->
-          <div class="row">
-            <div class="col-xl-6 col-md-12">
-              <div class="flat-filter">
-                <div class="wrap-box-search style2">
-                  <form method="get" accept-charset="utf-8">
+        <!--        <div class="container">-->
+        <div class="row">
+          <div class="col-xl-6 col-md-12">
+            <div class="flat-filter">
+              <div class="wrap-box-search style2">
+                <form method="get" accept-charset="utf-8">
                         <span>
                           <input type="text" placeholder="輸入行政區、地址、商家名或活動" name="search">
                         </span>
-                    <span class="categories">
+                  <span class="categories">
                           <span class="ti-angle-down"></span>
                           <select name="store_type" placeholder="所有商家種類" value="store_type">
                             {% for el in storetypes %}
@@ -52,13 +47,13 @@
                             {% endfor %}
                         </select>
                         </span>
-                    <div class="clearfix"></div>
-                  </form><!-- /form -->
-                </div><!-- /.wrap-box-search -->
-              </div><!-- /.flat-filter -->
-            </div>
+                  <div class="clearfix"></div>
+                </form><!-- /form -->
+              </div><!-- /.wrap-box-search -->
+            </div><!-- /.flat-filter -->
           </div>
-          <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
         <!--</div>-->
       </div><!-- /.col-md-6 -->
 
@@ -68,31 +63,31 @@
 
       <div class="col-xl-6 col-md-12 col-lg-pull-6">
 
-          <section class="flat-row flat-imagebox style3 padding-0">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="filter-result style2">
-                    <div class="result">
-                      共有 {{ count }} 筆搜尋結果
-                    </div>
-                    <a href="/store/{{ suffix }}" class="mr-5 link-map" style="font-size: xx-large; float:right">
-                      卡片模式
-                    </a>
-                    <div class="clear"></div>
-                    <div class="sort">
-                      <a data-sort="distance" href="">由近到遠</a>
-                      <a data-sort="-distance" href="">由遠到近</a>
-                      <a data-sort="new" href="">由新到舊</a>
-                      <a data-sort="old" href="">由舊到新</a>
-                    </div>
-                  </div><!-- /.filter-result -->
-                </div><!-- /.col-md-12 -->
-              </div><!-- /.row -->
-              {#原本 style 3 改掉才不會出問題#}
-              <div class="wrap-imagebox ma-0px store-box-block">
-                <div class="d-flex store-box">
-                  {% for el in data %}
+        <section class="flat-row flat-imagebox style3 padding-0">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="filter-result style2">
+                  <div class="result">
+                    共有 {{ count }} 筆搜尋結果
+                  </div>
+                  <a href="/store/{{ suffix }}" class="mr-5 link-map" style="font-size: xx-large; float:right">
+                    卡片模式
+                  </a>
+                  <div class="clear"></div>
+                  <div class="sort">
+                    <a data-sort="distance" href="">由近到遠</a>
+                    <a data-sort="-distance" href="">由遠到近</a>
+                    <a data-sort="new" href="">由新到舊</a>
+                    <a data-sort="old" href="">由舊到新</a>
+                  </div>
+                </div><!-- /.filter-result -->
+              </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+            {#原本 style 3 改掉才不會出問題#}
+            <div class="wrap-imagebox ma-0px store-box-block">
+              <div class="d-flex store-box">
+                {% for el in data %}
                   <div class="mb-50px col-lg-6 col-md-12 store">
                     <div class="imagebox style1">
                       <div class="box-imagebox">
@@ -162,10 +157,10 @@
                       </div><!-- /.box-imagebox -->
                     </div><!-- /.imagebox style1 -->
                   </div><!-- /.col-md-4 -->
-                  {% endfor %}
-                </div><!-- /.row -->
+                {% endfor %}
+              </div><!-- /.row -->
 
-                {% if count > 6 %}
+              {% if count > 6 %}
                 <div class="row">
                   <div class="col-md-12">
                     <div class="btn-more more-click">
@@ -173,12 +168,12 @@
                     </div>
                   </div>
                 </div>
-                {% endif %}
+              {% endif %}
 
-              </div>
+            </div>
 
-            </div><!-- /.container -->
-          </section>
+          </div><!-- /.container -->
+        </section>
 
       </div><!-- /.col-md-6 -->
     </div><!-- /.row -->

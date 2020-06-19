@@ -32,20 +32,7 @@
   </style>
 </head>
 <body class="header_sticky">
-  <div class="overlay_load">
-    <div class="loadingio2">
-      <svg width="200" height="200">
-        <image xlink:href="/media/Ripple.svg" width="200" height="200"/>
-      </svg>
-    </div>
-  </div>
-
-<!-- Preloader -->
-<div class="preloader">
-  <div class="clear-loading loading-effect-2">
-    <span></span>
-  </div>
-</div><!-- /.preloader -->
+{% include 'includes/preloader.html' %}
 
 {% include 'includes/header.html' %}<!-- /.header -->
 
@@ -64,7 +51,7 @@
                   <a href="/store/?search={{ el.name }}" class="link"></a>
                   <div class="box-header">
                     <div class="box-image">
-<!--                      <img src="/media/{{ el.picture }}" alt="">-->
+                      <!--                      <img src="/media/{{ el.picture }}" alt="">-->
                       <img src="/media/county_taipei.jpg" alt="">
                       <a title="">查看詳情</a>
                       <div class="overlay"></div>
