@@ -1,0 +1,270 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <title>Work - Dailist</title>
+
+  <meta name="author" content="themsflat.com">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+
+
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="clear-loading loading-effect-2">
+    <span></span>
+  </div>
+</div><!-- /.preloader -->
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+<section class="page-title parallax parallax1 parallax-200">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title-heading">
+          常見問題
+        </div>
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+<!--  <div class="overlay"></div>-->
+</section><!-- /.page-title -->
+
+<section class="flat-row flat-introduce">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="introduce-header">
+          <a class="tab" href="/qa_treble/">振興三倍券</a>
+          <a class="tab active" href="/qa_treble_cash/">振興三倍券-實體紙本</a>
+          <a class="tab" href="/qa_treble_noncash/">振興三倍券-數位支付</a>
+          <a class="tab" href="/qa_treble_store/">振興三倍券-店家相關</a>
+          <a class="tab" href="/qa_fun/">藝 FUN 券</a>
+          <a class="tab" href="/qa_farming/">農遊券</a>
+          <a class="tab" href="/qa_tour/">安心旅遊</a>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>振興三倍券可以找零嗎 ?</h3>
+            <span>1</span>
+          </div>
+          <div class="introduce-content">
+            <p>使用振興三倍券購買商品，不找零也不可兌現。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>買不到怎麼辦? 哪裡有庫存?</h3>
+            <span>2</span>
+          </div>
+          <div class="introduce-content">
+            <p>可用振興三倍券地圖查看郵局哪裡有庫存，或選擇數位工具綁定後，可馬上使用。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>可以代買嗎? 可以代買幾份?可以代領嗎？</h3>
+            <span>3</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 可以代買。</p>
+            <p>2. 沒有限制代買的份數。</p>
+            <p>3. 可以代領。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>什麼時候開始買振興三倍券?</h3>
+            <span>4</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 預購：</p>
+            <div class="indent">
+              <p>(1) 第一波：7/1~7/7 在四大超商、官網預購，7/15 開始領取。</p>
+              <p>(2) 第二波：8/1~8/7 在四大超商、官網預購，8/15 開始領取。</p>
+            </div>
+            <p>2. 現場領用：7/15~12/31 可在全國郵局現場領用。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>怎麼買? 去哪買? 可以買幾次?</h3>
+            <span>5</span>
+          </div>
+          <div class="introduce-content">
+            <div class="para">
+              <p><span class="highlight">1. 預訂</span>：可至官網或超商進行預訂，預訂期間分二梯次。</p>
+              <div class="indent">
+                <p>第一梯次: 7/1~7/7 預訂、7/15~7/31 領取</p>
+                <p>第二梯次: 8/1~8/7 預訂、8/15~8/31 領取</p>
+                <div class="indent">
+                  <p>(1) 拿健保卡和現金 1,000 元，去四大超商機臺預訂(和買口罩一樣)，收到簡訊後，就可以到超商領取。</p>
+                  <p>(2) 上官網用健保卡插入讀卡機，用信用卡支付 1,000 元，收到簡訊後，就可以到超商領取。</p>
+                </div>
+                <p>(2) 超商：到超商服務機台 Kiosk 插入健保卡，並列印小白單後，去櫃檯結帳支付 1,000 元，就完成預訂。</p>
+              </div>
+            </div>
+            <div class="para">
+              <p><span class="highlight">2. 現場領用</span>： 7/15 起可至郵局現場買，憑健保卡或身分證件並繳交 1,000 元，即可領取振興三倍券。</p>
+            </div>
+            <div class="para">
+              <p>3. 每人僅可領用一次，且不能與數位方式重複領取。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>符合身分資格，但沒有健保卡可以買嗎？</h3>
+            <span>6</span>
+          </div>
+          <div class="introduce-content">
+            <p>振興三倍券領取採實名制，民眾必須帶健保卡或身分證明文件就可以領用。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>未成年子女怎麼買振興三倍券？</h3>
+            <span>7</span>
+          </div>
+          <div class="introduce-content">
+              <p>國人不分年齡憑健保卡即可領用紙本振興三倍券。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>振興三倍券污損怎麼辦?破損了怎麼辦?可以用嗎?</h3>
+            <span>8</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 污損，但號碼、文字及花紋可辨識，仍可使用。</p>
+            <p>2. 破損，但餘留部分在四分之三以上，仍可使用。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>出現偽券時，怎麼處理？</h3>
+            <span>9</span>
+          </div>
+          <div class="introduce-content">
+            <p>兌付金融機構如發現偽造、變造或仿造的振興三倍券時，會截留並送經濟部，再轉請警政機關進行偵辦。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>上網預訂振興三倍券，需要信用卡手續費？</h3>
+            <span>10</span>
+          </div>
+          <div class="introduce-content">
+            <p>上網預訂振興三倍券，民眾不用負擔信用卡手續費。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>有積欠健保費能否持健保卡領取振興三倍券？</h3>
+            <span>11</span>
+          </div>
+          <div class="introduce-content">
+            <p>如民眾有積欠健保費仍然可以持健保卡領取振興三倍券，至於積欠的健保費請儘速繳納或辦理分期。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>健保卡遺失已補領，後來又找到還可以再用嗎？</h3>
+            <span>12</span>
+          </div>
+          <div class="introduce-content">
+            <p>申請健保卡遺失換補發時，當新健保卡製作後原遺失卡會自動註銷，該遺失卡找到亦無法再使用。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-md-12">
+        <div class="introduce-footer">
+          <p>還有問題嗎？</p>
+          <div class="btn-more">
+            <a href="" title="">聯絡我們</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include 'includes/footer.html' %}
+
+<!-- Javascript -->
+{% include 'includes/js.html' %}
+
+</body>
+</html>

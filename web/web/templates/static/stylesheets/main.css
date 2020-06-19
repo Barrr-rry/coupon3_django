@@ -10490,6 +10490,57 @@ a:hover {
   background-color: #CC2426;
 }
 
+.loader {
+  border: 2px solid #f3f3f3;
+  /* Light grey */
+  border-top: 2px solid #E02020;
+  /* animation */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.overlay_load {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 10000;
+}
+.overlay_load .loadingio, .overlay_load .loadingio2 {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0);
+  top: 50%;
+  margin-top: -100px;
+  left: 50%;
+  margin-left: -100px;
+}
+
 #logo {
   margin-top: 32px;
 }
@@ -10513,7 +10564,7 @@ a:hover {
 .header .wrap-box-search {
   display: inline-block;
   background-color: rgba(255, 255, 255, 0);
-  margin-top: 0px;
+  margin-top: 0;
 }
 .header .wrap-box-search form > span > span {
   z-index: 1;
@@ -10523,6 +10574,9 @@ a:hover {
   position: absolute;
   right: 30px;
   top: 15px;
+}
+.header .wrap-box-search a.search-pin-icon:active .loader {
+  opacity: 1;
 }
 .header .wrap-box-search.style2 form > span {
   width: 300px;
@@ -10808,7 +10862,7 @@ footer .widget-about .logo-ft a {
   background-color: #392D2C;
   background-image: url("/media/bg_dark.svg");
   background-repeat: no-repeat;
-  background-position: 100% 50px !important;
+  background-position: 100% 0 !important;
   background-size: auto;
 }
 
@@ -11199,6 +11253,10 @@ footer .widget-about .logo-ft a {
   text-align: center;
 }
 
+.row.display-block {
+  display: block;
+}
+
 .flat-map-zoom-in .wrap-box-search {
   background: transparent;
 }
@@ -11223,6 +11281,27 @@ footer .widget-about .logo-ft a {
 }
 .flat-map-zoom-in .wrap-box-search.style2 form > span input:-ms-input-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select:-ms-input-placeholder {
   color: #999999;
+}
+.flat-map-zoom-in .flat-filter {
+  padding: 30px 50px 80px 50px;
+}
+
+#map {
+  height: 1200px;
+}
+
+.margintop-200 {
+  margin-top: -210px;
+}
+
+.store-box-block {
+  height: 828px;
+  overflow: scroll;
+  padding-bottom: 80px;
+}
+
+.flat-imagebox.style3.padding-0 {
+  padding: 0px;
 }
 
 .header_sticky .flat-title {
@@ -11665,9 +11744,8 @@ form.form-listing .only-submit-form-listing:hover {
   }
 
   .parallax-200 {
-    background-image: url("/media/bg_dark_mobile_2.svg");
+    background-image: url("/media/bg_dark_tablet.svg");
     background-position: 33% -102px !important;
-    background-size: cover;
   }
 
   .wrap-box-search.style1 form > span {
@@ -11724,6 +11802,30 @@ form.form-listing .only-submit-form-listing:hover {
   .md-100 {
     flex: none;
     max-width: 50%;
+  }
+
+  .margintop-200 {
+    margin-top: 0;
+  }
+
+  #map {
+    height: 500px;
+  }
+
+  .flat-map-zoom-in .container-fluid .flat-filter {
+    padding-bottom: 20px;
+  }
+
+  .flat-imagebox .filter-result.style2 {
+    padding: 80px 0 0;
+  }
+
+  .store-box-block {
+    height: auto;
+    padding-bottom: 150px;
+  }
+  .store-box-block .btn-more {
+    margin-top: 0;
   }
 }
 @media only screen and (max-width: 991px) {
@@ -11783,6 +11885,12 @@ form.form-listing .only-submit-form-listing:hover {
 @media only screen and (max-width: 767px) {
   .flat-highlights {
     background-image: url("/media/bg_dark_mobile_2.svg");
+  }
+
+  .parallax-200 {
+    background-image: url("/media/bg_dark_mobile_2.svg");
+    background-position: 33% -102px !important;
+    background-size: cover;
   }
 
   .header {
@@ -11890,6 +11998,14 @@ form.form-listing .only-submit-form-listing:hover {
     line-height: 60px;
   }
 
+  .flat-map-zoom-in .container-fluid .flat-filter {
+    padding: 45px 25px 30px;
+  }
+
+  #map {
+    height: 300px;
+  }
+
   .wrap-box-search.style1 form > span input {
     padding: 8px 55px 8px 50px;
   }
@@ -11912,6 +12028,21 @@ form.form-listing .only-submit-form-listing:hover {
 
   .flat-introduce .introduce-image {
     margin-top: 20px;
+  }
+
+  .imagebox .box-imagebox ul.tag_block {
+    height: auto;
+  }
+  .imagebox .box-imagebox ul.tag_block li.right {
+    display: block;
+    float: none;
+    text-align: right;
+  }
+  .imagebox .box-imagebox .box-content ul.rating li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    padding-right: 12px;
+    margin-right: 8px;
   }
 }
 @media only screen and (max-width: 600px) {

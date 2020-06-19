@@ -1,0 +1,257 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <title>Work - Dailist</title>
+
+  <meta name="author" content="themsflat.com">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+
+
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="clear-loading loading-effect-2">
+    <span></span>
+  </div>
+</div><!-- /.preloader -->
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+<section class="page-title parallax parallax1 parallax-200">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title-heading">
+          常見問題
+        </div>
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+<!--  <div class="overlay"></div>-->
+</section><!-- /.page-title -->
+
+<section class="flat-row flat-introduce">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="introduce-header">
+          <a class="tab" href="/qa_treble/">振興三倍券</a>
+          <a class="tab" href="/qa_treble_cash/">振興三倍券-實體紙本</a>
+          <a class="tab active" href="/qa_treble_noncash/">振興三倍券-數位支付</a>
+          <a class="tab" href="/qa_treble_store/">振興三倍券-店家相關</a>
+          <a class="tab" href="/qa_fun/">藝 FUN 券</a>
+          <a class="tab" href="/qa_farming/">農遊券</a>
+          <a class="tab" href="/qa_tour/">安心旅遊</a>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>振興三倍券是什麼？</h3>
+            <span>1</span>
+          </div>
+          <div class="introduce-content">
+            <p>民眾可選擇下列任一種方式綁定使用：</p>
+            <p><span class="highlight">1. 行動支付</span>：需先下載參與活動之行動支付 APP，於 12/31 前完成綁定並累計消費滿 3,000 元，消費滿額 8 天後收到 APP 通知後，直接轉入 2,000 元至 APP 帳戶。</p>
+            <p><span class="highlight">2. 電子票證</span>：需先申請參與活動之記名制卡片，於 12/31 前完成綁定並累計消費滿 3,000 元，消費滿額 8 天後收到簡訊通知後，直接到超商靠卡回存2,000 元。</p>
+            <p><span class="highlight">3. 信用卡</span>：需先選擇參與活動之信用卡，於 12/31 前完成綁定並累計消費滿3,000 元，消費滿額 8 天後，收到簡訊通知，隔月帳單直接扣 2,000 元。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>一定要消費滿 3,000 元，才有回饋嗎？</h3>
+            <span>2</span>
+          </div>
+          <div class="introduce-content">
+            <p>對。若累計消費未達 3,000 元，則無法申請滿額回饋。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>可以用到什麼時候？ 領到回饋有時效限制嗎？</h3>
+            <span>3</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 使用期間 7/15~12/31。</p>
+            <p>2. 回饋金沒有使用時效限制。</p>
+            <div class="indent">
+              <p>(1) 行動支付、電子票證領到優惠後，花完為止。</p>
+              <p>(2) 信用卡領到優惠後，直接抵扣帳單。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>消費滿 3,000 元，最晚何時可以拿到回饋？</h3>
+            <span>4</span>
+          </div>
+          <div class="introduce-content">
+            <p>使用數位振興三倍券消費滿 3,000 元，收到簡訊通知，最晚次月帳單額度得到回饋。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>如何申請實名制？ 一定要先實名制登記？ 還是先消費再綁定也可以？</h3>
+            <span>5</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 民眾可至參與活動之電子票證平台振興網站登錄及上傳身分證明文件，經驗證後即可完成記名制登記。</p>
+            <p>2. 必須「先進行」記名登記並綁定後，才開始累計消費。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>我有綁定使用信用卡、行動支付或電子票證，還可以領取紙本振興三倍券嗎？</h3>
+            <span>6</span>
+          </div>
+          <div class="introduce-content">
+            <p>只要還沒有請領振興三倍券的回饋之前，民眾還是可以選擇領取紙本振興三倍券，惟重新綁定後，消費累計將重新計算。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>可以重新綁定數位工具，選擇不同支付工具嗎？</h3>
+            <span>7</span>
+          </div>
+          <div class="introduce-content">
+            <p>只要您在還沒請領振興三倍券回饋前或領取紙本振興三倍券前，都可以重新綁定，但消費累計重新計算。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>哪幾家電子票證業者、行動支付、信用卡可以使用振興三倍券？</h3>
+            <span>8</span>
+          </div>
+          <div class="introduce-content">
+            <p>6 月 20 日將於振興網站公布可使用數位振興三倍券業者名單。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>如果使用行動支付綁定信用卡，請問回饋到哪項支付工具？</h3>
+            <span>9</span>
+          </div>
+          <div class="introduce-content">
+            <p>會以民眾所選擇綁定的數位支付工具來做回饋。</p>
+            <p>例如：民眾綁定信用卡，雖使用行動支付來消費，仍計算在信用卡累計之中。</p>
+            <p>相反的，若民眾綁定行動支付則以行動支付來回饋。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>若未成年子女要使用數位支付，該如何使用？ 可以用附卡？</h3>
+            <span>10</span>
+          </div>
+          <div class="introduce-content">
+            <p><span class="highlight">1. 電子票證</span>：未成年子女，可至電子票證業者平台進行記名並綁定後，即可進行消費累計。</p>
+            <p><span class="highlight">2. 信用卡</span>：15 歲以上未成年子女，可使用父母提供之信用卡附卡綁定後，即可進行消費累計。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>未成年子女使用信用卡附卡功能進行消費，是否與持卡人合併計算？ 分別計算？</h3>
+            <span>11</span>
+          </div>
+          <div class="introduce-content">
+            <p>持卡人和附卡人之消費將各別計算。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>用信用卡、行動支付及電子票證等數位工具，購買 APP 也算振興三倍券累計消費？</h3>
+            <span>12</span>
+          </div>
+          <div class="introduce-content">
+            <p>不可以，購買 APP 屬於線上交易，所以，使用信用卡、行動支付及電子票證皆不可累計振興三倍券消費。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-md-12">
+        <div class="introduce-footer">
+          <p>還有問題嗎？</p>
+          <div class="btn-more">
+            <a href="" title="">聯絡我們</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include 'includes/footer.html' %}
+
+<!-- Javascript -->
+{% include 'includes/js.html' %}
+
+</body>
+</html>

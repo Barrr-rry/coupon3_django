@@ -1,0 +1,189 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <title>Work - Dailist</title>
+
+  <meta name="author" content="themsflat.com">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+
+
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="clear-loading loading-effect-2">
+    <span></span>
+  </div>
+</div><!-- /.preloader -->
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+<section class="page-title parallax parallax1 parallax-200">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title-heading">
+          常見問題
+        </div>
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+<!--  <div class="overlay"></div>-->
+</section><!-- /.page-title -->
+
+<section class="flat-row flat-introduce">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="introduce-header">
+          <a class="tab" href="/qa_treble/">振興三倍券</a>
+          <a class="tab" href="/qa_treble_cash/">振興三倍券-實體紙本</a>
+          <a class="tab" href="/qa_treble_noncash/">振興三倍券-數位支付</a>
+          <a class="tab" href="/qa_treble_store/">振興三倍券-店家相關</a>
+          <a class="tab" href="/qa_fun/">藝 FUN 券</a>
+          <a class="tab" href="/qa_farming/">農遊券</a>
+          <a class="tab active" href="/qa_tour/">安心旅遊</a>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>活動查詢</h3>
+            <span>1</span>
+          </div>
+          <div class="introduce-content">
+            <p>109年6月18日下午2時起，自由行旅客可至臺灣旅宿網（https://www.taiwanstay.net.tw）連結至「安心旅遊自由行旅客住宿優惠活動」網頁專區（網址：https://funtour.tbroc.gov.tw）查詢有參加本活動的觀光旅館、旅館或民宿。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>活動期間</h3>
+            <span>2</span>
+          </div>
+          <div class="introduce-content">
+            <p>109年7月1日起至109年10月31日止</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>適用對象</h3>
+            <span>3</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 適用對象：自由行旅客 ( 散客 )。</p>
+            <p>2. 以下對象不適用本補助：</p>
+            <ul class="indent">
+              <li><p>團體旅遊（如旅行社、遊覽車、企業員工、校外教學、進香團、里民活動…等）不補助。</p></li>
+              <li><p>非本國國民不補助。</p></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>如何申請補助？</h3>
+            <span>4</span>
+          </div>
+          <div class="introduce-content">
+            <p>訂房後入住前或入住當日至「安心旅遊自由行旅客住宿優惠活動」網頁專區，掃描並上傳身分證或健保卡（任一）正面圖檔，建立旅客資料檔案。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>哪些旅館可以使用補助？</h3>
+            <span>5</span>
+          </div>
+          <div class="introduce-content">
+            <p>旅行社名單將陸續公布於「安心旅遊自由行旅客住宿優惠活動」網頁專區</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>為何透過國際訂房平台訂房不適用本活動？</h3>
+            <span>6</span>
+          </div>
+          <div class="introduce-content">
+            <p>考量以下因素不開放國際訂房平台之訂房通路：</p>
+            <div class="indent">
+              <p>1. 本活動係因應疫情影響我國觀光產業，以振興及扶植國內觀光產業業者為主要對象。</p>
+              <p>2. 平台內之房源並非全部為合法旅宿或本國旅宿，為保障消費者住宿安全及權益，故不開放。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>可以搭配振興三倍券使用嗎？</h3>
+            <span>7</span>
+          </div>
+          <div class="introduce-content">
+            <p>可以，經濟部就振興三倍券可使用於遊相關消費，旅客參加安心旅遊各項優惠措施均可搭配振興三倍券使用，即：旅客可使用振興三倍券支付折抵住宿費最高1,000元以外的房價餘額。惟仍需注意紙本實體券及行動支付等使用規範，有關振興三倍券相關問題，可洽經濟部1988諮詢專線。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-md-12">
+        <div class="introduce-footer">
+          <p>還有問題嗎？</p>
+          <div class="btn-more">
+            <a href="" title="">聯絡我們</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include 'includes/footer.html' %}
+
+<!-- Javascript -->
+{% include 'includes/js.html' %}
+
+</body>
+</html>

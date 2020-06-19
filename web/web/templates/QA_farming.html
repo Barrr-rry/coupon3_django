@@ -1,0 +1,196 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  <!-- Basic Page Needs -->
+  <meta charset="UTF-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <title>Work - Dailist</title>
+
+  <meta name="author" content="themsflat.com">
+
+  <!-- Mobile Specific Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+
+
+</head>
+<body>
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="clear-loading loading-effect-2">
+    <span></span>
+  </div>
+</div><!-- /.preloader -->
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+<section class="page-title parallax parallax1 parallax-200">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title-heading">
+          常見問題
+        </div>
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+<!--  <div class="overlay"></div>-->
+</section><!-- /.page-title -->
+
+<section class="flat-row flat-introduce">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="introduce-header">
+          <a class="tab" href="/qa_treble/">振興三倍券</a>
+          <a class="tab" href="/qa_treble_cash/">振興三倍券-實體紙本</a>
+          <a class="tab" href="/qa_treble_noncash/">振興三倍券-數位支付</a>
+          <a class="tab" href="/qa_treble_store/">振興三倍券-店家相關</a>
+          <a class="tab" href="/qa_fun/">藝 FUN 券</a>
+          <a class="tab active" href="/qa_farming/">農遊券</a>
+          <a class="tab" href="/qa_tour/">安心旅遊</a>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>如何取得農業旅遊電子抵用券 ( 簡稱農遊券 )？</h3>
+            <span>1</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 您可利用手機於活動網頁登錄「手機號碼、身分證字號、居住地縣市/鄉鎮市區」後，待手機收到農遊券電子票券申請成功之簡訊通知，即成功領取農遊券。</p>
+            <p>2. 每人（每身份證字號）限領取並使用票券一次，不可重複領取。</p>
+            <p>3. 活動網頁預計6月底前上線，屆時將於農業易遊網(https://ezgo.coa.gov.tw/)開設-農遊券專區。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>什麼時候可以開始下載領取農遊券？</h3>
+            <span>2</span>
+          </div>
+          <div class="introduce-content">
+            <p>依行政農業委員會正式公布時程(預計6月底前)，相關資訊均會即時更新於農業易遊網(https://ezgo.coa.gov.tw/) -農遊券活動專區。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>人人都可以領取農遊券嗎？</h3>
+            <span>3</span>
+          </div>
+          <div class="introduce-content">
+            <p>凡本國國民及領有居留證之外籍配偶皆可下載領取農遊券。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>農遊券可以代領嗎？ 可以代領幾份？</h3>
+            <span>4</span>
+          </div>
+          <div class="introduce-content">
+            <p>農業旅遊最適全家出遊，為便利長者、小孩以及無智慧型手機遊客，每支手機號碼除本人外，可再代為申請領取2人農遊券。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>農遊券如何使用？</h3>
+            <span>5</span>
+          </div>
+          <div class="introduce-content">
+            <p>1. 農遊券可抵用額度為新臺幣250元整，遊客於合作業者場域消費結帳時出示手機農遊券供業者掃描，並口頭確認身分證後四碼，即完成票券抵用。</p>
+            <p>2. 消費金額如超過250元，遊客需另行補足差價。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>農遊券可以買什麼？</h3>
+            <span>6</span>
+          </div>
+          <div class="introduce-content">
+            <p>農遊券抵用項目包含門票、各項農業體驗（含農事、生態、導覽、田園餐飲、個別營業場域內套裝遊程）活動、農漁特產品或伴手等，農遊券不分平假日可至合作業者之場域使用。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>農遊券可以找零嗎？</h3>
+            <span>7</span>
+          </div>
+          <div class="introduce-content">
+            <p>限一次抵用完畢，無法分次抵用，且無法兌換現金或找零。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-12">
+        <div class="introduce">
+          <div class="introduce-title">
+            <h3>農遊券可以在哪裡抵用？</h3>
+            <span>8</span>
+          </div>
+          <div class="introduce-content">
+            <p>本計畫相關活動內容及農遊券合作業者名單，預計6月底前上線，相關資訊均會即時更新於農業易遊網(https://ezgo.coa.gov.tw/) -農遊券活動專區。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex">
+      <div class="col-md-12">
+        <div class="introduce-footer">
+          <p>還有問題嗎？</p>
+          <div class="btn-more">
+            <a href="" title="">聯絡我們</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include 'includes/footer.html' %}
+
+<!-- Javascript -->
+{% include 'includes/js.html' %}
+
+</body>
+</html>
