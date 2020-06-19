@@ -1715,7 +1715,7 @@ const showSelfPosition = (position) => {
   $('form').on('submit', function () {
     $('.preloader').show()
   })
-  $('.search-btn').on('submit', function () {
+  $('#search-btn').on('click', function () {
     $('.preloader').show()
   })
 
