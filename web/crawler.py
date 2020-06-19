@@ -135,7 +135,8 @@ def loop_queue():
         if not tasks:
             continue
         (task_type, task_args, task_id) = tasks
-        if len(task_args) <= 2:
+        logger.inf(f'task type:{task_type} args:{task_args}')
+        if len(task_args) <= 1:
             logger.info(f'task_args too small: {task_args}')
             continue
         fn = get_addr if task_type == 'get_addr' else get_latlon

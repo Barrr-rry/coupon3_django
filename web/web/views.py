@@ -98,6 +98,10 @@ class StoreView(BaseView):
         order_by = self.request.GET.get('order_by', None)
         storediscount_discount_type = self.request.GET.get('storediscount_discount_type', None)
         ids = self.request.GET.get('ids', None)
+        logger.info(f'get search: {search}')
+
+        if search:
+            search = search.replace('台', '臺')
 
         msg = search
         keywords = []
@@ -136,7 +140,6 @@ class StoreView(BaseView):
                     gps = task.get_task_result(task_id)
                     if gps:
                         break
-                logger.info(f'loc=> {search}:{gps}')
                 lat = float(gps[0])
                 lon = float(gps[1])
 
