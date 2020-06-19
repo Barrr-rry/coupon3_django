@@ -1712,6 +1712,12 @@ const showSelfPosition = (position) => {
 
     })
   }
+  $('form').on('submit', function () {
+    $('.preloader').show()
+  })
+  $('.search-btn').on('submit', function () {
+    $('.preloader').show()
+  })
 
   $(function () {
     initPosition();
