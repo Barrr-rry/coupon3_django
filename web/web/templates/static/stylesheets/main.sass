@@ -744,171 +744,179 @@ footer
             background-color: rgba(204, 36, 38, 0.8)
             border-radius: 0px
 
-    .box-content
-      padding: 30px 25px 18px
-      min-height: 200px
+      .box-content
+        padding: 30px 25px 18px
+        min-height: 200px
 
-      .box-title.ad
-        a
-          padding-left: 0px
-          font-size: 26px
-          letter-spacing: 2px
-          color: #333333
+        .box-title.ad
+          a
+            padding-left: 0px
+            font-size: 26px
+            letter-spacing: 2px
+            color: #333333
 
-      ul.rating
-        li
-          color: #aaaaaa
-          font-weight: 400
-          font-size: 16px
-          vertical-align: middle
-          letter-spacing: 1px
-
-          img
-            display: inline-block
-            vertical-align: middle
-
-          span
-            display: inline-block
-            vertical-align: middle
-
-      .box-desc
-        font-size: 16px
-        font-weight: 400
-        letter-spacing: 2px
-        color: #aaaaaa
-        margin-top: 15px
-
-        .sale-list
-          overflow: hidden
-          text-overflow: ellipsis
-          white-space: nowrap
-          width: 100%
-
-          &:before
-            content: "-"
-
-    ul.tag_block
-      padding: 16px 0 15px 25px
-      border-top: 1px solid #ebebeb
-      overflow: hidden
-      height: 58px
-
-      li.tag
-        display: inline-block
-        margin-bottom: 20px
-
-        a
-          border: 1px solid rgb(242, 91, 34, .5)
-          padding: 2px 15px
-          border-radius: 6px
-          margin-right: 8px
-          color: #f25b22
-
-          &:hover
-            background: #f25b22
-            color: #ffffff
+        ul.rating
+          li
+            color: #aaaaaa
             font-weight: 400
-
-    .right
-      position: relative
-      //display: inline-block
-      //float: right
-      display: block
-      text-align: right
-
-      a
-        display: inline-block
-        padding-right: 25px
-        font-weight: 400
-        color: rgba(204, 36, 38, 0.7)
-
-        &:hover
-          color: rgba(204, 36, 38, 1)
-
-      input[type="checkbox"]
-        display: none
-
-      //.checkbox:checked + .label
-      //  background: #7B7484
-      //  color: #231733
-
-      .checkbox:checked ~ .social
-        opacity: 1
-        transform: scale(1) translateY(-90px)
-
-      .label
-        cursor: pointer
-        display: inline-block
-        padding-right: 25px
-        padding-bottom: 18px
-        font-weight: 400
-        color: rgba(204, 36, 38, 0.7)
-        background-color: #fff
-        font-size: 16px
-
-      .social
-        position: absolute
-        right: 10px
-        transform-origin: 90% 0
-        transform: scale(0) translateY(-190px)
-        opacity: 0
-        transition: .5s
-        z-index: 1000
-
-      ul
-        position: relative
-        left: 0
-        right: 0
-        margin: -15px auto 0
-        color: #fff
-        height: 46px
-        width: 180px
-        background: #f26423
-        padding: 0
-        list-style: none
-
-        &:after
-          content: ''
-          display: block
-          position: absolute
-          left: 120px
-          right: 0
-          margin: 46px auto
-          height: 0
-          width: 0
-          border-left: 20px solid transparent
-          border-right: 20px solid transparent
-          border-top: 20px solid #f26423
-
-        li
-          font-size: 20px
-          cursor: pointer
-          width: 60px
-          margin: 0
-          padding: 9px 0
-          text-align: center
-          float: left
-          display: block
-          height: 46px
-          opacity: 0.95
-
-          &:hover
-            opacity: 1
-
-          &[class*="line"]
-            background: #00BE00
-
-          &[class*="facebook"]
-            background: #315A9D
-
-          &[class*="url"]
-            background: #f26423
+            font-size: 16px
+            vertical-align: middle
+            letter-spacing: 1px
 
             img
-              width: 30px
+              display: inline-block
+              vertical-align: middle
 
-          img
-            width: 25px
+            span
+              display: inline-block
+              vertical-align: middle
+
+        .box-desc
+          font-size: 16px
+          font-weight: 400
+          letter-spacing: 2px
+          color: #aaaaaa
+          margin-top: 15px
+
+          .sale-list
+            overflow: hidden
+            text-overflow: ellipsis
+            white-space: nowrap
+            width: 100%
+
+            &:before
+              content: "-"
+
+    .imagebox_bottom
+      border-top: 1px solid #ebebeb
+
+      ul.tag_block
+        display: inline-block
+        float: left
+        width: 84%
+        height: 60px
+        padding: 16px 40px 15px 25px
+        overflow: hidden
+        &:after
+          content: "..."
+          color: #f25b22
+          font-size: 27px
+          display: inline-block
+          position: absolute
+          margin-top: -6px
+          margin-left: 10px
+
+        li.tag
+          display: inline-block
+          margin-bottom: 20px
+
+          a
+            border: 1px solid rgb(242, 91, 34, .5)
+            padding: 2px 15px
+            border-radius: 6px
+            margin-right: 8px
+            color: #f25b22
+
+            &:hover
+              background: #f25b22
+              color: #ffffff
+              font-weight: 400
+
+      .right
+        position: relative
+        display: block
+        text-align: right
+        float: right
+
+        a
+          display: inline-block
+          padding-right: 25px
+          font-weight: 400
+          color: rgba(204, 36, 38, 0.7)
+
+          &:hover
+            color: rgba(204, 36, 38, 1)
+
+        input[type="checkbox"]
+          display: none
+
+
+        .checkbox:checked ~ .social
+          opacity: 1
+          transform: scale(1) translateY(-90px)
+
+        .label
+          cursor: pointer
+          display: inline-block
+          padding: 20px 25px 20px 0px
+          font-weight: 400
+          color: rgba(204, 36, 38, 0.7)
+          background-color: #fff
+          font-size: 16px
+
+        .social
+          position: absolute
+          right: 10px
+          transform-origin: 90% 0
+          transform: scale(0) translateY(-190px)
+          opacity: 0
+          transition: .5s
+          z-index: 1000
+
+        ul
+          position: relative
+          left: 0
+          right: 0
+          margin: -15px auto 0
+          color: #fff
+          height: 46px
+          width: 180px
+          background: #f26423
+          padding: 0
+          list-style: none
+
+          &:after
+            content: ''
+            display: block
+            position: absolute
+            left: 120px
+            right: 0
+            margin: 46px auto
+            height: 0
+            width: 0
+            border-left: 20px solid transparent
+            border-right: 20px solid transparent
+            border-top: 20px solid #f26423
+
+          li
+            font-size: 20px
+            cursor: pointer
+            width: 60px
+            margin: 0
+            padding: 9px 0
+            text-align: center
+            float: left
+            display: block
+            height: 46px
+            opacity: 0.95
+
+            &:hover
+              opacity: 1
+
+            &[class*="line"]
+              background: #00BE00
+
+            &[class*="facebook"]
+              background: #315A9D
+
+            &[class*="url"]
+              background: #f26423
+
+              img
+                width: 30px
+
+            img
+              width: 25px
 
 
 // store-county
@@ -977,6 +985,11 @@ footer
 
 #map
   height: 1200px
+  .lpi-1592630594977-98115
+    background-color: #f25b22 !important
+    border: 2px solid #fda73d
+    &:after
+      box-shadow: 0 0 6px 2px #fda73d
 
 .margintop-200
   margin-top: -210px
@@ -1348,6 +1361,11 @@ form.form-listing
           text-align: center
 
 //RWD
+@media only screen and (max-width: 1650px)
+  .flat-map-zoom-in
+    .col-lg-6
+      flex: none
+      max-width: 100%
 
 @media only screen and (max-width: 1440px)
   .footer-bottom
@@ -1456,7 +1474,7 @@ form.form-listing
   .parallax-200
     background-image: url("/media/bg_dark_tablet.svg")
     //background-position: 45% 50px !important
-    background-position: 33% -102px !important
+    background-position: 33% -75px !important
   //background-size: cover
 
   .wrap-box-search.style1

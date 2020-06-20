@@ -90,32 +90,35 @@
                     </div>
                   </div><!-- /.box-content -->
                 </div>
-                <ul class="tag_block">
-                  {% for storediscount in el.storediscount %}
-                    <li class="tag"><a href="">{{ storediscount.name }}</a></li>
-                  {% endfor %}
-                </ul>
-                <div class="right">
-                  <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
-                  <label for="share_{{ el.id }}" class="label entypo-export">
-                    <!--                      <a href="">分享</a>-->
-                    分享
-                  </label>
-                  <div class="social">
-                    <ul>
-                      <li class="share-to entypo-line" data-sns="line" data-name="{{ el.name }}"
-                          data-url="store/{{ el.id }}">
-                        <img src="/media/share_line.svg" alt="">
-                      </li>
-                      <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
-                          data-url="store/{{ el.id }}">
-                        <img src="/media/share_fb.svg" alt="">
-                      </li>
-                      <li class="share-url entypo-url" data-name="{{ el.name }}" data-url="store/{{ el.id }}">
-                        <img src="/media/share_url.svg" alt="">
-                      </li>
-                    </ul>
+                <div class="imagebox_bottom">
+                  <ul class="tag_block">
+                    {% for storediscount in el.storediscount %}
+                      <li class="tag"><a href="">{{ storediscount.name }}</a></li>
+                    {% endfor %}
+                  </ul>
+                  <div class="right">
+                    <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
+                    <label for="share_{{ el.id }}" class="label entypo-export">
+                      <!--                      <a href="">分享</a>-->
+                      分享
+                    </label>
+                    <div class="social">
+                      <ul>
+                        <li class="share-to entypo-line" data-sns="line" data-name="{{ el.name }}"
+                            data-url="store/{{ el.id }}">
+                          <img src="/media/share_line.svg" alt="">
+                        </li>
+                        <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
+                            data-url="store/{{ el.id }}">
+                          <img src="/media/share_fb.svg" alt="">
+                        </li>
+                        <li class="share-url entypo-url" data-name="{{ el.name }}" data-url="store/{{ el.id }}">
+                          <img src="/media/share_url.svg" alt="">
+                        </li>
+                      </ul>
+                    </div>
                   </div>
+                  <div class="clear"></div>
                 </div>
                 <!--                <ul class="location">-->
                 <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
