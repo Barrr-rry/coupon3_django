@@ -56,8 +56,11 @@
             <a href="#" title="">{{ instance.name }}</a>
           </div><!-- /.box-title -->
           <ul class="box-address">
-            <li class="phone"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}</li>
-            <li class="address"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ instance.address }}
+            <li class="phone">
+              <a href="tel:{{ instance.phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}</a>
+            </li>
+            <li class="address">
+              <a href="{{ google }}"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ instance.address }}</a>
             </li>
           </ul><!-- /.box-address -->
         </div><!-- /.title-left -->
@@ -113,12 +116,19 @@
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
-              <li class="address"><i class="fa fa-map-marker" aria-hidden="true"></i>
-                {{ instance.address }}
+              <li class="address">
+                <a href="{{ google }}">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  {{ instance.address }}
+                </a>
               </li>
-              <li><i class="fa fa-phone" aria-hidden="true"></i><a href="#">{{ instance.phone }}</a></li>
+              <li>
+                <a href="tel:{{ instance.phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
+                </a>
+              </li>
               {% if instance.website %}
-                <li><i class="fa fa-globe" aria-hidden="true"></i><a href="#" title="">{{ instance.website }}</a>
+                <li><i class="fa fa-globe" aria-hidden="true"></i><a href="{{ instance.website }}"
+                                                                     title="">{{ instance.website }}</a>
                 </li>
               {% endif %}
             </ul>
