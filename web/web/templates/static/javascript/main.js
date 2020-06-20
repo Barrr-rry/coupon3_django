@@ -1712,14 +1712,15 @@ const showSelfPosition = (position) => {
 
     })
   }
-  $('form').on('submit', function () {
-    $('.preloader').show()
-  })
-  $('#search-btn').on('click', function () {
-    $('.preloader').show()
-  })
+  let initPreloaderListenr = () => {
+    $(window).on('beforeunload', function () {
+      $('.preloader').show()
+    })
+  }
+
 
   $(function () {
+    initPreloaderListenr();
     initPosition();
     searchAPI();
     responsiveMenu();
