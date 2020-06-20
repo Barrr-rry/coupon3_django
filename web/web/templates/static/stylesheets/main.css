@@ -11046,8 +11046,8 @@ footer .widget-about .logo-ft a {
   display: inline-block;
   font-size: 14px;
   font-weight: 400;
-  color: #999999;
-  border: 1px solid #cccccc;
+  color: #f25b22;
+  border: 1px solid rgba(242, 91, 34, 0.5);
   border-radius: 50px;
   padding: 2px 15px;
   margin-right: 3px;
@@ -11055,8 +11055,8 @@ footer .widget-about .logo-ft a {
 }
 .flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a.active {
   color: #ffffff;
-  background-color: #999999;
-  border-color: #f1f1f1;
+  background-color: #f25b22;
+  border-color: #f25b22;
 }
 .flat-imagebox .filter-result .link-map {
   font-size: 18px !important;
@@ -11284,6 +11284,7 @@ footer .widget-about .logo-ft a {
   letter-spacing: 1px;
   font-weight: 400;
   background-color: rgba(255, 255, 255, 0.5);
+  padding: 0 42px 0 33px;
 }
 .flat-map-zoom-in .wrap-box-search.style2 form > span input::-webkit-input-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select::-webkit-input-placeholder {
   color: #999999 !important;
@@ -11297,8 +11298,25 @@ footer .widget-about .logo-ft a {
 .flat-map-zoom-in .wrap-box-search.style2 form > span input:-ms-input-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select:-ms-input-placeholder {
   color: #999999;
 }
+.flat-map-zoom-in .wrap-box-search.style2 .ti-location-pin {
+  left: 30px;
+  width: 20px;
+}
+.flat-map-zoom-in .wrap-box-search.style2 .search-pin-load {
+  position: absolute;
+  right: 35px;
+  top: 14px;
+}
 .flat-map-zoom-in .flat-filter {
-  padding: 30px 50px 80px 50px;
+  padding: 30px 20px 80px 20px;
+}
+.flat-map-zoom-in .store-box-block .imagebox .box-imagebox ul.tag_block {
+  height: auto;
+}
+.flat-map-zoom-in .store-box-block .imagebox .box-imagebox ul.tag_block li.right {
+  display: block;
+  float: none;
+  text-align: right;
 }
 
 #map {
@@ -11849,6 +11867,14 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .store-box-block .btn-more {
     margin-top: 0;
+  }
+
+  .flat-map-zoom-in .wrap-box-search.style2 .ti-location-pin {
+    left: 15px;
+    margin-top: 1px;
+  }
+  .flat-map-zoom-in .wrap-box-search.style2 .search-pin-load {
+    right: 28px;
   }
 }
 @media only screen and (max-width: 991px) {
