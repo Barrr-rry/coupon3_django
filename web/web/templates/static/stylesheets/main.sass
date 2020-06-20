@@ -788,9 +788,9 @@ footer
             content: "-"
 
     ul.tag_block
-      padding: 16px 0px 15px 25px
+      padding: 16px 0 15px 25px
       border-top: 1px solid #ebebeb
-      //overflow: hidden
+      overflow: hidden
       height: 58px
 
       li.tag
@@ -809,19 +809,21 @@ footer
             color: #ffffff
             font-weight: 400
 
-      li.right
-        position: relative
+    .right
+      position: relative
+      //display: inline-block
+      //float: right
+      display: block
+      text-align: right
+
+      a
         display: inline-block
-        float: right
+        padding-right: 25px
+        font-weight: 400
+        color: rgba(204, 36, 38, 0.7)
 
-        a
-          display: inline-block
-          padding-right: 25px
-          font-weight: 400
-          color: rgba(204, 36, 38, 0.7)
-
-          &:hover
-            color: rgba(204, 36, 38, 1)
+        &:hover
+          color: rgba(204, 36, 38, 1)
 
       input[type="checkbox"]
         display: none
@@ -838,6 +840,7 @@ footer
         cursor: pointer
         display: inline-block
         padding-right: 25px
+        padding-bottom: 18px
         font-weight: 400
         color: rgba(204, 36, 38, 0.7)
         background-color: #fff
@@ -856,7 +859,7 @@ footer
         position: relative
         left: 0
         right: 0
-        margin: -5px auto 0
+        margin: -15px auto 0
         color: #fff
         height: 46px
         width: 180px
