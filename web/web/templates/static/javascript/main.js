@@ -1411,6 +1411,13 @@ const showSelfPosition = (position) => {
         files.push(res)
         appendImage(res)
         setImageClick()
+      }).fail(e => {
+        $('.preloader').hide()
+        let msg = e.responseJSON.file[0]
+        Swal.fire({
+          text: msg,
+          confirmButtonText: '確定'
+        })
       })
     })
     $("#createStore").validate({
