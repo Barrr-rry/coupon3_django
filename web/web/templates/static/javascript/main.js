@@ -1501,6 +1501,8 @@ const showSelfPosition = (position) => {
         Swal.fire({
           text: '您的意見我們已經收到，我們將儘速聯繫您！',
           confirmButtonText: '確定'
+        }).then(() => {
+          window.location.href = '/'
         })
       })
     })
