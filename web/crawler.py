@@ -40,8 +40,8 @@ class RedisWrap:
     def __init__(self, r):
         self.r = r
 
-    def set(self, task_id, result, ex=60 * 60 * 24 * 7):
-        self.r.set(task_id, pickle.dumps(result), ex=ex)
+    def set(self, task_id, result):
+        self.r.set(task_id, pickle.dumps(result))
 
     def get(self, task_id):
         ret = self.r.get(task_id)
