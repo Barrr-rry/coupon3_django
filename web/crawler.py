@@ -140,6 +140,7 @@ def get_addr(driver, latlon_str):
 def loop_queue():
     driver = get_driver()
     driver.get("http://www.map.com.tw/")
+    logger.info('get driver')
     # 重新整理
     reflash = False
     while True:
@@ -147,6 +148,7 @@ def loop_queue():
         if not tasks:
             if reflash:
                 driver.get("http://www.map.com.tw/")
+                logger.info('reflash driver')
                 reflash = False
             continue
         st = time.time()
@@ -169,7 +171,7 @@ def loop_queue():
 
 
 if __name__ == '__main__':
-    # task.enqueue_task('get_latlon', '高雄市中正四路148號')
+    task.enqueue_task('get_latlon', '高雄市中正四路148號')
     # task.enqueue_task('get_latlon', '高雄市中正三路42號')
     # task.enqueue_task('get_latlon', '高雄市中正三路44號')
     # task.enqueue_task('get_latlon', '高雄市中正三路46號')

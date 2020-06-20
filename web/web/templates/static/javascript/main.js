@@ -235,7 +235,7 @@ const showSelfPosition = (position) => {
           var $mobileMenu = $('#mainnav').attr('id', 'mainnav-mobi').hide();
           var hasChildMenu = $('#mainnav-mobi').find('li:has(ul)');
 
-          $('.header').after($mobileMenu);
+          $('.header .container-fluid .row').after($mobileMenu);
           hasChildMenu.children('ul').hide();
           hasChildMenu.children('a').after('<span class="btn-submenu"></span>');
           $('.btn-menu').removeClass('active');
