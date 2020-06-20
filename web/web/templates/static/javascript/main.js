@@ -1399,6 +1399,7 @@ const showSelfPosition = (position) => {
     $('input[name="upload-file"]').change((e) => {
       let form = new FormData()
       form.append("file", e.target.files[0])
+      $('.preloader').show()
       $.ajax({
         method: 'POST',
         url: '/api/file/',
@@ -1406,6 +1407,7 @@ const showSelfPosition = (position) => {
         data: form,
         contentType: false, //required
       }).done((res) => {
+        $('.preloader').hide()
         files.push(res)
         appendImage(res)
         setImageClick()
