@@ -11148,8 +11148,9 @@ footer .widget-about .logo-ft a {
   content: "-";
 }
 .imagebox .box-imagebox ul.tag_block {
-  padding: 16px 0px 15px 25px;
+  padding: 16px 0 15px 25px;
   border-top: 1px solid #ebebeb;
+  overflow: hidden;
   height: 58px;
 }
 .imagebox .box-imagebox ul.tag_block li.tag {
@@ -11168,37 +11169,38 @@ footer .widget-about .logo-ft a {
   color: #ffffff;
   font-weight: 400;
 }
-.imagebox .box-imagebox ul.tag_block li.right {
+.imagebox .box-imagebox .right {
   position: relative;
-  display: inline-block;
-  float: right;
+  display: block;
+  text-align: right;
 }
-.imagebox .box-imagebox ul.tag_block li.right a {
+.imagebox .box-imagebox .right a {
   display: inline-block;
   padding-right: 25px;
   font-weight: 400;
   color: rgba(204, 36, 38, 0.7);
 }
-.imagebox .box-imagebox ul.tag_block li.right a:hover {
+.imagebox .box-imagebox .right a:hover {
   color: #cc2426;
 }
-.imagebox .box-imagebox ul.tag_block input[type=checkbox] {
+.imagebox .box-imagebox .right input[type=checkbox] {
   display: none;
 }
-.imagebox .box-imagebox ul.tag_block .checkbox:checked ~ .social {
+.imagebox .box-imagebox .right .checkbox:checked ~ .social {
   opacity: 1;
   transform: scale(1) translateY(-90px);
 }
-.imagebox .box-imagebox ul.tag_block .label {
+.imagebox .box-imagebox .right .label {
   cursor: pointer;
   display: inline-block;
   padding-right: 25px;
+  padding-bottom: 18px;
   font-weight: 400;
   color: rgba(204, 36, 38, 0.7);
   background-color: #fff;
   font-size: 16px;
 }
-.imagebox .box-imagebox ul.tag_block .social {
+.imagebox .box-imagebox .right .social {
   position: absolute;
   right: 10px;
   transform-origin: 90% 0;
@@ -11207,11 +11209,11 @@ footer .widget-about .logo-ft a {
   transition: 0.5s;
   z-index: 1000;
 }
-.imagebox .box-imagebox ul.tag_block ul {
+.imagebox .box-imagebox .right ul {
   position: relative;
   left: 0;
   right: 0;
-  margin: -5px auto 0;
+  margin: -15px auto 0;
   color: #fff;
   height: 46px;
   width: 180px;
@@ -11219,7 +11221,7 @@ footer .widget-about .logo-ft a {
   padding: 0;
   list-style: none;
 }
-.imagebox .box-imagebox ul.tag_block ul:after {
+.imagebox .box-imagebox .right ul:after {
   content: "";
   display: block;
   position: absolute;
@@ -11232,7 +11234,7 @@ footer .widget-about .logo-ft a {
   border-right: 20px solid transparent;
   border-top: 20px solid #f26423;
 }
-.imagebox .box-imagebox ul.tag_block ul li {
+.imagebox .box-imagebox .right ul li {
   font-size: 20px;
   cursor: pointer;
   width: 60px;
@@ -11244,22 +11246,22 @@ footer .widget-about .logo-ft a {
   height: 46px;
   opacity: 0.95;
 }
-.imagebox .box-imagebox ul.tag_block ul li:hover {
+.imagebox .box-imagebox .right ul li:hover {
   opacity: 1;
 }
-.imagebox .box-imagebox ul.tag_block ul li[class*=line] {
+.imagebox .box-imagebox .right ul li[class*=line] {
   background: #00BE00;
 }
-.imagebox .box-imagebox ul.tag_block ul li[class*=facebook] {
+.imagebox .box-imagebox .right ul li[class*=facebook] {
   background: #315A9D;
 }
-.imagebox .box-imagebox ul.tag_block ul li[class*=url] {
+.imagebox .box-imagebox .right ul li[class*=url] {
   background: #f26423;
 }
-.imagebox .box-imagebox ul.tag_block ul li[class*=url] img {
+.imagebox .box-imagebox .right ul li[class*=url] img {
   width: 30px;
 }
-.imagebox .box-imagebox ul.tag_block ul li img {
+.imagebox .box-imagebox .right ul li img {
   width: 25px;
 }
 
