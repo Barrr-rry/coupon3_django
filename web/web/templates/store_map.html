@@ -124,9 +124,9 @@
                           </div><!-- /.box-content -->
                         </div>
                         <ul class="tag_block">
-                          <li class="tag"><a href="">贈品贈品</a></li>
-                          <li class="tag"><a href="">全店打折</a></li>
-                          <li class="tag"><a href="">全店打折</a></li>
+                          {% for storediscount in el.storediscount %}
+                            <li class="tag"><a href="">{{ storediscount.name }}</a></li>
+                          {% endfor %}
                           <!--這邊可以只顯示3筆嗎，要維持一行-->
                           <li class="right">
                             <input type="checkbox" class="checkbox" id="share_{{ el.id }}">

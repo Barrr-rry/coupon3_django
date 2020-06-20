@@ -1575,6 +1575,10 @@ const showSelfPosition = (position) => {
       } else {
         class_name = 'mb-50px col-md-4 store'
       }
+      let li = ''
+      for (let el of data.storediscount) {
+        li += `<li class="tag"><a href="">${el.name}</a></li>`
+      }
       let html = `
       <div class="${class_name}">
         <div class="imagebox style1">
@@ -1611,9 +1615,7 @@ const showSelfPosition = (position) => {
               </div><!-- /.box-content -->
             </div>
             <ul class="tag_block">
-              <li class="tag"><a href="">贈品贈品</a></li>
-              <li class="tag"><a href="">全店打折</a></li>
-              <li class="tag"><a href="">全店打折</a></li>
+              ${li}
               <!--這邊可以只顯示3筆嗎，要維持一行-->
               <li class="right">
                 <input type="checkbox" class="checkbox" id="share_${data.id}">
