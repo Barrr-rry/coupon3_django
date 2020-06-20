@@ -1,5 +1,5 @@
 import datetime
-
+from django.forms import forms
 from django.contrib.auth.models import AbstractBaseUser, UserManager, AbstractUser, PermissionsMixin
 from django.db import models
 from rest_framework.authtoken.models import Token as DefaultToken
@@ -104,5 +104,20 @@ class StoreImage(DefaultAbstract):
     picture = models.CharField(max_length=128, help_text="商家圖片")
 
 
+def validate_file(file):
+    import re
+    file_size = 1048576
+    try:
+        content_type = file.content_type
+        if re.findall('^image/.+?', content_type):
+            if file.size > file_size:
+                raise forms.ValidationError('超過 1MB，請重新上傳圖片')
+        else:
+            raise forms.ValidationError('圖片格式錯誤，請重新上傳圖片')
+    except AttributeError:
+        pass
+    return True
+
+
 class File(DefaultAbstract):
-    file = models.FileField()
+    file = models.FileField(validators=[validate_file])

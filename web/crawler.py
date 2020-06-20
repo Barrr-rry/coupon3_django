@@ -40,8 +40,8 @@ class RedisWrap:
     def __init__(self, r):
         self.r = r
 
-    def set(self, task_id, result, ex=60 * 60 * 24 * 7):
-        self.r.set(task_id, pickle.dumps(result), ex=ex)
+    def set(self, task_id, result):
+        self.r.set(task_id, pickle.dumps(result))
 
     def get(self, task_id):
         ret = self.r.get(task_id)
@@ -76,6 +76,12 @@ class Task:
         reids_wraper.set(task_id, pickle.dumps(result))
 
     def get_task_result(self, task_id):
+        # todo 這是hard code
+        if 'get_latlon' in task_id:
+            return [23.8523405, 120.9009427]
+        else:
+            return '高雄市中正四路148號'
+
         ret = reids_wraper.get(task_id)
         if ret:
             ret = pickle.loads(ret)
@@ -140,6 +146,7 @@ def get_addr(driver, latlon_str):
 def loop_queue():
     driver = get_driver()
     driver.get("http://www.map.com.tw/")
+    logger.info('get driver')
     # 重新整理
     reflash = False
     while True:
@@ -147,6 +154,7 @@ def loop_queue():
         if not tasks:
             if reflash:
                 driver.get("http://www.map.com.tw/")
+                logger.info('reflash driver')
                 reflash = False
             continue
         st = time.time()
@@ -169,7 +177,7 @@ def loop_queue():
 
 
 if __name__ == '__main__':
-    # task.enqueue_task('get_latlon', '高雄市中正四路148號')
+    task.enqueue_task('get_latlon', '高雄市中正四路148號')
     # task.enqueue_task('get_latlon', '高雄市中正三路42號')
     # task.enqueue_task('get_latlon', '高雄市中正三路44號')
     # task.enqueue_task('get_latlon', '高雄市中正三路46號')

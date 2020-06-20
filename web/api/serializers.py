@@ -134,6 +134,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                     picture=pic
                 )
             for el in storediscount_data:
+                el['description'] = el['description'].replace('\n', '<br>')
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
