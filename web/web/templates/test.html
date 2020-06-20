@@ -2,13 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="{% static 'stylesheets/L.Icon.Pulse.css' %}">
-
-  <meta property="og:url" content="{{ request.get_full_path }}">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"/>
-  <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"></link>
-  <link href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css"></link>
+  {% include 'includes/meta.html' %}
 </head>
 <body>
 <ul>
