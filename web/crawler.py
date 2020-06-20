@@ -76,6 +76,12 @@ class Task:
         reids_wraper.set(task_id, pickle.dumps(result))
 
     def get_task_result(self, task_id):
+        # todo 這是hard code
+        if 'get_latlon' in task_id:
+            return [23.8523405, 120.9009427]
+        else:
+            return '高雄市中正四路148號'
+
         ret = reids_wraper.get(task_id)
         if ret:
             ret = pickle.loads(ret)
