@@ -26,6 +26,12 @@ button
 form.form-listing .inner-box .browse .upload span
   background-color: #f25b22
 
+.float-right
+  float: right
+
+.float-left
+  float: left
+
 .clear
   clear: both
 
@@ -654,6 +660,10 @@ footer
 .introduce .introduce-title span
   color: #888888
   opacity: 0.2
+  &.county
+    //font-size: 80px
+    font-size: 60px
+    line-height: 30px
 
 .flat-introduce
   background: #f1f1f1
@@ -701,10 +711,13 @@ footer
       font-size: 16px
       letter-spacing: 1px
       font-weight: 400
+      width: 100%
 
       p
         display: block
         margin-bottom: 10px
+        &.county
+          max-width: 90%
 
         a
           display: inline-block
@@ -745,6 +758,17 @@ footer
         color: #fff
         font-weight: 400
         border-radius: 6px
+
+      a.more-info
+        border: 1px solid #f25b22
+        padding: 3px 10px
+        color: #f25b22
+        border-radius: 6px
+        margin-top: -46px
+        margin-bottom: 50px
+        &:hover
+          background-color: #f25b22
+          color: #ffffff
 
 
   .introduc-footer
@@ -1754,6 +1778,15 @@ form.form-listing
 
         .search-pin-load
           right: 28px
+
+  .flat-introduce .introduce .introduce-content
+    a.more-info
+      margin-top: 0px
+    p
+      display: block
+      margin-bottom: 10px
+      &.county
+        max-width: 100%
 
 
 @media only screen and (max-width: 991px)

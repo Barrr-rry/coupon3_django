@@ -10417,6 +10417,14 @@ form.form-listing .inner-box .browse .upload span {
   background-color: #f25b22;
 }
 
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
 .clear {
   clear: both;
 }
@@ -11040,6 +11048,10 @@ footer .widget-about .logo-ft a {
   color: #888888;
   opacity: 0.2;
 }
+.introduce .introduce-title span.county {
+  font-size: 60px;
+  line-height: 30px;
+}
 
 .flat-introduce {
   background: #f1f1f1;
@@ -11084,10 +11096,14 @@ footer .widget-about .logo-ft a {
   font-size: 16px;
   letter-spacing: 1px;
   font-weight: 400;
+  width: 100%;
 }
 .flat-introduce .introduce .introduce-content p {
   display: block;
   margin-bottom: 10px;
+}
+.flat-introduce .introduce .introduce-content p.county {
+  max-width: 90%;
 }
 .flat-introduce .introduce .introduce-content p a {
   display: inline-block;
@@ -11127,6 +11143,18 @@ footer .widget-about .logo-ft a {
   color: #fff;
   font-weight: 400;
   border-radius: 6px;
+}
+.flat-introduce .introduce .introduce-content a.more-info {
+  border: 1px solid #f25b22;
+  padding: 3px 10px;
+  color: #f25b22;
+  border-radius: 6px;
+  margin-top: -46px;
+  margin-bottom: 50px;
+}
+.flat-introduce .introduce .introduce-content a.more-info:hover {
+  background-color: #f25b22;
+  color: #ffffff;
 }
 .flat-introduce .introduc-footer {
   border-top: 1px solid #e0e0e0;
@@ -12079,6 +12107,17 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .flat-map-zoom-in .wrap-box-search.style2 .search-pin-load {
     right: 28px;
+  }
+
+  .flat-introduce .introduce .introduce-content a.more-info {
+    margin-top: 0px;
+  }
+  .flat-introduce .introduce .introduce-content p {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .flat-introduce .introduce .introduce-content p.county {
+    max-width: 100%;
   }
 }
 @media only screen and (max-width: 991px) {
