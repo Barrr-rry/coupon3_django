@@ -11922,6 +11922,16 @@ form.form-listing .only-submit-form-listing:hover {
   .header .wrap-box-search {
     display: none;
   }
+
+  .wrap-box-search form > span {
+    width: 60%;
+  }
+  .wrap-box-search form > span.categories {
+    width: 25%;
+  }
+  .wrap-box-search form button {
+    float: right;
+  }
 }
 @media only screen and (max-width: 1199px) {
   .flat-highlights {
