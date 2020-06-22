@@ -137,7 +137,7 @@ const showError = (error) => {
 }
 // 創建icon圖標
 const greenIcon = new L.Icon({
-  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+  iconUrl: '/media/map_pin.svg',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
   iconSize: [25, 41],
   iconAnchor: [12, 41],
@@ -160,7 +160,7 @@ const greyIcon = new L.Icon({
   popupAnchor: [1, -34],
   shadowSize: [41, 41]
 })
-const blueMarker = L.icon.pulse({iconSize: [20, 20], color: '#2e72f0', fillColor: '#2e72f0'})
+const blueMarker = L.icon.pulse({iconSize: [20, 20], color: '#F25B22', fillColor: '#F25B22'})
 let _map = null
 const initMap = (position) => {
   if (!_map) {

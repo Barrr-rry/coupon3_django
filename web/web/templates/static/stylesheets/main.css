@@ -10399,7 +10399,7 @@ body {
   font: 14px/24px "Noto Sans TC", sans-serif !important;
 }
 
-.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type=button], input[type=reset], input[type=submit] {
+.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type=button], .leaflet-containerinput[type=reset], input[type=submit], .leaflet-container {
   font-family: "Noto Sans TC", sans-serif !important;
 }
 
@@ -10410,6 +10410,7 @@ body {
 
 button {
   outline: none !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
 form.form-listing .inner-box .browse .upload span {
@@ -10495,7 +10496,7 @@ a:hover {
   background-color: #f25b22;
   color: #fff;
   font-size: 18px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 .map_store_id .map_btn:hover {
   background-color: #CC2426;
@@ -10949,7 +10950,7 @@ footer .widget-about .logo-ft a {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 0px;
+  border-radius: 0;
   background-repeat: no-repeat;
   background-position: bottom right;
   background-color: transparent;
@@ -10999,12 +11000,12 @@ footer .widget-about .logo-ft a {
   color: #333333;
   font-size: 18px;
   letter-spacing: 2px;
-  font-width: 400;
+  font-weight: 400;
 }
 .imagebox.style5 .box-content img.bg {
   display: inline-block;
   position: absolute;
-  right: 0px;
+  right: 0;
   top: 30px;
   z-index: -1;
 }
@@ -11032,7 +11033,7 @@ footer .widget-about .logo-ft a {
 .page-title-heading {
   font-size: 36px;
   letter-spacing: 4px;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .introduce .introduce-title span {
@@ -11114,14 +11115,14 @@ footer .widget-about .logo-ft a {
   content: "◆";
   position: absolute;
   display: inline-block;
-  left: 0px;
+  left: 0;
   padding-right: 5px;
   color: #666666;
   font-size: 13px;
 }
 .flat-introduce .introduce .introduce-content .highlight {
   display: inline-block;
-  padding: 0px 8px;
+  padding: 0 8px;
   background-color: #aaaaaa;
   color: #fff;
   font-weight: 400;
@@ -11219,7 +11220,7 @@ footer .widget-about .logo-ft a {
   font-size: 18px !important;
   letter-spacing: 3px;
   font-weight: 400;
-  margin-right: 0px !important;
+  margin-right: 0 !important;
 }
 .flat-imagebox .filter-result .link-map:after {
   clear: both;
@@ -11243,8 +11244,8 @@ footer .widget-about .logo-ft a {
 }
 
 .imagebox .box-imagebox {
-  border-radius: 0px;
-  box-shadow: 4px 4px 7px 0px rgba(0, 0, 0, 0.08);
+  border-radius: 0;
+  box-shadow: 4px 4px 7px 0 rgba(0, 0, 0, 0.08);
 }
 .imagebox .box-imagebox .link_block {
   position: relative;
@@ -11261,14 +11262,14 @@ footer .widget-about .logo-ft a {
 }
 .imagebox .box-imagebox .link_block .box-header .box-image:after {
   background-color: rgba(204, 36, 38, 0.8);
-  border-radius: 0px;
+  border-radius: 0;
 }
 .imagebox .box-imagebox .link_block .box-content {
   padding: 30px 25px 18px;
   min-height: 200px;
 }
 .imagebox .box-imagebox .link_block .box-content .box-title.ad a {
-  padding-left: 0px;
+  padding-left: 0;
   font-size: 26px;
   letter-spacing: 2px;
   color: #333333;
@@ -11495,6 +11496,17 @@ footer .widget-about .logo-ft a {
 }
 #map .lpi-1592630594977-98115:after {
   box-shadow: 0 0 6px 2px #fda73d;
+}
+#map .leaflet-popup-content > div {
+  font-size: 18px;
+}
+#map .leaflet-popup-content ul {
+  font-size: 12px;
+  line-height: 22px;
+  padding-bottom: 5px;
+}
+#map .leaflet-popup-content button, #map .leaflet-popup-content input[type=button], #map .leaflet-popup-content input[type=reset], #map .leaflet-popup-content input[type=submit] {
+  background: #f25b22;
 }
 
 .margintop-200 {
@@ -11963,7 +11975,7 @@ form.form-listing .only-submit-form-listing:hover {
     font-size: 18px;
     letter-spacing: 5px;
     vertical-align: middle;
-    padding: 0px 20px;
+    padding: 0 20px;
     font-weight: 400;
   }
   #mainnav-mobi ul li img {
