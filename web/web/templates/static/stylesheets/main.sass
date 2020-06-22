@@ -9,6 +9,11 @@ body
   color: #333333
   background-color: #F1F1F1
   width: 100%
+  //font-family: 'Noto Sans TC', sans-serif
+  font: 14px/24px "Noto Sans TC", sans-serif !important
+
+.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type="button"], input[type="reset"], input[type="submit"]
+  font-family: "Noto Sans TC", sans-serif !important
 
 .row.display-initial
   display: initial
@@ -316,6 +321,7 @@ footer
     .slide_shop:nth-of-type(2)
       /*background: #F4E4CD*/
       background-image: url("/media/景點照片_劍湖山.jpg")
+
     .slide_shop:nth-of-type(3)
       /*background: #C75534*/
       background-image: url("/media/景點照片_日月潭.jpg")
@@ -343,6 +349,7 @@ footer
     .slide_content
       text-align: center
       padding: 250px 0
+
       .page-title-heading
         font-size: 46px
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5)
@@ -361,6 +368,10 @@ footer
         border: 1px solid #ffffff
         color: #fff
 
+        &:hover
+          background-color: rgba(242, 91, 34, 0.9)
+          border-color: transparent
+
 
   .slide_buttons
     position: absolute
@@ -372,7 +383,7 @@ footer
   a.slide_btn
     color: #ffffff
     font-size: 60px
-    margin: 0 0.175em
+    //margin: 0 0.175em
     -webkit-transition: all 0.4s ease-in-out
     -moz-transition: all 0.4s ease-in-out
     -ms-transition: all 0.4s ease-in-out
@@ -415,7 +426,6 @@ footer
 
   .previous_btn:hover, .next_btn:hover
     opacity: 1
-
 
 
 // store_id
@@ -494,6 +504,7 @@ footer
 
           span
             margin-top: 10px
+            font-size: 16px
 
         .index_icon
           filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%)
@@ -1520,12 +1531,9 @@ form.form-listing
     .copyright
       margin-bottom: 20px
 
-@media only screen and (max-width: 1199px)
+@media only screen and (max-width: 1350px)
 
-  .flat-highlights
-    background-image: url("/media/bg_dark_tablet.svg")
   .header
-    background-image: url("/media/bg_top_tablet.svg")
 
     .show-search
       display: inline-block
@@ -1574,27 +1582,27 @@ form.form-listing
           right: 20px
           top: 10px
 
+    .wrap-box-search
+      display: none
+
+
+@media only screen and (max-width: 1199px)
+
+  .flat-highlights
+    background-image: url("/media/bg_dark_tablet.svg")
+  .header
+    background-image: url("/media/bg_top_tablet.svg")
+
     .btn-menu
       span
         background-color: #FFFFFF
 
       &:before
         background-color: #FFFFFF
-      //-webkit-transform: translate3d(0, -9px, 0)
-      //transform: translate3d(0, -9px, 0)
+
       &:after
         background-color: #FFFFFF
-    //-webkit-transform: translate3d(0, 9px, 0)
-    //transform: translate3d(0, 9px, 0)
-    //.active
-    //  &:before
-    //    -webkit-transform: rotate3d(0, 0, 1, 45deg)
-    //    transform: rotate3d(0, 0, 1, 45deg)
-    //  &:after
-    //    -webkit-transform: rotate3d(0, 0, 1, -45deg);
-    //    transform: rotate3d(0, 0, 1, -45deg);
-    .wrap-box-search
-      display: none
+
   #mainnav-mobi
     background-color: #1B2026
 

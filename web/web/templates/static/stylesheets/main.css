@@ -10396,6 +10396,11 @@ body {
   color: #333333;
   background-color: #F1F1F1;
   width: 100%;
+  font: 14px/24px "Noto Sans TC", sans-serif !important;
+}
+
+.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type=button], input[type=reset], input[type=submit] {
+  font-family: "Noto Sans TC", sans-serif !important;
 }
 
 .row.display-initial {
@@ -10758,6 +10763,10 @@ footer .widget-about .logo-ft a {
   border: 1px solid #ffffff;
   color: #fff;
 }
+.tp-banner .slider .slide_content a.text-heading:hover {
+  background-color: rgba(242, 91, 34, 0.9);
+  border-color: transparent;
+}
 .tp-banner .slide_buttons {
   position: absolute;
   left: 0;
@@ -10768,7 +10777,6 @@ footer .widget-about .logo-ft a {
 .tp-banner a.slide_btn {
   color: #ffffff;
   font-size: 60px;
-  margin: 0 0.175em;
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   -ms-transition: all 0.4s ease-in-out;
@@ -10882,6 +10890,7 @@ footer .widget-about .logo-ft a {
 }
 .flat-highlights .highlights ul.menu-list li a span {
   margin-top: 10px;
+  font-size: 16px;
 }
 .flat-highlights .highlights ul.menu-list li .index_icon {
   filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%);
@@ -11853,14 +11862,7 @@ form.form-listing .only-submit-form-listing:hover {
     margin-bottom: 20px;
   }
 }
-@media only screen and (max-width: 1199px) {
-  .flat-highlights {
-    background-image: url("/media/bg_dark_tablet.svg");
-  }
-
-  .header {
-    background-image: url("/media/bg_top_tablet.svg");
-  }
+@media only screen and (max-width: 1350px) {
   .header .show-search {
     display: inline-block;
   }
@@ -11907,6 +11909,18 @@ form.form-listing .only-submit-form-listing:hover {
     right: 20px;
     top: 10px;
   }
+  .header .wrap-box-search {
+    display: none;
+  }
+}
+@media only screen and (max-width: 1199px) {
+  .flat-highlights {
+    background-image: url("/media/bg_dark_tablet.svg");
+  }
+
+  .header {
+    background-image: url("/media/bg_top_tablet.svg");
+  }
   .header .btn-menu span {
     background-color: #FFFFFF;
   }
@@ -11915,9 +11929,6 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .header .btn-menu:after {
     background-color: #FFFFFF;
-  }
-  .header .wrap-box-search {
-    display: none;
   }
 
   #mainnav-mobi {
