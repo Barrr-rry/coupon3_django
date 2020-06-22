@@ -10682,17 +10682,17 @@ footer .widget-about .logo-ft a {
 .tp-banner .slider {
   margin: 0 auto;
 }
-.tp-banner .slide_viewer {
+.tp-banner .slider .slide_viewer {
   height: 650px;
   overflow: hidden;
   position: relative;
 }
-.tp-banner .slide_group {
+.tp-banner .slider .slide_group {
   height: 100%;
   width: 100%;
   position: relative;
 }
-.tp-banner .slide {
+.tp-banner .slider .slide {
   position: absolute;
   display: none;
   height: 100%;
@@ -10700,24 +10700,62 @@ footer .widget-about .logo-ft a {
   background-size: cover;
   background-position: center center;
 }
-.tp-banner .slide:first-child {
+.tp-banner .slider .slide:first-child {
   display: block;
 }
-.tp-banner .slide_shop:nth-of-type(1) {
+.tp-banner .slider .slide_shop:nth-of-type(1) {
   /*background: #D7A151*/
   background-image: url("/media/景點_安平古堡.jpg");
 }
-.tp-banner .slide_shop:nth-of-type(2) {
+.tp-banner .slider .slide_shop:nth-of-type(2) {
   /*background: #F4E4CD*/
   background-image: url("/media/景點照片_劍湖山.jpg");
 }
-.tp-banner .slide_shop:nth-of-type(3) {
+.tp-banner .slider .slide_shop:nth-of-type(3) {
   /*background: #C75534*/
   background-image: url("/media/景點照片_日月潭.jpg");
 }
-.tp-banner .slide_shop:nth-of-type(4) {
+.tp-banner .slider .slide_shop:nth-of-type(4) {
   /*background: #D1D1D4*/
   background-image: url("/media/景點照片_野柳.jpg");
+}
+.tp-banner .slider .slide_index:nth-of-type(1) {
+  /*background: #D7A151*/
+  background-image: url("/media/景點_安平古堡.jpg");
+}
+.tp-banner .slider .slide_index:nth-of-type(2) {
+  /*background: #F4E4CD*/
+  background-image: url("/media/景點照片_劍湖山.jpg");
+}
+.tp-banner .slider .slide_index:nth-of-type(3) {
+  /*background: #C75534*/
+  background-image: url("/media/景點照片_日月潭.jpg");
+}
+.tp-banner .slider .slide_index:nth-of-type(4) {
+  /*background: #D1D1D4*/
+  background-image: url("/media/景點照片_野柳.jpg");
+}
+.tp-banner .slider .slide_content {
+  text-align: center;
+  padding: 250px 0;
+}
+.tp-banner .slider .slide_content .page-title-heading {
+  font-size: 46px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 5px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  line-height: 60px;
+  color: #ffffff;
+}
+.tp-banner .slider .slide_content a.text-heading {
+  display: inline-block;
+  padding: 12px 35px;
+  font-size: 24px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  border: 1px solid #ffffff;
+  color: #fff;
 }
 .tp-banner .slide_buttons {
   position: absolute;
@@ -12110,17 +12148,35 @@ form.form-listing .only-submit-form-listing:hover {
     border: 1px solid rgba(255, 255, 255, 0);
   }
 
-  .tp-banner .slide_viewer {
+  .tp-banner .slider .slide_content {
+    padding: 150px 40px;
+  }
+  .tp-banner .slider .slide_content .page-title-heading {
+    font-size: 36px;
+    line-height: 55px;
+  }
+  .tp-banner .slider .slide_content a.text-heading {
+    background-color: rgba(242, 91, 34, 0.9);
+    border: none;
+  }
+  .tp-banner .slider .slide_viewer {
+    height: 550px;
+  }
+  .tp-banner .slider .slide_viewer_store {
     height: 400px;
   }
   .tp-banner .directional_nav {
+    top: auto;
+    bottom: 43px;
+  }
+  .tp-banner .directional_nav_store {
     top: -220px;
   }
   .tp-banner .previous_btn {
-    left: 0;
+    left: -20px;
   }
   .tp-banner .next_btn {
-    right: 0;
+    right: -20px;
   }
 
   .header_sticky .flat-explore-detail #map {
