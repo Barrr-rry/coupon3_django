@@ -124,11 +124,11 @@
                           </div><!-- /.box-content -->
                         </div>
                         <div class="imagebox_bottom">
-                          <ul class="tag_block">
+                          <p class="tag_block">
                             {% for storediscount in el.storediscount %}
-                              <li class="tag"><a href="">{{ storediscount.name }}</a></li>
+                              <span class="tag"><a href="">{{ storediscount.name }}</a></span>
                             {% endfor %}
-                          </ul>
+                          </p>
                           <div class="right">
                             <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
                             <label for="share_{{ el.id }}" class="label entypo-export">

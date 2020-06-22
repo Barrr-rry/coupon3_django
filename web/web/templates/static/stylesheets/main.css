@@ -11151,35 +11151,29 @@ footer .widget-about .logo-ft a {
 .imagebox .box-imagebox .imagebox_bottom {
   border-top: 1px solid #ebebeb;
 }
-.imagebox .box-imagebox .imagebox_bottom ul.tag_block {
+.imagebox .box-imagebox .imagebox_bottom p.tag_block {
   display: inline-block;
   float: left;
   width: 84%;
   height: 60px;
   padding: 16px 40px 15px 25px;
   overflow: hidden;
-}
-.imagebox .box-imagebox .imagebox_bottom ul.tag_block:after {
-  content: "...";
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: #f25b22;
-  font-size: 27px;
-  display: inline-block;
-  position: absolute;
-  margin-top: -6px;
-  margin-left: 10px;
 }
-.imagebox .box-imagebox .imagebox_bottom ul.tag_block li.tag {
+.imagebox .box-imagebox .imagebox_bottom p.tag_block span.tag {
   display: inline-block;
   margin-bottom: 20px;
 }
-.imagebox .box-imagebox .imagebox_bottom ul.tag_block li.tag a {
+.imagebox .box-imagebox .imagebox_bottom p.tag_block span.tag a {
   border: 1px solid rgba(242, 91, 34, 0.5);
   padding: 2px 15px;
   border-radius: 6px;
   margin-right: 8px;
   color: #f25b22;
 }
-.imagebox .box-imagebox .imagebox_bottom ul.tag_block li.tag a:hover {
+.imagebox .box-imagebox .imagebox_bottom p.tag_block span.tag a:hover {
   background: #f25b22;
   color: #ffffff;
   font-weight: 400;
