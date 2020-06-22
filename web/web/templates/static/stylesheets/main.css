@@ -10408,6 +10408,10 @@ body {
   flex-wrap: unset;
 }
 
+button {
+  outline: none !important;
+}
+
 form.form-listing .inner-box .browse .upload span {
   background-color: #f25b22;
 }
@@ -10825,12 +10829,12 @@ footer .widget-about .logo-ft a {
   border: 1px solid #2c3e50;
   color: #2c3e50;
   font-size: 18px;
-  padding: 0px 10px;
+  padding: 0 10px;
   border-radius: 5px;
 }
 
 .upload-images {
-  padding: 0px 30px;
+  padding: 0 30px;
 }
 .upload-images img {
   width: 100px;
@@ -10843,6 +10847,12 @@ footer .widget-about .logo-ft a {
 
 .wrap-listing label {
   display: flex;
+}
+
+.swal2-styled.swal2-confirm {
+  background-color: #f25b22 !important;
+  border-left-color: #f25b22 !important;
+  border-right-color: #f25b22 !important;
 }
 
 .page-title.style2 .page-title-heading {

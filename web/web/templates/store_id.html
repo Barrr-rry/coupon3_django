@@ -97,7 +97,7 @@
               <a href="tel:{{ instance.phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}</a>
             </li>
             <li class="address">
-              <a href="{{ google }}"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ instance.address }}</a>
+              <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker" aria-hidden="true"></i>{{ instance.address }}</a>
             </li>
           </ul><!-- /.box-address -->
         </div><!-- /.title-left -->
@@ -154,18 +154,18 @@
           <div class="box contact-box">
             <ul class="contact-list">
               <li class="address">
-                <a href="{{ google }}">
+                <a href="{{ google }}" target="_blank">
                   <i class="fa fa-map-marker" aria-hidden="true"></i>
                   {{ instance.address }}
                 </a>
               </li>
               <li>
-                <a href="tel:{{ instance.phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
+                <a href="tel:{{ instance.phone }}" target="_blank"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
                 </a>
               </li>
               {% if instance.website %}
                 <li><i class="fa fa-globe" aria-hidden="true"></i><a href="{{ instance.website }}"
-                                                                     title="">{{ instance.website }}</a>
+                                                                     title="" target="_blank">{{ instance.website }}</a>
                 </li>
               {% endif %}
             </ul>
