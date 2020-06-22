@@ -10676,6 +10676,104 @@ footer .widget-about .logo-ft a {
   clear: both;
 }
 
+.tp-banner {
+  position: relative;
+}
+.tp-banner .slider {
+  margin: 0 auto;
+}
+.tp-banner .slide_viewer {
+  height: 650px;
+  overflow: hidden;
+  position: relative;
+}
+.tp-banner .slide_group {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+.tp-banner .slide {
+  position: absolute;
+  display: none;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+}
+.tp-banner .slide:first-child {
+  display: block;
+}
+.tp-banner .slide_shop:nth-of-type(1) {
+  /*background: #D7A151*/
+  background-image: url("/media/景點_安平古堡.jpg");
+}
+.tp-banner .slide_shop:nth-of-type(2) {
+  /*background: #F4E4CD*/
+  background-image: url("/media/景點照片_劍湖山.jpg");
+}
+.tp-banner .slide_shop:nth-of-type(3) {
+  /*background: #C75534*/
+  background-image: url("/media/景點照片_日月潭.jpg");
+}
+.tp-banner .slide_shop:nth-of-type(4) {
+  /*background: #D1D1D4*/
+  background-image: url("/media/景點照片_野柳.jpg");
+}
+.tp-banner .slide_buttons {
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: center;
+  bottom: 20px;
+}
+.tp-banner a.slide_btn {
+  color: #ffffff;
+  font-size: 60px;
+  margin: 0 0.175em;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.tp-banner .slide_btn.active, .tp-banner .slide_btn:hover {
+  color: #f25b22;
+  cursor: pointer;
+}
+.tp-banner .directional_nav {
+  margin: 0 auto;
+  position: relative;
+  top: -340px;
+}
+.tp-banner .previous_btn {
+  bottom: 0;
+  left: 30px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+}
+.tp-banner .next_btn {
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  right: 30px;
+  top: 0;
+}
+.tp-banner .previous_btn, .tp-banner .next_btn {
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  opacity: 0.5;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -ms-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+}
+.tp-banner .previous_btn:hover, .tp-banner .next_btn:hover {
+  opacity: 1;
+}
+
 .discount-type-border {
   border: 1px solid #2c3e50;
   color: #2c3e50;
@@ -12010,6 +12108,19 @@ form.form-listing .only-submit-form-listing:hover {
     color: #ffffff;
     font-weight: 400;
     border: 1px solid rgba(255, 255, 255, 0);
+  }
+
+  .tp-banner .slide_viewer {
+    height: 400px;
+  }
+  .tp-banner .directional_nav {
+    top: -220px;
+  }
+  .tp-banner .previous_btn {
+    left: 0;
+  }
+  .tp-banner .next_btn {
+    right: 0;
   }
 
   .header_sticky .flat-explore-detail #map {

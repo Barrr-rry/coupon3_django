@@ -280,6 +280,106 @@ footer
     clear: both
 
 
+// slider
+.tp-banner
+  position: relative
+
+  .slider
+    margin: 0 auto
+
+  .slide_viewer
+    height: 650px
+    overflow: hidden
+    position: relative
+
+  .slide_group
+    height: 100%
+    width: 100%
+    position: relative
+
+  .slide
+    position: absolute
+    display: none
+    height: 100%
+    width: 100%
+    background-size: cover
+    background-position: center center
+
+  .slide:first-child
+    display: block
+
+  .slide_shop:nth-of-type(1)
+    /*background: #D7A151*/
+    background-image: url("/media/景點_安平古堡.jpg")
+
+  .slide_shop:nth-of-type(2)
+    /*background: #F4E4CD*/
+    background-image: url("/media/景點照片_劍湖山.jpg")
+
+  .slide_shop:nth-of-type(3)
+    /*background: #C75534*/
+    background-image: url("/media/景點照片_日月潭.jpg")
+
+  .slide_shop:nth-of-type(4)
+    /*background: #D1D1D4*/
+    background-image: url("/media/景點照片_野柳.jpg")
+
+  .slide_buttons
+    position: absolute
+    left: 0
+    right: 0
+    text-align: center
+    bottom: 20px
+
+  a.slide_btn
+    color: #ffffff
+    font-size: 60px
+    margin: 0 0.175em
+    -webkit-transition: all 0.4s ease-in-out
+    -moz-transition: all 0.4s ease-in-out
+    -ms-transition: all 0.4s ease-in-out
+    -o-transition: all 0.4s ease-in-out
+    transition: all 0.4s ease-in-out
+
+  .slide_btn.active, .slide_btn:hover
+    color: #f25b22
+    cursor: pointer
+
+  .directional_nav
+    margin: 0 auto
+    position: relative
+    top: -340px
+
+  .previous_btn
+    bottom: 0
+    left: 30px
+    margin: auto
+    position: absolute
+    top: 0
+
+  .next_btn
+    bottom: 0
+    margin: auto
+    position: absolute
+    right: 30px
+    top: 0
+
+  .previous_btn, .next_btn
+    cursor: pointer
+    width: 100px
+    height: 100px
+    opacity: 0.5
+    -webkit-transition: opacity 0.4s ease-in-out
+    -moz-transition: opacity 0.4s ease-in-out
+    -ms-transition: opacity 0.4s ease-in-out
+    -o-transition: opacity 0.4s ease-in-out
+    transition: opacity 0.4s ease-in-out
+
+  .previous_btn:hover, .next_btn:hover
+    opacity: 1
+
+
+
 // store_id
 .discount-type-border
   border: 1px solid #2c3e50
@@ -333,7 +433,6 @@ footer
 
 .page-title.style2
   padding: 200px 0 294px
-
 
 
 .flat-highlights
@@ -991,9 +1090,11 @@ footer
 
 #map
   height: 1200px
+
   .lpi-1592630594977-98115
     background-color: #f25b22 !important
     border: 2px solid #fda73d
+
     &:after
       box-shadow: 0 0 6px 2px #fda73d
 
@@ -1691,6 +1792,19 @@ form.form-listing
             font-weight: 400
             border: 1px solid rgba(255, 255, 255, 0)
 
+  .tp-banner
+    .slide_viewer
+      height: 400px
+
+    .directional_nav
+      top: -220px
+
+    .previous_btn
+      left: 0
+
+    .next_btn
+      right: 0
+
   .header_sticky
     .flat-explore-detail
       #map
@@ -1774,6 +1888,7 @@ form.form-listing
 
   .page-title.style2
     padding: 165px 0
+
     a.text-heading
       background-color: rgba(242, 91, 34, 0.9)
       border: none
