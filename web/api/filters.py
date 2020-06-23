@@ -22,8 +22,11 @@ def filter_query(filter_dict, queryset):
         else:
             for keyword in search:
                 county = County.objects.filter(name=keyword).all()
+                county_1 = County.objects.filter(name=keyword+'市').all()
+                county_2 = County.objects.filter(name=keyword+'縣').all()
                 district = District.objects.filter(name=keyword).all()
-                if len(county) > 0 or len(district) > 0:
+                district_1 = District.objects.filter(name=keyword+'區').all()
+                if len(county) > 0 or len(district) > 0 or len(county_1) or len(county_2) or len(district_1):
                     q = or_q(q, Q(county__name__contains=keyword))
                     q = or_q(q, Q(district__name__contains=keyword))
 
