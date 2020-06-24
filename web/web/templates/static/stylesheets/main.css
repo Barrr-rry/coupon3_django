@@ -12573,6 +12573,40 @@ form.form-listing .only-submit-form-listing:hover {
     background-position: bottom center !important;
   }
 }
+@media only screen and (max-width: 320px) {
+  .flat-imagebox .filter-result .result {
+    font-size: 17px;
+    letter-spacing: 2px;
+  }
+  .flat-imagebox .filter-result .link-map {
+    font-size: 16px !important;
+    letter-spacing: 2px;
+  }
+  .flat-imagebox .filter-result .sort a {
+    font-size: 12px;
+    padding: 1px 9px;
+  }
+
+  .imagebox {
+    margin-bottom: 0;
+  }
+  .imagebox .box-imagebox .imagebox_bottom p.tag_block {
+    width: 79%;
+    padding: 16px 30px 15px 25px;
+  }
+
+  .show-search {
+    margin-left: 15px;
+  }
+
+  .flat-contact .contact-form .contact-us {
+    padding: 0 30px 120px;
+  }
+
+  .flat-introduce .introduce-header {
+    padding: 10px 0 40px;
+  }
+}
 button.swal2-confirm {
   line-height: 100%;
 }
