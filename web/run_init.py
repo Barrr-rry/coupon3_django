@@ -115,9 +115,16 @@ def generate_store():
 
 
 def generate_discount_type(count):
-    for i in range(count):
+    discount = ['打折',
+                '贈品',
+                '買就送',
+                '滿減',
+                '優惠碼',
+                '尊享服務',
+                '優惠',]
+    for i in discount:
         DiscountType.objects.create(
-            name=f'折扣名稱{i}',
+            name=i,
         )
 
 
