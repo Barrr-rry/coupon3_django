@@ -134,7 +134,7 @@ def generate_activity(count):
     activity = Activity.objects.create(
         name='高雄振興嘉年華'
     )
-    for i in range(5):
+    for i in range(200):
         activity.store.add(random.choice(stores))
     activity.save()
 
