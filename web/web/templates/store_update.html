@@ -1,0 +1,245 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  {% include 'includes/meta.html' %}
+
+  {% include 'includes/css.html' %}
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+</head>
+<body class="header_sticky">
+
+{% include 'includes/preloader.html' %}
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+<section class="page-title parallax parallax1 parallax-200">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title-heading">
+          免費刊登<span>商家加碼活動</span>
+        </div>
+        <ul class="breadcrumbs">
+          <li>
+            想曝光在首頁嗎？請撥打 <span>07-2855820</span> 分機 915
+          </li>
+        </ul>
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+  <!--  <div class="overlay"></div>-->
+</section><!-- /.page-title -->
+
+<section class="flat-listing">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <form id="createStore" action="" class="form-listing" method="post" accept-charset="utf-8">
+          <input type="hidden" name="latitude" id="latitude">
+          <input type="hidden" name="longitude" id="longitude">
+          <div class="inner-box form">
+            <div class="one-half">
+              <div class="wrap-listing price">
+                <label>商家分類</label>
+                <span class="ti-angle-down"></span>
+                <select name="store_type">
+                  {% for el in store_type %}
+                    <option value="{{ el.id }}">{{ el.name }}</option>
+                  {% endfor %}
+                </select>
+              </div><!-- /.wrap-listing -->
+            </div><!-- /.wrap-listing -->
+            <div class="wrap-listing your-name">
+              <label>商家名稱</label>
+              <input type="text" name="name" placeholder="請輸入商家名稱">
+            </div><!-- /.wrap-listing -->
+            <div class="wrap-listing phone">
+              <label>聯絡電話</label>
+              <input type="text" name="phone" placeholder="格式如 0912345675 或 07-2855820">
+            </div><!-- /.wrap-listing -->
+            <div class="wrap-listing website">
+              <label>聯絡人（ 不會公開 ）</label>
+              <input type="text" name="person" placeholder="請輸入聯絡人姓名">
+            </div><!-- /.wrap-listing -->
+            <div class="wrap-listing phone">
+              <label>電子信箱</label>
+              <input type="text" name="email" placeholder="請輸入電子信箱">
+            </div><!-- /.wrap-listing -->
+            <div class="wrap-listing website">
+              <label>網站（ 選填 ）</label>
+              <input type="text" name="website" placeholder="http://">
+            </div><!-- /.wrap-listing -->
+            <div class="one-half">
+              <div class="wrap-listing price">
+                <label>縣市</label>
+                <span class="ti-angle-down"></span>
+                <select name="county">
+                  {% for el in county_list %}
+                    <option value="{{ el.id }}">{{ el.name }}</option>
+                  {% endfor %}
+                </select>
+              </div><!-- /.wrap-listing -->
+            </div><!-- /.wrap-listing -->
+            <div class="one-half one-half-right">
+              <div class="wrap-listing price">
+                <label>區域</label>
+                <span class="ti-angle-down"></span>
+                <select name="district">
+                  {% for el in district_list %}
+                    <option value="{{ el.id }}">{{ el.name }}</option>
+                  {% endfor %}
+                </select>
+              </div><!-- /.wrap-listing -->
+            </div><!-- /.wrap-listing -->
+
+            <div class="clearfix"></div>
+            <div class="wrap-listing location">
+              <label>地址</label>
+              <input type="text" name="address" placeholder="請輸入商家地址或活動地址">
+              <a href="javascript:void(0);" id="position" class="search-pin-load">
+                <svg width="20" height="20">
+                  <image xlink:href="/media/search-bar-arget.svg" width="20" height="20"></image>
+                </svg>
+              </a>
+              <a href="" class="search-pin-load">
+                <div></div>
+              </a>
+              <a class="enter address-click" href="javascript:void(0)">確定</a>
+              <div class="clear"></div>
+            </div><!-- /.wrap-listing -->
+            <div class="pdmap style2" id="map" style="height: 320px">
+
+            </div><!-- /#flat-map -->
+            <div class="clearfix"></div>
+          </div><!-- /.inner-box -->
+          <div class="inner-box form style2">
+            {#活動區塊#}
+            <div class="store-disocunt-area"></div>
+            <button class="submit-form-listing store-discount-btn" type="button">新增活動優惠</button>
+            <div class="clearfix"></div>
+          </div><!-- /.inner-box -->
+          <div class="inner-box style3">
+            {#這邊是要預留給image 上傳後的位置用的#}
+            <div class="row upload-images">
+            </div>
+            <label>請上傳商家照片</label>
+            <div class="browse">
+              <p>拖曳圖片至此</p>
+              <span>或</span>
+              <div class="upload">
+                <span>選取圖片</span>
+                <input type="file" name="upload-file" data-target="file-uploader" accept="image/*" multiple="multiple"/>
+              </div>
+               <p class="mt-4">圖片建議上傳尺寸 2000 px x 1527 px ， 格式 .jpg .png ，小於 1 MB</p>
+            </div>
+            <div class="clearfix"></div>
+          </div><!-- /.inner-box -->
+          <button class="only-submit-form-listing" type="submit">儲存並查看</button>
+        </form><!-- /.form-listing -->
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</section><!-- /.flat-listing -->
+
+<script>
+  let county_list = {{ county_list_json| safe }};
+  let district_list = {{ district_list_json| safe }};
+</script>
+{% include 'includes/footer.html' %}
+{% include 'includes/js.html' %}
+<script>
+  $(document).ready(() => {
+    let showPosition = (position) => {
+      let map = initMap(position)
+      map.off('click')
+      map.on('click', (e) => {
+        clearAllMarker(map)
+        let msg = `${e.latlng.lat}, ${e.latlng.lng}`
+        const pos = L.marker([e.latlng.lat, e.latlng.lng], {icon: greenIcon}).bindPopup('目前位置').openPopup()
+        marker.push(pos)
+        map.addLayer(pos)
+        $.ajax({
+          url: `/api/location/?task_type=2&msg=${msg}`,
+          type: "GET",
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+        }).done(res => {
+          let $input = $('input[name="address"]')
+          $input.val(res.data)
+        })
+      })
+      clearAllMarker(map)
+
+      const pos = L.marker([position.coords.latitude, position.coords.longitude], {icon: greenIcon}).bindPopup('店家位置')
+      marker.push(pos)
+      map.addLayer(pos)
+    }
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, () => {
+        const position = {
+          coords: {
+            latitude: '23.8523405',
+            longitude: '120.9009427'
+          },
+          zoom: 7
+        }
+        showPosition(position)
+      })
+    } else {
+      alert('您的瀏覽器不支援定位系統')
+      const position = {
+        coords: {
+          latitude: '23.8523405',
+          longitude: '120.9009427'
+        },
+        zoom: 7
+      }
+      showPosition(position)
+    }
+
+    $('.address-click').on('click', function () {
+      let $el = $('input[name="address"]')
+      let msg = $el.val()
+      $.ajax({
+        url: `/api/location/?task_type=1&msg=${msg}`,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+      }).done(res => {
+        let lat = res.data[0]
+        let lon = res.data[1]
+        console.log('res:', lat, lon)
+        const position = {
+          coords: {
+            latitude: lat,
+            longitude: lon
+          },
+          zoom: 15
+        }
+        $('#latitude').val(lat)
+        $('#longitude').val(lon)
+        showPosition(position)
+      })
+    })
+
+
+    $('select[name="county"]').on('change', function () {
+      let $el = $(this)
+      let $district = $('select[name="district"]')
+      $district.find('option').remove()
+      let filters = district_list.filter(x => x.county === parseInt($el.val()))
+      for (let el of filters) {
+        $district.append(`<option value=${el.id}>${el.name}</option>`)
+      }
+    })
+  })
+</script>
+
+</body>
+</html>

@@ -95,6 +95,26 @@ class TestStore(DefaultTestMixin, APITestCase):
         self.assertIsNotNone(instance)
         self.assertNotEqual(before_count, after_count)
 
+    def test_store_update(self):
+        instance = Store.objects.last()
+        url = f'/api/store/{instance.id}/'
+        data = dict(
+            storeimage_data=["test.jpg"],
+            storediscount_data=[
+                dict(
+                    discount_type=3,
+                    name='321',
+                    description='321',
+                )
+            ],
+            name='test',
+        )
+        r = self.user.put(url, data)
+        # status 200
+        self.assertEqual(r.status_code, 200)
+        # type dict
+        self.assertIsInstance(r.data, dict)
+
 
 class TestStoretype(DefaultTestMixin, APITestCase):
 

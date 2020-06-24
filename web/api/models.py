@@ -87,6 +87,12 @@ class Store(DefaultAbstract):
     status = models.SmallIntegerField(default=0, help_text="商家狀態 0：待審核；1：審核通過（上架）；2：審核失敗（不顯示）")
 
 
+class Activity(DefaultAbstract):
+    name = models.CharField(max_length=64, help_text="活動名稱")
+    store = models.ManyToManyField(Store, related_name='activity')
+    county = models.ManyToManyField(County, related_name='activity')
+
+
 class DiscountType(DefaultAbstract):
     name = models.CharField(max_length=128, help_text="折扣名稱")
 
