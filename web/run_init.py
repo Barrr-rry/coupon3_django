@@ -5,7 +5,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'web.settings')
 django.setup()
 from django.contrib.auth.models import User
 from api import serializers
-from api.models import StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage
+from api.models import StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, Activity
 from django.utils import timezone
 import datetime
 import random
@@ -27,6 +27,7 @@ def main(for_test=False, config_data=None):
     generate_discount_type(5)
     generate_store_discount()
     generate_store_image()
+    generate_activity(5)
 
 
 def generate_super_admin():
@@ -126,6 +127,16 @@ def generate_discount_type(count):
         DiscountType.objects.create(
             name=i,
         )
+
+
+def generate_activity(count):
+    stores = Store.objects.filter(status=1).all()
+    activity = Activity.objects.create(
+        name='高雄振興嘉年華'
+    )
+    for i in range(5):
+        activity.store.add(random.choice(stores))
+    activity.save()
 
 
 def generate_store_discount():

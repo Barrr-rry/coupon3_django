@@ -19,7 +19,7 @@ from django.core import validators
 from drf_serializer_cache import SerializerCacheMixin
 from django.utils.timezone import make_aware
 from api.models import (
-    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
 )
 from crawler import task
 
@@ -94,6 +94,11 @@ class StoreDiscountWriteSerializer(serializers.ModelSerializer):
         ]
 
 
+class ActivitySerializer(DefaultModelSerializer):
+    class Meta(CommonMeta):
+        model = Activity
+
+
 class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     storeimage_data = StringListField(required=False, help_text='StoreImage', write_only=True)
     storediscount_data = StoreDiscountWriteSerializer(many=True, required=False, write_only=True,
@@ -105,6 +110,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     images = serializers.SerializerMethodField()
     storediscount_names = serializers.SerializerMethodField()
     image_1 = serializers.SerializerMethodField()
+    activity = ActivitySerializer(many=True, required=False)
 
     class Meta(CommonMeta):
         model = Store
