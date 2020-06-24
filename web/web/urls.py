@@ -35,6 +35,7 @@ urlpatterns = [
     path('store/create/', StoreCreateView.as_view()),
     path('contact/', ContactView.as_view()),
     path('store/<int:store_id>/', StoreIdView.as_view()),
+    path('store/<int:store_id>/update/', StoreUpdateView.as_view()),
 
     # path('store_map/', cache_page(60 * 60)(StoreMapView.as_view())),
     # path('store/', cache_page(60 * 60)(StoreView.as_view())),
