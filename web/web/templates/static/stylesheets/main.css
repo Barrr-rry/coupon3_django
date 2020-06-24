@@ -10658,7 +10658,7 @@ footer .widget-about .logo-ft a {
   background-color: #f1f1f1;
   border-top: none;
   text-align: center;
-  padding: 0px 80px 40px 80px;
+  padding: 0 80px 40px 80px;
 }
 .footer-bottom .copyright {
   display: inline-block;
@@ -10678,18 +10678,21 @@ footer .widget-about .logo-ft a {
 .footer-bottom .item a {
   color: #555555;
 }
+.footer-bottom .item a:hover {
+  color: #CC2426;
+}
 .footer-bottom .item a.link-contact {
   display: inline-block;
   padding: 8px 15px;
   color: #CC2426;
   background-color: #FFFFFF;
+  border: 1px solid rgba(204, 36, 38, 0);
 }
-.footer-bottom .item a:hover {
-  color: #CC2426;
-  border: 1px solid rgba(204, 36, 38, 0.5);
+.footer-bottom .item a.link-contact:hover {
+  border-color: rgba(204, 36, 38, 0.5);
 }
 .footer-bottom .item a img {
-  margin: 0px 0px 0px 5px;
+  margin: 0 0 0 5px;
 }
 .footer-bottom .clear {
   clear: both;
@@ -11228,21 +11231,33 @@ footer .widget-about .logo-ft a {
 .flat-imagebox .filter-result .sort {
   padding-top: 20px;
 }
+.flat-imagebox .filter-result .sort::after {
+  content: "";
+  clear: both;
+}
 .flat-imagebox .filter-result .sort a {
   display: inline-block;
   font-size: 14px;
   font-weight: 400;
   color: #f25b22;
   border: 1px solid rgba(242, 91, 34, 0.5);
-  border-radius: 50px;
+  border-right: none;
   padding: 2px 15px;
-  margin-right: 3px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
+  float: left;
 }
 .flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a.active {
   color: #ffffff;
   background-color: #f25b22;
   border-color: #f25b22;
+}
+.flat-imagebox .filter-result .sort a:first-child {
+  border-radius: 50px 0 0 50px;
+  border-left: 1px solid rgba(242, 91, 34, 0.5);
+}
+.flat-imagebox .filter-result .sort a:last-child {
+  border-radius: 0 50px 50px 0;
+  border-right: 1px solid rgba(242, 91, 34, 0.5);
 }
 .flat-imagebox .filter-result .link-map {
   font-size: 18px !important;
@@ -11494,6 +11509,13 @@ footer .widget-about .logo-ft a {
 .flat-map-zoom-in .wrap-box-search.style2 form > span input:-ms-input-placeholder, .flat-map-zoom-in .wrap-box-search.style2 form > span select:-ms-input-placeholder {
   color: #999999;
 }
+.flat-map-zoom-in .wrap-box-search.style2 form > span.width-100 {
+  width: 100%;
+}
+.flat-map-zoom-in .wrap-box-search.style2 form > span button {
+  width: 100%;
+  margin-top: 10px;
+}
 .flat-map-zoom-in .wrap-box-search.style2 .ti-location-pin {
   left: 30px;
   width: 20px;
@@ -11504,7 +11526,7 @@ footer .widget-about .logo-ft a {
   top: 14px;
 }
 .flat-map-zoom-in .flat-filter {
-  padding: 30px 20px 80px 20px;
+  padding: 8px 20px 37px 20px;
 }
 .flat-map-zoom-in .store-box-block .imagebox .box-imagebox ul.tag_block {
   height: auto;
@@ -11542,13 +11564,13 @@ footer .widget-about .logo-ft a {
 }
 
 .store-box-block {
-  height: 828px;
+  height: 861px;
   overflow: scroll;
   padding-bottom: 80px;
 }
 
 .flat-imagebox.style3.padding-0 {
-  padding: 0px;
+  padding: 0;
 }
 
 .header_sticky .flat-title {
@@ -11719,6 +11741,7 @@ form.form-listing .inner-box .submit-form-listing {
   border-radius: 50px;
   color: #f26423;
   border: 2px solid rgba(242, 100, 35, 0.5);
+  letter-spacing: 2px;
 }
 form.form-listing .inner-box .submit-form-listing:hover {
   background: #f26423 !important;
@@ -11770,6 +11793,8 @@ form.form-listing .inner-box .browse span {
 }
 form.form-listing .inner-box .browse .upload span {
   background: #f26423;
+  height: 45px;
+  border-radius: 25px;
 }
 form.form-listing .inner-box.style3 label {
   margin-bottom: 10px;
@@ -11786,6 +11811,7 @@ form.form-listing .only-submit-form-listing {
   border-radius: 50px;
   background: #f26423;
   color: #ffffff;
+  letter-spacing: 2px;
 }
 form.form-listing .only-submit-form-listing:hover {
   background: #9c0b0e;
@@ -11931,7 +11957,7 @@ form.form-listing .only-submit-form-listing:hover {
     color: #666666;
     padding: 8px 50px;
     border: none;
-    box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
   }
   .header .show-search .location input::-webkit-input-placeholder {
     color: #999999;
@@ -11971,6 +11997,96 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .wrap-box-search form button {
     float: right;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1350px) {
+  #logo {
+    margin-top: 12px;
+    margin-bottom: 5px;
+  }
+
+  .header .show-search > button {
+    margin: 12px 0;
+  }
+  .header .show-search .top-search {
+    margin-top: 0;
+  }
+  .header .wrap-box-search a {
+    top: 8px;
+  }
+  .header .wrap-box-search .style2 form > span {
+    top: 12px;
+  }
+  .header .wrap-box-search .style2 form > span > span {
+    top: 10px;
+  }
+  .header .wrap-box-search .style2 form > span input {
+    height: 35px;
+  }
+
+  #mainnav ul.menu > li > a {
+    line-height: 58px;
+  }
+
+  .btn-menu {
+    top: 15px;
+  }
+
+  .page-title.style1 {
+    padding: 0 0 25px;
+  }
+
+  .wrap-box-search form button {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 36px;
+  }
+  .wrap-box-search.style1 {
+    padding: 10px 10px;
+  }
+  .wrap-box-search.style1 form > span .ti-location-pin {
+    top: 6px;
+  }
+  .wrap-box-search.style1 form > span.search-span a {
+    top: 5px;
+  }
+  .wrap-box-search.style1 form > span.categories span {
+    top: 8px;
+  }
+  .wrap-box-search.style1 form > span input {
+    height: 30px;
+  }
+  .wrap-box-search.style1 form > span select {
+    height: 30px;
+    padding: 0 30px;
+  }
+
+  .flat-imagebox.store-list {
+    padding: 0 0 90px;
+  }
+  .flat-imagebox .filter-result .result {
+    margin-right: 20px;
+    padding: 5px 0;
+  }
+  .flat-imagebox .filter-result .sort {
+    padding-top: 0;
+  }
+
+  .filter-result.style2 {
+    margin-bottom: 15px;
+    padding: 20px 0 0;
+  }
+
+  .clear-non-md {
+    clear: none;
+  }
+
+  .flat-map-zoom-in .wrap-box-search.style2 form > span button {
+    height: 50px;
+  }
+
+  .store-box-block {
+    height: 871px;
   }
 }
 @media only screen and (max-width: 1199px) {
@@ -12174,15 +12290,85 @@ form.form-listing .only-submit-form-listing:hover {
     max-width: 100%;
   }
 }
+@media only screen and (min-width: 768px) and (max-width: 1190px) {
+  .wrap-box-search.style1 form > span input {
+    height: 40px;
+  }
+  .wrap-box-search.style1 form > span.search-span a {
+    top: 10px;
+  }
+  .wrap-box-search.style1 form > span .ti-location-pin {
+    top: 11px !important;
+  }
+  .wrap-box-search.style1 form > span select {
+    height: 40px;
+  }
+  .wrap-box-search.style1 form > span.categories span {
+    top: 11px !important;
+  }
+  .wrap-box-search.style1 form button {
+    margin-top: 5px;
+    float: none;
+  }
+
+  .flat-imagebox .filter-result.style2 {
+    padding: 30px 0 0;
+  }
+}
 @media only screen and (max-width: 767px) {
-  .flat-highlights {
-    background-image: url("/media/bg_dark_mobile_2.svg");
+  #logo {
+    margin-top: 19px;
+  }
+
+  .show-search > button {
+    margin: 20px 0 20px;
+  }
+
+  .btn-menu {
+    top: 22px;
+  }
+
+  .wrap-box-search {
+    padding: 20px 0;
+    margin-bottom: 30px;
+  }
+  .wrap-box-search.style1 form > span input {
+    padding: 8px 55px 8px 50px;
+  }
+  .wrap-box-search form button {
+    float: none;
   }
 
   .parallax-200 {
     background-image: url("/media/bg_dark_mobile_2.svg");
     background-position: 33% -102px !important;
     background-size: cover;
+  }
+
+  .parallax-search {
+    padding: 0 !important;
+  }
+
+  .flat-imagebox.store-list {
+    padding-top: 0;
+  }
+  .flat-imagebox .filter-result.style2 {
+    padding-top: 50px;
+  }
+  .flat-imagebox .filter-result .sort a {
+    font-size: 13px;
+    padding: 2px 12px;
+  }
+
+  .flat-highlights {
+    background-image: url("/media/bg_dark_mobile_2.svg");
+  }
+  .flat-highlights .col-md-12 {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .flat-highlights .col-md-12 .highlights ul.menu-list li a span {
+    font-size: 15px;
   }
 
   .header {
@@ -12328,20 +12514,12 @@ form.form-listing .only-submit-form-listing:hover {
     padding: 45px 25px 30px;
   }
 
+  .flat-map-zoom-in .wrap-box-search.style2 form > span button {
+    margin-top: 0;
+  }
+
   #map {
     height: 300px;
-  }
-
-  .wrap-box-search.style1 form > span input {
-    padding: 8px 55px 8px 50px;
-  }
-
-  .flat-highlights .col-md-12 {
-    padding-right: 0;
-    padding-left: 0;
-  }
-  .flat-highlights .col-md-12 .highlights ul.menu-list li a span {
-    font-size: 15px;
   }
 
   .page-title.style2 {

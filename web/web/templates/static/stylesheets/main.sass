@@ -259,7 +259,7 @@ footer
   background-color: #f1f1f1
   border-top: none
   text-align: center
-  padding: 0px 80px 40px 80px
+  padding: 0 80px 40px 80px
 
   .copyright
     display: inline-block
@@ -279,18 +279,20 @@ footer
     a
       color: #555555
 
+      &:hover
+        color: #CC2426
+
       &.link-contact
         display: inline-block
         padding: 8px 15px
         color: #CC2426
         background-color: #FFFFFF
-
-      &:hover
-        color: #CC2426
-        border: 1px solid rgba(204, 36, 38, 0.5)
+        border: 1px solid rgba(204, 36, 38, 0)
+        &:hover
+          border-color: rgba(204, 36, 38, 0.5)
 
       img
-        margin: 0px 0px 0px 5px
+        margin: 0 0 0 5px
 
   .clear
     clear: both
@@ -660,6 +662,7 @@ footer
 .introduce .introduce-title span
   color: #888888
   opacity: 0.2
+
   &.county
     //font-size: 80px
     font-size: 60px
@@ -716,6 +719,7 @@ footer
       p
         display: block
         margin-bottom: 10px
+
         &.county
           max-width: 90%
 
@@ -766,6 +770,7 @@ footer
         border-radius: 6px
         margin-top: -46px
         margin-bottom: 50px
+
         &:hover
           background-color: #f25b22
           color: #ffffff
@@ -860,22 +865,38 @@ footer
       //margin-left: 20px
       padding-top: 20px
 
+      &::after
+        content: ""
+        clear: both
+
+
       a
         display: inline-block
         font-size: 14px
         font-weight: 400
         color: #f25b22
         border: 1px solid rgba(242, 91, 34, 0.5)
-        border-radius: 50px
+        border-right: none
+        //border-radius: 50px
         padding: 2px 15px
-        margin-right: 3px
-        margin-bottom: 10px
+        //margin-right: 3px
+        margin-bottom: 25px
+        float: left
 
         &:hover, &.active
           color: #ffffff
           //background-color: #999999
           background-color: #f25b22
           border-color: #f25b22
+
+        &:first-child
+          border-radius: 50px 0 0 50px
+          border-left: 1px solid rgba(242, 91, 34, 0.5)
+
+        &:last-child
+          border-radius: 0 50px 50px 0
+          border-right: 1px solid rgba(242, 91, 34, 0.5)
+
 
     .link-map
       font-size: 18px !important
@@ -1147,6 +1168,13 @@ footer
         input:-ms-input-placeholder, select:-ms-input-placeholder
           color: #999999
 
+        &.width-100
+          width: 100%
+
+        button
+          width: 100%
+          margin-top: 10px
+
       .ti-location-pin
         left: 30px
         width: 20px
@@ -1158,7 +1186,8 @@ footer
 
 
   .flat-filter
-    padding: 30px 20px 80px 20px
+    //padding: 30px 20px 80px 20px
+    padding: 8px 20px 37px 20px
 
   .store-box-block .imagebox .box-imagebox
     ul.tag_block
@@ -1168,8 +1197,6 @@ footer
         display: block
         float: none
         text-align: right
-
-
 
 
 #map
@@ -1185,10 +1212,12 @@ footer
   .leaflet-popup-content
     > div
       font-size: 18px
+
     ul
       font-size: 12px
       line-height: 22px
       padding-bottom: 5px
+
     button, input[type="button"], input[type="reset"], input[type="submit"]
       background: #f25b22
 
@@ -1197,12 +1226,13 @@ footer
   margin-top: -210px
 
 .store-box-block
-  height: 828px
+  //height: 828px
+  height: 861px
   overflow: scroll
   padding-bottom: 80px
 
 .flat-imagebox.style3.padding-0
-  padding: 0px
+  padding: 0
 
 
 // store-id
@@ -1378,9 +1408,9 @@ form.form-listing
     .submit-form-listing
       background: #ffffff
       border-radius: 50px
-      //color: #333333
       color: #f26423
       border: 2px solid rgba(242, 100, 35, 0.5)
+      letter-spacing: 2px
 
       &:hover
         background: #f26423 !important
@@ -1433,6 +1463,8 @@ form.form-listing
 
       .upload span
         background: #f26423
+        height: 45px
+        border-radius: 25px
 
     &.style3
       label
@@ -1450,6 +1482,7 @@ form.form-listing
     border-radius: 50px
     background: #f26423
     color: #ffffff
+    letter-spacing: 2px
 
     &:hover
       background: #9c0b0e
@@ -1487,7 +1520,6 @@ form.form-listing
     z-index: 99
 
 .flat-contact .contact-form .contact-us
-  //padding: 180px 75px
   padding: 50px 100px 180px
 
 .flat-iconbox
@@ -1600,7 +1632,7 @@ form.form-listing
           color: #666666
           padding: 8px 50px
           border: none
-          box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.1)
+          box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1)
 
         input::-webkit-input-placeholder
           color: #999999
@@ -1634,12 +1666,100 @@ form.form-listing
   .wrap-box-search form
     > span
       width: 60%
+
       &.categories
         width: 25%
+
     button
       float: right
 
+@media only screen and (min-width: 768px) and (max-width: 1350px)
+  #logo
+    margin-top: 12px
+    margin-bottom: 5px
+  .header
+    .show-search
+      > button
+        margin: 12px 0
 
+      .top-search
+        margin-top: 0
+
+    .wrap-box-search
+      a
+        top: 8px
+
+      .style2 form
+        > span
+          top: 12px
+
+          > span
+            top: 10px
+
+          input
+            height: 35px
+
+  #mainnav ul.menu > li > a
+    line-height: 58px
+
+  .btn-menu
+    top: 15px
+
+  .page-title.style1
+    padding: 0 0 25px
+
+  .wrap-box-search
+    form button
+      height: 36px
+      line-height: 36px
+      padding: 0 36px
+
+    &.style1
+      padding: 10px 10px
+
+      form
+        > span
+          .ti-location-pin
+            top: 6px
+
+          &.search-span a
+            top: 5px
+
+          &.categories span
+            top: 8px
+
+          input
+            height: 30px
+
+          select
+            height: 30px
+            padding: 0 30px
+
+  .flat-imagebox
+    &.store-list
+      padding: 0 0 90px
+
+    .filter-result
+      .result
+        margin-right: 20px
+        padding: 5px 0
+
+      .sort
+        padding-top: 0
+
+  .filter-result
+    &.style2
+      margin-bottom: 15px
+      padding: 20px 0 0
+
+  .clear-non-md
+    clear: none
+
+  .flat-map-zoom-in .wrap-box-search.style2 form > span button
+    height: 50px
+
+  .store-box-block
+    height: 871px
 
 
 @media only screen and (max-width: 1199px)
@@ -1782,9 +1902,11 @@ form.form-listing
   .flat-introduce .introduce .introduce-content
     a.more-info
       margin-top: 0px
+
     p
       display: block
       margin-bottom: 10px
+
       &.county
         max-width: 100%
 
@@ -1846,13 +1968,86 @@ form.form-listing
     max-width: 100%
 
 
+@media only screen and (min-width: 768px) and (max-width: 1190px)
+  .wrap-box-search.style1
+    form
+      > span
+        input
+          height: 40px
+
+        &.search-span a
+          top: 10px
+
+        .ti-location-pin
+          top: 11px !important
+
+        select
+          height: 40px
+
+        &.categories span
+          top: 11px !important
+
+      button
+        margin-top: 5px
+        float: none
+
+  .flat-imagebox .filter-result.style2
+    padding: 30px 0 0
+
+
 @media only screen and (max-width: 767px)
-  .flat-highlights
-    background-image: url("/media/bg_dark_mobile_2.svg")
+
+  #logo
+    margin-top: 19px
+
+  .show-search
+    > button
+      margin: 20px 0 20px
+
+  .btn-menu
+    top: 22px
+
+  .wrap-box-search
+    padding: 20px 0
+    margin-bottom: 30px
+
+    &.style1 form > span input
+      padding: 8px 55px 8px 50px
+
+    form button
+      float: none
+
   .parallax-200
     background-image: url("/media/bg_dark_mobile_2.svg")
     background-position: 33% -102px !important
     background-size: cover
+
+  .parallax-search
+    padding: 0 !important
+
+  .flat-imagebox
+
+    &.store-list
+      padding-top: 0
+
+    .filter-result
+      &.style2
+        padding-top: 50px
+
+      .sort a
+        font-size: 13px
+        padding: 2px 12px
+
+  .flat-highlights
+    background-image: url("/media/bg_dark_mobile_2.svg")
+
+    .col-md-12
+      padding-right: 0
+      padding-left: 0
+
+      .highlights ul.menu-list li a span
+        font-size: 15px
+
   .header
     background-image: url("/media/bg_top_mobile.svg")
   .flat-imagebox.style5
@@ -2001,20 +2196,12 @@ form.form-listing
   .flat-map-zoom-in .container-fluid .flat-filter
     padding: 45px 25px 30px
 
+  .flat-map-zoom-in .wrap-box-search.style2 form > span button
+    margin-top: 0
+
   #map
     height: 300px
 
-
-  .wrap-box-search.style1 form > span input
-    padding: 8px 55px 8px 50px
-
-  .flat-highlights
-    .col-md-12
-      padding-right: 0
-      padding-left: 0
-
-      .highlights ul.menu-list li a span
-        font-size: 15px
 
   .page-title.style2
     padding: 165px 0
