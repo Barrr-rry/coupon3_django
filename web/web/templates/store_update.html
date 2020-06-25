@@ -48,7 +48,7 @@
               <div class="wrap-listing price">
                 <label>商家分類</label>
                 <span class="ti-angle-down"></span>
-                <select name="store_type">
+                <select name="store_type" value="{{ instance.store_type.id }}">
                   {% for el in store_type %}
                     <option value="{{ el.id }}">{{ el.name }}</option>
                   {% endfor %}
@@ -57,29 +57,30 @@
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing your-name">
               <label>商家名稱</label>
-              <input type="text" name="name" placeholder="請輸入商家名稱">
+              <input type="text" name="name" placeholder="請輸入商家名稱" value="{{ instance.name|default_if_none:"" }}">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing phone">
               <label>聯絡電話</label>
-              <input type="text" name="phone" placeholder="格式如 0912345675 或 07-2855820">
+              <input type="text" name="phone" placeholder="格式如 0912345675 或 07-2855820"
+                     value="{{ instance.phone|default_if_none:"" }}">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing website">
               <label>聯絡人（ 不會公開 ）</label>
-              <input type="text" name="person" placeholder="請輸入聯絡人姓名">
+              <input type="text" name="person" placeholder="請輸入聯絡人姓名" value="{{ instance.person|default_if_none:"" }}">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing phone">
               <label>電子信箱</label>
-              <input type="text" name="email" placeholder="請輸入電子信箱">
+              <input type="text" name="email" placeholder="請輸入電子信箱" value="{{ instance.email|default_if_none:"" }}">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing website">
               <label>網站（ 選填 ）</label>
-              <input type="text" name="website" placeholder="http://">
+              <input type="text" name="website" placeholder="http://" value="{{ instance.website|default_if_none:"" }}">
             </div><!-- /.wrap-listing -->
             <div class="one-half">
               <div class="wrap-listing price">
                 <label>縣市</label>
                 <span class="ti-angle-down"></span>
-                <select name="county">
+                <select name="county" value="{{ instance.county.id }}">
                   {% for el in county_list %}
                     <option value="{{ el.id }}">{{ el.name }}</option>
                   {% endfor %}
@@ -90,7 +91,7 @@
               <div class="wrap-listing price">
                 <label>區域</label>
                 <span class="ti-angle-down"></span>
-                <select name="district">
+                <select name="district" value="{{ instance.district.id }}">
                   {% for el in district_list %}
                     <option value="{{ el.id }}">{{ el.name }}</option>
                   {% endfor %}
@@ -101,7 +102,7 @@
             <div class="clearfix"></div>
             <div class="wrap-listing location">
               <label>地址</label>
-              <input type="text" name="address" placeholder="請輸入商家地址或活動地址">
+              <input type="text" name="address" placeholder="請輸入商家地址或活動地址" value="{{ instance.address }}">
               <a href="javascript:void(0);" id="position" class="search-pin-load">
                 <svg width="20" height="20">
                   <image xlink:href="/media/search-bar-arget.svg" width="20" height="20"></image>
@@ -120,13 +121,55 @@
           </div><!-- /.inner-box -->
           <div class="inner-box form style2">
             {#活動區塊#}
-            <div class="store-disocunt-area"></div>
+            <div class="store-disocunt-area">
+              {% for el in storediscount %}
+                <div class="store-discount d-flex" data-id="{{ el.id }}">
+                  <div class="store-discount-content col">
+                    <div class="wrap-listing your-name">
+                      <label>活動名稱</label>
+                      <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）" value="{{ el.name }}">
+                      <div class="discount_type">
+                        <label>活動類型</label>
+                        <span class="ti-angle-down"></span>
+                        <select name="discount_type" placeholder="請選擇活動類型" value="{{ el.discount_type }}">
+                          {% for e in discounttype %}
+                            <option value="{{ e.id }}">{{ e.name }}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div><!-- /.wrap-listing -->
+                    <div class="wrap-listing your-name">
+                      <label>活動內容</label>
+                      <textarea rows="4" cols="5" name="description" placeholder="請輸入活動內容與注意事項"
+                                value="{{ el.description }}"
+                      ></textarea>
+                    </div><!-- /.wrap-listing -->
+                  </div>
+                  <div class="col-auto d-flex align-items-center">
+                    <i class="fa fa-times pointer close-image" aria-hidden="true"
+                       data-id="{{ el.id }}"
+                    ></i>
+                  </div>
+                </div>
+              {% endfor %}
+
+
+            </div>
             <button class="submit-form-listing store-discount-btn" type="button">新增活動優惠</button>
             <div class="clearfix"></div>
           </div><!-- /.inner-box -->
           <div class="inner-box style3">
             {#這邊是要預留給image 上傳後的位置用的#}
             <div class="row upload-images">
+              {% for el in storeimages %}
+              <div class="imgbox d-flex align-items-start" data-id="{{el.id}}">
+                <img src="/media/{{ el.picture }}" alt="">
+                <i class="fa fa-times pointer close-image" aria-hidden="true"
+                   data-id="{{el.id}}"
+                ></i>
+              </div>
+              {% endfor %}
+
             </div>
             <label>請上傳商家照片</label>
             <div class="browse">
@@ -136,7 +179,7 @@
                 <span>選取圖片</span>
                 <input type="file" name="upload-file" data-target="file-uploader" accept="image/*" multiple="multiple"/>
               </div>
-               <p class="mt-4">圖片建議上傳尺寸 2000 px x 1527 px ， 格式 .jpg .png ，小於 1 MB</p>
+              <p class="mt-4">圖片建議上傳尺寸 2000 px x 1527 px ， 格式 .jpg .png ，小於 1 MB</p>
             </div>
             <div class="clearfix"></div>
           </div><!-- /.inner-box -->

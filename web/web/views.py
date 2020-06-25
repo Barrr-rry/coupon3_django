@@ -63,19 +63,27 @@ class StoreUpdateView(BaseView):
     template_name = 'store_update.html'
 
     def get_context_data(self, *args, **kwargs):
+        instance = Store.objects.get(pk=kwargs.get('store_id'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         county_list = serializers.CountySerializer(many=True, instance=County.objects.all()).data
         district_list_json = json.dumps(district_list)
         county_list_json = json.dumps(county_list)
         county_id = county_list[0]['id']
         district_list = list(filter(lambda x: x['county'] == county_id, district_list))
+        storediscount = serializers.StoreDiscountSerializer(many=True, instance=instance.storediscount.all()).data
+        discounttype = serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data
+        storeimages = serializers.StoreImageSerializer(many=True, instance=instance.storeimage).data
         ret = dict(
+            storediscount=storediscount,
+            discounttype=discounttype,
+            instance=instance,
             store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
             district_list=district_list,
             county_list=county_list,
             token=self.token,
             district_list_json=district_list_json,
             county_list_json=county_list_json,
+            storeimages=storeimages,
         )
         return ret
 
