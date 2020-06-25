@@ -102,7 +102,7 @@ class StoreDiscount(DefaultAbstract):
     discount_type = models.ForeignKey(DiscountType, related_name="store_discount", on_delete=models.CASCADE,
                                       help_text="折扣fk")
     name = models.CharField(max_length=128, help_text="折扣標題")
-    description = models.CharField(max_length=128, help_text="敘述")
+    description = models.CharField(max_length=128, help_text="敘述", null=True, blank=True)
 
 
 class StoreImage(DefaultAbstract):

@@ -1462,9 +1462,6 @@ const showSelfPosition = (position) => {
         // let ret = {}
         let ret = {
           ...(formSerailize(data)),
-          // todo county district
-          county: 1,
-          district: 1,
         }
         let storediscount = []
         if (ret.store_discount_name) {
@@ -1504,7 +1501,80 @@ const showSelfPosition = (position) => {
           window.location.href = `/store/${res.id}/`
         })
       }
-    });
+    })
+
+
+    $("#updateStore").validate({
+      rules: {
+        name: "required",
+        person: "required",
+        address: "required",
+        phone: {
+          isPhone: true
+        },
+        store_discount_name: "required",
+        email: {
+          required: true,
+          isEmail: true,
+        },
+        website: {
+          url: true
+        }
+      },
+      messages: {
+        name: "請输入商家名稱",
+        person: "請输入聯絡人姓名",
+        address: "請输入地址",
+        phone: "請输入正確電話格式",
+        store_discount_name: "請输入活動名稱",
+        email: "請输入正確信箱格式",
+        website: "請输入正確url格式",
+      },
+      submitHandler(form) {
+        let data = $(form).serializeArray()
+        // let ret = {}
+        let ret = {
+          ...(formSerailize(data)),
+        }
+        let storediscount = []
+        if (ret.store_discount_name) {
+          if (Array.isArray(ret.store_discount_name)) {
+            for (let i = 0; i < ret.store_discount_name.length; i++) {
+              storediscount.push({
+                name: ret.store_discount_name[i],
+                description: ret.description[i],
+                discount_type: ret.discount_type[i],
+              })
+            }
+          } else {
+            storediscount.push({
+              name: ret.store_discount_name,
+              description: ret.description,
+              discount_type: ret.discount_type,
+            })
+          }
+
+
+          delete ret.store_discount_name
+          delete ret.description
+          delete ret.discount_type
+        }
+        ret.storediscount_data = storediscount
+        ret.storeimage_data = files.map(x => x.filename)
+        ret.latitude = null
+        ret.longitude = null
+        console.log(ret)
+        $.ajax({
+          url: '/api/store/',
+          type: "POST",
+          contentType: "application/json; charset=utf-8",
+          data: JSON.stringify(ret),
+          dataType: "json",
+        }).done(res => {
+          window.location.href = `/store/${res.id}/`
+        })
+      }
+    })
 
   }
   let contactUs = () => {

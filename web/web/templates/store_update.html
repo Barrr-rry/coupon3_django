@@ -40,7 +40,8 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <form id="createStore" action="" class="form-listing" method="post" accept-charset="utf-8">
+        <form id="updateStore" action="" class="form-listing" method="post" accept-charset="utf-8">
+          <input type="hidden" name="id" value="{{ instance.id }}">
           <input type="hidden" name="latitude" id="latitude">
           <input type="hidden" name="longitude" id="longitude">
           <div class="inner-box form">
@@ -162,12 +163,12 @@
             {#這邊是要預留給image 上傳後的位置用的#}
             <div class="row upload-images">
               {% for el in storeimages %}
-              <div class="imgbox d-flex align-items-start" data-id="{{el.id}}">
-                <img src="/media/{{ el.picture }}" alt="">
-                <i class="fa fa-times pointer close-image" aria-hidden="true"
-                   data-id="{{el.id}}"
-                ></i>
-              </div>
+                <div class="imgbox d-flex align-items-start" data-id="{{ el.id }}">
+                  <img src="/media/{{ el.picture }}" alt="">
+                  <i class="fa fa-times pointer close-image" aria-hidden="true"
+                     data-id="{{ el.id }}"
+                  ></i>
+                </div>
               {% endfor %}
 
             </div>
