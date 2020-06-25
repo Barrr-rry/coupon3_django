@@ -248,12 +248,23 @@ const showSelfPosition = (position) => {
         }
       }
     });
-
+    let open_menu = false
     $('.btn-menu').on('click', function () {
+      open_menu = !open_menu
       $('#mainnav-mobi').slideToggle(300);
       $(this).toggleClass('active');
       return false;
     });
+    $(window).on('click', function () {
+      if (open_menu) {
+        $('#mainnav-mobi').slideToggle(300);
+        $('.btn-menu').toggleClass('active');
+        open_menu = !open_menu
+      }
+    })
+    $('.header').on('click', function (event) {
+      event.stopPropagation()
+    })
 
     $(document).on('click', '#mainnav-mobi li .btn-submenu', function (e) {
       $(this).toggleClass('active').next('ul').slideToggle(300);
@@ -1731,7 +1742,7 @@ const showSelfPosition = (position) => {
     })
   }
   let initToScroll = () => {
-    if ($('#toscroll')) {
+    if ($('#toscroll') && $('#toscroll')[0]) {
       setTimeout(() => {
         $('#toscroll')[0].scrollIntoView()
         console.log('scrollll')
