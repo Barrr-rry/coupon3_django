@@ -1566,6 +1566,13 @@ const showSelfPosition = (position) => {
       }
       window.location.href = `${$('#search-form').attr('action')}?${querys.join('&')}`
     })
+    let sformsubmit = false
+    $('#search-form').on('submit', function (e) {
+      if (sformsubmit) {
+        e.preventDefault()
+      }
+      sformsubmit = true
+    })
 
     let initStoreShare = () => {
       $('.share-to').off('click')
