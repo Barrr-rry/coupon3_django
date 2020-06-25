@@ -22,10 +22,10 @@ def filter_query(filter_dict, queryset):
         else:
             for keyword in search:
                 county = County.objects.filter(name=keyword).all()
-                county_1 = County.objects.filter(name=keyword+'市').all()
-                county_2 = County.objects.filter(name=keyword+'縣').all()
+                county_1 = County.objects.filter(name=keyword + '市').all()
+                county_2 = County.objects.filter(name=keyword + '縣').all()
                 district = District.objects.filter(name=keyword).all()
-                district_1 = District.objects.filter(name=keyword+'區').all()
+                district_1 = District.objects.filter(name=keyword + '區').all()
                 if len(county) > 0 or len(district) > 0 or len(county_1) or len(county_2) or len(district_1):
                     q = or_q(q, Q(county__name__contains=keyword))
                     q = or_q(q, Q(district__name__contains=keyword))
@@ -38,6 +38,9 @@ def filter_query(filter_dict, queryset):
         filter_dict['county'] = None
     if filter_dict['county'] is not None:
         q = and_q(q, Q(county=filter_dict['county']))
+
+    if filter_dict['activity'] is not None:
+        q = and_q(q, Q(activity=filter_dict['activity']))
 
     filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
     if filter_dict['store_type'] is not None:
@@ -67,6 +70,7 @@ class StoreFilter(filters.BaseFilterBackend):
         search = request.query_params.get('search')
         district = request.query_params.get('district', None)
         county = request.query_params.get('county', None)
+        activity = request.query_params.get('activity', None)
         store_type = request.query_params.get('store_type', None)
         order_by = request.query_params.get('order_by', None)
         storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
@@ -74,6 +78,7 @@ class StoreFilter(filters.BaseFilterBackend):
         filter_dict = dict([('search', search),
                             ('district', district),
                             ('county', county),
+                            ('activity', activity),
                             ('store_type', store_type),
                             ('order_by', order_by),
                             ('storediscount_discount_type', storediscount_discount_type),
@@ -110,6 +115,15 @@ class StoreFilter(filters.BaseFilterBackend):
                 schema=coreschema.String(
                     title='search',
                     description='str: 請輸入Search'
+                )
+            ),
+            coreapi.Field(
+                name='activity',
+                required=False,
+                location='query',
+                schema=coreschema.Number(
+                    title='activity',
+                    description='int: 活動'
                 )
             ),
             coreapi.Field(

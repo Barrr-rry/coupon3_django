@@ -105,6 +105,9 @@
                 </div>
                 <div class="imagebox_bottom">
                   <p class="tag_block">
+                    {% for activity in el.activity %}
+                      <span class="tag"><a href="">{{ activity.name }}</a></span>
+                    {% endfor %}
                     {% for storediscount in el.storediscount %}
                       <span class="tag"><a href="">{{ storediscount.name }}</a></span>
                     {% endfor %}

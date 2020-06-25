@@ -1,6 +1,6 @@
 from django.views.generic.base import View, TemplateView
 from api.models import (
-    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
 )
 from api import serializers
 from api import filters
@@ -171,6 +171,7 @@ class StoreView(BaseView):
             select_related('county').prefetch_related('activity'). \
             select_related('district').select_related('store_type').filter(status=1)
         search = self.request.GET.get('search', None)
+        activity = self.request.GET.get('activity', None)
         district = self.request.GET.get('district', None)
         county = self.request.GET.get('county', 'all')
         store_type = self.request.GET.get('store_type', None)
@@ -193,9 +194,24 @@ class StoreView(BaseView):
         district_instance = None
         # 沒有輸入search lat lon 用本身經緯度
         msg_st = time.time()
+        lat = None
+        lon = None
         if msg is None or not search:
-            lat = float(self.request.COOKIES.get('lat', 23.8523405))
-            lon = float(self.request.COOKIES.get('lon', 120.9009427))
+            # 如果沒有輸入地址取得經緯度的方法
+            el = None
+            if county:
+                el = County.objects.get(pk=county)
+            elif district:
+                el = District.objects.get(pk=district)
+            elif activity:
+                el = Activity.objects.get(pk=activity)
+                el = el.county.first()
+            if el:
+                lat = el.latitude
+                lon = el.longitude
+            else:
+                lat = float(self.request.COOKIES.get('lat', 23.8523405))
+                lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
 
             for county_name in county_dct:
@@ -213,12 +229,13 @@ class StoreView(BaseView):
                     district_instance = el
                     break
 
-            # 縣市或者區域
+            # 屬於縣市或者區域找經緯度
             if not msg and keywords:
                 search = " ".join(keywords)
                 target_instnace = district_instance if district_instance else county_instance
                 lat = target_instnace.latitude
                 lon = target_instnace.longitude
+            # 自行輸入地址找經緯度
             else:
                 task_st = time.time()
                 task_id = task.enqueue_task('get_latlon', search)
@@ -234,13 +251,15 @@ class StoreView(BaseView):
         msg_ed = time.time()
 
         activity_list = []
+        if not keywords and activity:
+            el = Activity.objects.get(pk=activity)
+            keywords.append(el.county.first().name)
         for keyword in keywords:
             if county_dct.get(keyword):
                 el = county_dct[keyword]['instance']
                 activity_list = serializers.ActivitySerializer(many=True, instance=el.activity).data
 
         sort = self.request.GET.get('sort', 'distance')
-        activity = self.request.GET.get('activity', None)
         if sort == 'new':
             order_by = '-created_at'
         if sort == 'old':
@@ -248,6 +267,7 @@ class StoreView(BaseView):
 
         filter_dict = dict([('search', search),
                             ('district', district),
+                            ('activity', activity),
                             ('county', county),
                             ('store_type', store_type),
                             ('order_by', order_by),
@@ -305,6 +325,8 @@ class StoreView(BaseView):
             suffix = f'?{split_list[-1]}'
 
         ret = dict(
+            lat=lat,
+            lon=lon,
             activity=activity,
             activity_list=activity_list,
             suffix=suffix,

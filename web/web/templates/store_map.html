@@ -194,6 +194,8 @@
 <script type="text/javascript">
   let store_data = {{ json_data|safe }};
   let sort = '{{ sort }}';
+  let lat = {{ lat }};
+  let lon = {{ lon }};
 </script>
 {% include 'includes/js.html' %}
 <script>
@@ -220,12 +222,14 @@
       initStoreDataMarker(0, 6)
     }
 
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(positionFunction, showError)
-    } else {
-      alert('您的瀏覽器不支援定位系統')
+    const position = {
+      coords: {
+        latitude: lat,
+        longitude: lon
+      },
+      zoom: 14
     }
+    positionFunction(position)
   })
 </script>
 
