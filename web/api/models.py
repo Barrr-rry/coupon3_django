@@ -53,6 +53,7 @@ class DefaultAbstract(models.Model):
 class StoreType(DefaultAbstract):
     name = models.CharField(max_length=128, help_text="類型名稱")
     icon = models.CharField(max_length=128, help_text="標籤名稱")
+    replace_icon = models.CharField(max_length=128, help_text="替代標籤")
 
     class Meta:
         ordering = ['created_at']

@@ -117,7 +117,11 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
 
     def get_image_1(self, instance, *args, **kwargs):
         target = instance.storeimage.first()
-        return '' if not target else target.picture
+        if not target:
+            ret = instance.store_type.replace_icon
+        else:
+            ret = target.picture
+        return ret
 
     def get_storediscount_names(self, instance, *args, **kwargs):
         names = map(lambda x: x.name, instance.storediscount.all())

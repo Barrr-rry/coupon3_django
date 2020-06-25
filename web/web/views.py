@@ -207,9 +207,9 @@ class StoreView(BaseView):
         if msg is None or not search:
             # 如果沒有輸入地址取得經緯度的方法
             el = None
-            if county:
+            if county and county != 'all':
                 el = County.objects.get(pk=county)
-            elif district:
+            elif district and district != 'all':
                 el = District.objects.get(pk=district)
             elif activity:
                 el = Activity.objects.get(pk=activity)

@@ -1,1 +1,3 @@
-from crawler import task_redis, queue
+from run_init import *
+
+generate_store()

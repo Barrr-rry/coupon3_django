@@ -23,10 +23,10 @@ def main(for_test=False, config_data=None):
     generate_stort_type(5)
     generate_county()
     generate_district()
-    generate_store()
     generate_discount_type(5)
-    generate_store_discount()
-    generate_store_image()
+    generate_store()
+    # generate_store_discount()
+    # generate_store_image()
     generate_activity(5)
 
 
@@ -43,19 +43,20 @@ def generate_super_admin():
 
 def generate_stort_type(count):
     names = [
-        ('美食', 'cutlery.svg'),
-        ('住宿', 'double-bed.svg'),
-        ('娛樂', 'guitar.svg'),
-        ('租賃', 'rent-a-car.svg'),
-        ('購物', 'shopping-bag.svg'),
-        ('旅遊', 'dumbbell.svg'),
-        ('刷卡', 'cocktail.svg'),
-        ('美妝便利店', 'park.svg'),
+        ('美食', 'cutlery.svg', 'cutlery_replace.svg'),
+        ('住宿', 'double-bed.svg', 'double-bed_replace.svg'),
+        ('娛樂', 'guitar.svg', 'guitar_replace.svg'),
+        ('租賃', 'rent-a-car.svg', 'rent-a-car_replace.svg'),
+        ('購物', 'shopping-bag.svg', 'shopping-bag_replace.svg'),
+        ('旅遊', 'dumbbell.svg', 'dumbbell_replace.svg'),
+        ('刷卡', 'cocktail.svg', 'cocktail_replace.svg'),
+        ('美妝便利店', 'park.svg', 'park_replace.svg'),
     ]
-    for name, icon in names:
+    for name, icon, replace_icon in names:
         StoreType.objects.create(
             name=name,
             icon=icon,
+            replace_icon=replace_icon,
         )
 
 
@@ -94,25 +95,56 @@ def generate_district():
                 )
 
 
+def get_json(filename):
+    import json
+
+    ret = []
+    with open(filename) as f:
+        return json.loads(f.read())
+
+
+def set_json(filename, data):
+    import json
+
+    ret = []
+    with open(filename, 'w') as f:
+        f.write(json.dumps(data))
+
+
 def generate_store():
     store_type = StoreType.objects.all()
+    store_dct = dict()
+    for el in store_type:
+        print(el.id, el.name)
+        store_dct[el.name] = el.id
+    store_map = {
+        '餐飲美食': '美食'
+    }
     querset = District.objects.all()
-    i = 0
-    for el in querset:
-        i += 1
-        county = el.county
-        Store.objects.create(
-            name=f'商店{i}',
-            store_type=random.choice(store_type),
-            phone=f'09{get_random_number(8)}',
-            website='https://conquers.co/',
-            address=f'{county.name}{el.name}{random.randint(1, 999)}號',
-            county=county,
-            district=el,
+    data = get_json('./site1.josn')
+    discount_type = DiscountType.objects.first()
+    for el in data:
+        instance = Store.objects.create(
+            name=el['name'],
+            address=el['address'],
+            # todo 假資料
+            store_type_id=1,
+            latitude=el['lat'],
+            longitude=el['lon'],
+            # todo 假資料
+            county_id=1,
+            district_id=1,
             status=1,
-            latitude=el.latitude + round(random.uniform(0, 1), 6),
-            longitude=el.longitude + round(random.uniform(0, 1), 6),
+
         )
+        if el['storediscount']:
+            StoreDiscount.objects.create(
+                store=instance,
+                # todo 假資料
+                discount_type=discount_type,
+                name=el['storediscount'],
+                description=None
+            )
 
 
 def generate_discount_type(count):
