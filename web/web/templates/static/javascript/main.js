@@ -1730,6 +1730,14 @@ const showSelfPosition = (position) => {
       $('.preloader').show()
     })
   }
+  let initToScroll = () => {
+    if ($('#toscroll')) {
+      setTimeout(() => {
+        $('#toscroll')[0].scrollIntoView()
+        console.log('scrollll')
+      }, 1000)
+    }
+  }
 
 
   $(function () {
@@ -1755,6 +1763,7 @@ const showSelfPosition = (position) => {
     storeCreatePage();
     contactUs();
     storePage();
+    initToScroll();
   });
 
 })(jQuery);

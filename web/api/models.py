@@ -75,7 +75,7 @@ class District(DefaultAbstract):
 class Store(DefaultAbstract):
     name = models.CharField(max_length=64, help_text="商家名稱")
     store_type = models.ForeignKey(StoreType, related_name="store", on_delete=models.CASCADE, help_text="店家類型fk")
-    phone = models.CharField(max_length=64, help_text="電話")
+    phone = models.CharField(max_length=64, help_text="電話", null=True)
     person = models.CharField(max_length=64, help_text="聯絡人", null=True)
     email = models.CharField(max_length=64, help_text="信箱", null=True)
     website = models.CharField(max_length=64, null=True, blank=True, help_text="網站")
