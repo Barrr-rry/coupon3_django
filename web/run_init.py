@@ -110,8 +110,8 @@ def generate_store():
             county=county,
             district=el,
             status=1,
-            latitude=el.latitude+round(random.uniform(0, 1), 6),
-            longitude=el.longitude+round(random.uniform(0, 1), 6),
+            latitude=el.latitude + round(random.uniform(0, 1), 6),
+            longitude=el.longitude + round(random.uniform(0, 1), 6),
         )
 
 
@@ -122,7 +122,7 @@ def generate_discount_type(count):
                 '滿減',
                 '優惠碼',
                 '尊享服務',
-                '優惠',]
+                '優惠', ]
     for i in discount:
         DiscountType.objects.create(
             name=i,
@@ -130,13 +130,17 @@ def generate_discount_type(count):
 
 
 def generate_activity(count):
-    stores = Store.objects.filter(status=1).all()
-    activity = Activity.objects.create(
-        name='高雄振興嘉年華'
-    )
-    for i in range(200):
-        activity.store.add(random.choice(stores))
-    activity.save()
+    county_query = County.objects.all()
+    for county in county_query:
+        activity = Activity.objects.create(
+            name=f'{county.name}振興嘉年華',
+        )
+        activity.county.add(county)
+        stores = Store.objects.filter(status=1, county=county).all()
+        for s in stores:
+            if random.choice([True, False]):
+                activity.store.add(s)
+        activity.save()
 
 
 def generate_store_discount():
