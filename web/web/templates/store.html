@@ -46,6 +46,16 @@
             地圖模式
           </a>
           <div class="clear clear-non-md"></div>
+          <div>
+            您所查詢的區域還有這些優惠活動:
+          </div>
+          <div class="clear clear-non-md"></div>
+          <div class="activity">
+            {% for el in activity_list %}
+              <a data-activity="{{ el.id }}" href="">{{ el.name }}</a>
+            {% endfor %}
+          </div>
+          <div class="clear clear-non-md"></div>
           <div class="sort">
             <a data-sort="distance" href="">由近到遠</a>
             <a data-sort="-distance" href="">由遠到近</a>
@@ -154,6 +164,7 @@
 <script type="text/javascript">
   let store_data = {{ json_data|safe }};
   let sort = '{{ sort }}';
+  let activity = '{{ activity }}';
 </script>
 {% include 'includes/js.html' %}
 <script>
@@ -173,7 +184,25 @@
 
 
     // init active sort
-    let $el = $(`a[data-sort=${sort}]`)
+    let $el = $(`a[data-sort=${activity}]`)
+    $el.addClass('active')
+
+
+    $('.activity a').each(function () {
+      let $el = $(this)
+      let activity = $el.attr('data-activity')
+      let split_str = ''
+      if (href_split.length > 1) {
+        split_str = `&activity=${activity}`
+      } else {
+        split_str = `?activity=${activity}`
+      }
+      $el.attr('href', `${window.location.href + split_str}`)
+    })
+
+
+    // init active activity
+    $el = $(`a[data-activity=${activity}]`)
     $el.addClass('active')
 
 

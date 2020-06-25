@@ -168,7 +168,7 @@ class StoreView(BaseView):
         st = time.time()
         task_spend = 0
         queryset = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
-            select_related('county').select_related('activity'). \
+            select_related('county').prefetch_related('activity'). \
             select_related('district').select_related('store_type').filter(status=1)
         search = self.request.GET.get('search', None)
         district = self.request.GET.get('district', None)
@@ -182,6 +182,11 @@ class StoreView(BaseView):
         if search:
             search = search.replace('台', '臺')
 
+        # get all county
+        county_dct = dict()
+        for el in County.objects.all():
+            county_dct[el.name] = dict(id=el.id, instance=el)
+
         msg = search
         keywords = []
         county_instance = None
@@ -193,11 +198,12 @@ class StoreView(BaseView):
             lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
 
-            for el in County.objects.all():
-                if el.name in msg:
-                    msg = msg.replace(el.name, '')
-                    keywords.append(el.name)
-                    county_instance = el
+            for county_name in county_dct:
+                county = county_dct[county_name]['instance']
+                if county_name in msg:
+                    msg = msg.replace(county_name, '')
+                    keywords.append(county_name)
+                    county_instance = county
                     break
 
             for el in District.objects.all():
@@ -227,7 +233,14 @@ class StoreView(BaseView):
                 task_spend = task_ed - task_st
         msg_ed = time.time()
 
+        activity_list = []
+        for keyword in keywords:
+            if county_dct.get(keyword):
+                el = county_dct[keyword]['instance']
+                activity_list = serializers.ActivitySerializer(many=True, instance=el.activity).data
+
         sort = self.request.GET.get('sort', 'distance')
+        activity = self.request.GET.get('activity', None)
         if sort == 'new':
             order_by = '-created_at'
         if sort == 'old':
@@ -292,6 +305,8 @@ class StoreView(BaseView):
             suffix = f'?{split_list[-1]}'
 
         ret = dict(
+            activity=activity,
+            activity_list=activity_list,
             suffix=suffix,
             search=search if search is not None else '',
             data=data[:6],

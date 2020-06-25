@@ -76,12 +76,6 @@ class Task:
         reids_wraper.set(task_id, pickle.dumps(result))
 
     def get_task_result(self, task_id):
-        # todo 這是hard code
-        if 'get_latlon' in task_id:
-            return [23.8523405, 120.9009427]
-        else:
-            return '高雄市中正四路148號'
-
         ret = reids_wraper.get(task_id)
         if ret:
             ret = pickle.loads(ret)
@@ -159,6 +153,9 @@ def loop_queue():
             continue
         st = time.time()
         (task_type, task_args, task_id) = tasks
+        # 有資料就不要再跑了 減少效能消耗
+        if task.get_task_result(task_id):
+            continue
         logger.info(f'task type:{task_type} args:{task_args}')
         if len(task_args) <= 1:
             logger.info(f'task_args too small: {task_args}')
@@ -177,7 +174,7 @@ def loop_queue():
 
 
 if __name__ == '__main__':
-    task.enqueue_task('get_latlon', '高雄市中正四路148號')
+    # task.enqueue_task('get_latlon', '高雄市中正四路148號')
     # task.enqueue_task('get_latlon', '高雄市中正三路42號')
     # task.enqueue_task('get_latlon', '高雄市中正三路44號')
     # task.enqueue_task('get_latlon', '高雄市中正三路46號')

@@ -11207,14 +11207,14 @@ footer .widget-about .logo-ft a {
   font-size: 18px;
   letter-spacing: 3px;
 }
-.flat-imagebox .filter-result .sort {
+.flat-imagebox .filter-result .sort, .flat-imagebox .filter-result .activity {
   padding-top: 20px;
 }
-.flat-imagebox .filter-result .sort::after {
+.flat-imagebox .filter-result .sort::after, .flat-imagebox .filter-result .activity::after {
   content: "";
   clear: both;
 }
-.flat-imagebox .filter-result .sort a {
+.flat-imagebox .filter-result .sort a, .flat-imagebox .filter-result .activity a {
   display: inline-block;
   font-size: 14px;
   font-weight: 400;
@@ -11225,16 +11225,16 @@ footer .widget-about .logo-ft a {
   margin-bottom: 25px;
   float: left;
 }
-.flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a.active {
+.flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a.active, .flat-imagebox .filter-result .activity a:hover, .flat-imagebox .filter-result .activity a.active {
   color: #ffffff;
   background-color: #f25b22;
   border-color: #f25b22;
 }
-.flat-imagebox .filter-result .sort a:first-child {
+.flat-imagebox .filter-result .sort a:first-child, .flat-imagebox .filter-result .activity a:first-child {
   border-radius: 50px 0 0 50px;
   border-left: 1px solid rgba(242, 91, 34, 0.5);
 }
-.flat-imagebox .filter-result .sort a:last-child {
+.flat-imagebox .filter-result .sort a:last-child, .flat-imagebox .filter-result .activity a:last-child {
   border-radius: 0 50px 50px 0;
   border-right: 1px solid rgba(242, 91, 34, 0.5);
 }
@@ -12051,7 +12051,7 @@ form.form-listing .only-submit-form-listing:hover {
     margin-right: 20px;
     padding: 5px 0;
   }
-  .flat-imagebox .filter-result .sort {
+  .flat-imagebox .filter-result .sort, .flat-imagebox .filter-result .activity {
     padding-top: 0;
   }
 
@@ -12338,7 +12338,7 @@ form.form-listing .only-submit-form-listing:hover {
   .flat-imagebox .filter-result.style2 {
     padding-top: 50px;
   }
-  .flat-imagebox .filter-result .sort a {
+  .flat-imagebox .filter-result .sort a, .flat-imagebox .filter-result .activity a {
     font-size: 13px;
     padding: 2px 12px;
   }
@@ -12572,7 +12572,7 @@ form.form-listing .only-submit-form-listing:hover {
     font-size: 16px !important;
     letter-spacing: 2px;
   }
-  .flat-imagebox .filter-result .sort a {
+  .flat-imagebox .filter-result .sort a, .flat-imagebox .filter-result .activity a {
     font-size: 12px;
     padding: 1px 9px;
   }
