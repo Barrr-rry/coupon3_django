@@ -243,7 +243,7 @@ const showSelfPosition = (position) => {
           var $desktopMenu = $('#mainnav-mobi').attr('id', 'mainnav').removeAttr('style');
 
           $desktopMenu.find('.submenu').removeAttr('style');
-          $('.header').find('.button-header').before($desktopMenu);
+          $('.nav-wrap .wrap-box-search').before($desktopMenu);
           $('.btn-submenu').remove();
         }
       }
