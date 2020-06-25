@@ -1529,6 +1529,10 @@ const showSelfPosition = (position) => {
   }
   let storePage = () => {
     // store activity
+    let search = new URLSearchParams(window.location.search).get('search')
+    if (search) {
+      $('input[name="search"]').val(search)
+    }
     $('.list-filter li').on('click', function () {
       let $self = $(this)
       let $span = $self.find('span')
