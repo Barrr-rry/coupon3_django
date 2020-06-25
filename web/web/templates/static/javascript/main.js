@@ -1541,7 +1541,6 @@ const showSelfPosition = (position) => {
       }
     })
     $('#search-btn').on('click', () => {
-      $('#search-form')
       let data = $('#search-form').serializeArray()
       data = formSerailize(data)
       let querys = []
@@ -1561,7 +1560,7 @@ const showSelfPosition = (position) => {
           querys.push(`storediscount_discount_type=${ids.join(',')}`)
         }
       }
-      window.location.href = `/store/?${querys.join('&')}`
+      window.location.href = `${$('#search-form').attr('action')}?${querys.join('&')}`
     })
 
     let initStoreShare = () => {
