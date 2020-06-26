@@ -272,6 +272,30 @@ class LocationView(viewsets.ViewSet):
         ]
     )
 
+    @action(methods=['GET'], detail=False, permission_classes=[], authentication_classes=[])
+    def temp(self, request, *args, **kwargs):
+        """
+                1: get_latlon 2: get_addr
+                """
+        from crawler import task
+        import random
+        task_type = int(request.query_params.get('task_type', 1))
+        msg = request.query_params.get('msg')
+        lat = f'24.{random.randint(100000, 999999)}'
+        lon = f'121.{random.randint(100000, 999999)}'
+        msg = f'{lat},{lon}'
+        fn_mapping = {
+            1: 'get_latlon',
+            2: 'get_addr'
+        }
+        task_id = task.enqueue_task(fn_mapping[task_type], msg)
+        ret = None
+        while True:
+            ret = task.get_task_result(task_id)
+            if ret:
+                break
+        return Response(dict(data=ret))
+
     def list(self, request, *args, **kwargs):
         """
         1: get_latlon 2: get_addr

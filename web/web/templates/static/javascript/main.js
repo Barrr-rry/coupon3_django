@@ -1539,29 +1539,8 @@ const showSelfPosition = (position) => {
 
     $("#updateStore").validate({
       rules: {
-        name: "required",
-        person: "required",
-        address: "required",
-        phone: {
-          isPhone: true
-        },
-        store_discount_name: "required",
-        email: {
-          required: true,
-          isEmail: true,
-        },
-        website: {
-          url: true
-        }
       },
       messages: {
-        name: "請输入商家名稱",
-        person: "請输入聯絡人姓名",
-        address: "請输入地址",
-        phone: "請输入正確電話格式",
-        store_discount_name: "請输入活動名稱",
-        email: "請输入正確信箱格式",
-        website: "請输入正確url格式",
       },
       submitHandler(form) {
         let data = $(form).serializeArray()
