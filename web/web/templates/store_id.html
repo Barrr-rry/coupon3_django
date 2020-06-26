@@ -116,7 +116,9 @@
       <div class="col-md-8">
         {% for el in instance.storediscount %}
           <div class="text-box">
-            <h3><span class="discount-type-border">{{ el.discount_type.name }}</span><span>{{ el.name }}</span></h3>
+            <h3><span
+              class="discount-type-border">{{ el.discount_type.name|default_if_none:"" }}</span><span>{{ el.name|default_if_none:"" }}</span>
+            </h3>
             <div class="text-desc">
               <p>
                 {{ el.description|default_if_none:"" }}</p>
@@ -176,7 +178,7 @@
       zoom: 12
     }
     showSelfPosition(position)
-    $('.share-to').snsShare('快來看看{{instance.name}}用三倍券的超棒優惠！', window.location.href)
+    $('.share-to').snsShare('快來看看{{instance.name|default_if_none:""}}用三倍券的超棒優惠！', window.location.href)
     $('.share-url').on('click', function () {
       let $el = $(this)
       let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！${window.location.origin}/${$el.attr('data-url')}`

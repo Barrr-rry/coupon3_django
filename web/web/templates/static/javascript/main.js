@@ -1679,10 +1679,14 @@ const showSelfPosition = (position) => {
       }
       let li = ''
       for (let el of data.activity) {
-        li += `<span class="tag"><a href="">${el.name}</a></span>`
+        if (el.name) {
+          li += `<span class="tag"><a href="">${el.name}</a></span>`
+        }
       }
       for (let el of data.storediscount) {
-        li += `<span class="tag"><a href="">${el.name}</a></span>`
+        if (el.name) {
+          li += `<span class="tag"><a href="">${el.name}</a></span>`
+        }
       }
       let html = `
       <div class="${class_name}">

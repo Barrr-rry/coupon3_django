@@ -131,8 +131,15 @@
                         </div>
                         <div class="imagebox_bottom">
                           <p class="tag_block">
+                            {% for activity in el.activity %}
+                              {% if activity.name %}
+                                <span class="tag"><a href="">{{ activity.name }}</a></span>
+                              {% endif %}
+                            {% endfor %}
                             {% for storediscount in el.storediscount %}
-                              <span class="tag"><a href="">{{ storediscount.name }}</a></span>
+                              {% if storediscount.name %}
+                                <span class="tag"><a href="">{{ storediscount.name }}</a></span>
+                              {% endif %}
                             {% endfor %}
                           </p>
                           <div class="right">
@@ -151,13 +158,13 @@
                                     data-url="store/{{ el.id }}">
                                   <img src="/media/share_fb.svg" alt="">
                                 </li>
-                                <li class="share-url entypo-url" data-name="{{ el.name }}"
-                                    data-url="store/{{ el.id }}">
+                                <li class="share-url entypo-url" data-name="{{ el.name }}" data-url="store/{{ el.id }}">
                                   <img src="/media/share_url.svg" alt="">
                                 </li>
                               </ul>
                             </div>
                           </div>
+                          <div class="clear"></div>
                         </div>
                         <!--                <ul class="location">-->
                         <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->

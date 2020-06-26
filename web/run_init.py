@@ -51,6 +51,7 @@ def generate_stort_type(count):
         ('旅遊', 'dumbbell.svg', 'dumbbell_replace.svg'),
         ('刷卡', 'cocktail.svg', 'cocktail_replace.svg'),
         ('美妝便利店', 'park.svg', 'park_replace.svg'),
+        ('其他', 'other.svg', 'other_replace.svg'),
     ]
     for name, icon, replace_icon in names:
         StoreType.objects.create(
@@ -118,10 +119,12 @@ def generate_store():
         print(el.id, el.name)
         store_dct[el.name] = el.id
     store_map = {
-        '餐飲美食': '美食'
+        '餐飲美食': '美食',
+        '流行時尚': '美妝便利店',
+        '美妝保養': '美妝便利店',
     }
     querset = District.objects.all()
-    data = get_json('./site1.josn')
+    data = get_json('./site1.json')
     discount_type = DiscountType.objects.first()
     for el in data:
         instance = Store.objects.create(
@@ -142,8 +145,8 @@ def generate_store():
                 store=instance,
                 # todo 假資料
                 discount_type=discount_type,
-                name=el['storediscount'],
-                description=None
+                    name=None,
+                description=el['storediscount']
             )
 
 

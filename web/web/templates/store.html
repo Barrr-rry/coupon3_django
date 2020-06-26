@@ -110,10 +110,14 @@
                 <div class="imagebox_bottom">
                   <p class="tag_block">
                     {% for activity in el.activity %}
-                      <span class="tag"><a href="">{{ activity.name }}</a></span>
+                      {% if activity.name %}
+                        <span class="tag"><a href="">{{ activity.name }}</a></span>
+                      {% endif %}
                     {% endfor %}
                     {% for storediscount in el.storediscount %}
-                      <span class="tag"><a href="">{{ storediscount.name }}</a></span>
+                      {% if storediscount.name %}
+                        <span class="tag"><a href="">{{ storediscount.name }}</a></span>
+                      {% endif %}
                     {% endfor %}
                   </p>
                   <div class="right">

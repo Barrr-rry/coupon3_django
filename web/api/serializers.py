@@ -125,6 +125,9 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
 
     def get_storediscount_names(self, instance, *args, **kwargs):
         names = map(lambda x: x.name, instance.storediscount.all())
+        names = list(filter(lambda x: x, names))
+        if not names:
+            return ''
         return ", ".join(names)
 
     def get_images(self, instance, *args, **kwargs):
