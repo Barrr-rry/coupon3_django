@@ -71,9 +71,12 @@
             <a href="#" title="">{{ instance.name }}</a>
           </div><!-- /.box-title -->
           <ul class="box-address">
-            <li class="phone">
-              <a href="tel:{{ instance.phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}</a>
-            </li>
+            {% if instance.phone %}
+              <li class="phone">
+                <a href="tel:{{ instance.phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
+                </a>
+              </li>
+            {% endif %}
             <li class="address">
               <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker"
                                                         aria-hidden="true"></i>{{ instance.address }}</a>
@@ -116,7 +119,7 @@
             <h3><span class="discount-type-border">{{ el.discount_type.name }}</span><span>{{ el.name }}</span></h3>
             <div class="text-desc">
               <p>
-                {{ el.description|safe }}</p>
+                {{ el.description|default_if_none:"" }}</p>
             </div>
           </div>
         {% endfor %}
@@ -138,11 +141,13 @@
                   {{ instance.address }}
                 </a>
               </li>
-              <li>
-                <a href="tel:{{ instance.phone }}" target="_blank"><i class="fa fa-phone"
-                                                                      aria-hidden="true"></i>{{ instance.phone }}
-                </a>
-              </li>
+              {% if instance.phone %}
+                <li>
+                  <a href="tel:{{ instance.phone }}" target="_blank"><i class="fa fa-phone"
+                                                                        aria-hidden="true"></i>{{ instance.phone }}
+                  </a>
+                </li>
+              {% endif %}
               {% if instance.website %}
                 <li><i class="fa fa-globe" aria-hidden="true"></i><a href="{{ instance.website }}"
                                                                      title="" target="_blank">{{ instance.website }}</a>
