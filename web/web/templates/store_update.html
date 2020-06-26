@@ -144,7 +144,7 @@
                         >
                           {% for e in discounttype %}
                             <option value="{{ e.id }}"
-                                    {% if el.discount_type.id == e.id %}selected="selected"{% endif %}
+                                    {% if e.discount_type.id == e.id %}selected="selected"{% endif %}
                             >{{ e.name }}
                             </option>
                           {% endfor %}
@@ -155,7 +155,9 @@
                       <label>活動內容</label>
                       <textarea rows="4" cols="5" name="description" placeholder="請輸入活動內容與注意事項"
                                 value="{{ el.description }}"
-                      ></textarea>
+                      >
+                        {{ el.description }}
+                      </textarea>
                     </div><!-- /.wrap-listing -->
                   </div>
                   <div class="col-auto d-flex align-items-center">
