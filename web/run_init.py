@@ -112,7 +112,9 @@ def set_json(filename, data):
         f.write(json.dumps(data))
 
 
-def generate_store():
+def site1():
+    data = get_json('./site1.json')
+
     store_type = StoreType.objects.all()
     store_dct = dict()
     for el in store_type:
@@ -120,23 +122,37 @@ def generate_store():
         store_dct[el.name] = el.id
     store_map = {
         '餐飲美食': '美食',
-        '流行時尚': '美妝便利店',
+        '流行時尚': '購物',
+        '百貨商城': '購物',
         '美妝保養': '美妝便利店',
+        '觀光工廠': '旅遊',
+        '旅遊休憩': '旅遊',
+        '其他': '其他',
+        '': '其他',
+        '居家生活': '購物',
     }
     querset = District.objects.all()
-    data = get_json('./site1.json')
+    district_dct = dict()
+    for el in querset:
+        district_dct[el.name] = el
     discount_type = DiscountType.objects.first()
+    county_id = None
+    district_id = None
     for el in data:
+        addr = el['address']
+        for key in district_dct:
+            if key in addr:
+                district_id = district_dct[key].id
+                county_id = district_dct[key].county_id
+                break
         instance = Store.objects.create(
             name=el['name'],
             address=el['address'],
-            # todo 假資料
-            store_type_id=1,
+            store_type_id=store_dct[store_map[el['store_type']]],
             latitude=el['lat'],
             longitude=el['lon'],
-            # todo 假資料
-            county_id=1,
-            district_id=1,
+            county_id=county_id,
+            district_id=district_id,
             status=1,
 
         )
@@ -145,9 +161,89 @@ def generate_store():
                 store=instance,
                 # todo 假資料
                 discount_type=discount_type,
-                    name=None,
+                name=None,
                 description=el['storediscount']
             )
+
+
+def site2():
+    data = get_json('./site2.json')
+
+    storetype = StoreType.objects.filter(name='旅遊').first()
+    querset = District.objects.all()
+    district_dct = dict()
+    for el in querset:
+        district_dct[el.name] = el
+    discount_type = DiscountType.objects.first()
+    county_id = None
+    district_id = None
+    for el in data:
+        addr = el['address']
+        for key in district_dct:
+            if key in addr:
+                district_id = district_dct[key].id
+                county_id = district_dct[key].county_id
+                break
+
+        instance = Store.objects.create(
+            name=el['name'],
+            address=el['address'],
+            store_type_id=storetype.id,
+            latitude=el['lat'],
+            longitude=el['lon'],
+            county_id=county_id,
+            district_id=district_id,
+            status=1,
+        )
+
+
+def from_csv():
+    data = get_json('./csv.json')
+
+    storetype = StoreType.objects.filter(name='旅遊').first()
+    querset = District.objects.all()
+    district_dct = dict()
+    for el in querset:
+        district_dct[el.name] = el
+    discount_type = DiscountType.objects.first()
+    county_id = None
+    district_id = None
+    for el in data:
+        addr = el['address']
+        if not addr:
+            continue
+        for key in district_dct:
+            if key in addr:
+                district_id = district_dct[key].id
+                county_id = district_dct[key].county_id
+                break
+
+        instance = Store.objects.create(
+            name=el['name'],
+            address=el['address'],
+            store_type_id=el['store_type'],
+            person=el['person'],
+            email=el['email'],
+            website=el['website'],
+            latitude=el['lat'],
+            longitude=el['lon'],
+            county_id=county_id,
+            district_id=district_id,
+            status=1,
+        )
+        if el['discountype'] and el['discount_name']:
+            StoreDiscount.objects.create(
+                store=instance,
+                discount_type_id=el['discountype'],
+                name=el['discount_name'],
+                description=el['description']
+            )
+
+
+def generate_store():
+    site1()
+    site2()
+    from_csv()
 
 
 def generate_discount_type(count):
