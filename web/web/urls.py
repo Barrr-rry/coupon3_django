@@ -24,40 +24,47 @@ from api import docs
 from .views import *
 from django.views.generic.base import RedirectView
 from django.views.decorators.cache import cache_page
+import os
+
+DEBUG = os.environ.get('ENV') != 'prod'
+
+
+def get_view(cls):
+    if DEBUG:
+        return cls.as_view()
+    else:
+        return cache_page(60 * 60)(cls.as_view())
+
 
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='media/shorticon_48.svg')),
     path('api/', include(get_urls())),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('backend/conquers/admin/', admin.site.urls),
-    path('', IndexView.as_view()),
+    path('', get_view(IndexView)),
     path('404/', NotFoundView.as_view()),
     path('store/create/', StoreCreateView.as_view()),
-    path('contact/', ContactView.as_view()),
-    path('store/<int:store_id>/', StoreIdView.as_view()),
+    path('contact/', get_view(ContactView)),
+    path('store/<int:store_id>/', get_view(StoreIdView)),
     path('store/<int:store_id>/update/', StoreUpdateView.as_view()),
-
-    # path('store_map/', cache_page(60 * 60)(StoreMapView.as_view())),
-    # path('store/', cache_page(60 * 60)(StoreView.as_view())),
-    path('store_map/', StoreMapView.as_view()),
-    path('store/', StoreView.as_view()),
-
-    path('store/county/', StoreCountyView.as_view()),
-    path('test/', TestView.as_view()),
-    path('qa/', QAView.as_view()),
-    path('qa/farming/', QAFarmingView.as_view()),
-    path('qa/fun/', QAFunView.as_view()),
-    path('qa/tour/', QATourView.as_view()),
-    path('qa/treble/', QATrebleView.as_view()),
-    path('qa/treble-cash/', QATrebleCashView.as_view()),
-    path('qa/treble-non-cash/', QATrebleNonCashView.as_view()),
-    path('qa/treble-store/', QAVTrebleStoreiew.as_view()),
-    path('eli5/county/', ELI5CountyView.as_view()),
-    path('eli5/farming/', ELI5FarmingView.as_view()),
-    path('eli5/fun/', ELI5FunView.as_view()),
-    path('eli5/tour/', ELI5TourView.as_view()),
-    path('eli5/treble/', ELI5TrebleView.as_view()),
-    path('eli5/voucher', ELI5VoucherView.as_view()),
+    path('store_map/', get_view(StoreMapView)),
+    path('store/', get_view(StoreView)),
+    path('store/county/', get_view(StoreCountyView)),
+    path('test/', get_view(TestView)),
+    path('qa/', get_view(QAView)),
+    path('qa/farming/', get_view(QAFarmingView)),
+    path('qa/fun/', get_view(QAFunView)),
+    path('qa/tour/', get_view(QATourView)),
+    path('qa/treble/', get_view(QATrebleView)),
+    path('qa/treble-cash/', get_view(QATrebleCashView)),
+    path('qa/treble-non-cash/', get_view(QATrebleNonCashView)),
+    path('qa/treble-store/', get_view(QAVTrebleStoreiew)),
+    path('eli5/county/', get_view(ELI5CountyView)),
+    path('eli5/farming/', get_view(ELI5FarmingView)),
+    path('eli5/fun/', get_view(ELI5FunView)),
+    path('eli5/tour/', get_view(ELI5TourView)),
+    path('eli5/treble/', get_view(ELI5TrebleView)),
+    path('eli5/voucher', get_view(ELI5VoucherView)),
 ]
 
 if settings.DEBUG:
