@@ -174,9 +174,10 @@ class StoreView(BaseView):
     def get_context_data(self, *args, **kwargs):
         st = time.time()
         task_spend = 0
+        status = self.request.GET.get('status', 1)
         queryset = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
             select_related('county').prefetch_related('activity'). \
-            select_related('district').select_related('store_type').filter(status=1)
+            select_related('district').select_related('store_type').filter(status=status)
         search = self.request.GET.get('search', None)
         activity = self.request.GET.get('activity', None)
         district = self.request.GET.get('district', None)
