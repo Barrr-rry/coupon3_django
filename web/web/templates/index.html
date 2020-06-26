@@ -6,6 +6,20 @@
 <head>
   <!-- Basic Page Needs -->
   {% include 'includes/meta.html' %}
+  <title>小資振興｜振興優惠整理</title>
+  <meta name="keywords"
+        content="小資振興,小資優惠,振興抵用券,振興抵用卷,振興補助,住宿優惠,訂房補助,訂房優惠,振興方案,振興折扣券,消費抵用券,國旅抵用券,振興優惠券,我愛東東消費券,振興方案,紓困方案,振興紓困券,振興酷碰券,酷碰券懶人包,修正版酷碰券,實體券,消費券,電子票證,行動支付,安心旅遊,防疫旅遊,政府旅遊補助,旅遊補助,振興券,酷碰券,振興三倍券,三倍券,振興卷,三倍卷,振興三倍卷,振興補助,康闓">
+  <meta name="description" content="小資振興｜整理各商家優惠、振興券常見問答、地圖找商家、免費刊登商家活動，讓大家用振興券得到最多優惠">
+  <meta name="copyright" content="CONQUER TECHNOLOGY CO., LTD.">
+  <meta name="author" content="康闓科技股份有限公司">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:title" content="小資振興｜最多三倍券優惠整理">
+  <meta property="og:description" content="小資振興｜整理各商家優惠、振興券常見問答、地圖找商家、免費刊登商家活動，讓大家用振興券得到最多優惠">
+  <meta property="og:img" content="">
+  <meta property="og:site_name" content="小資振興｜最多三倍券優惠整理">
+  <meta name="google" content="notranslate"/>
+  <meta name="robots" content="noindex,nofollow">
 
   <!-- Boostrap style -->
   <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
@@ -106,16 +120,20 @@
 
   <div class="directional_nav">
     <div class="previous_btn" title="Previous">
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="-11 -11.5 65 66">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="100px" height="100px" viewBox="-11 -11.5 65 66">
         <g>
-          <path fill="#ffffff" d="M25.43,33.243L14.628,22.429c-0.433-0.432-0.433-1.132,0-1.564L25.43,10.051c0.432-0.432,1.132-0.432,1.563,0	c0.431,0.431,0.431,1.132,0,1.564L16.972,21.647l10.021,10.035c0.432,0.433,0.432,1.134,0,1.564	c-0.215,0.218-0.498,0.323-0.78,0.323C25.929,33.569,25.646,33.464,25.43,33.243z"/>
+          <path fill="#ffffff"
+                d="M25.43,33.243L14.628,22.429c-0.433-0.432-0.433-1.132,0-1.564L25.43,10.051c0.432-0.432,1.132-0.432,1.563,0	c0.431,0.431,0.431,1.132,0,1.564L16.972,21.647l10.021,10.035c0.432,0.433,0.432,1.134,0,1.564	c-0.215,0.218-0.498,0.323-0.78,0.323C25.929,33.569,25.646,33.464,25.43,33.243z"/>
         </g>
       </svg>
     </div>
     <div class="next_btn" title="Next">
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px" height="100px" viewBox="-11 -11.5 65 66">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           width="100px" height="100px" viewBox="-11 -11.5 65 66">
         <g>
-          <path fill="#ffffff" d="M18.022,33.569c 0.282,0-0.566-0.105-0.781-0.323c-0.432-0.431-0.432-1.132,0-1.564l10.022-10.035 			L17.241,11.615c 0.431-0.432-0.431-1.133,0-1.564c0.432-0.432,1.132-0.432,1.564,0l10.803,10.814c0.433,0.432,0.433,1.132,0,1.564 L18.805,33.243C18.59,33.464,18.306,33.569,18.022,33.569z"/>
+          <path fill="#ffffff"
+                d="M18.022,33.569c 0.282,0-0.566-0.105-0.781-0.323c-0.432-0.431-0.432-1.132,0-1.564l10.022-10.035 			L17.241,11.615c 0.431-0.432-0.431-1.133,0-1.564c0.432-0.432,1.132-0.432,1.564,0l10.803,10.814c0.433,0.432,0.433,1.132,0,1.564 L18.805,33.243C18.59,33.464,18.306,33.569,18.022,33.569z"/>
         </g>
       </svg>
     </div>
@@ -248,9 +266,8 @@
 {% include 'includes/js.html' %}
 
 
-
 <script>
-  $('.slider').each(function() {
+  $('.slider').each(function () {
     var $this = $(this);
     var $group = $this.find('.slide_group');
     var $slides = $this.find('.slide');
@@ -284,7 +301,7 @@
       });
       $group.animate({
         left: animateLeft
-      }, function() {
+      }, function () {
         $slides.eq(currentIndex).css({
           display: 'none'
         });
@@ -300,7 +317,7 @@
 
     function advance() {
       clearTimeout(timeout);
-      timeout = setTimeout(function() {
+      timeout = setTimeout(function () {
         if (currentIndex < ($slides.length - 1)) {
           move(currentIndex + 1);
         } else {
@@ -309,7 +326,7 @@
       }, 4000);
     }
 
-    $('.next_btn').on('click', function() {
+    $('.next_btn').on('click', function () {
       if (currentIndex < ($slides.length - 1)) {
         move(currentIndex + 1);
       } else {
@@ -317,7 +334,7 @@
       }
     });
 
-    $('.previous_btn').on('click', function() {
+    $('.previous_btn').on('click', function () {
       if (currentIndex !== 0) {
         move(currentIndex - 1);
       } else {
@@ -325,13 +342,13 @@
       }
     });
 
-    $.each($slides, function(index) {
+    $.each($slides, function (index) {
       var $button = $('<a class="slide_btn">&bull;</a>');
 
       if (index === currentIndex) {
         $button.addClass('active');
       }
-      $button.on('click', function() {
+      $button.on('click', function () {
         move(index);
       }).appendTo('.slide_buttons');
       bulletArray.push($button);
