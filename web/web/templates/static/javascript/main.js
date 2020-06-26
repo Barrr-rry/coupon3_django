@@ -1794,6 +1794,7 @@ const showSelfPosition = (position) => {
   let searchAPI = () => {
     $('#position').on('click', function () {
       let $el = $(this)
+      $el.find('svg').hide()
       let $load = $el.next().find('div')
       $load.addClass('loader')
       let msg = ''
@@ -1816,8 +1817,8 @@ const showSelfPosition = (position) => {
       }).done(res => {
         let $input = $el.prev()
         $input.val(res.data)
-        console.log('input', $input)
         $load.removeClass('loader')
+        $el.find('svg').show()
       })
 
     })
