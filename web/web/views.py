@@ -68,8 +68,7 @@ class StoreUpdateView(BaseView):
         county_list = serializers.CountySerializer(many=True, instance=County.objects.all()).data
         district_list_json = json.dumps(district_list)
         county_list_json = json.dumps(county_list)
-        county_id = county_list[0]['id']
-        district_list = list(filter(lambda x: x['county'] == county_id, district_list))
+        district_list = list(filter(lambda x: x['county'] == instance.county.id, district_list))
         storediscount = serializers.StoreDiscountSerializer(many=True, instance=instance.storediscount.all()).data
         discounttype = serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data
         storeimages = serializers.StoreImageSerializer(many=True, instance=instance.storeimage).data

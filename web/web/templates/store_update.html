@@ -51,7 +51,9 @@
                 <span class="ti-angle-down"></span>
                 <select name="store_type" value="{{ instance.store_type.id }}">
                   {% for el in store_type %}
-                    <option value="{{ el.id }}">{{ el.name }}</option>
+                    <option value="{{ el.id }}"
+                            {% if instance.store_type.id == el.id %}selected="selected"{% endif %}
+                    >{{ el.name }}</option>
                   {% endfor %}
                 </select>
               </div><!-- /.wrap-listing -->
@@ -83,7 +85,9 @@
                 <span class="ti-angle-down"></span>
                 <select name="county" value="{{ instance.county.id }}">
                   {% for el in county_list %}
-                    <option value="{{ el.id }}">{{ el.name }}</option>
+                    <option value="{{ el.id }}"
+                            {% if instance.county.id == el.id %}selected="selected"{% endif %}
+                    >{{ el.name }}</option>
                   {% endfor %}
                 </select>
               </div><!-- /.wrap-listing -->
@@ -94,7 +98,9 @@
                 <span class="ti-angle-down"></span>
                 <select name="district" value="{{ instance.district.id }}">
                   {% for el in district_list %}
-                    <option value="{{ el.id }}">{{ el.name }}</option>
+                    <option value="{{ el.id }}"
+                            {% if instance.district.id == el.id %}selected="selected"{% endif %}
+                    >{{ el.name }}</option>
                   {% endfor %}
                 </select>
               </div><!-- /.wrap-listing -->
@@ -128,13 +134,19 @@
                   <div class="store-discount-content col">
                     <div class="wrap-listing your-name">
                       <label>活動名稱</label>
-                      <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）" value="{{ el.name|default_if_none:"" }}">
+                      <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）"
+                             value="{{ el.name|default_if_none:"" }}">
                       <div class="discount_type">
                         <label>活動類型</label>
                         <span class="ti-angle-down"></span>
-                        <select name="discount_type" placeholder="請選擇活動類型" value="{{ el.discount_type|default_if_none:"" }}">
+                        <select name="discount_type" placeholder="請選擇活動類型"
+                                value="{{ el.discount_type.id|default_if_none:"" }}"
+                        >
                           {% for e in discounttype %}
-                            <option value="{{ e.id }}">{{ e.name }}</option>
+                            <option value="{{ e.id }}"
+                                    {% if el.discount_type.id == e.id %}selected="selected"{% endif %}
+                            >{{ e.name }}
+                            </option>
                           {% endfor %}
                         </select>
                       </div>
@@ -163,7 +175,7 @@
             {#這邊是要預留給image 上傳後的位置用的#}
             <div class="row upload-images">
               {% for el in storeimages %}
-                <div class="imgbox d-flex align-items-start" data-id="{{ el.id }}">
+                <div class="imgbox d-flex align-items-start" data-id="{{ el.id }}" data-file="{{ el.picture }}">
                   <img src="/media/{{ el.picture }}" alt="">
                   <i class="fa fa-times pointer close-image" aria-hidden="true"
                      data-id="{{ el.id }}"

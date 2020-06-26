@@ -1405,15 +1405,15 @@ const showSelfPosition = (position) => {
       `)
     }
 
-    $('.close-image').on('click', function () {
+    $('.store-discount .close-image').on('click', function () {
       let _id = $(this).attr('data-id')
       $(`.store-discount[data-id=${_id}]`).remove()
     })
 
     $('.store-discount-btn').on('click', () => {
       appendDiscount()
-      $('.close-image').off('click')
-      $('.close-image').on('click', function () {
+      $('.store-discount .close-image').off('click')
+      $('.store-discount .close-image').on('click', function () {
         let _id = $(this).attr('data-id')
         $(`.store-discount[data-id=${_id}]`).remove()
       })
@@ -1423,7 +1423,7 @@ const showSelfPosition = (position) => {
     // image
     let appendImage = (res) => {
       $('.upload-images').append(`
-        <div class="imgbox d-flex align-items-start" data-id="${res.id}">
+        <div class="imgbox d-flex align-items-start" data-id="${res.id}" data-file="${res.filename}">
           <img src="/media/${res.filename}" alt="">
           <i class="fa fa-times pointer close-image" aria-hidden="true"
           data-id="${res.id}"
@@ -1432,13 +1432,14 @@ const showSelfPosition = (position) => {
         `)
     }
     let setImageClick = () => {
-      $('.close-image').off('click')
-      $('.close-image').on('click', function () {
+      $('.imgbox .close-image').off('click')
+      $('.imgbox .close-image').on('click', function () {
         let _id = $(this).attr('data-id')
         $(`.imgbox[data-id="${_id}"]`).remove()
         files = files.filter(x => parseInt(x.id) !== parseInt(_id))
       })
     }
+    setImageClick()
     $('input[name="upload-file"]').change((e) => {
       let form = new FormData()
       form.append("file", e.target.files[0])
@@ -1592,7 +1593,11 @@ const showSelfPosition = (position) => {
           delete ret.discount_type
         }
         ret.storediscount_data = storediscount
-        ret.storeimage_data = files.map(x => x.filename)
+        let storeimage_data = []
+        $('.upload-images .imgbox').each(function () {
+          storeimage_data.push($(this).attr('data-file'))
+        })
+        ret.storeimage_data = storeimage_data
         ret.latitude = null
         ret.longitude = null
         console.log(ret)
