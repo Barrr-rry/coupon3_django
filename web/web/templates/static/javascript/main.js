@@ -23,6 +23,32 @@ const default_position = {
   zoom: 7
 }
 
+function getParameters(url) {
+  const searchURL = new URL(url)
+
+  // 透過物件的解構賦值，取出 URL 物件的屬性值
+  const {href, protocol, hostname, pathname, search, searchParams} = searchURL
+  let ret = {}
+  // 透過陣列的解構賦值，取得網址參數部分
+  for (let [key, value] of searchParams.entries()) {
+    ret [key] = value
+  }
+  return ret
+}
+
+function setParameters(url, params) {
+  let old_params = getParameters(url)
+  for (let key in params) {
+    old_params[key] = params[key]
+  }
+
+  const searchURL = new URL(url)
+  let searchParams = new URLSearchParams(old_params)
+  searchURL.search = searchParams
+  return searchURL.href
+
+}
+
 function setCookie(cname, cvalue, exdays) {
   let d = new Date()
   d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000))

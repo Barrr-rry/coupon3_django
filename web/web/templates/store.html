@@ -186,13 +186,8 @@
     $('.sort a').each(function () {
       let $el = $(this)
       let sort = $el.attr('data-sort')
-      let split_str = ''
-      if (href_split.length > 1) {
-        split_str = `&sort=${sort}`
-      } else {
-        split_str = `?sort=${sort}`
-      }
-      $el.attr('href', `${window.location.href + split_str}`)
+      let newurl = setParameters(window.location.href, {sort: sort})
+      $el.attr('href', newurl)
     })
 
 
@@ -204,13 +199,8 @@
     $('.activity a').each(function () {
       let $el = $(this)
       let activity = $el.attr('data-activity')
-      let split_str = ''
-      if (href_split.length > 1) {
-        split_str = `&activity=${activity}`
-      } else {
-        split_str = `?activity=${activity}`
-      }
-      $el.attr('href', `${window.location.href + split_str}`)
+      let newurl = setParameters(window.location.href, {activity: activity})
+      $el.attr('href', newurl)
     })
 
 
