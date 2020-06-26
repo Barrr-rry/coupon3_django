@@ -1688,6 +1688,15 @@ const showSelfPosition = (position) => {
           li += `<span class="tag"><a href="">${el.name}</a></span>`
         }
       }
+      let names = ''
+      if (data.storediscount_names) {
+        names = `
+      <div class="sale-list">
+        ${data.storediscount_names}
+      </div>
+      `
+      }
+
       let html = `
       <div class="${class_name}">
         <div class="imagebox style1">
@@ -1717,9 +1726,7 @@ const showSelfPosition = (position) => {
                   </li>
                 </ul>
                 <div class="box-desc">
-                  <div class="sale-list">
-                    ${data.storediscount_names}
-                  </div>
+                  ${names}
                 </div>
               </div><!-- /.box-content -->
             </div>

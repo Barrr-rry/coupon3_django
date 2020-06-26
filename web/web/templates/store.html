@@ -101,9 +101,11 @@
                       </li>
                     </ul>
                     <div class="box-desc">
-                      <div class="sale-list">
-                        {{ el.storediscount_names }}
-                      </div>
+                      {% if el.storediscount_names %}
+                        <div class="sale-list">
+                          {{ el.storediscount_names }}
+                        </div>
+                      {% endif %}
                     </div>
                   </div><!-- /.box-content -->
                 </div>

@@ -95,7 +95,7 @@
             <div class="wrap-imagebox ma-0px store-box-block">
               <div class="d-flex store-box">
                 {% for el in data %}
-                  <div class="mb-50px col-lg-6 col-md-12 store">
+                  <div class="mb-50px col-md-4 store md-100">
                     <div class="imagebox style1">
                       <div class="box-imagebox">
                         <div class="link_block">
@@ -123,9 +123,11 @@
                               </li>
                             </ul>
                             <div class="box-desc">
-                              <div class="sale-list">
-                                {{ el.storediscount_names }}
-                              </div>
+                              {% if el.storediscount_names %}
+                                <div class="sale-list">
+                                  {{ el.storediscount_names }}
+                                </div>
+                              {% endif %}
                             </div>
                           </div><!-- /.box-content -->
                         </div>
