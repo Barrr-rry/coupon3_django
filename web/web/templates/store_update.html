@@ -128,11 +128,11 @@
                   <div class="store-discount-content col">
                     <div class="wrap-listing your-name">
                       <label>活動名稱</label>
-                      <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）" value="{{ el.name }}">
+                      <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）" value="{{ el.name|default_if_none:"" }}">
                       <div class="discount_type">
                         <label>活動類型</label>
                         <span class="ti-angle-down"></span>
-                        <select name="discount_type" placeholder="請選擇活動類型" value="{{ el.discount_type }}">
+                        <select name="discount_type" placeholder="請選擇活動類型" value="{{ el.discount_type|default_if_none:"" }}">
                           {% for e in discounttype %}
                             <option value="{{ e.id }}">{{ e.name }}</option>
                           {% endfor %}

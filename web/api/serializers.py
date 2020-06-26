@@ -168,17 +168,20 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
         with transaction.atomic():
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
+            StoreImage.original_objects.filter(store=instance).delete()
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
                     picture=pic
                 )
+            StoreDiscount.original_objects.filter(store=instance).delete()
             for el in storediscount_data:
                 el['description'] = el['description'].replace('\n', '<br>')
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
                 )
+            instance = super().update(instance, validated_data)
             if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
@@ -189,7 +192,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                 instance.latitude = float(gps[0])
                 instance.longitude = float(gps[1])
                 instance.save()
-            return super().update(instance, validated_data)
+            return instance
 
 
 class DistrictSerializer(DefaultModelSerializer):

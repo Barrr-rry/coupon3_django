@@ -1404,6 +1404,12 @@ const showSelfPosition = (position) => {
       </div>
       `)
     }
+
+    $('.close-image').on('click', function () {
+      let _id = $(this).attr('data-id')
+      $(`.store-discount[data-id=${_id}]`).remove()
+    })
+
     $('.store-discount-btn').on('click', () => {
       appendDiscount()
       $('.close-image').off('click')
@@ -1591,8 +1597,8 @@ const showSelfPosition = (position) => {
         ret.longitude = null
         console.log(ret)
         $.ajax({
-          url: '/api/store/',
-          type: "POST",
+          url: `/api/store/${ret.id}/`,
+          type: "PUT",
           contentType: "application/json; charset=utf-8",
           data: JSON.stringify(ret),
           dataType: "json",
