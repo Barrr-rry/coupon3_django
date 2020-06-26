@@ -1424,7 +1424,7 @@ const showSelfPosition = (position) => {
         setImageClick()
       }).fail(e => {
         $('.preloader').hide()
-        let msg = e.responseJSON.file[0]
+        let msg = '超過 1MB，請重新上傳圖片'
         Swal.fire({
           text: msg,
           confirmButtonText: '確定'
@@ -1675,11 +1675,14 @@ const showSelfPosition = (position) => {
       if ($('#map').length) {
         class_name = 'mb-50px col-lg-6 col-md-12 store'
       } else {
-        class_name = 'mb-50px col-md-4 store'
+        class_name = 'mb-50px col-md-4 store md-100'
       }
       let li = ''
+      for (let el of data.activity) {
+        li += `<span class="tag"><a href="">${el.name}</a></span>`
+      }
       for (let el of data.storediscount) {
-        li += `<li class="tag"><a href="">${el.name}</a></li>`
+        li += `<span class="tag"><a href="">${el.name}</a></span>`
       }
       let html = `
       <div class="${class_name}">
@@ -1716,10 +1719,11 @@ const showSelfPosition = (position) => {
                 </div>
               </div><!-- /.box-content -->
             </div>
-            <ul class="tag_block">
-              ${li}
-              <!--這邊可以只顯示3筆嗎，要維持一行-->
-              <li class="right">
+            <div class="imagebox_bottom">
+              <p class="tag_block">
+                ${li}
+              </p>
+              <div class="right">
                 <input type="checkbox" class="checkbox" id="share_${data.id}">
                 <label for="share_${data.id}" class="label entypo-export">
                   <!--                      <a href="">分享</a>-->
@@ -1731,7 +1735,8 @@ const showSelfPosition = (position) => {
                         data-url="store/${data.id}">
                       <img src="/media/share_line.svg" alt="">
                     </li>
-                    <li class="share-to entypo-facebook" data-sns="facebook" data-name="${data.name}" data-url="store/${data.id}">
+                    <li class="share-to entypo-facebook" data-sns="facebook" data-name="${data.name}"
+                        data-url="store/${data.id}">
                       <img src="/media/share_fb.svg" alt="">
                     </li>
                     <li class="share-url entypo-url" data-name="${data.name}" data-url="store/${data.id}">
@@ -1739,8 +1744,9 @@ const showSelfPosition = (position) => {
                     </li>
                   </ul>
                 </div>
-              </li>
-            </ul>
+              </div>
+              <div class="clear"></div>
+            </div>
             <!--                <ul class="location">-->
             <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
             <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
