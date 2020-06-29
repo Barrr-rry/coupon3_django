@@ -161,13 +161,14 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             instance = super().create(validated_data)
             if '#' in instance.phone and ' #' not in instance.phone:
                 instance.phone = instance.phone.replace('#', ' #')
+                instance.save()
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
                     picture=pic
                 )
             for el in storediscount_data:
-                el['description'] = el['description'].replace('\n', '<br>')
+                el['description'] = el['description'].replace('\n', '<br/>')
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
@@ -189,6 +190,9 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
             StoreImage.original_objects.filter(store=instance).delete()
+            if '#' in instance.phone and ' #' not in instance.phone:
+                instance.phone = instance.phone.replace('#', ' #')
+                instance.save()
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
@@ -196,7 +200,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                 )
             StoreDiscount.original_objects.filter(store=instance).delete()
             for el in storediscount_data:
-                el['description'] = el['description'].replace('\n', '<br>')
+                el['description'] = el['description'].replace('\n', '<br/>')
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
