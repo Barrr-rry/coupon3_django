@@ -25,6 +25,8 @@ from .views import *
 from django.views.generic.base import RedirectView
 from django.views.decorators.cache import cache_page
 import os
+from api.sitemaps import StaticViewSitemap, StoreSitemap
+from django.contrib.sitemaps.views import sitemap
 
 DEBUG = os.environ.get('ENV') != 'prod'
 
@@ -35,6 +37,11 @@ def get_view(cls):
     else:
         return cache_page(60 * 60)(cls.as_view())
 
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'store': StoreSitemap
+}
 
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='media/shorticon_48.svg')),
@@ -65,6 +72,7 @@ urlpatterns = [
     path('eli5/tour/', get_view(ELI5TourView)),
     path('eli5/treble/', get_view(ELI5TrebleView)),
     path('eli5/voucher', get_view(ELI5VoucherView)),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
 ]
 
 if settings.DEBUG:
