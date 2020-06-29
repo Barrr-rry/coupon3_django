@@ -171,6 +171,21 @@ class StoreIdView(BaseView):
         return ret
 
 
+def distance(x):
+    # 更新後目前用不到 但是先把算式留著
+    nlat = x['latitude']
+    nlon = x['longitude']
+    ret = (abs(nlat - lat) ** 2 + abs(nlon - lon) ** 2) ** (1 / 2)
+    x['distance'] = ret
+    m = ret / 0.00001
+    if m > 1000:
+        m = str(round(m / 1000, 1)) + '公里'
+    else:
+        m = str(round(m)) + '公尺'
+    x['distance_name'] = m
+    return ret
+
+
 class StoreView(BaseView):
     template_name = 'store.html'
 
@@ -271,6 +286,7 @@ class StoreView(BaseView):
                 activity_list = serializers.ActivitySerializer(many=True, instance=el.activity).data
 
         sort = self.request.GET.get('sort', 'distance')
+        # distance \ -distance or down
         if sort == 'new':
             order_by = '-created_at'
         if sort == 'old':
@@ -278,6 +294,8 @@ class StoreView(BaseView):
 
         filter_dict = dict([('search', search),
                             ('district', district),
+                            ('lat', lat),
+                            ('lon', lon),
                             ('activity', activity),
                             ('county', county),
                             ('status', status),
@@ -289,21 +307,10 @@ class StoreView(BaseView):
                            )
 
         data_st = time.time()
-        logger.info(json.dumps(filter_dict))
-        data = reids_wraper.get(json.dumps(filter_dict))
+        queryset = filters.filter_query(filter_dict, queryset)
+        data = serializers.StoreSerializer(many=True, instance=queryset[:6]).data
         data_ed = time.time()
-        if not data:
-            queryset = filters.filter_query(filter_dict, queryset)
-            if sort == 'new':
-                queryset = queryset.order_by('-created_at')
-            if sort == 'old':
-                queryset = queryset.order_by('created_at')
-
-            data_st = time.time()
-            data = serializers.StoreSerializer(many=True, instance=queryset).data
-            data_ed = time.time()
-            print(data_ed-data_st)
-            reids_wraper.set(json.dumps(filter_dict), data)
+        reids_wraper.set(json.dumps(filter_dict), data)
 
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         storetypes.insert(0, dict(id='all', name='全部'))
@@ -313,25 +320,6 @@ class StoreView(BaseView):
         if not county:
             county = 'all'
 
-        def distance(x):
-            nlat = x['latitude']
-            nlon = x['longitude']
-            ret = (abs(nlat - lat) ** 2 + abs(nlon - lon) ** 2) ** (1 / 2)
-            x['distance'] = ret
-            m = ret / 0.00001
-            if m > 1000:
-                m = str(round(m / 1000, 1)) + '公里'
-            else:
-                m = str(round(m)) + '公尺'
-            x['distance_name'] = m
-            return ret
-
-        sort_st = time.time()
-        # if sort == 'distance':
-        #     data = sorted(data, key=distance)
-        # if sort == '-distance':
-        #     data = sorted(data, key=distance, reverse=True)
-        sort_ed = time.time()
         json_data = json.dumps(data)
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
@@ -368,7 +356,7 @@ class StoreView(BaseView):
         )
         ed = time.time()
         logger.info(
-            f'search time: {ed - st} task: {task_spend} sort: {sort_ed - sort_st} msg: {msg_ed - msg_st} data: {data_ed - data_st}'
+            f'search time: {ed - st} task: {task_spend}  msg: {msg_ed - msg_st} data: {data_ed - data_st}'
         )
         return ret
 

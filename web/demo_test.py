@@ -8,7 +8,10 @@ import math
 import random
 import re
 
-#
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
 
+site3()
 
 print()

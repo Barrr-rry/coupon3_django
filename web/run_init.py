@@ -260,7 +260,9 @@ def site3():
                 district_id = district_dct[key].id
                 county_id = district_dct[key].county_id
                 break
-
+        if el['lat'] == 'NaN' or el['lon'] == 'NaN':
+            print('oops...')
+            continue
         instance = Store.objects.create(
             store_type_id=storetype.id,
             name=el['title'],
@@ -274,13 +276,10 @@ def site3():
 
 
 def generate_store():
-    print('store....')
-    # site1()
-    pass
-    # site1()
-    # site2()
-    # site3()
-    # from_csv()
+    site1()
+    site2()
+    site3()
+    from_csv()
 
 
 def generate_discount_type(count):

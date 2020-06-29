@@ -79,10 +79,10 @@ class Store(DefaultAbstract):
     name = models.CharField(max_length=64, help_text="商家名稱")
     store_type = models.ForeignKey(StoreType, related_name="store", on_delete=models.CASCADE, help_text="店家類型fk")
     phone = models.CharField(max_length=64, help_text="電話", null=True, blank=True)
-    person = models.CharField(max_length=64, help_text="聯絡人", null=True, blank=True)
-    email = models.CharField(max_length=64, help_text="信箱", null=True, blank=True)
-    website = models.CharField(max_length=64, null=True, blank=True, help_text="網站")
-    address = models.CharField(max_length=64, help_text="商家地址")
+    person = models.CharField(max_length=128, help_text="聯絡人", null=True, blank=True)
+    email = models.CharField(max_length=128, help_text="信箱", null=True, blank=True)
+    website = models.CharField(max_length=512, null=True, blank=True, help_text="網站")
+    address = models.CharField(max_length=128, help_text="商家地址")
     latitude = models.FloatField(max_length=64, help_text="經度", null=True, blank=True)
     longitude = models.FloatField(max_length=64, help_text="緯度", null=True, blank=True)
     location = models.PointField(null=True, blank=True, srid=4326, help_text='Location')
@@ -115,7 +115,6 @@ class StoreDiscount(DefaultAbstract):
                                       help_text="折扣fk")
     name = models.CharField(max_length=128, null=True, blank=True, help_text="折扣標題")
     description = models.TextField(help_text="敘述", null=True, blank=True)
-
 
 
 class StoreImage(DefaultAbstract):

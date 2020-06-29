@@ -112,6 +112,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     image_1 = serializers.SerializerMethodField()
     activity = ActivitySerializer(many=True, required=False)
     phone_2 = serializers.SerializerMethodField(read_only=True)
+    distance_name = serializers.SerializerMethodField(read_only=True)
 
     class Meta(CommonMeta):
         model = Store
@@ -124,9 +125,19 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             ret = target.picture
         return ret
 
+    def get_distance_name(self, instance, *args, **kwargs):
+        if not hasattr(instance, 'distance'):
+            return ''
+        m = instance.distance * 1000000
+        if m > 1000:
+            m = str(round(m / 1000, 1)) + '公里'
+        else:
+            m = str(round(m)) + '公尺'
+        return m
+
     def get_phone_2(self, instance, *args, **kwargs):
         phone = instance.phone
-        if '#' in phone:
+        if phone and '#' in phone:
             phone = phone.replace(' #', ',')
         return phone
 

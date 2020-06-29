@@ -4,6 +4,9 @@ from rest_framework.compat import coreapi, coreschema
 from django.utils import timezone
 from django.utils.timezone import make_aware
 from api.models import County, District
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
 
 or_q = lambda q, other_fn: other_fn if q is None else q | other_fn
 and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
@@ -45,6 +48,12 @@ def filter_query(filter_dict, queryset):
     filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
     if filter_dict['store_type'] is not None:
         q = and_q(q, Q(store_type=filter_dict['store_type']))
+
+    ref_location = Point(filter_dict['lat'], filter_dict['lon'], srid=4326)
+    queryset = queryset.annotate(distance=Distance("location", ref_location))
+    # 算距離
+    if filter_dict['sort']:
+        queryset = queryset.order_by(filter_dict['sort'])
 
     if filter_dict['order_by']:
         queryset = queryset.order_by(filter_dict['order_by'])
