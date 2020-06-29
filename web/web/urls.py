@@ -71,8 +71,8 @@ urlpatterns = [
     path('eli5/fun/', get_view(ELI5FunView)),
     path('eli5/tour/', get_view(ELI5TourView)),
     path('eli5/treble/', get_view(ELI5TrebleView)),
-    path('eli5/voucher', get_view(ELI5VoucherView)),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
+    path('eli5/voucher/', get_view(ELI5VoucherView)),
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
 ]
 
 if settings.DEBUG:

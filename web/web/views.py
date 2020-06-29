@@ -155,7 +155,9 @@ class StoreIdView(BaseView):
     template_name = 'store_id.html'
 
     def get_context_data(self, *args, **kwargs):
-        instance = Store.objects.get(pk=kwargs.get('store_id'))
+        instance = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
+            select_related('county').prefetch_related('activity'). \
+            select_related('district').select_related('store_type').get(pk=kwargs.get('store_id'))
         ret = dict(instance=serializers.StoreSerializer(instance=instance).data,
                    token=self.token, )
         lat = instance.latitude
