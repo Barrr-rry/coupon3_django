@@ -1,11 +1,10 @@
 #FROM joyzoursky/python-chromedriver:3.7
-FROM previous:latest as previous
+FROM qazxc56690659/coupon3_django_coupon3-web:latest
 ENV ENV dev
 COPY ./web /app
 WORKDIR /app
 RUN pip install -r requirements.txt
-RUN apt-get install libsqlite3-mod-spatialite
-#RUN apt-get -y install binutils libproj-dev gdal-bin
+RUN apt-get -y install binutils libproj-dev gdal-bin
 #
 #RUN wget https://download.osgeo.org/proj/proj-4.9.1.tar.gz && tar xzf proj-4.9.1.tar.gz && cd proj-4.9.1/nad && cd .. && ./configure && make && make install && cd ..
 #RUN wget https://download.osgeo.org/proj/proj-datumgrid-1.7.tar.gz
