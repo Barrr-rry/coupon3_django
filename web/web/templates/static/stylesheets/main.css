@@ -11044,6 +11044,11 @@ footer .widget-about .logo-ft a {
 .flat-introduce .row.eli5_list {
   margin-bottom: 120px;
 }
+.flat-introduce .row.eli5_list .divider {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
 .flat-introduce .row:nth-child(3) .introduce .introduce-title h3 {
   margin: 20px 0 24px;
 }
