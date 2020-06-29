@@ -18,4 +18,4 @@ class StaticViewSitemap(Sitemap):
 class StoreSitemap(Sitemap):
 
     def items(self):
-        return Store.objects.all()
+        return Store.objects.filter(status=1)

@@ -154,7 +154,7 @@ def site1():
             county_id=county_id,
             district_id=district_id,
             status=1,
-
+            phone='02-88615599 #308'
         )
         if el['storediscount']:
             StoreDiscount.objects.create(

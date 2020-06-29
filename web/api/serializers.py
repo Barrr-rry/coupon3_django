@@ -111,6 +111,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     storediscount_names = serializers.SerializerMethodField()
     image_1 = serializers.SerializerMethodField()
     activity = ActivitySerializer(many=True, required=False)
+    phone_2 = serializers.SerializerMethodField(read_only=True)
 
     class Meta(CommonMeta):
         model = Store
@@ -122,6 +123,12 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
         else:
             ret = target.picture
         return ret
+
+    def get_phone_2(self, instance, *args, **kwargs):
+        phone = instance.phone
+        if '#' in phone:
+            phone = phone.replace(' #', ',')
+        return phone
 
     def get_storediscount_names(self, instance, *args, **kwargs):
         names = map(lambda x: x.name, instance.storediscount.all())
@@ -141,6 +148,8 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
             instance = super().create(validated_data)
+            if '#' in instance.phone and ' #' not in instance.phone:
+                instance.phone = instance.phone.replace('#', ' #')
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
