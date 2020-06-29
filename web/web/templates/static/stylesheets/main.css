@@ -10731,8 +10731,10 @@ footer .widget-about .logo-ft a {
   display: block;
 }
 .tp-banner .slider .slide_content {
+  position: relative;
   text-align: center;
   padding: 250px 0;
+  z-index: 1;
 }
 .tp-banner .slider .slide_content .page-title-heading {
   font-size: 46px;
@@ -10755,6 +10757,14 @@ footer .widget-about .logo-ft a {
 .tp-banner .slider .slide_content a.text-heading:hover {
   background-color: rgba(242, 91, 34, 0.9);
   border-color: transparent;
+}
+.tp-banner .slider .mask {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .tp-banner .slide_buttons {
   position: absolute;
@@ -10780,10 +10790,11 @@ footer .widget-about .logo-ft a {
   margin: 0 auto;
   position: relative;
   top: -340px;
+  z-index: 1;
 }
 .tp-banner .previous_btn {
   bottom: 0;
-  left: 30px;
+  left: 50px;
   margin: auto;
   position: absolute;
   top: 0;
@@ -10792,13 +10803,11 @@ footer .widget-about .logo-ft a {
   bottom: 0;
   margin: auto;
   position: absolute;
-  right: 30px;
+  right: 50px;
   top: 0;
 }
 .tp-banner .previous_btn, .tp-banner .next_btn {
   cursor: pointer;
-  width: 100px;
-  height: 100px;
   opacity: 0.5;
   -webkit-transition: opacity 0.4s ease-in-out;
   -moz-transition: opacity 0.4s ease-in-out;
@@ -12401,7 +12410,7 @@ form.form-listing .only-submit-form-listing:hover {
   }
 
   .tp-banner .slider .slide_content {
-    padding: 150px 40px;
+    padding: 135px 20px;
   }
   .tp-banner .slider .slide_content .page-title-heading {
     font-size: 36px;
@@ -12410,6 +12419,9 @@ form.form-listing .only-submit-form-listing:hover {
   .tp-banner .slider .slide_content a.text-heading {
     background-color: rgba(242, 91, 34, 0.9);
     border: none;
+    padding: 8px 18px;
+    font-size: 20px;
+    line-height: 30px;
   }
   .tp-banner .slider .slide_viewer {
     height: 550px;
@@ -12418,17 +12430,22 @@ form.form-listing .only-submit-form-listing:hover {
     height: 400px;
   }
   .tp-banner .directional_nav {
-    top: auto;
-    bottom: 43px;
+    top: -64px;
   }
   .tp-banner .directional_nav_store {
     top: -220px;
   }
   .tp-banner .previous_btn {
-    left: -20px;
+    left: 20px;
+  }
+  .tp-banner .previous_btn img {
+    width: 14px;
   }
   .tp-banner .next_btn {
-    right: -20px;
+    right: 20px;
+  }
+  .tp-banner .next_btn img {
+    width: 14px;
   }
 
   .header_sticky .flat-explore-detail #map {
