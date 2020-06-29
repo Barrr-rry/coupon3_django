@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'api',
     'django_crontab',
+    'django.contrib.sitemaps',
 ]
 MIDDLEWARE = [
     'django_samesite_none.middleware.SameSiteNoneMiddleware',

@@ -87,6 +87,9 @@ class Store(DefaultAbstract):
     district = models.ForeignKey(District, related_name="store", on_delete=models.CASCADE, help_text="行政區fk")
     status = models.SmallIntegerField(default=0, help_text="商家狀態 0：待審核；1：審核通過（上架）；2：審核失敗（不顯示）")
 
+    def get_absolute_url(self):
+        return f'/store/{self.pk}'
+
 
 class Activity(DefaultAbstract):
     name = models.CharField(max_length=64, help_text="活動名稱")
