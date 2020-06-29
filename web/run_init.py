@@ -274,10 +274,13 @@ def site3():
 
 
 def generate_store():
-    site1()
-    site2()
-    site3()
-    from_csv()
+    print('store....')
+    # site1()
+    pass
+    # site1()
+    # site2()
+    # site3()
+    # from_csv()
 
 
 def generate_discount_type(count):

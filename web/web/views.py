@@ -5,11 +5,12 @@ from api.models import (
 from api import serializers
 from api import filters
 import json
-from crawler import task
+from crawler import task, reids_wraper
 from log import logger
 import uuid
 import time
 from api.util import get_time
+import json
 
 
 class BaseView(TemplateView):
@@ -279,24 +280,35 @@ class StoreView(BaseView):
                             ('district', district),
                             ('activity', activity),
                             ('county', county),
+                            ('status', status),
+                            ('sort', sort),
                             ('store_type', store_type),
                             ('order_by', order_by),
                             ('storediscount_discount_type', storediscount_discount_type),
                             ('ids', ids)]
                            )
-        queryset = filters.filter_query(filter_dict, queryset)
-        if sort == 'new':
-            queryset = queryset.order_by('-created_at')
-        if sort == 'old':
-            queryset = queryset.order_by('created_at')
+
+        data_st = time.time()
+        logger.info(json.dumps(filter_dict))
+        data = reids_wraper.get(json.dumps(filter_dict))
+        data_ed = time.time()
+        if not data:
+            queryset = filters.filter_query(filter_dict, queryset)
+            if sort == 'new':
+                queryset = queryset.order_by('-created_at')
+            if sort == 'old':
+                queryset = queryset.order_by('created_at')
+
+            data_st = time.time()
+            data = serializers.StoreSerializer(many=True, instance=queryset).data
+            data_ed = time.time()
+            print(data_ed-data_st)
+            reids_wraper.set(json.dumps(filter_dict), data)
 
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         storetypes.insert(0, dict(id='all', name='全部'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         district_list.insert(0, dict(id='all', name='全部'))
-        data_st = time.time()
-        data = serializers.StoreSerializer(many=True, instance=queryset).data
-        data_ed = time.time()
 
         if not county:
             county = 'all'
@@ -315,11 +327,10 @@ class StoreView(BaseView):
             return ret
 
         sort_st = time.time()
-        data = sorted(data, key=distance)
-        if sort == 'distance':
-            data = sorted(data, key=distance)
-        if sort == '-distance':
-            data = sorted(data, key=distance, reverse=True)
+        # if sort == 'distance':
+        #     data = sorted(data, key=distance)
+        # if sort == '-distance':
+        #     data = sorted(data, key=distance, reverse=True)
         sort_ed = time.time()
         json_data = json.dumps(data)
         if storediscount_discount_type is not None:

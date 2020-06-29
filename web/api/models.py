@@ -1,11 +1,13 @@
 import datetime
 from django.forms import forms
 from django.contrib.auth.models import AbstractBaseUser, UserManager, AbstractUser, PermissionsMixin
-from django.db import models
 from rest_framework.authtoken.models import Token as DefaultToken
 from rest_framework import exceptions
 from django.utils import timezone
+# from django.db import models
+from django.contrib.gis.db import models
 import uuid
+from django.contrib.gis.geos import Point
 
 
 class ParanoidQuerySet(models.QuerySet):
@@ -83,9 +85,15 @@ class Store(DefaultAbstract):
     address = models.CharField(max_length=64, help_text="商家地址")
     latitude = models.FloatField(max_length=64, help_text="經度", null=True, blank=True)
     longitude = models.FloatField(max_length=64, help_text="緯度", null=True, blank=True)
+    location = models.PointField(null=True, blank=True, srid=4326, help_text='Location')
     county = models.ForeignKey(County, related_name="store", on_delete=models.CASCADE, help_text="縣市fk")
     district = models.ForeignKey(District, related_name="store", on_delete=models.CASCADE, help_text="行政區fk")
     status = models.SmallIntegerField(default=0, help_text="商家狀態 0：待審核；1：審核通過（上架）；2：審核失敗（不顯示）")
+
+    def save(self, *args, **kwargs):
+        if not self.location and self.latitude and self.longitude:
+            self.location = Point(float(self.latitude), float(self.longitude), srid=4326)
+        super().save(*args, **kwargs)
 
     def get_absolute_url(self):
         return f'/store/{self.pk}'
@@ -106,7 +114,8 @@ class StoreDiscount(DefaultAbstract):
     discount_type = models.ForeignKey(DiscountType, related_name="store_discount", on_delete=models.CASCADE,
                                       help_text="折扣fk")
     name = models.CharField(max_length=128, null=True, blank=True, help_text="折扣標題")
-    description = models.CharField(max_length=128, help_text="敘述", null=True, blank=True)
+    description = models.TextField(help_text="敘述", null=True, blank=True)
+
 
 
 class StoreImage(DefaultAbstract):
