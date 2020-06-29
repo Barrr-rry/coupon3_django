@@ -656,6 +656,11 @@ footer
   .row.eli5_list
     margin-bottom: 120px
 
+    .divider
+      border-top: 1px solid #e0e0e0
+      padding-top: 60px
+      padding-bottom: 20px
+
   .row:nth-child(3) .introduce .introduce-title h3
     margin: 20px 0 24px
 
@@ -986,7 +991,7 @@ footer
       p.tag_block
         display: inline-block
         float: left
-        width: 84%
+        width: 83%
         height: 60px
         padding: 16px 40px 15px 25px
         overflow: hidden
@@ -1198,6 +1203,7 @@ footer
       box-shadow: 0 0 6px 2px #fda73d
 
   .leaflet-popup-content
+    text-align: center
     > div
       font-size: 18px
 
@@ -1205,9 +1211,17 @@ footer
       font-size: 12px
       line-height: 22px
       padding-bottom: 5px
+      color: #aaaaaa
+      font-weight: 400
+      vertical-align: middle
+      letter-spacing: 1px
+      margin-bottom: 5px
 
     button, input[type="button"], input[type="reset"], input[type="submit"]
       background: #f25b22
+      border-radius: 50px
+      line-height: 36px
+      height: 36px
 
 
 .margintop-200
@@ -2245,6 +2259,13 @@ form.form-listing
 
     .margintop-255
       margin-top: 20px
+
+  .map_store_id .map_btn
+    margin-bottom: 15px
+    width: 170px
+    margin-left: -85px
+    font-size: 15px
+      padding: 6px 10px
 
 @media only screen and (max-width: 600px)
   .imagebox.style5

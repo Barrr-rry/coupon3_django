@@ -11044,6 +11044,11 @@ footer .widget-about .logo-ft a {
 .flat-introduce .row.eli5_list {
   margin-bottom: 120px;
 }
+.flat-introduce .row.eli5_list .divider {
+  border-top: 1px solid #e0e0e0;
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
 .flat-introduce .row:nth-child(3) .introduce .introduce-title h3 {
   margin: 20px 0 24px;
 }
@@ -11342,7 +11347,7 @@ footer .widget-about .logo-ft a {
 .imagebox .box-imagebox .imagebox_bottom p.tag_block {
   display: inline-block;
   float: left;
-  width: 84%;
+  width: 83%;
   height: 60px;
   padding: 16px 40px 15px 25px;
   overflow: hidden;
@@ -11535,6 +11540,9 @@ footer .widget-about .logo-ft a {
 #map .lpi-1592630594977-98115:after {
   box-shadow: 0 0 6px 2px #fda73d;
 }
+#map .leaflet-popup-content {
+  text-align: center;
+}
 #map .leaflet-popup-content > div {
   font-size: 18px;
 }
@@ -11542,9 +11550,17 @@ footer .widget-about .logo-ft a {
   font-size: 12px;
   line-height: 22px;
   padding-bottom: 5px;
+  color: #aaaaaa;
+  font-weight: 400;
+  vertical-align: middle;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
 }
 #map .leaflet-popup-content button, #map .leaflet-popup-content input[type=button], #map .leaflet-popup-content input[type=reset], #map .leaflet-popup-content input[type=submit] {
   background: #f25b22;
+  border-radius: 50px;
+  line-height: 36px;
+  height: 36px;
 }
 
 .margintop-200 {
@@ -12567,6 +12583,14 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .flat-introduce .margintop-255 {
     margin-top: 20px;
+  }
+
+  .map_store_id .map_btn {
+    margin-bottom: 15px;
+    width: 170px;
+    margin-left: -85px;
+    font-size: 15px;
+    font-size-padding: 6px 10px;
   }
 }
 @media only screen and (max-width: 600px) {
