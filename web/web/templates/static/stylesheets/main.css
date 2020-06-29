@@ -11342,7 +11342,7 @@ footer .widget-about .logo-ft a {
 .imagebox .box-imagebox .imagebox_bottom p.tag_block {
   display: inline-block;
   float: left;
-  width: 84%;
+  width: 83%;
   height: 60px;
   padding: 16px 40px 15px 25px;
   overflow: hidden;
@@ -12567,6 +12567,14 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .flat-introduce .margintop-255 {
     margin-top: 20px;
+  }
+
+  .map_store_id .map_btn {
+    margin-bottom: 15px;
+    width: 170px;
+    margin-left: -85px;
+    font-size: 15px;
+    font-size-padding: 6px 10px;
   }
 }
 @media only screen and (max-width: 600px) {
