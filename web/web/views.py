@@ -311,7 +311,6 @@ class StoreView(BaseView):
         queryset = filters.filter_query(filter_dict, queryset)
         data = serializers.StoreSerializer(many=True, instance=queryset[:6]).data
         data_ed = time.time()
-        reids_wraper.set(json.dumps(filter_dict), data)
 
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         storetypes.insert(0, dict(id='all', name='全部'))
