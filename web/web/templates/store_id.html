@@ -88,7 +88,7 @@
           <ul class="box-address">
             {% if instance.phone %}
               <li class="phone">
-                <a href="tel:{{ instance.phone }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
+                <a href="tel:{{ instance.phone_2 }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
                 </a>
               </li>
             {% endif %}
@@ -160,7 +160,7 @@
               </li>
               {% if instance.phone %}
                 <li>
-                  <a href="tel:{{ instance.phone }}" target="_blank"><i class="fa fa-phone"
+                  <a href="tel:{{ instance.phone_2 }}" target="_blank"><i class="fa fa-phone"
                                                                         aria-hidden="true"></i>{{ instance.phone }}
                   </a>
                 </li>
