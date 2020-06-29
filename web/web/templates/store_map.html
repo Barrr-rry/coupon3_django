@@ -216,6 +216,7 @@
 <!-- Javascript -->
 <script type="text/javascript">
   let store_data = {{ json_data|safe }};
+  let data_count = {{ count }};
   let sort = '{{ sort }}';
   let lat = {{ lat }};
   let lon = {{ lon }};
@@ -236,13 +237,12 @@
       $el.attr('href', `${window.location.href + split_str}`)
     })
 
-
     // init active sort
     let $el = $(`a[data-sort=${sort}]`)
     $el.addClass('active')
     let positionFunction = (position) => {
       showSelfPosition(position)
-      initStoreDataMarker(0, 6)
+      initStoreDataMarker(store_data)
     }
 
     const position = {

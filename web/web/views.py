@@ -274,6 +274,7 @@ class StoreView(BaseView):
                 lon = float(gps[1])
                 task_ed = time.time()
                 task_spend = task_ed - task_st
+
         msg_ed = time.time()
 
         activity_list = []
@@ -320,7 +321,6 @@ class StoreView(BaseView):
         if not county:
             county = 'all'
 
-        json_data = json.dumps(data)
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
         else:
@@ -341,7 +341,7 @@ class StoreView(BaseView):
             suffix=suffix,
             search=search if search is not None else '',
             data=data[:6],
-            json_data=json_data,
+            json_data=json.dumps(data[:6]),
             count=queryset.count(),
             storetypes=storetypes,
             district=district,
@@ -358,6 +358,13 @@ class StoreView(BaseView):
         logger.info(
             f'search time: {ed - st} task: {task_spend}  msg: {msg_ed - msg_st} data: {data_ed - data_st}'
         )
+        return ret
+
+    def render_to_response(self, context, **response_kwargs):
+        ret = super().render_to_response(context, **response_kwargs)
+
+        ret.set_cookie('search-lat', context.get('lat'))
+        ret.set_cookie('search-lon', context.get('lon'))
         return ret
 
 

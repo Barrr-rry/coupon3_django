@@ -77,6 +77,8 @@ def filter_query(filter_dict, queryset):
 class StoreFilter(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         search = request.query_params.get('search')
+        activity = request.query_params.get('activity')
+        status = request.query_params.get('status', 1)
         district = request.query_params.get('district', None)
         county = request.query_params.get('county', None)
         activity = request.query_params.get('activity', None)
@@ -84,10 +86,23 @@ class StoreFilter(filters.BaseFilterBackend):
         order_by = request.query_params.get('order_by', None)
         storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
         ids = request.query_params.get('ids', None)
+        lat = float(request.COOKIES.get('search-lat'))
+        lon = float(request.COOKIES.get('search-lon'))
+
+        sort = request.query_params.get('sort', 'distance')
+        # distance \ -distance or down
+        if sort == 'new':
+            order_by = '-created_at'
+        if sort == 'old':
+            order_by = 'created_at'
         filter_dict = dict([('search', search),
                             ('district', district),
-                            ('county', county),
+                            ('lat', lat),
+                            ('lon', lon),
                             ('activity', activity),
+                            ('county', county),
+                            ('status', status),
+                            ('sort', sort),
                             ('store_type', store_type),
                             ('order_by', order_by),
                             ('storediscount_discount_type', storediscount_discount_type),

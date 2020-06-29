@@ -77,9 +77,8 @@ let clearAllMarker = (map) => {
   }
 }
 
-let initStoreDataMarker = (start, end) => {
-  for (let i = start; i < end; i++) {
-    let el = store_data[i]
+let initStoreDataMarker = (datas) => {
+  for (let el of datas) {
     let li = el.storediscount.map(x => `<li>${x.name}</li>`)
     let ul = `
         <ul>
@@ -1538,10 +1537,8 @@ const showSelfPosition = (position) => {
 
 
     $("#updateStore").validate({
-      rules: {
-      },
-      messages: {
-      },
+      rules: {},
+      messages: {},
       submitHandler(form) {
         let data = $(form).serializeArray()
         // let ret = {}
@@ -1786,19 +1783,36 @@ const showSelfPosition = (position) => {
     $(".more-click").on('click', () => {
       let index = 6
       let offset = $('.store').length
-      let max_offset = Math.min(offset + index, store_data.length)
-      for (let i = offset; i < max_offset; i++) {
-        let data = store_data[i]
-        appendStore(data)
+      let max_offset = Math.min(offset + index, data_count)
+      let search = window.location.search
+      if (search) {
+        search += `&limit=${index}&&offset=${offset}`
+      } else {
+        search += `?limit=${index}&&offset=${offset}`
       }
-      if ($('#map').length) {
-        initStoreDataMarker(offset, max_offset)
-      }
-      if (max_offset === store_data.length) {
-        $(".more-click").remove()
-      }
-      initStoreShare()
+      $('.preloader').show()
+      $.ajax({
+        url: `/api/store/${search}`,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+      }).done(res => {
+        for (let data of res.results) {
+          appendStore(data)
+        }
+        if ($('#map').length) {
+          initStoreDataMarker(res.results)
+        }
+        if (max_offset === data_count || !res.next) {
+          $(".more-click").remove()
+        }
+        initStoreShare()
+        $('.preloader').hide()
+      })
+
     })
+
+    // initStoreDataMarker(store_data)
   }
   let initPosition = () => {
     let setError = () => {
