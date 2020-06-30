@@ -11,6 +11,38 @@ import uuid
 import time
 from api.util import get_time
 import json
+from munch import AutoMunch
+import re
+
+location_data = []
+with open('./location.json') as f:
+    location_data = json.loads(f.read())
+city_list = []
+site_list = []
+road_list = []
+road_dict = dict()
+for el in location_data:
+    raw_data = AutoMunch(el['raw_data'])
+    if el['lat'] is None or el['lon'] is None:
+        continue
+    if raw_data.city not in city_list:
+        city_list.append(raw_data.city)
+    site = raw_data.site_id.replace(raw_data.city, '')
+    if raw_data.road not in road_list:
+        road_list.append(raw_data.road)
+        road_dict[raw_data.road] = dict(lat=float(el['lat']), lon=float(el['lon']))
+
+city_list = []
+for el in County.objects.all():
+    city_list.append(el.name)
+
+site_list = []
+for el in District.objects.all():
+    site_list.append(el.name)
+
+city_re = "|".join(city_list)
+site_re = "|".join(site_list)
+road_re = "|".join(road_list)
 
 
 class BaseView(TemplateView):
@@ -263,17 +295,51 @@ class StoreView(BaseView):
                 lon = target_instnace.longitude
             # 自行輸入地址找經緯度
             else:
+                # 先試試看map 裡面有沒有
                 task_st = time.time()
-                task_id = task.enqueue_task('get_latlon', search)
-                gps = None
-                while True:
-                    gps = task.get_task_result(task_id)
-                    if gps:
-                        break
-                lat = float(gps[0])
-                lon = float(gps[1])
-                task_ed = time.time()
-                task_spend = task_ed - task_st
+                lat = None
+                lon = None
+                # 確定road
+                if lat is None or lon is None:
+                    target = re.findall(road_re, search)
+                    if target:
+                        dct = road_dict[target[0]]
+                        lat = dct['lat']
+                        lon = dct['lon']
+                        logger.info(f'get map from road: {search}')
+                # 確定site
+                if lat is None or lon is None:
+                    target = re.findall(site_re, search)
+                    if target:
+                        target = District.objects.filter(name=target[0])
+                        if target:
+                            lat = target.latitude
+                            lon = target.longitude
+                            logger.info(f'get map from site: {search}')
+
+                # 確定county
+                if lat is None or lon is None:
+                    target = re.findall(city_re, search)
+                    if target:
+                        target = County.objects.filter(name=target[0])
+                        if target:
+                            lat = target.latitude
+                            lon = target.longitude
+                            logger.info(f'get map from county: {search}')
+
+                # 真的要定位
+                if lat is None or lon is None:
+                    task_id = task.enqueue_task('get_latlon', search)
+                    gps = None
+                    while True:
+                        gps = task.get_task_result(task_id)
+                        if gps:
+                            break
+                    lat = float(gps[0])
+                    lon = float(gps[1])
+                    task_ed = time.time()
+                    task_spend = task_ed - task_st
+                    logger.info(f'get map from selenium: {msg}')
 
         msg_ed = time.time()
 
