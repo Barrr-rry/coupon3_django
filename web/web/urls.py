@@ -32,7 +32,6 @@ DEBUG = os.environ.get('ENV') != 'prod'
 
 
 def get_view(cls):
-    return cls.as_view()
     if DEBUG:
         return cls.as_view()
     else:
