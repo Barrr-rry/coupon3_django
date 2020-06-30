@@ -27,6 +27,7 @@ from django.views.decorators.cache import cache_page
 import os
 from api.sitemaps import StaticViewSitemap, StoreSitemap
 from django.contrib.sitemaps.views import sitemap
+from django.views.generic import TemplateView
 
 DEBUG = os.environ.get('ENV') != 'prod'
 
@@ -73,6 +74,8 @@ urlpatterns = [
     path('eli5/treble/', get_view(ELI5TrebleView)),
     path('eli5/voucher/', get_view(ELI5VoucherView)),
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps}),
+    path('robots.txt/', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
+
 ]
 
 if settings.DEBUG:
