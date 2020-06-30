@@ -1696,11 +1696,6 @@ const showSelfPosition = (position) => {
           li += `<span class="tag"><a href="">${el.name}</a></span>`
         }
       }
-      for (let el of data.storediscount) {
-        if (el.name) {
-          li += `<span class="tag"><a href="">${el.name}</a></span>`
-        }
-      }
       let names = ''
       if (data.storediscount_names) {
         names = `
@@ -1715,7 +1710,7 @@ const showSelfPosition = (position) => {
         <div class="imagebox style1">
           <div class="box-imagebox">
             <div class="link_block">
-              <a href="/store/${data.id}" class="link"></a>
+              <a href="/store/${data.id}" class="link" target="_blank"></a>
               <div class="box-header">
                 <div class="box-image">
                   <img src="/media/${data.image_1}" alt="">

@@ -131,11 +131,6 @@
                         <span class="tag"><a href="">{{ activity.name }}</a></span>
                       {% endif %}
                     {% endfor %}
-                    {% for storediscount in el.storediscount %}
-                      {% if storediscount.name %}
-                        <span class="tag"><a href="">{{ storediscount.name }}</a></span>
-                      {% endif %}
-                    {% endfor %}
                   </p>
                   <div class="right">
                     <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
