@@ -34,6 +34,7 @@ REST_FRAMEWORK = {
 # Application definition
 
 INSTALLED_APPS = [
+    'import_export',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -118,7 +119,6 @@ DATABASES = {
     }
 }
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.mysql',
@@ -134,7 +134,6 @@ DATABASES = {
         }
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
