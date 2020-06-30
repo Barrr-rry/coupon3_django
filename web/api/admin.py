@@ -8,7 +8,7 @@ from import_export.admin import ImportExportModelAdmin, ImportExportActionModelA
 from api.resources import StoreResource, ActivityResource, StoreDiscountResource
 
 modellist = (
-    StoreType, County, District, DiscountType, StoreDiscount, StoreImage, File
+    StoreType, County, District, DiscountType, StoreImage, File
 )
 
 for md in modellist:
