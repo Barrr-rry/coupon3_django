@@ -385,6 +385,8 @@ class StoreView(BaseView):
 
         if not county:
             county = 'all'
+        else:
+            county = county.id
 
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
