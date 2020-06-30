@@ -10733,7 +10733,7 @@ footer .widget-about .logo-ft a {
 .tp-banner .slider .slide_content {
   position: relative;
   text-align: center;
-  padding: 250px 0;
+  padding: 250px 90px;
   z-index: 1;
 }
 .tp-banner .slider .slide_content .page-title-heading {
@@ -12462,6 +12462,19 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .tp-banner .next_btn img {
     width: 14px;
+  }
+
+  .flat-highlights .highlights ul.menu-list li:hover a {
+    color: #ffffff;
+  }
+  .flat-highlights .highlights ul.menu-list li:hover svg {
+    color: #ffffff;
+  }
+  .flat-highlights .highlights ul.menu-list li:hover .index_icon {
+    filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%);
+  }
+  .flat-highlights .highlights ul.menu-list li:after {
+    width: 0;
   }
 
   .header_sticky .flat-explore-detail #map {

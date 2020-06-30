@@ -335,7 +335,7 @@ footer
     .slide_content
       position: relative
       text-align: center
-      padding: 250px 0
+      padding: 250px 90px
       z-index: 1
 
       .page-title-heading
@@ -524,6 +524,7 @@ footer
 
         &:after
           background-color: #ffc332
+
 
 .flat-imagebox
   .flat-row-title
@@ -2143,6 +2144,17 @@ form.form-listing
 
       img
         width: 14px
+
+  .flat-highlights .highlights ul.menu-list li
+    &:hover
+      a
+        color: #ffffff
+      svg
+        color: #ffffff
+      .index_icon
+        filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%)
+    &:after
+      width: 0
 
   .header_sticky
     .flat-explore-detail
