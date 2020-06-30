@@ -5,11 +5,44 @@ from api.models import (
 from api import serializers
 from api import filters
 import json
-from crawler import task
+from crawler import task, reids_wraper
 from log import logger
 import uuid
 import time
 from api.util import get_time
+import json
+from munch import AutoMunch
+import re
+
+location_data = []
+with open('./location.json') as f:
+    location_data = json.loads(f.read())
+city_list = []
+site_list = []
+road_list = []
+road_dict = dict()
+for el in location_data:
+    raw_data = AutoMunch(el['raw_data'])
+    if el['lat'] is None or el['lon'] is None:
+        continue
+    if raw_data.city not in city_list:
+        city_list.append(raw_data.city)
+    site = raw_data.site_id.replace(raw_data.city, '')
+    if raw_data.road not in road_list:
+        road_list.append(raw_data.road)
+        road_dict[raw_data.road] = dict(lat=float(el['lat']), lon=float(el['lon']))
+
+city_list = []
+for el in County.objects.all():
+    city_list.append(el.name)
+
+site_list = []
+for el in District.objects.all():
+    site_list.append(el.name)
+
+city_re = "|".join(city_list)
+site_re = "|".join(site_list)
+road_re = "|".join(road_list)
 
 
 class BaseView(TemplateView):
@@ -170,6 +203,21 @@ class StoreIdView(BaseView):
         return ret
 
 
+def distance(x):
+    # 更新後目前用不到 但是先把算式留著
+    nlat = x['latitude']
+    nlon = x['longitude']
+    ret = (abs(nlat - lat) ** 2 + abs(nlon - lon) ** 2) ** (1 / 2)
+    x['distance'] = ret
+    m = ret / 0.00001
+    if m > 1000:
+        m = str(round(m / 1000, 1)) + '公里'
+    else:
+        m = str(round(m)) + '公尺'
+    x['distance_name'] = m
+    return ret
+
+
 class StoreView(BaseView):
     template_name = 'store.html'
 
@@ -247,17 +295,52 @@ class StoreView(BaseView):
                 lon = target_instnace.longitude
             # 自行輸入地址找經緯度
             else:
+                # 先試試看map 裡面有沒有
                 task_st = time.time()
-                task_id = task.enqueue_task('get_latlon', search)
-                gps = None
-                while True:
-                    gps = task.get_task_result(task_id)
-                    if gps:
-                        break
-                lat = float(gps[0])
-                lon = float(gps[1])
-                task_ed = time.time()
-                task_spend = task_ed - task_st
+                lat = None
+                lon = None
+                # 確定road
+                if lat is None or lon is None:
+                    target = re.findall(road_re, search)
+                    if target:
+                        dct = road_dict[target[0]]
+                        lat = dct['lat']
+                        lon = dct['lon']
+                        logger.info(f'get map from road: {search}')
+                # 確定site
+                if lat is None or lon is None:
+                    target = re.findall(site_re, search)
+                    if target:
+                        target = District.objects.filter(name=target[0])
+                        if target:
+                            lat = target.latitude
+                            lon = target.longitude
+                            logger.info(f'get map from site: {search}')
+
+                # 確定county
+                if lat is None or lon is None:
+                    target = re.findall(city_re, search)
+                    if target:
+                        target = County.objects.filter(name=target[0])
+                        if target:
+                            lat = target.latitude
+                            lon = target.longitude
+                            logger.info(f'get map from county: {search}')
+
+                # 真的要定位
+                if lat is None or lon is None:
+                    task_id = task.enqueue_task('get_latlon', search)
+                    gps = None
+                    while True:
+                        gps = task.get_task_result(task_id)
+                        if gps:
+                            break
+                    lat = float(gps[0])
+                    lon = float(gps[1])
+                    task_ed = time.time()
+                    task_spend = task_ed - task_st
+                    logger.info(f'get map from selenium: {msg}')
+
         msg_ed = time.time()
 
         activity_list = []
@@ -270,6 +353,7 @@ class StoreView(BaseView):
                 activity_list = serializers.ActivitySerializer(many=True, instance=el.activity).data
 
         sort = self.request.GET.get('sort', 'distance')
+        # distance \ -distance or down
         if sort == 'new':
             order_by = '-created_at'
         if sort == 'old':
@@ -277,51 +361,31 @@ class StoreView(BaseView):
 
         filter_dict = dict([('search', search),
                             ('district', district),
+                            ('lat', lat),
+                            ('lon', lon),
                             ('activity', activity),
                             ('county', county),
+                            ('status', status),
+                            ('sort', sort),
                             ('store_type', store_type),
                             ('order_by', order_by),
                             ('storediscount_discount_type', storediscount_discount_type),
                             ('ids', ids)]
                            )
+
+        data_st = time.time()
         queryset = filters.filter_query(filter_dict, queryset)
-        if sort == 'new':
-            queryset = queryset.order_by('-created_at')
-        if sort == 'old':
-            queryset = queryset.order_by('created_at')
+        data = serializers.StoreSerializer(many=True, instance=queryset[:6]).data
+        data_ed = time.time()
 
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         storetypes.insert(0, dict(id='all', name='全部'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         district_list.insert(0, dict(id='all', name='全部'))
-        data_st = time.time()
-        data = serializers.StoreSerializer(many=True, instance=queryset).data
-        data_ed = time.time()
 
         if not county:
             county = 'all'
 
-        def distance(x):
-            nlat = x['latitude']
-            nlon = x['longitude']
-            ret = (abs(nlat - lat) ** 2 + abs(nlon - lon) ** 2) ** (1 / 2)
-            x['distance'] = ret
-            m = ret / 0.00001
-            if m > 1000:
-                m = str(round(m / 1000, 1)) + '公里'
-            else:
-                m = str(round(m)) + '公尺'
-            x['distance_name'] = m
-            return ret
-
-        sort_st = time.time()
-        data = sorted(data, key=distance)
-        if sort == 'distance':
-            data = sorted(data, key=distance)
-        if sort == '-distance':
-            data = sorted(data, key=distance, reverse=True)
-        sort_ed = time.time()
-        json_data = json.dumps(data)
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
         else:
@@ -342,7 +406,7 @@ class StoreView(BaseView):
             suffix=suffix,
             search=search if search is not None else '',
             data=data[:6],
-            json_data=json_data,
+            json_data=json.dumps(data[:6]),
             count=queryset.count(),
             storetypes=storetypes,
             district=district,
@@ -357,8 +421,15 @@ class StoreView(BaseView):
         )
         ed = time.time()
         logger.info(
-            f'search time: {ed - st} task: {task_spend} sort: {sort_ed - sort_st} msg: {msg_ed - msg_st} data: {data_ed - data_st}'
+            f'search time: {ed - st} task: {task_spend}  msg: {msg_ed - msg_st} data: {data_ed - data_st}'
         )
+        return ret
+
+    def render_to_response(self, context, **response_kwargs):
+        ret = super().render_to_response(context, **response_kwargs)
+
+        ret.set_cookie('search-lat', context.get('lat'))
+        ret.set_cookie('search-lon', context.get('lon'))
         return ret
 
 

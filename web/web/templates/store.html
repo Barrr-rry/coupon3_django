@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -125,15 +125,10 @@
                   </div><!-- /.box-content -->
                 </div>
                 <div class="imagebox_bottom">
-                  <p class="tag_block">
+                  <p class="tag_block activity">
                     {% for activity in el.activity %}
                       {% if activity.name %}
-                        <span class="tag"><a href="">{{ activity.name }}</a></span>
-                      {% endif %}
-                    {% endfor %}
-                    {% for storediscount in el.storediscount %}
-                      {% if storediscount.name %}
-                        <span class="tag"><a href="">{{ storediscount.name }}</a></span>
+                        <span class="tag"><a data-activity="{{ activity.id }}" href="">{{ activity.name }}</a></span>
                       {% endif %}
                     {% endfor %}
                   </p>
@@ -191,6 +186,7 @@
 <!-- Javascript -->
 <script type="text/javascript">
   let store_data = {{ json_data|safe }};
+  let data_count = {{ count }};
   let sort = '{{ sort }}';
   let activity = '{{ activity }}';
 </script>

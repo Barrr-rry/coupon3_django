@@ -113,10 +113,28 @@ WSGI_APPLICATION = 'web.wsgi.application'
 #
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.mysql',
+        'NAME': 'ezgo',
+        'USER': 'root',
+        'PASSWORD': 'conquers666',
+        "DEFAULT-CHARACTER-SET": 'utf8',
+        'HOST': 'coupon-db',
+        'PORT': '3306',
+        'TEST': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'test.db'),
+        }
+    }
+}
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

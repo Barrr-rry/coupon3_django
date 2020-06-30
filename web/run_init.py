@@ -240,9 +240,45 @@ def from_csv():
             )
 
 
+def site3():
+    data = get_json('./site3.json')
+
+    storetype = StoreType.objects.filter(name='住宿').first()
+    querset = District.objects.all()
+    district_dct = dict()
+    for el in querset:
+        district_dct[el.name] = el
+    discount_type = DiscountType.objects.first()
+    county_id = None
+    district_id = None
+    for el in data:
+        addr = el['address']
+        if not addr:
+            continue
+        for key in district_dct:
+            if key in addr:
+                district_id = district_dct[key].id
+                county_id = district_dct[key].county_id
+                break
+        if el['lat'] == 'NaN' or el['lon'] == 'NaN':
+            print('oops...')
+            continue
+        instance = Store.objects.create(
+            store_type_id=storetype.id,
+            name=el['title'],
+            address=el['address'],
+            latitude=el['lat'],
+            longitude=el['lon'],
+            county_id=county_id,
+            district_id=district_id,
+            status=1,
+        )
+
+
 def generate_store():
     site1()
     site2()
+    site3()
     from_csv()
 
 

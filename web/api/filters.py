@@ -4,6 +4,9 @@ from rest_framework.compat import coreapi, coreschema
 from django.utils import timezone
 from django.utils.timezone import make_aware
 from api.models import County, District
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
 
 or_q = lambda q, other_fn: other_fn if q is None else q | other_fn
 and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
@@ -46,6 +49,12 @@ def filter_query(filter_dict, queryset):
     if filter_dict['store_type'] is not None:
         q = and_q(q, Q(store_type=filter_dict['store_type']))
 
+    ref_location = Point(filter_dict['lat'], filter_dict['lon'], srid=4326)
+    queryset = queryset.annotate(distance=Distance("location", ref_location))
+    # 算距離
+    if filter_dict['sort']:
+        queryset = queryset.order_by(filter_dict['sort'])
+
     if filter_dict['order_by']:
         queryset = queryset.order_by(filter_dict['order_by'])
 
@@ -68,6 +77,8 @@ def filter_query(filter_dict, queryset):
 class StoreFilter(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         search = request.query_params.get('search')
+        activity = request.query_params.get('activity')
+        status = request.query_params.get('status', 1)
         district = request.query_params.get('district', None)
         county = request.query_params.get('county', None)
         activity = request.query_params.get('activity', None)
@@ -75,10 +86,23 @@ class StoreFilter(filters.BaseFilterBackend):
         order_by = request.query_params.get('order_by', None)
         storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
         ids = request.query_params.get('ids', None)
+        lat = float(request.COOKIES.get('search-lat'))
+        lon = float(request.COOKIES.get('search-lon'))
+
+        sort = request.query_params.get('sort', 'distance')
+        # distance \ -distance or down
+        if sort == 'new':
+            order_by = '-created_at'
+        if sort == 'old':
+            order_by = 'created_at'
         filter_dict = dict([('search', search),
                             ('district', district),
-                            ('county', county),
+                            ('lat', lat),
+                            ('lon', lon),
                             ('activity', activity),
+                            ('county', county),
+                            ('status', status),
+                            ('sort', sort),
                             ('store_type', store_type),
                             ('order_by', order_by),
                             ('storediscount_discount_type', storediscount_discount_type),

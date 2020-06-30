@@ -112,6 +112,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     image_1 = serializers.SerializerMethodField()
     activity = ActivitySerializer(many=True, required=False)
     phone_2 = serializers.SerializerMethodField(read_only=True)
+    distance_name = serializers.SerializerMethodField(read_only=True)
 
     class Meta(CommonMeta):
         model = Store
@@ -124,9 +125,19 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             ret = target.picture
         return ret
 
+    def get_distance_name(self, instance, *args, **kwargs):
+        if not hasattr(instance, 'distance'):
+            return ''
+        m = instance.distance * 1000000
+        if m > 1000:
+            m = str(round(m / 1000, 1)) + '公里'
+        else:
+            m = str(round(m)) + '公尺'
+        return m
+
     def get_phone_2(self, instance, *args, **kwargs):
         phone = instance.phone
-        if '#' in phone:
+        if phone and '#' in phone:
             phone = phone.replace(' #', ',')
         return phone
 
@@ -148,15 +159,16 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
             instance = super().create(validated_data)
-            if '#' in instance.phone and ' #' not in instance.phone:
+            if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
                 instance.phone = instance.phone.replace('#', ' #')
+                instance.save()
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
                     picture=pic
                 )
             for el in storediscount_data:
-                el['description'] = el['description'].replace('\n', '<br>')
+                el['description'] = el['description'].replace('\n', '<br/>')
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
@@ -185,12 +197,15 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                 )
             StoreDiscount.original_objects.filter(store=instance).delete()
             for el in storediscount_data:
-                el['description'] = el['description'].replace('\n', '<br>')
+                el['description'] = el['description'].replace('\n', '<br/>')
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
                 )
             instance = super().update(instance, validated_data)
+            if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
+                instance.phone = instance.phone.replace('#', ' #')
+                instance.save()
             if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
