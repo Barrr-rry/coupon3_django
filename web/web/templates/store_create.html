@@ -128,7 +128,7 @@
               <div class="clear"></div>
             </div><!-- /.wrap-listing -->
             <div class="pdmap style2 map_store_id" id="map" style="height: 320px">
-              <a class="map_btn" target="_blank" href="" style="outline: none;">使用此位置</a>
+              <a class="map_btn" href="javascript:void(0);" style="outline: none;display: none">使用此位置</a>
             </div><!-- /#flat-map -->
             <div class="clearfix"></div>
           </div><!-- /.inner-box -->
@@ -169,6 +169,27 @@
 {% include 'includes/js.html' %}
 <script>
   $(document).ready(() => {
+    let location = ''
+    let gps_msg = ''
+    $('.map_btn').on('click', function (e) {
+      e.preventDefault()
+      e.stopPropagation()
+      $('.preloader').show()
+      $.ajax({
+        url: `/api/location/?task_type=2&msg=${gps_msg}`,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+      }).done(res => {
+        $('.preloader').hide()
+        location = res.data
+        let $input = $('input[name="address"]')
+        $input.val(location)
+        $(this).hide()
+      })
+
+
+    })
     let showPosition = (position) => {
       let map = initMap(position)
       map.off('click')
@@ -178,15 +199,8 @@
         const pos = L.marker([e.latlng.lat, e.latlng.lng], {icon: greenIcon}).bindPopup('目前位置').openPopup()
         marker.push(pos)
         map.addLayer(pos)
-        $.ajax({
-          url: `/api/location/?task_type=2&msg=${msg}`,
-          type: "GET",
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-        }).done(res => {
-          let $input = $('input[name="address"]')
-          $input.val(res.data)
-        })
+        gps_msg = msg
+        $('.map_btn').show()
       })
       clearAllMarker(map)
 
