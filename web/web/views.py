@@ -385,7 +385,7 @@ class StoreView(BaseView):
 
         if not county:
             county = 'all'
-        else:
+        if isinstance(county,County):
             county = county.id
 
         if storediscount_discount_type is not None:
