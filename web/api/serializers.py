@@ -159,7 +159,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
             instance = super().create(validated_data)
-            if '#' in instance.phone and ' #' not in instance.phone:
+            if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
                 instance.phone = instance.phone.replace('#', ' #')
                 instance.save()
             for pic in storeimage_data:
@@ -190,9 +190,6 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
             StoreImage.original_objects.filter(store=instance).delete()
-            if '#' in instance.phone and ' #' not in instance.phone:
-                instance.phone = instance.phone.replace('#', ' #')
-                instance.save()
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
@@ -206,6 +203,9 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                     **el
                 )
             instance = super().update(instance, validated_data)
+            if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
+                instance.phone = instance.phone.replace('#', ' #')
+                instance.save()
             if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
