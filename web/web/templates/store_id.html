@@ -136,7 +136,8 @@
             </h3>
             <div class="text-desc">
               <p>
-                {{ el.description|default_if_none:"" }}</p>
+                {{ el.description|default_if_none:""|safe }}
+              </p>
             </div>
           </div>
         {% endfor %}
