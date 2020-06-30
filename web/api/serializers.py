@@ -22,6 +22,7 @@ from api.models import (
     StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
 )
 from crawler import task
+from django.utils.html import escape
 
 fmt = '%Y-%m-%d %H:%M:%S'
 to_datetime = lambda x: make_aware(datetime.datetime.strptime(x, '%Y-%m-%d %H:%M'))
@@ -168,7 +169,9 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                     picture=pic
                 )
             for el in storediscount_data:
-                el['description'] = el['description'].replace('\n', '<br/>')
+                el['description'] = el['description'].replace('\n', '<br>')
+                # el['description'] = (escape(el['description']))
+
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
@@ -225,8 +228,14 @@ class DistrictSerializer(DefaultModelSerializer):
 
 
 class CountySerializer(DefaultModelSerializer):
+    count = serializers.SerializerMethodField(read_only=True)
+
     class Meta(CommonMeta):
         model = County
+
+    def get_count(self, instance, *args, **kwargs):
+        count = Store.objects.filter(county=instance).filter(status=1).count()
+        return count
 
 
 class StoreTypeSerializer(DefaultModelSerializer):

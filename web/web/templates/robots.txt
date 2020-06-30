@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://3coupon.info/sitemap.xml/
