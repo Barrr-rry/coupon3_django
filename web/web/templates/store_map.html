@@ -146,10 +146,10 @@
                           </div><!-- /.box-content -->
                         </div>
                         <div class="imagebox_bottom">
-                          <p class="tag_block">
+                          <p class="tag_block activity">
                             {% for activity in el.activity %}
                               {% if activity.name %}
-                                <span class="tag"><a href="">{{ activity.name }}</a></span>
+                                <span class="tag"><a data-activity="{{ activity.id }}" href="">{{ activity.name }}</a></span>
                               {% endif %}
                             {% endfor %}
                           </p>
@@ -215,6 +215,7 @@
   let sort = '{{ sort }}';
   let lat = {{ lat }};
   let lon = {{ lon }};
+  let activity = '{{ activity }}';
 </script>
 {% include 'includes/js.html' %}
 <script>
@@ -239,6 +240,17 @@
       showSelfPosition(position)
       initStoreDataMarker(store_data)
     }
+
+    $('.activity a').each(function () {
+       let $el = $(this)
+       let activity = $el.attr('data-activity')
+       let newurl = setParameters(window.location.href, {activity: activity})
+       $el.attr('href', newurl)
+    })
+
+    // init active activity
+    $el = $(`a[data-activity=${activity}]`)
+    $el.addClass('active')
 
     const position = {
       coords: {

@@ -125,10 +125,10 @@
                   </div><!-- /.box-content -->
                 </div>
                 <div class="imagebox_bottom">
-                  <p class="tag_block">
+                  <p class="tag_block activity">
                     {% for activity in el.activity %}
                       {% if activity.name %}
-                        <span class="tag"><a href="">{{ activity.name }}</a></span>
+                        <span class="tag"><a data-activity="{{ activity.id }}" href="">{{ activity.name }}</a></span>
                       {% endif %}
                     {% endfor %}
                   </p>
