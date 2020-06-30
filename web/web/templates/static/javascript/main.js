@@ -79,16 +79,23 @@ let clearAllMarker = (map) => {
 
 let initStoreDataMarker = (datas) => {
   for (let el of datas) {
-    let li = el.storediscount.map(x => `<li>${x.name}</li>`)
     let ul = `
         <ul>
-        ${li}
+          <li><span>${el.district_name}</span></li>
+          <li>
+            <img src="/media/map_gray.svg" alt="">
+            <span>${el.distance_name}</span>
+          </li>
+          <li>
+            <img src="/media/park_gray.svg" alt="">
+            <span>${el.store_type_name}</span>
+          </li>      
         </ul>
         `
     let html = `
         <div>${el.name}</div>
         ${ul}
-        <a href="/store/${el.id}"><button type="button" class="search-btn" id="search-btn">導覽到頁面</button></a>
+        <a href="/store/${el.id}"><button type="button" class="search-btn" id="search-btn">查看詳情</button></a>
         `
     const pos = L.marker([el.latitude, el.longitude], {icon: greenIcon}).bindPopup(html).openPopup()
     marker.push(pos)
