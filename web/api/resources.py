@@ -1,5 +1,5 @@
 from api.models import (
-    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
 )
 
 from import_export import resources
