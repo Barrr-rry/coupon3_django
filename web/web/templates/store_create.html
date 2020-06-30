@@ -251,6 +251,8 @@
       for (let el of filters) {
         $district.append(`<option value=${el.id}>${el.name}</option>`)
       }
+      $district.val(filters[0].id)
+      $district.trigger('change')
     })
   })
 </script>

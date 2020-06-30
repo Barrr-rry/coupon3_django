@@ -1375,6 +1375,25 @@ const showSelfPosition = (position) => {
     }).done(res => {
       discount_type_list = res
     })
+    let val = $('select[name="county"]').val()
+    let county_name = $(`select[name="county"] option[value="${val}"]`).text()
+    val = $('select[name="district"]').val()
+    let district_name = $(`select[name="district"] option[value="${val}"]`).text()
+    let changeLocation = () => {
+      $('input[name="address"]').val(`${county_name}${district_name}`)
+    }
+    changeLocation()
+
+    $('select[name="county"]').on('change', function (e) {
+      county_name = $(`select[name="county"] option[value="${e.target.value}"]`).text()
+      changeLocation()
+    })
+
+    $('select[name="district"]').on('change', function (e) {
+      district_name = $(`select[name="district"] option[value="${e.target.value}"]`).text()
+      changeLocation()
+    })
+
 
     // 活動折扣
     let appendDiscount = () => {
