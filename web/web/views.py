@@ -299,6 +299,13 @@ class StoreView(BaseView):
                 task_st = time.time()
                 lat = None
                 lon = None
+                # 確定store name
+                if lat is None or lon is None:
+                    target = Store.objects.filter(name=search).first()
+                    if target:
+                        lat = target.latitude
+                        lon = target.longitude
+                        logger.info(f'get map from store: {search}')
                 # 確定road
                 if lat is None or lon is None:
                     target = re.findall(road_re, search)
@@ -311,7 +318,7 @@ class StoreView(BaseView):
                 if lat is None or lon is None:
                     target = re.findall(site_re, search)
                     if target:
-                        target = District.objects.filter(name=target[0])
+                        target = District.objects.filter(name=target[0]).first()
                         if target:
                             lat = target.latitude
                             lon = target.longitude
@@ -321,7 +328,7 @@ class StoreView(BaseView):
                 if lat is None or lon is None:
                     target = re.findall(city_re, search)
                     if target:
-                        target = County.objects.filter(name=target[0])
+                        target = County.objects.filter(name=target[0]).first()
                         if target:
                             lat = target.latitude
                             lon = target.longitude
@@ -385,7 +392,7 @@ class StoreView(BaseView):
 
         if not county:
             county = 'all'
-        if isinstance(county,County):
+        if isinstance(county, County):
             county = county.id
 
         if storediscount_discount_type is not None:
