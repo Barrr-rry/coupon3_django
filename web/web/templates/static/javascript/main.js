@@ -1693,12 +1693,7 @@ const showSelfPosition = (position) => {
       let li = ''
       for (let el of data.activity) {
         if (el.name) {
-          li += `<span class="tag"><a href="">${el.name}</a></span>`
-        }
-      }
-      for (let el of data.storediscount) {
-        if (el.name) {
-          li += `<span class="tag"><a href="">${el.name}</a></span>`
+          li += `<span class="tag"><a data-activity="${el.id}" href="">${el.name}</a></span>`
         }
       }
       let names = ''
@@ -1709,13 +1704,42 @@ const showSelfPosition = (position) => {
       </div>
       `
       }
+      $(document).ready(() => {
+        let href_split = window.location.href.split('?')
+        $('.sort a').each(function () {
+          let $el = $(this)
+          let sort = $el.attr('data-sort')
+          let newurl = setParameters(window.location.href, {sort: sort})
+          $el.attr('href', newurl)
+        })
+
+
+        // init active sort
+        let $el = $(`a[data-sort=${sort}]`)
+        $el.addClass('active')
+
+
+        $('.activity a').each(function () {
+          let $el = $(this)
+          let activity = $el.attr('data-activity')
+          let newurl = setParameters(window.location.href, {activity: activity})
+          $el.attr('href', newurl)
+        })
+
+
+        // init active activity
+        $el = $(`a[data-activity=${activity}]`)
+        $el.addClass('active')
+
+
+      })
 
       let html = `
       <div class="${class_name}">
         <div class="imagebox style1">
           <div class="box-imagebox">
             <div class="link_block">
-              <a href="/store/${data.id}" class="link"></a>
+              <a href="/store/${data.id}" class="link" target="_blank"></a>
               <div class="box-header">
                 <div class="box-image">
                   <img src="/media/${data.image_1}" alt="">
@@ -1744,7 +1768,7 @@ const showSelfPosition = (position) => {
               </div><!-- /.box-content -->
             </div>
             <div class="imagebox_bottom">
-              <p class="tag_block">
+              <p class="tag_block activity">
                 ${li}
               </p>
               <div class="right">
