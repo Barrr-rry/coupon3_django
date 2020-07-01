@@ -1906,7 +1906,7 @@ const showSelfPosition = (position) => {
     }
   }
   let searchAPI = () => {
-    $('#position').on('click', function () {
+    $('.search-pin-icon, .search-pin-load').on('click', function () {
       let $el = $(this)
       $el.find('svg').hide()
       let $load = $el.next().find('div')
@@ -2029,7 +2029,6 @@ const showSelfPosition = (position) => {
   $(function () {
     initPreloaderListenr();
     initPosition();
-    searchAPI();
     responsiveMenu();
     headerFixed();
     slideTeam();
@@ -2051,6 +2050,7 @@ const showSelfPosition = (position) => {
     storePage();
     initToScroll();
     initLazyLoading();
+    searchAPI();
   });
 
 })(jQuery);
