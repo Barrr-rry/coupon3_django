@@ -174,6 +174,8 @@ class StoreIdView(BaseView):
             instance=serializers.StoreSerializer(instance=instance).data,
             google=google
         )
+        for el in ret.get('instance', None).get('storediscount', None):
+            el['description'] = el['description'].replace('\n', '<br/>')
         return ret
 
 
