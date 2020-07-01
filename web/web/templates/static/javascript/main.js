@@ -23,6 +23,26 @@ const default_position = {
   zoom: 7
 }
 
+let initPosition = () => {
+  let setError = () => {
+    setCookie("lat", default_position.coords.latitude, 365)
+    setCookie("lon", default_position.coords.longitude, 365)
+    now_position = default_position
+  }
+  let setPosition = (position) => {
+    setCookie("lat", position.coords.latitude, 365)
+    setCookie("lon", position.coords.longitude, 365)
+    console.log('set position:', now_position)
+  }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setPosition, setError)
+  } else {
+    alert('您的瀏覽器不支援定位系統')
+    setError()
+  }
+  console.log('init position')
+}
+
 function getParameters(url) {
   const searchURL = new URL(url)
 
@@ -1884,26 +1904,9 @@ const showSelfPosition = (position) => {
 
     // initStoreDataMarker(store_data)
   }
-  let initPosition = () => {
-    let setError = () => {
-      setCookie("lat", default_position.coords.latitude, 365)
-      setCookie("lon", default_position.coords.longitude, 365)
-      now_position = default_position
-    }
-    let setPosition = (position) => {
-      setCookie("lat", position.coords.latitude, 365)
-      setCookie("lon", position.coords.longitude, 365)
-      console.log('set position:', now_position)
-    }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(setPosition, setError)
-    } else {
-      alert('您的瀏覽器不支援定位系統')
-      setError()
-    }
-  }
   let searchAPI = () => {
     $('.search-pin-icon, .search-pin-load').on('click', function () {
+      initPosition()
       let $el = $(this)
       $el.find('svg').hide()
       let $load = $el.next().find('div')
@@ -2025,7 +2028,6 @@ const showSelfPosition = (position) => {
 
   $(function () {
     initPreloaderListenr();
-    initPosition();
     responsiveMenu();
     headerFixed();
     slideTeam();
