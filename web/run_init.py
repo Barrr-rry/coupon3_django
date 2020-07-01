@@ -360,10 +360,9 @@ def site3():
 
 def generate_store():
     # todo 要依照地址做filter 判斷有沒有被爬過
-    pass
-    # site1()
-    # site2()
-    # site3()
+    site1()
+    site2()
+    site3()
     # from_csv()
 
 

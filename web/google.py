@@ -30,10 +30,11 @@ def get_place_info(place_id):
         return ret
     data = data['result']
     ret = dict(
-        address=data['formatted_address'],
-        phone=data['formatted_phone_number'],
-        website=data['website'],
-        photos=data['photos']
+        address=data.get('formatted_address'),
+        phone=data.get('formatted_phone_number'),
+        website=data.get('website'),
+        name=data['name'],
+        photos=data.get('photos', [])
     )
     return ret
 
@@ -45,7 +46,7 @@ def get_photo(ref):
         photoreference=ref,
         key=key,
     ))
-    ret = None
+    ref = ref[:100]
     with open(f'./media/{ref}.jpeg', 'wb') as f:
         f.write(r.content)
     return f'{ref}.jpeg'
