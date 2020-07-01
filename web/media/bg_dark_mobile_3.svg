@@ -35,24 +35,24 @@
                         <polygon id="Fill-54" fill="#33A689" fill-rule="evenodd" points="209.897905 448.409058 234.054118 448.409058 227.087407 443.831827"></polygon>
                         <polygon id="Fill-55" fill="#F14321" fill-rule="evenodd" points="217.732352 200.911617 246.144315 256.165339 299.34118 225.198967"></polygon>
                         <polygon id="Fill-59" fill="#3BA485" fill-rule="evenodd" points="246.785095 305.534049 256.477713 377.135026 309.78711 368.639995"></polygon>
-                        <polygon id="Fill-60" fill="#3BA382" fill-rule="evenodd" points="246.785095 305.561503 309.607113 368.634454 311.419287 289.186794"></polygon>
-                        <polygon id="Fill-61" fill="#E76A27" fill-rule="evenodd" points="246.132225 256.165339 246.736734 305.860994 311.419287 289.497791"></polygon>
-                        <polygon id="Fill-62" fill="#F23E23" fill-rule="evenodd" points="299.32909 225.105554 246.132225 255.937094 311.419287 289.186794"></polygon>
+                        <polygon id="Fill-60" fill="#3BA382" fill-rule="evenodd" points="246.785095 305.561503 309.607113 368.634454 311.602907 289.186794"></polygon>
+                        <polygon id="Fill-61" fill="#E76A27" fill-rule="evenodd" points="246.132225 256.165339 246.736734 305.860994 311.602907 289.186794"></polygon>
+                        <polygon id="Fill-62" fill="#F23E23" fill-rule="evenodd" points="299.667616 225.105554 245.765171 256.165339 311.602907 289.186794"></polygon>
                         <polygon id="Fill-63" fill="#0BA99A" fill-rule="evenodd" points="309.706379 368.634454 256.578154 377.128285 312.725028 427.484572"></polygon>
                         <polygon id="Fill-64" fill="#1DA891" fill-rule="evenodd" points="256.497695 377.135026 226.872541 443.831827 312.725028 427.460794"></polygon>
                         <polygon id="Fill-65" fill="#12A996" fill-rule="evenodd" points="226.872541 443.822845 233.794598 448.409058 292.666844 448.409058 312.725028 427.484572"></polygon>
                         <polygon id="Fill-66" fill="#03A99D" fill-rule="evenodd" points="292.812474 448.409058 325.456005 448.409058 312.977336 427.484572"></polygon>
-                        <polygon id="Fill-70" fill="#E2171D" fill-rule="evenodd" points="299.667616 225.105554 311.76056 289.186794 352.876571 258.355254"></polygon>
+                        <polygon id="Fill-70" fill="#E2171D" fill-rule="evenodd" points="299.667616 225.105554 311.602907 289.186794 352.876571 258.355254"></polygon>
                         <polygon id="Fill-71" fill="#DF161C" fill-rule="evenodd" points="347.434746 197.969111 299.667616 225.187291 352.876571 258.453955"></polygon>
                         <polygon id="Fill-72" fill="#079690" fill-rule="evenodd" points="311.602907 289.186794 309.78711 368.634454 367.892596 343.769156"></polygon>
-                        <polygon id="Fill-73" fill="#673538" fill-rule="evenodd" points="352.79935 258.453955 311.745722 289.318963 367.892596 343.786626"></polygon>
+                        <polygon id="Fill-73" fill="#673538" fill-rule="evenodd" points="352.79935 258.453955 311.602907 289.186794 367.892596 343.769156"></polygon>
                         <polygon id="Fill-74" fill="#00A39A" fill-rule="evenodd" points="309.78711 368.653407 312.813438 427.484572 367.892596 343.786626"></polygon>
-                        <polygon id="Fill-80" fill="#821F22" fill-rule="evenodd" points="352.876571 258.453955 368.008208 343.786626 410.982057 272.373468"></polygon>
-                        <polygon id="Fill-81" fill="#0C8F8A" fill-rule="evenodd" points="367.793329 343.786626 312.725028 427.484572 416.205022 414.141421"></polygon>
+                        <polygon id="Fill-80" fill="#821F22" fill-rule="evenodd" points="352.876571 258.453955 367.892596 343.769156 410.982057 272.373468"></polygon>
+                        <polygon id="Fill-81" fill="#0C8F8A" fill-rule="evenodd" points="367.892596 343.786626 312.725028 427.484572 416.205022 414.141421"></polygon>
                         <polygon id="Fill-82" fill="#029D95" fill-rule="evenodd" points="312.725028 427.428294 325.149889 448.409058 363.254732 448.409058 416.205022 414.079823"></polygon>
                         <polygon id="Fill-83" fill="#0A938C" fill-rule="evenodd" points="363.322501 448.409058 405.245346 448.409058 416.205022 414.079823"></polygon>
-                        <polygon id="Fill-84" fill="#643839" fill-rule="evenodd" points="410.898634 272.512594 367.892596 344.113571 422.407292 330.157448"></polygon>
-                        <polygon id="Fill-85" fill="#356361" fill-rule="evenodd" points="367.892596 344.01243 416.350104 414.406768 422.407292 330.054932"></polygon>
+                        <polygon id="Fill-84" fill="#643839" fill-rule="evenodd" points="410.898634 272.512594 367.892596 343.769156 422.407292 330.157448"></polygon>
+                        <polygon id="Fill-85" fill="#356361" fill-rule="evenodd" points="367.892596 343.769156 416.350104 414.406768 422.407292 330.054932"></polygon>
                         <polygon id="Fill-87" fill="#C40B10" fill-rule="evenodd" points="347.327171 197.969111 352.76922 258.453955 437.423317 219.743655"></polygon>
                         <polygon id="Fill-88" fill="#AA0B0F" fill-rule="evenodd" points="352.876571 258.596758 410.851482 272.512594 437.423317 219.874433"></polygon>
                         <polygon id="Fill-89" fill="#3D5B5B" fill-rule="evenodd" points="422.244075 330.054932 416.205022 414.406768 464.517448 385.278076"></polygon>
@@ -64,7 +64,7 @@
                         <polygon id="Fill-99" fill="#8D161A" fill-rule="evenodd" points="410.982057 272.564608 467.839407 310.111281 493.243755 256.819229"></polygon>
                         <polygon id="Fill-101" fill="#A50A0E" fill-rule="evenodd" points="437.423317 219.585068 493.038222 256.492284 519.032145 203.854123"></polygon>
                         <polygon id="Fill-102" fill="#247471" fill-rule="evenodd" points="460.600224 448.409058 490.305837 448.409058 484.526462 443.177937"></polygon>
-                        <polygon id="Fill-103" fill="#5E3C3D" fill-rule="evenodd" points="467.546391 310.111281 464.517448 385.308654 527.519463 361.657867"></polygon>
+                        <polygon id="Fill-103" fill="#5E3C3D" fill-rule="evenodd" points="467.781801 309.956412 464.517448 385.308654 527.621523 361.294893"></polygon>
                         <polygon id="Fill-104" fill="#465252" fill-rule="evenodd" points="464.517448 385.054363 484.508472 443.177937 527.519463 361.441661"></polygon>
                         <polygon id="Fill-107" fill="#851B1D" fill-rule="evenodd" points="493.228917 256.819229 467.781801 310.111281 547.758452 304.055366"></polygon>
                         <polygon id="Fill-108" fill="#722A2D" fill-rule="evenodd" points="467.781801 309.956412 527.764289 361.441661 547.758452 303.899324"></polygon>
@@ -73,7 +73,7 @@
                         <polygon id="Fill-113" fill="#9C0B0E" fill-rule="evenodd" points="519.234324 203.854123 493.243755 256.492284 586.930689 235.316012"></polygon>
                         <polygon id="Fill-114" fill="#901317" fill-rule="evenodd" points="493.243755 256.73243 547.64262 303.899324 586.930689 235.567798"></polygon>
                         <polygon id="Fill-117" fill="#6C3030" fill-rule="evenodd" points="547.495402 303.899324 527.519463 361.374439 589.868607 368.634454"></polygon>
-                        <polygon id="Fill-118" fill="#594141" fill-rule="evenodd" points="527.519463 361.441661 567.471342 443.831827 589.868607 368.711382"></polygon>
+                        <polygon id="Fill-118" fill="#594141" fill-rule="evenodd" points="527.519463 361.269855 567.471342 443.831827 589.868607 368.711382"></polygon>
                         <polygon id="Fill-119" fill="#3C5C5B" fill-rule="evenodd" points="560.815864 448.409058 570.608924 448.409058 567.424799 443.831827"></polygon>
                         <polygon id="Fill-122" fill="#8A171A" fill-rule="evenodd" points="586.767472 235.567798 547.432017 303.899324 626.102927 303.899324"></polygon>
                         <polygon id="Fill-123" fill="#782628" fill-rule="evenodd" points="547.432017 303.899324 589.793276 368.634454 626.102927 303.899324"></polygon>
