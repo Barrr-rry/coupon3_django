@@ -10404,7 +10404,6 @@ body {
 }
 
 .row.display-initial {
-  display: initial;
   flex-wrap: unset;
 }
 
