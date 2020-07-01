@@ -78,20 +78,17 @@ let clearAllMarker = (map) => {
 }
 
 let initStoreDataMarker = (datas) => {
+  let ul = ''
   for (let el of datas) {
-    let ul = `
+    for (let activity of el.activity) {
+      if (activity.name) {
+        ul = `
         <ul>
-          <li><span>${el.district_name}</span></li>
-          <li>
-            <img src="/media/map_gray.svg" alt="">
-            <span>${el.distance_name}</span>
-          </li>
-          <li>
-            <img src="/media/park_gray.svg" alt="">
-            <span>${el.store_type_name}</span>
-          </li>      
+          <li><span>${activity.name}</span></li>     
         </ul>
         `
+      }
+    }
     let html = `
         <div>${el.name}</div>
         ${ul}
