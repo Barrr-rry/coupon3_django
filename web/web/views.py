@@ -17,6 +17,7 @@ import re
 city_re = None
 site_re = None
 road_re = None
+road_dict = dict()
 
 
 class BaseView(TemplateView):
@@ -206,7 +207,7 @@ class StoreView(BaseView):
     template_name = 'store.html'
 
     def check_re(self):
-        global city_re, site_re, road_re
+        global city_re, site_re, road_re, road_dict
         if city_re is None or site_re is None or road_re is None:
             location_data = []
             with open('./location.json') as f:
@@ -214,7 +215,6 @@ class StoreView(BaseView):
             city_list = []
             site_list = []
             road_list = []
-            road_dict = dict()
             for el in location_data:
                 raw_data = AutoMunch(el['raw_data'])
                 if el['lat'] is None or el['lon'] is None:
@@ -239,7 +239,7 @@ class StoreView(BaseView):
             road_re = r"|".join(road_list)
 
     def get_context_data(self, *args, **kwargs):
-        global city_re, site_re, road_re
+        global city_re, site_re, road_re, road_dict
         self.check_re()
         st = time.time()
         task_spend = 0
@@ -291,24 +291,26 @@ class StoreView(BaseView):
                 lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
 
+            if len(msg) > 2:
+                msg = msg[:-1]
             for county_name in county_dct:
                 county = county_dct[county_name]['instance']
-                if county_name in msg:
+                if county_name in msg or msg in county_name:
                     msg = msg.replace(county_name, '')
                     keywords.append(county_name)
                     county_instance = county
                     break
 
             for el in District.objects.all():
-                if el.name in msg:
+                if el.name in msg or msg in el.name:
                     msg = msg.replace(el.name, '')
                     keywords.append(el.name)
                     district_instance = el
                     break
 
+            search = " ".join(keywords)
             # 屬於縣市或者區域找經緯度
             if not msg and keywords:
-                search = " ".join(keywords)
                 target_instnace = district_instance if district_instance else county_instance
                 lat = target_instnace.latitude
                 lon = target_instnace.longitude
