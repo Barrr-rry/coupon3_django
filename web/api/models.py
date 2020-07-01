@@ -76,7 +76,8 @@ class District(DefaultAbstract):
 
 
 class Store(DefaultAbstract):
-    name = models.CharField(max_length=64, help_text="商家名稱")
+    name = models.CharField(max_length=128, help_text="商家名稱", null=True, blank=True)
+    google_name = models.CharField(max_length=128, help_text="商家名稱", null=True, blank=True)
     store_type = models.ForeignKey(StoreType, related_name="store", on_delete=models.CASCADE, help_text="店家類型fk")
     phone = models.CharField(max_length=64, help_text="電話", null=True, blank=True)
     person = models.CharField(max_length=128, help_text="聯絡人", null=True, blank=True)
@@ -89,6 +90,7 @@ class Store(DefaultAbstract):
     county = models.ForeignKey(County, related_name="store", on_delete=models.CASCADE, help_text="縣市fk")
     district = models.ForeignKey(District, related_name="store", on_delete=models.CASCADE, help_text="行政區fk")
     status = models.SmallIntegerField(default=0, help_text="商家狀態 0：待審核；1：審核通過（上架）；2：審核失敗（不顯示）")
+    google_status = models.SmallIntegerField(default=0, help_text="from google 0: 沒有資料 1: 有資料")
 
     def save(self, *args, **kwargs):
         if not self.location and self.latitude and self.longitude:
@@ -103,6 +105,7 @@ class Activity(DefaultAbstract):
     name = models.CharField(max_length=64, help_text="活動名稱")
     store = models.ManyToManyField(Store, related_name='activity')
     county = models.ManyToManyField(County, related_name='activity')
+    description = models.TextField(help_text="敘述", null=True, blank=True)
 
 
 class DiscountType(DefaultAbstract):
