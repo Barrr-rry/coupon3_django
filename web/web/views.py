@@ -14,35 +14,9 @@ import json
 from munch import AutoMunch
 import re
 
-location_data = []
-with open('./location.json') as f:
-    location_data = json.loads(f.read())
-city_list = []
-site_list = []
-road_list = []
-road_dict = dict()
-for el in location_data:
-    raw_data = AutoMunch(el['raw_data'])
-    if el['lat'] is None or el['lon'] is None:
-        continue
-    if raw_data.city not in city_list:
-        city_list.append(raw_data.city)
-    site = raw_data.site_id.replace(raw_data.city, '')
-    if raw_data.road not in road_list:
-        road_list.append(raw_data.road)
-        road_dict[raw_data.road] = dict(lat=float(el['lat']), lon=float(el['lon']))
-
-city_list = []
-for el in County.objects.all():
-    city_list.append(el.name)
-
-site_list = []
-for el in District.objects.all():
-    site_list.append(el.name)
-
-city_re = "|".join(city_list)
-site_re = "|".join(site_list)
-road_re = "|".join(road_list)
+city_re = None
+site_re = None
+road_re = None
 
 
 class BaseView(TemplateView):
@@ -221,7 +195,41 @@ def distance(x):
 class StoreView(BaseView):
     template_name = 'store.html'
 
+    def check_re(self):
+        global city_re, site_re, road_re
+        if city_re is None or site_re is None or road_re is None:
+            location_data = []
+            with open('./location.json') as f:
+                location_data = json.loads(f.read())
+            city_list = []
+            site_list = []
+            road_list = []
+            road_dict = dict()
+            for el in location_data:
+                raw_data = AutoMunch(el['raw_data'])
+                if el['lat'] is None or el['lon'] is None:
+                    continue
+                if raw_data.city not in city_list:
+                    city_list.append(raw_data.city)
+                site = raw_data.site_id.replace(raw_data.city, '')
+                if raw_data.road not in road_list:
+                    road_list.append(raw_data.road)
+                    road_dict[raw_data.road] = dict(lat=float(el['lat']), lon=float(el['lon']))
+
+            city_list = []
+            for el in County.objects.all():
+                city_list.append(el.name)
+
+            site_list = []
+            for el in District.objects.all():
+                site_list.append(el.name)
+
+            city_re = "|".join(city_list)
+            site_re = "|".join(site_list)
+            road_re = "|".join(road_list)
+
     def get_context_data(self, *args, **kwargs):
+        global city_re, site_re, road_re
         st = time.time()
         task_spend = 0
         status = self.request.GET.get('status', 1)
