@@ -21,8 +21,8 @@ def filter_query(filter_dict, queryset):
                 search[0] = search[0][:-1]
             if len(search[1]) > 2:
                 search[1] = search[1][:-1]
-            county = County.objects.filter(name=search[0]).all()
-            district = District.objects.filter(name=search[1]).all()
+            county = County.objects.filter(name__contains=search[0]).all()
+            district = District.objects.filter(name__contains=search[1]).all()
             if (county.count() + district.count()) > 0:
                 q = and_q(q, Q(district__name__contains=search[1]))
                 q = and_q(q, Q(county__name__contains=search[0]))
