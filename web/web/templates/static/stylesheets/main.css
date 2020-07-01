@@ -10399,7 +10399,7 @@ body {
   font: 14px/24px "Noto Sans TC", sans-serif !important;
 }
 
-.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type=button], .leaflet-containerinput[type=reset], input[type=submit], .leaflet-container {
+.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type=button], .leaflet-containerinput[type=reset], input[type=submit], .leaflet-container, h1, h2, h3, h4, h5, h6, form, input, button, textarea, p, blockquote, th, td, a, p, span, ul, li, div {
   font-family: "Noto Sans TC", sans-serif !important;
 }
 
@@ -10896,6 +10896,10 @@ footer .widget-about .logo-ft a {
   margin-top: 10px;
   font-size: 16px;
 }
+.flat-highlights .highlights ul.menu-list li a img {
+  width: 50px;
+  padding-bottom: 0;
+}
 .flat-highlights .highlights ul.menu-list li .index_icon {
   filter: invert(100%) sepia(2%) saturate(7495%) hue-rotate(319deg) brightness(101%) contrast(108%);
 }
@@ -11223,6 +11227,7 @@ footer .widget-about .logo-ft a {
 }
 .flat-imagebox .filter-result .sort, .flat-imagebox .filter-result .activity {
   padding-top: 20px;
+  margin-bottom: 20px;
 }
 .flat-imagebox .filter-result .sort::after, .flat-imagebox .filter-result .activity::after {
   content: "";
@@ -11250,6 +11255,12 @@ footer .widget-about .logo-ft a {
 }
 .flat-imagebox .filter-result .sort a:last-child, .flat-imagebox .filter-result .activity a:last-child {
   border-radius: 0 50px 50px 0;
+  border-right: 1px solid rgba(242, 91, 34, 0.5);
+}
+.flat-imagebox .filter-result .sort a.tag, .flat-imagebox .filter-result .activity a.tag {
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border-radius: 50px;
   border-right: 1px solid rgba(242, 91, 34, 0.5);
 }
 .flat-imagebox .filter-result .link-map {

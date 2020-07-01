@@ -61,8 +61,9 @@
             <div class="clear clear-non-md"></div>
             <div class="activity">
               {% for el in activity_list %}
-                <a data-activity="{{ el.id }}" href="">{{ el.name }}</a>
+                <a data-activity="{{ el.id }}" href="" class="tag">{{ el.name }}</a>
               {% endfor %}
+              <div class="clear"></div>
             </div>
             <div class="clear clear-non-sm"></div>
           {% endif %}
