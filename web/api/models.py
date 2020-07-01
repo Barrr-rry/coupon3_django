@@ -103,6 +103,7 @@ class Activity(DefaultAbstract):
     name = models.CharField(max_length=64, help_text="活動名稱")
     store = models.ManyToManyField(Store, related_name='activity')
     county = models.ManyToManyField(County, related_name='activity')
+    description = models.TextField(help_text="敘述", null=True, blank=True)
 
 
 class DiscountType(DefaultAbstract):

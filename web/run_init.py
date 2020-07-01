@@ -135,15 +135,20 @@ def site1():
     district_dct = dict()
     for el in querset:
         district_dct[el.name] = el
-    discount_type = DiscountType.objects.first()
+    discount_type = DiscountType.objects.filter(name='抵用券').first()
     county_id = None
     district_id = None
+    activity = Activity.objects.create(
+        name='高雄振興購物嘉年華',
+    )
+    county_id_set = set()
     for el in data:
         addr = el['address']
         for key in district_dct:
             if key in addr:
                 district_id = district_dct[key].id
                 county_id = district_dct[key].county_id
+                county_id_set.add(county_id)
                 break
         instance = Store.objects.create(
             name=el['name'],
@@ -154,16 +159,25 @@ def site1():
             county_id=county_id,
             district_id=district_id,
             status=1,
-            phone='02-88615599 #308'
+            phone=None,
+        )
+        activity.store.add(instance)
+        StoreDiscount.objects.create(
+            store=instance,
+            discount_type=discount_type,
+            name='可使用高雄振興購物嘉年華抵用券',
+            description='活動內容：本商家可使用抵用券（每張面額抵用50元），每筆消費不限張數，惟不得找零，亦不得兌換成現金。<br>活動日期：為109年6月1日（一）10：00 至 109 年 9 月 10 日（四）24：00止，逾期恕無法折抵使用。<br>活動辦法：https://www.lovekhshopping.com.tw/about4.php',
         )
         if el['storediscount']:
             StoreDiscount.objects.create(
                 store=instance,
-                # todo 假資料
                 discount_type=discount_type,
                 name=None,
                 description=el['storediscount']
             )
+    for pk in county_id_set:
+        activity.county.add(County.objects.get(pk=pk))
+    activity.save()
 
 
 def site2():
@@ -174,15 +188,20 @@ def site2():
     district_dct = dict()
     for el in querset:
         district_dct[el.name] = el
-    discount_type = DiscountType.objects.first()
+    discount_type = DiscountType.objects.filter(name='補貼').first()
     county_id = None
     district_id = None
+    county_id_set = set()
+    activity = Activity.objects.create(
+        name='鐵定貼心'
+    )
     for el in data:
         addr = el['address']
         for key in district_dct:
             if key in addr:
                 district_id = district_dct[key].id
                 county_id = district_dct[key].county_id
+                county_id_set.add(county_id)
                 break
 
         instance = Store.objects.create(
@@ -195,6 +214,17 @@ def site2():
             district_id=district_id,
             status=1,
         )
+        activity.store.add(instance)
+        StoreDiscount.objects.create(
+            store=instance,
+            discount_type=discount_type,
+            name='參觀本景點及住當地民宿每人補貼 500 元',
+            description='活動內容：參加屏東縣三天兩夜 10 人以上團體行程（行程中含本景點），並於行程中入住兩晚屏東縣合法旅宿，每人獎助500元，每團補助上限1萬元整<br>活動日期：出發日期限定為6月15日至7月15日，貼心支持國內團體安心遊!<br>申請方式：依「屏東縣政府獎助旅行業推動國民旅遊實施要點」所定要件辦理完成後，於109年8月31日前備妥相關文件向本府申請獎助。<br>活動辦法：https://www.pthg.gov.tw/traffic/cp.aspx?n=FCA8BB125A1786AC&s=3D44C32E03E3DF25'
+        )
+
+    for pk in county_id_set:
+        activity.county.add(County.objects.get(pk=pk))
+    activity.save()
 
 
 def from_csv():
@@ -251,6 +281,15 @@ def site3():
     discount_type = DiscountType.objects.first()
     county_id = None
     district_id = None
+    county = None
+    activity_tainan = Activity.objects.create(
+        name='住台南百萬抽大獎',
+    )
+    activity_tainan.county.add(County.objects.filter(name='臺南市').first())
+    activity_hualien = Activity.objects.create(
+        name='住宿抽豐田汽車',
+    )
+    activity_hualien.county.add(County.objects.filter(name='花蓮縣').first())
     for el in data:
         addr = el['address']
         if not addr:
@@ -259,7 +298,14 @@ def site3():
             if key in addr:
                 district_id = district_dct[key].id
                 county_id = district_dct[key].county_id
+                county = district_dct[key].county
                 break
+        else:
+            print('address...oops')
+            continue
+
+        if '台南' not in county.name and '花蓮' not in county.name:
+            continue
         if el['lat'] == 'NaN' or el['lon'] == 'NaN':
             print('oops...')
             continue
@@ -273,13 +319,52 @@ def site3():
             district_id=district_id,
             status=1,
         )
+        if '台南' in county.name:
+            activity_tainan.store.add(instance)
+            StoreDiscount.objects.create(
+                store=instance,
+                discount_type=DiscountType.objects.filter('抽獎').first(),
+                name='6-8月月抽百萬大獎好禮',
+                description='於6-8月入住台南各合法旅宿業者，登錄發票(或收據)即可參加6-8月月抽百萬大獎活動。<BR>單筆發票(或收據)登錄金額需滿500元以上，每滿500元即可得到1組抽獎序號（滿1000元，可得到2組抽獎序號，以此類推，每單筆發票至多可得到200組抽獎序號，不得與其他發票併計）。<BR>活動連結：https://tainanday.tw/index.php?action=act_mothod'
+            )
+            StoreDiscount.objects.create(
+                store=instance,
+                discount_type=DiscountType.objects.filter('登錄送').first(),
+                name='住宿金額前十名贈 10000 元',
+                description='尋找6-8月住宿台南的常客與貴人：<BR>活動內容：6-8月累積住宿台南金額最高的前十名民眾，且累積住宿天數不同日期達3日以上者，加碼贈新臺幣1萬元整獎勵金。<BR>活動期間：109年6月1日起至8月31日止，以個人登錄本活動網站之累計金額與實際住宿發票(收據)正本合計與驗證，若符合活動資格者超過十名民眾，同樣金額者將由系統電腦抽籤決定得獎者。<BR>活動連結：https://tainanday.tw/index.php?action=act_mothod'
+            )
+            StoreDiscount.objects.create(
+                store=instance,
+                discount_type=DiscountType.objects.filter(name='登錄送').first(),
+                name='登錄即贈台南好物',
+                description='登錄即贈限量台南特色好物<BR>活動內容：於活動網站登錄住宿台南發票(收據)之前1,000名民眾，即可獲贈限量台南特色好物(隨機贈送，不提供挑選)。<BR>活動說明：依民眾登錄活動網站系統的時間排序，前1,000名民眾(可重複得獎，多住多機會)，即可獲贈六甲蓮花茶、東山咖啡、玉井芒果乾、將軍虱目魚鬆、善化芝麻麵、新市火龍果麵、後壁茄芷袋、關子嶺旅行組等8種贈品其中一種(隨機贈送，不提供挑選，品項市價新臺幣140元至220元不等)，登錄時間次序以網站伺服器系統時間為準。<BR>活動連結：https://tainanday.tw/index.php?action=act_mothod (edited)'
+            )
+        if '花蓮' in county.name:
+            activity_hualien.store.add(instance)
+            """
+            discount type ： 抽獎（請轉換成 ID）
+            折扣標題：住宿抽豐田汽車
+            折扣敘述：
+            活動名稱：玩花蓮，抽豐田<BR>活動內容：活動期間在花蓮縣合法旅宿業住宿，並登錄相關資料，即享有抽獎機會，獎品為豐田汽車TOYOTA-YARIS 乙台。<BR>活動期間：109年6月20日起至109年11月15日止。(最後住宿日為109年11月15日、11月16日退房)。<BR>活動連結：https://trip.hl.gov.tw/#/explain
+            """
+            StoreDiscount.objects.create(
+                store=instance,
+                discount_type=DiscountType.objects.filter(name='抽獎').first(),
+                name='住宿抽豐田汽車',
+                description='玩花蓮，抽豐田<BR>活動內容：活動期間在花蓮縣合法旅宿業住宿，並登錄相關資料，即享有抽獎機會，獎品為豐田汽車TOYOTA-YARIS 乙台。<BR>活動期間：109年6月20日起至109年11月15日止。(最後住宿日為109年11月15日、11月16日退房)。<BR>活動連結：https://trip.hl.gov.tw/#/explain'
+            )
+
+    activity_hualien.save()
+    activity_tainan.save()
 
 
 def generate_store():
-    site1()
-    site2()
-    site3()
-    from_csv()
+    # todo 要依照地址做filter 判斷有沒有被爬過
+    pass
+    # site1()
+    # site2()
+    # site3()
+    # from_csv()
 
 
 def generate_discount_type(count):
@@ -288,6 +373,10 @@ def generate_discount_type(count):
                 '買就送',
                 '滿減',
                 '優惠碼',
+                '抵用券',
+                '補貼',
+                '抽獎',
+                '登錄送',
                 '尊享服務',
                 '優惠', ]
     for i in discount:
