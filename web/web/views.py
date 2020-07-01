@@ -173,8 +173,6 @@ class StoreIdView(BaseView):
         instance = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
             select_related('county').prefetch_related('activity'). \
             select_related('district').select_related('store_type').get(pk=kwargs.get('store_id'))
-        ret = dict(instance=serializers.StoreSerializer(instance=instance).data,
-                   token=self.token, )
         lat = instance.latitude
         lon = instance.longitude
         google = f'https://www.google.com.tw/maps/search/{lat},+{lon}/@{lat},{lon},17z?hl=zh-TW'
@@ -182,7 +180,7 @@ class StoreIdView(BaseView):
             instance=serializers.StoreSerializer(instance=instance).data,
             google=google
         )
-        for el in ret.get('instance', None).get('storediscount', None):
+        for el in ret.get('instance', []).get('storediscount', []):
             el['description'] = el['description'].replace('\n', '<br/>')
         return ret
 
