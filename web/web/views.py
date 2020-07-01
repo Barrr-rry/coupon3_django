@@ -122,6 +122,14 @@ class ELI5TrebleView(BaseView):
     template_name = 'eli5_treble.html'
 
 
+class ELI5HakkaTourView(BaseView):
+    template_name = 'eli5_hakka_tour.html'
+
+
+class ELI5SportView(BaseView):
+    template_name = 'eli5_sport.html'
+
+
 class ELI5VoucherView(BaseView):
     template_name = 'eli5_voucher.html'
 
@@ -226,12 +234,13 @@ class StoreView(BaseView):
             for el in District.objects.all():
                 site_list.append(el.name)
 
-            city_re = "|".join(city_list)
-            site_re = "|".join(site_list)
-            road_re = "|".join(road_list)
+            city_re = r"|".join(city_list)
+            site_re = r"|".join(site_list)
+            road_re = r"|".join(road_list)
 
     def get_context_data(self, *args, **kwargs):
         global city_re, site_re, road_re
+        self.check_re()
         st = time.time()
         task_spend = 0
         status = self.request.GET.get('status', 1)
@@ -381,7 +390,6 @@ class StoreView(BaseView):
                             ('lat', lat),
                             ('lon', lon),
                             ('activity', activity),
-                            ('county', county),
                             ('status', status),
                             ('sort', sort),
                             ('store_type', store_type),
