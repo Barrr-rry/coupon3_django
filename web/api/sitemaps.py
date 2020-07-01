@@ -4,15 +4,35 @@ from .models import Store
 
 
 class StaticViewSitemap(Sitemap):
-
+    """Reverse 'static' views for XML sitemap."""
     def items(self):
-        return ['store', '404', 'store/create', 'store_map', 'store/county', 'qa',
-                'qa/farming', 'qa/fun', 'qa/tour', 'qa/treble', 'qa/treble-cash',
-                'qa/treble-non-cash', 'qa/treble-store', 'eli5/county', 'eli5/farming',
-                'eli5/fun', 'eli5/tour', 'eli5/treble', 'eli5/voucher']
+        # Return list of url names for views to include in sitemap
+        return ['store',
+                '404',
+                'store/create',
+                'contact',
+                'store_map',
+                'store/county',
+                'qa',
+                'qa/farming',
+                'qa/fun',
+                'qa/tour',
+                'qa/treble',
+                'qa/treble-cash',
+                'qa/treble-non-cash',
+                'qa/treble-store',
+                'eli5/county',
+                'eli5/farming',
+                'eli5/fun',
+                'eli5/tour',
+                'eli5/treble',
+                'eli5/voucher',
+                'eli5/hakka_tour',
+                'eli5/sport',
+                'robots.txt']
 
     def location(self, item):
-        return reversed(item)
+        return reverse(item)
 
 
 class StoreSitemap(Sitemap):
