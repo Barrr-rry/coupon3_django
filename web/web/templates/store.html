@@ -194,6 +194,7 @@
 {% include 'includes/js.html' %}
 <script>
   $(document).ready(() => {
+    initPosition()
     let href_split = window.location.href.split('?')
     $('.sort a').each(function () {
       let $el = $(this)
