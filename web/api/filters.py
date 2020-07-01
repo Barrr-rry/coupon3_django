@@ -19,30 +19,27 @@ def filter_query(filter_dict, queryset):
         if len(search) > 1:
             county = County.objects.filter(name=search[0]).all()
             district = District.objects.filter(name=search[1]).all()
-            if len(county) and len(district):
-                q = or_q(q, Q(district__name__contains=search[1]))
+            if (len(county) + len(district)) > 0:
+                q = and_q(q, Q(district__name__contains=search[1]))
+                q = and_q(q, Q(county__name__contains=search[0]))
 
         else:
             for keyword in search:
-                county = County.objects.filter(name=keyword).all()
-                county_1 = County.objects.filter(name=keyword + '市').all()
-                county_2 = County.objects.filter(name=keyword + '縣').all()
-                district = District.objects.filter(name=keyword).all()
-                district_1 = District.objects.filter(name=keyword + '區').all()
-                if len(county) > 0 or len(district) > 0 or len(county_1) or len(county_2) or len(district_1):
+                # county = County.objects.filter(name=keyword).all()
+                county_1 = County.objects.filter(name__contains=keyword).all()
+                # county_2 = County.objects.filter(name=keyword + '縣').all()
+                # district = District.objects.filter(name=keyword).all()
+                district_1 = District.objects.filter(name__contains=keyword).all()
+                # district_2 = District.objects.filter(name=keyword + '鎮').all()
+                if (len(county_1) + len(district_1)) > 0:
                     q = or_q(q, Q(county__name__contains=keyword))
                     q = or_q(q, Q(district__name__contains=keyword))
 
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
         q = and_q(q, Q(district=filter_dict['district']))
-    filter_dict['county'] = None if filter_dict['county'] == 'all' else filter_dict['county']
-    if not filter_dict['county']:
-        filter_dict['county'] = None
-    if filter_dict['county'] is not None:
-        q = and_q(q, Q(county=filter_dict['county']))
 
-    if filter_dict['activity'] is not None:
+    if filter_dict.get('activity', None) is not None:
         q = and_q(q, Q(activity=filter_dict['activity']))
 
     filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
@@ -76,11 +73,21 @@ def filter_query(filter_dict, queryset):
 
 class StoreFilter(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
-        search = request.query_params.get('search')
+        search = request.query_params.get('search').replace('台', '臺')
+        keywords = []
+        for county in County.objects.all():
+            if county.name in search:
+                keywords.append(county.name)
+                break
+
+        for el in District.objects.all():
+            if el.name in search:
+                keywords.append(el.name)
+                break
+        search = " ".join(keywords)
         activity = request.query_params.get('activity')
         status = request.query_params.get('status', 1)
         district = request.query_params.get('district', None)
-        county = request.query_params.get('county', None)
         activity = request.query_params.get('activity', None)
         store_type = request.query_params.get('store_type', None)
         order_by = request.query_params.get('order_by', None)
@@ -100,7 +107,6 @@ class StoreFilter(filters.BaseFilterBackend):
                             ('lat', lat),
                             ('lon', lon),
                             ('activity', activity),
-                            ('county', county),
                             ('status', status),
                             ('sort', sort),
                             ('store_type', store_type),

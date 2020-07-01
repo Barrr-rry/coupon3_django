@@ -10399,8 +10399,8 @@ body {
   font: 14px/24px "Noto Sans TC", sans-serif !important;
 }
 
-.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type=button], .leaflet-containerinput[type=reset], input[type=submit], .leaflet-container, h1, h2, h3, h4, h5, h6, form, input, button, textarea, p, blockquote, th, td, a, p, span, ul, li, div {
-  font-family: "Noto Sans TC", sans-serif !important;
+.flat-row-title h2, .flat-contact .contact-form .contact-us h3, .page-title .page-title-heading, .introduce .introduce-title h3, .introduce-footer p, button, input[type=button], .leaflet-containerinput[type=reset], input[type=submit], .leaflet-container, h1, h2, h3, h4, h5, h6, form, input, button, textarea, p, blockquote, th, td, a, p, ul, li, div, .introduce .introduce-title span, .text-box span, .text-box p {
+  font-family: "Noto Sans TC", sans-serif;
 }
 
 .row.display-initial {
@@ -10787,10 +10787,11 @@ footer .widget-about .logo-ft a {
   cursor: pointer;
 }
 .tp-banner .directional_nav {
-  margin: 0 auto;
-  position: relative;
-  top: -340px;
-  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  top: 50%;
+  margin-top: -25px;
 }
 .tp-banner .previous_btn {
   bottom: 0;
@@ -11798,7 +11799,7 @@ form.form-listing .inner-box .wrap-listing.location a.search-pin-load {
 form.form-listing .inner-box .browse {
   background-color: #FBFBFB;
   border: 2px dashed #cccccc;
-  padding: 60px 0;
+  padding: 60px 15px;
 }
 form.form-listing .inner-box .browse p {
   font-size: 18px;
@@ -11953,7 +11954,7 @@ form.form-listing .only-submit-form-listing:hover {
     margin-bottom: 20px;
   }
 }
-@media only screen and (max-width: 1350px) {
+@media only screen and (max-width: 1350px), screen and (max-height: 900px) {
   .header .show-search {
     display: inline-block;
   }
@@ -12016,96 +12017,6 @@ form.form-listing .only-submit-form-listing:hover {
 
   .flat-introduce .margintop-255 {
     margin-top: -300px;
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 1350px) {
-  #logo {
-    margin-top: 12px;
-    margin-bottom: 5px;
-  }
-
-  .header .show-search > button {
-    margin: 12px 0;
-  }
-  .header .show-search .top-search {
-    margin-top: 0;
-  }
-  .header .wrap-box-search a {
-    top: 8px;
-  }
-  .header .wrap-box-search .style2 form > span {
-    top: 12px;
-  }
-  .header .wrap-box-search .style2 form > span > span {
-    top: 10px;
-  }
-  .header .wrap-box-search .style2 form > span input {
-    height: 35px;
-  }
-
-  #mainnav ul.menu > li > a {
-    line-height: 58px;
-  }
-
-  .btn-menu {
-    top: 15px;
-  }
-
-  .page-title.style1 {
-    padding: 0 0 25px;
-  }
-
-  .wrap-box-search form button {
-    height: 36px;
-    line-height: 36px;
-    padding: 0 36px;
-  }
-  .wrap-box-search.style1 {
-    padding: 10px 10px;
-  }
-  .wrap-box-search.style1 form > span .ti-location-pin {
-    top: 6px;
-  }
-  .wrap-box-search.style1 form > span.search-span a {
-    top: 5px;
-  }
-  .wrap-box-search.style1 form > span.categories span {
-    top: 8px;
-  }
-  .wrap-box-search.style1 form > span input {
-    height: 30px;
-  }
-  .wrap-box-search.style1 form > span select {
-    height: 30px;
-    padding: 0 30px;
-  }
-
-  .flat-imagebox.store-list {
-    padding: 0 0 90px;
-  }
-  .flat-imagebox .filter-result .result {
-    margin-right: 20px;
-    padding: 5px 0;
-  }
-  .flat-imagebox .filter-result .sort, .flat-imagebox .filter-result .activity {
-    padding-top: 0;
-  }
-
-  .filter-result.style2 {
-    margin-bottom: 15px;
-    padding: 20px 0 0;
-  }
-
-  .clear-non-md {
-    clear: none;
-  }
-
-  .flat-map-zoom-in .wrap-box-search.style2 form > span button {
-    height: 50px;
-  }
-
-  .store-box-block {
-    height: 871px;
   }
 }
 @media only screen and (max-width: 1199px) {
@@ -12174,6 +12085,7 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .wrap-box-search.style1 form button {
     margin-top: 20px;
+    float: none;
   }
 
   .imagebox.style5.link-activity .box-image {
@@ -12199,7 +12111,8 @@ form.form-listing .only-submit-form-listing:hover {
     padding: 0;
   }
   .flat-map-zoom-in .container-fluid .flat-filter {
-    padding-top: 80px;
+    padding-top: 45px;
+    padding-bottom: 20px;
   }
 
   .flat-map-zoom-in .wrap-box-search.style2 .ti-angle-down {
@@ -12218,10 +12131,6 @@ form.form-listing .only-submit-form-listing:hover {
 
   #map {
     height: 500px;
-  }
-
-  .flat-map-zoom-in .container-fluid .flat-filter {
-    padding-bottom: 20px;
   }
 
   .flat-imagebox .filter-result.style2 {
@@ -12309,7 +12218,110 @@ form.form-listing .only-submit-form-listing:hover {
     max-width: 100%;
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 1190px) {
+@media only screen and (max-height: 900px) {
+  #logo {
+    margin-top: 12px;
+    margin-bottom: 5px;
+  }
+
+  .header .show-search {
+    display: inline-block;
+  }
+  .header .show-search > button {
+    margin: 12px 0;
+  }
+  .header .show-search .top-search {
+    margin-top: 0;
+  }
+  .header .wrap-box-search {
+    display: none;
+  }
+  .header .wrap-box-search a {
+    top: 8px;
+  }
+  .header .wrap-box-search .style2 form > span {
+    top: 12px;
+  }
+  .header .wrap-box-search .style2 form > span > span {
+    top: 10px;
+  }
+  .header .wrap-box-search .style2 form > span input {
+    height: 35px;
+  }
+
+  #mainnav ul.menu > li > a {
+    line-height: 58px;
+  }
+
+  .btn-menu {
+    top: 15px;
+  }
+
+  .page-title.style1 {
+    padding: 0 0 25px;
+  }
+
+  .wrap-box-search form button {
+    height: 36px;
+    line-height: 36px;
+    padding: 0 36px;
+  }
+  .wrap-box-search.style1 {
+    padding: 10px 10px;
+  }
+  .wrap-box-search.style1 form > span .ti-location-pin {
+    top: 6px;
+  }
+  .wrap-box-search.style1 form > span.search-span a {
+    top: 5px;
+  }
+  .wrap-box-search.style1 form > span.categories span {
+    top: 8px;
+  }
+  .wrap-box-search.style1 form > span input {
+    height: 30px;
+  }
+  .wrap-box-search.style1 form > span select {
+    height: 30px;
+    padding: 0 30px;
+  }
+
+  .tp-banner .slider .slide_viewer {
+    height: 600px;
+  }
+  .tp-banner .slider .slide_content {
+    padding: 230px 90px;
+  }
+
+  .flat-highlights .highlights ul.menu-list li {
+    min-height: 130px;
+    padding: 20px 0 20px;
+  }
+
+  .flat-imagebox.store-list {
+    padding: 0 0 90px;
+  }
+  .flat-imagebox .filter-result .result {
+    margin-right: 20px;
+    padding: 5px 0;
+  }
+  .flat-imagebox .filter-result .sort, .flat-imagebox .filter-result .activity {
+    padding-top: 0;
+  }
+
+  .filter-result.style2 {
+    margin-bottom: 15px;
+    padding: 20px 0 0;
+  }
+
+  .clear-non-md {
+    clear: none;
+  }
+
+  .flat-map-zoom-in .wrap-box-search.style2 form > span button {
+    height: 50px;
+  }
+
   .wrap-box-search.style1 form > span input {
     height: 40px;
   }
@@ -12332,6 +12344,46 @@ form.form-listing .only-submit-form-listing:hover {
 
   .flat-imagebox .filter-result.style2 {
     padding: 30px 0 0;
+  }
+}
+@media only screen and (max-height: 800px) {
+  .tp-banner .slider .slide_viewer {
+    height: 500px;
+  }
+  .tp-banner .slider .slide_content {
+    padding: 170px 90px;
+  }
+}
+@media only screen and (max-height: 690px) {
+  .tp-banner .slider .slide_viewer {
+    height: 400px;
+  }
+  .tp-banner .slider .slide_content {
+    padding: 130px 90px;
+  }
+
+  .flat-introduce {
+    padding: 40px 0 80px;
+  }
+  .flat-introduce .introduce-header {
+    padding: 10px 0 35px;
+  }
+
+  .flat-listing {
+    padding: 25px 0 120px;
+  }
+
+  button.only-submit-form-listing {
+    width: 450px;
+    height: 65px;
+    line-height: 65px;
+    left: 50%;
+    margin-left: -225px;
+  }
+}
+@media only screen and (max-width: 1199px) and (min-width: 768px) {
+  .flat-map-zoom-in .col-lg-6 {
+    max-width: 50%;
   }
 }
 @media only screen and (max-width: 767px) {
@@ -12374,9 +12426,15 @@ form.form-listing .only-submit-form-listing:hover {
   .flat-imagebox .filter-result.style2 {
     padding-top: 50px;
   }
+  .flat-imagebox .filter-result .sort {
+    padding-top: 39px;
+  }
   .flat-imagebox .filter-result .sort a, .flat-imagebox .filter-result .activity a {
     font-size: 13px;
     padding: 2px 12px;
+  }
+  .flat-imagebox .filter-result .link-map {
+    padding-top: 5px;
   }
 
   .flat-highlights {
@@ -12615,6 +12673,14 @@ form.form-listing .only-submit-form-listing:hover {
     margin-left: -85px;
     font-size: 15px;
     font-size-padding: 6px 10px;
+  }
+
+  button.only-submit-form-listing {
+    width: 100%;
+    height: 65px;
+    line-height: 65px;
+    left: auto;
+    margin-left: auto;
   }
 }
 @media only screen and (max-width: 600px) {
