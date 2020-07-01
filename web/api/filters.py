@@ -17,21 +17,23 @@ def filter_query(filter_dict, queryset):
     if filter_dict['search'] is not None:
         search = filter_dict['search'].strip().split()
         if len(search) > 1:
+            if len(search[0]) > 2:
+                search[0] = search[0][:-1]
+            if len(search[1]) > 2:
+                search[1] = search[1][:-1]
             county = County.objects.filter(name=search[0]).all()
             district = District.objects.filter(name=search[1]).all()
-            if (len(county) + len(district)) > 0:
+            if (county.count() + district.count()) > 0:
                 q = and_q(q, Q(district__name__contains=search[1]))
                 q = and_q(q, Q(county__name__contains=search[0]))
 
         else:
             for keyword in search:
-                # county = County.objects.filter(name=keyword).all()
+                if len(keyword) > 2:
+                    keyword = keyword[:-1]
                 county_1 = County.objects.filter(name__contains=keyword).all()
-                # county_2 = County.objects.filter(name=keyword + '縣').all()
-                # district = District.objects.filter(name=keyword).all()
                 district_1 = District.objects.filter(name__contains=keyword).all()
-                # district_2 = District.objects.filter(name=keyword + '鎮').all()
-                if (len(county_1) + len(district_1)) > 0:
+                if (county_1.count() + district_1.count()) > 0:
                     q = or_q(q, Q(county__name__contains=keyword))
                     q = or_q(q, Q(district__name__contains=keyword))
 
@@ -66,24 +68,29 @@ def filter_query(filter_dict, queryset):
         q = and_q(q, Q(id__in=ids))
 
     if q:
-        return queryset.filter(q)
+        queryset = queryset.filter(q)
+        return queryset
     else:
         return queryset
 
 
 class StoreFilter(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
-        search = request.query_params.get('search').replace('台', '臺')
+        search = request.query_params.get('search', None)
         keywords = []
-        for county in County.objects.all():
-            if county.name in search:
-                keywords.append(county.name)
-                break
+        if search:
+            search = search.replace('台', '臺')
+            if len(search) > 2:
+                search = search[:-1]
+            for county in County.objects.all():
+                if county.name in search or search in county.name:
+                    keywords.append(county.name)
+                    break
 
-        for el in District.objects.all():
-            if el.name in search:
-                keywords.append(el.name)
-                break
+            for el in District.objects.all():
+                if el.name in search or search in el.name:
+                    keywords.append(el.name)
+                    break
         search = " ".join(keywords)
         activity = request.query_params.get('activity')
         status = request.query_params.get('status', 1)
