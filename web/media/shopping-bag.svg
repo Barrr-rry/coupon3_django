@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" cursor="pointer">
-    <g fill="none" fill-rule="evenodd">
+    <g fill="none" fill-rule="evenodd" id="shopping-bag">
         <path stroke="#000" stroke-linecap="square" d="M39.243 17.436L41.795 17.436 45.894 48.686 15.679 48.686 19.777 17.436 25.384 17.436M28.447 17.436L36.189 17.436" transform="translate(-.5)"/>
         <path stroke="#000" stroke-linecap="square" d="M25.384 19.424v-4.752c0-1.534 1.243-2.776 2.776-2.776h5.252c1.534 0 2.776 1.242 2.776 2.776v4.752M22.601 38.327L22.055 43.524 39.562 43.524 38.997 38.316M45.116 17.72L49.231 48.402" transform="translate(-.5)"/>
         <path fill="#none" d="M26.813 21.401c0 .79-.64 1.43-1.43 1.43-.789 0-1.429-.64-1.429-1.43 0-.79.64-1.43 1.43-1.43.79 0 1.43.64 1.43 1.43" transform="translate(-.5)"/>
