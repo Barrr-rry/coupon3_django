@@ -11256,6 +11256,9 @@ footer .widget-about .logo-ft a {
   border-radius: 0 50px 50px 0;
   border-right: 1px solid rgba(242, 91, 34, 0.5);
 }
+.flat-imagebox .filter-result .sort a.tag, .flat-imagebox .filter-result .activity a.tag {
+  border-radius: 50px;
+}
 .flat-imagebox .filter-result .link-map {
   font-size: 18px !important;
   letter-spacing: 3px;
