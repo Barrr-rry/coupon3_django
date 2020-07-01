@@ -124,8 +124,8 @@
               {#<li class="active">#}
               <li>
                 <a href="/store/?store_type={{ el.id }}" title="">
-<!--                  <object type="image/svg+xml" data="/media/{{ el.icon }}" class="index_icon"></object>-->
-                  <img src="/media/{{ el.icon }}" alt="" class="index_icon">
+                  <!--                  <object type="image/svg+xml" data="/media/{{ el.icon }}" class="index_icon"></object>-->
+                  <img data-src="/media/{{ el.icon }}" alt="" class="index_icon lazy" width="400" height="400">
                   <span>{{ el.name }}</span>
                 </a>
               </li>
