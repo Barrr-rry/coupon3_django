@@ -29,7 +29,8 @@ class StaticViewSitemap(Sitemap):
                 'eli5/voucher',
                 'eli5/hakka_tour',
                 'eli5/sport',
-                'robots.txt']
+                'robots.txt',
+                'ads.txt']
 
     def location(self, item):
         return reverse(item)
