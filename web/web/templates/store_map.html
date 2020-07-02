@@ -6,7 +6,8 @@
 <head>
   {% include 'includes/meta.html' %}
   <title>小資振興 | 快來看看你附近有哪些優惠商家</title>
-  <meta name="keywords" content="商家地圖,加碼商家地圖,小資振興,小資優惠,振興抵用券,振興抵用卷,振興補助,住宿優惠,訂房補助,訂房優惠,振興方案,振興折扣券,消費抵用券,國旅抵用券,振興優惠券,我愛東東消費券,振興方案,紓困方案,振興紓困券,振興酷碰券,酷碰券懶人包,修正版酷碰券,實體券,消費券,電子票證,行動支付,安心旅遊,防疫旅遊,政府旅遊補助,旅遊補助,振興券,酷碰券,振興三倍券,三倍券,振興卷,三倍卷,振興三倍卷,振興補助,康闓,康闓科技">
+  <meta name="keywords"
+        content="商家地圖,加碼商家地圖,小資振興,小資優惠,振興抵用券,振興抵用卷,振興補助,住宿優惠,訂房補助,訂房優惠,振興方案,振興折扣券,消費抵用券,國旅抵用券,振興優惠券,我愛東東消費券,振興方案,紓困方案,振興紓困券,振興酷碰券,酷碰券懶人包,修正版酷碰券,實體券,消費券,電子票證,行動支付,安心旅遊,防疫旅遊,政府旅遊補助,旅遊補助,振興券,酷碰券,振興三倍券,三倍券,振興卷,三倍卷,振興三倍卷,振興補助,康闓,康闓科技">
   <meta name="description" content="用地圖找商家優惠最快！振興優惠神器，走到哪優惠到哪！">
   <meta name="copyright" content="CONQUER TECHNOLOGY CO., LTD.">
   <meta name="author" content="康闓科技股份有限公司">
@@ -148,7 +149,8 @@
                           <p class="tag_block activity">
                             {% for activity in el.activity %}
                               {% if activity.name %}
-                                <span class="tag"><a data-activity="{{ activity.id }}" href="">{{ activity.name }}</a></span>
+                                <span class="tag"><a data-activity="{{ activity.id }}"
+                                                     href="">{{ activity.name }}</a></span>
                               {% endif %}
                             {% endfor %}
                           </p>
@@ -210,6 +212,7 @@
 <!-- Javascript -->
 <script type="text/javascript">
   let store_data = {{ json_data|safe }};
+  let all_store_cache = {{ all_store_cache|safe }};
   let data_count = {{ count }};
   let sort = '{{ sort }}';
   let lat = {{ lat }};
@@ -238,14 +241,14 @@
     $el.addClass('active')
     let positionFunction = (position) => {
       showSelfPosition(position)
-      initStoreDataMarker(store_data)
+      initStoreDataMarker(all_store_cache)
     }
 
     $('.activity a').each(function () {
-       let $el = $(this)
-       let activity = $el.attr('data-activity')
-       let newurl = setParameters(window.location.href, {activity: activity})
-       $el.attr('href', newurl)
+      let $el = $(this)
+      let activity = $el.attr('data-activity')
+      let newurl = setParameters(window.location.href, {activity: activity})
+      $el.attr('href', newurl)
     })
 
     // init active activity

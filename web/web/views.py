@@ -13,6 +13,8 @@ from api.util import get_time
 import json
 from munch import AutoMunch
 import re
+from django.views.decorators.cache import cache_page
+from crawler import reids_wraper
 
 city_re = None
 site_re = None
@@ -203,6 +205,15 @@ def distance(x):
 
 class StoreView(BaseView):
     template_name = 'store.html'
+
+    def get_all_store_cache(self):
+        key = 'store:cache'
+        data = reids_wraper.get(key)
+        if not data:
+            queryset = Store.objects.all()
+            data = json.dumps(serializers.StoreSerializer(many=True, instance=queryset).data)
+            reids_wraper.set(key, data)
+        return data
 
     def check_re(self):
         global city_re, site_re, road_re, road_dict
@@ -435,6 +446,7 @@ class StoreView(BaseView):
             suffix = f'?{split_list[-1]}'
 
         ret = dict(
+            all_store_cache=self.get_all_store_cache(),
             lat=lat,
             lon=lon,
             activity=activity,

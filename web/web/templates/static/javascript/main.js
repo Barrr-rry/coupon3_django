@@ -1890,9 +1890,9 @@ const showSelfPosition = (position) => {
         for (let data of res.results) {
           appendStore(data)
         }
-        if ($('#map').length) {
-          initStoreDataMarker(res.results)
-        }
+        // if ($('#map').length) {
+        //   initStoreDataMarker(res.results)
+        // }
         if (max_offset === data_count || !res.next) {
           $(".more-click").remove()
         }
