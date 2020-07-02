@@ -95,8 +95,16 @@ class StoreDiscountWriteSerializer(serializers.ModelSerializer):
 
 
 class ActivitySerializer(DefaultModelSerializer):
-    class Meta(CommonMeta):
+    class Meta:
         model = Activity
+        exclude = [
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'deleted_status',
+            'store',
+            'county'
+        ]
 
 
 class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):

@@ -243,7 +243,7 @@ class StoreView(BaseView):
         task_spend = 0
         status = self.request.GET.get('status', 1)
         queryset = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
-            select_related('county').prefetch_related('activity'). \
+            prefetch_related('activity').select_related('county'). \
             select_related('district').select_related('store_type').filter(status=status)
         search = self.request.GET.get('search', None)
         activity = self.request.GET.get('activity', None)
