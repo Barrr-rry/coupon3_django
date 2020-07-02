@@ -22,6 +22,7 @@ from api.models import (
     StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
 )
 from crawler import task
+import re
 
 fmt = '%Y-%m-%d %H:%M:%S'
 to_datetime = lambda x: make_aware(datetime.datetime.strptime(x, '%Y-%m-%d %H:%M'))
@@ -77,9 +78,24 @@ class DiscountTypeSerializer(DefaultModelSerializer):
 
 class StoreDiscountSerializer(serializers.ModelSerializer):
     discount_type = DiscountTypeSerializer(many=False)
+    desc_safe = serializers.SerializerMethodField()
+    desc_edit = serializers.SerializerMethodField()
 
     class Meta(CommonMeta):
         model = StoreDiscount
+
+    def get_desc_safe(self, instance):
+        ret = instance.description
+        urls = re.findall(
+            r'(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})',
+            ret)
+        for url in urls:
+            ret = ret.replace(url, f'<a href="{url}">{url}</a>')
+        return ret
+
+    def get_desc_edit(self, instance):
+        ret = instance.description
+        return ret.replace('<br>', '\n').replace('<BR>', '\n').strip()
 
 
 class StoreDiscountWriteSerializer(serializers.ModelSerializer):

@@ -14,7 +14,7 @@ from munch import AutoMunch
 from google import find_place_id, get_place_info, get_photo
 from log import logger
 
-queryset = Store.objects.all()
+queryset = Store.objects.filter(google_status=0, county__name__contains='臺南')
 for el in queryset:
     try:
         place_id = find_place_id(el.name)
