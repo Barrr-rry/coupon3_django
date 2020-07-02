@@ -299,24 +299,30 @@ class StoreView(BaseView):
                 lat = float(self.request.COOKIES.get('lat', 23.8523405))
                 lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
-
+            msg_2 = msg
             if len(msg) > 2:
                 msg = msg[:-1]
             for county_name in county_dct:
                 county = county_dct[county_name]['instance']
-                if county_name in msg or msg in county_name:
+                if county_name[:-1] in msg or msg in county_name[:-1]:
                     msg = msg.replace(county_name, '')
                     keywords.append(county_name)
                     county_instance = county
                     break
 
             for el in District.objects.all():
-                if el.name in msg or msg in el.name:
-                    msg = msg.replace(el.name, '')
-                    keywords.append(el.name)
-                    district_instance = el
-                    break
-
+                if len(el.name) > 2:
+                    if (el.name[:-1] in msg or msg in el.name[:-1]) and '縣' not in msg_2:
+                        msg = msg.replace(el.name, '')
+                        keywords.append(el.name)
+                        district_instance = el
+                        break
+                else:
+                    if (el.name in msg or msg in el.name) and '縣' not in msg_2:
+                        msg = msg.replace(el.name, '')
+                        keywords.append(el.name)
+                        district_instance = el
+                        break
             search = " ".join(keywords)
             # 屬於縣市或者區域找經緯度
             if not msg and keywords:
@@ -417,7 +423,8 @@ class StoreView(BaseView):
                             ('storediscount_discount_type', storediscount_discount_type),
                             ('ids', ids)]
                            )
-
+        if filter_dict['search'] == '':
+            filter_dict['search'] = msg_2
         data_st = time.time()
         queryset = filters.filter_query(filter_dict, queryset)
         data = serializers.StoreSerializer(many=True, instance=queryset[:6]).data

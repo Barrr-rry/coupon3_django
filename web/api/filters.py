@@ -3,7 +3,7 @@ from rest_framework import filters
 from rest_framework.compat import coreapi, coreschema
 from django.utils import timezone
 from django.utils.timezone import make_aware
-from api.models import County, District
+from api.models import County, District, Store
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
@@ -21,21 +21,23 @@ def filter_query(filter_dict, queryset):
                 search[0] = search[0][:-1]
             if len(search[1]) > 2:
                 search[1] = search[1][:-1]
-            county = County.objects.filter(name__contains=search[0]).all()
-            district = District.objects.filter(name__contains=search[1]).all()
+            county = County.objects.filter(name__icontains=search[0]).all()
+            district = District.objects.filter(name__icontains=search[1]).all()
             if (county.count() + district.count()) > 0:
-                q = or_q(q, Q(district__name__contains=search[1]))
-                q = or_q(q, Q(county__name__contains=search[0]))
+                q = and_q(q, Q(district__name__icontains=search[1]))
+                q = and_q(q, Q(county__name__icontains=search[0]))
 
         else:
             for keyword in search:
                 if len(keyword) > 2:
                     keyword = keyword[:-1]
-                county_1 = County.objects.filter(name__contains=keyword).all()
-                district_1 = District.objects.filter(name__contains=keyword).all()
-                if (county_1.count() + district_1.count()) > 0:
-                    q = or_q(q, Q(county__name__contains=keyword))
-                    q = or_q(q, Q(district__name__contains=keyword))
+                county_1 = County.objects.filter(name__icontains=keyword).all()
+                district_1 = District.objects.filter(name__icontains=keyword).all()
+                name = Store.objects.filter(name__icontains=keyword).all()
+                if (county_1.count() + district_1.count() + name.count()) > 0:
+                    q = or_q(q, Q(county__name__icontains=keyword))
+                    q = or_q(q, Q(district__name__icontains=keyword))
+                    q = or_q(q, Q(name__icontains=keyword))
 
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
@@ -80,16 +82,22 @@ class StoreFilter(filters.BaseFilterBackend):
         keywords = []
         if search:
             search = search.replace('台', '臺')
+            msg = search
             if len(search) > 2:
                 search = search[:-1]
             for county in County.objects.all():
-                if county.name in search or search in county.name:
+                if county.name[:-1] in search or search in county.name[:-1]:
                     keywords.append(county.name)
                     break
 
             for el in District.objects.all():
-                if el.name in search or search in el.name:
-                    keywords.append(el.name)
+                if len(el.name) > 2:
+                    if (el.name[:-1] in search or search in el.name[:-1]) and '縣' not in msg:
+                        keywords.append(el.name)
+                        break
+                else:
+                    if (el.name in search or search in el.name) and '縣' not in msg:
+                        keywords.append(el.name)
                     break
         search = " ".join(keywords)
         activity = request.query_params.get('activity')
