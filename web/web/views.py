@@ -355,10 +355,19 @@ class StoreView(BaseView):
 
                 # 真的要定位
                 if lat is None or lon is None:
-                    task_id = task.enqueue_task('get_latlon', search)
+                    task_id = task.enqueue_task('get_latlon', search or msg
+                                                )
                     gps = None
+                    gps_st = time.time()
                     while True:
+                        gps_ed = time.time()
                         gps = task.get_task_result(task_id)
+                        # 找不到
+                        if gps_ed - gps_st > 3:
+                            logger.warning(f'not found gps: {search} {msg}')
+                            lat = float(self.request.COOKIES.get('lat', 23.8523405))
+                            lon = float(self.request.COOKIES.get('lon', 120.9009427))
+                            break
                         if gps:
                             break
                     lat = float(gps[0])
