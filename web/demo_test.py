@@ -1,19 +1,23 @@
-from run_init import *
+import pandas as pd
+import json
 
-import math
-from django.db import transaction
+data = pd.read_csv('商家資料 - 清單.csv')
+el = dict([])
+el['name'] = dict(data['NAME'])
+el['google_name'] = dict(data[''])
+el['store_type'] = dict(data['STORE TYPE ID'])
+el['phone'] = dict(data['PHONE'])
+el['person'] = dict(data['PERSON'])
+el['email'] = dict(data['EMAIL'])
+el['website'] = dict(data['WEBSITE'])
+el['address'] = dict(data['ADDRESS'])
+el['storediscount'] = dict(data['DISCOUNT TYPE ID'])
+el['latitude'] = None
+el['longitude'] = None
+el['location'] = None
+el['county'] = None
+el['district'] = None
+el['google_status'] = None
+el = json.dumps(el)
+print(el)
 
-"""
-"lat": "24.635421", "lon": "121.750068"
-"""
-import random
-import re
-
-from django.contrib.gis.db.models.functions import Distance
-from django.contrib.gis.measure import D
-from django.contrib.gis.geos import Point
-from munch import AutoMunch
-from google import find_place_id, get_place_info, get_photo
-from log import logger
-
-print()
