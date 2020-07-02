@@ -179,6 +179,23 @@
         location = res.data
         let $input = $('input[name="address"]')
         $input.val(location)
+        let $select_2 = $('select[name="county"]')
+        let $select_1 = $('select[name="district"]')
+        for (let el of county_list) {
+            if (location.indexOf(el.name) >= 0) {
+                $select_2.val(el.id)
+                $select_1.find('option').remove()
+                let filters = district_list.filter(x => x.county = el.id)
+                for (let ell of filters) {
+                    $select_1.append(`<option value=${ell.id}>${ell.name}</option>`)
+                }
+            }
+        }
+        for (let el of district_list) {
+            if (location.indexOf(el.name) >= 0) {
+                $select_1.val(el.id)
+            }
+        }
         $(this).hide()
       })
 
@@ -256,6 +273,7 @@
       let $district = $('select[name="district"]')
       $district.find('option').remove()
       let filters = district_list.filter(x => x.county === parseInt($el.val()))
+        debugger
       for (let el of filters) {
         $district.append(`<option value=${el.id}>${el.name}</option>`)
       }
