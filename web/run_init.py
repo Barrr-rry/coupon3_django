@@ -304,7 +304,7 @@ def site3():
             print('address...oops')
             continue
 
-        if '台南' not in county.name and '花蓮' not in county.name:
+        if '臺南' not in county.name and '花蓮' not in county.name:
             continue
         if el['lat'] == 'NaN' or el['lon'] == 'NaN':
             print('oops...')
@@ -319,7 +319,7 @@ def site3():
             district_id=district_id,
             status=1,
         )
-        if '台南' in county.name:
+        if '臺南' in county.name:
             activity_tainan.store.add(instance)
             StoreDiscount.objects.create(
                 store=instance,
