@@ -11297,6 +11297,19 @@ footer .widget-about .logo-ft a {
 .imagebox .box-imagebox .link_block {
   position: relative;
 }
+.imagebox .box-imagebox .link_block .box-header .box-image {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  background: #fff;
+}
+.imagebox .box-imagebox .link_block .box-header .box-image img {
+  position: absolute;
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
 .imagebox .box-imagebox .link_block a.link {
   position: absolute;
   display: inline-block;
@@ -12391,7 +12404,7 @@ form.form-listing .only-submit-form-listing:hover {
   }
 
   .show-search > button {
-    margin: 20px 0 20px;
+    margin: 20px 0 20px !important;
   }
 
   .btn-menu {
@@ -12680,6 +12693,10 @@ form.form-listing .only-submit-form-listing:hover {
     line-height: 65px;
     left: auto;
     margin-left: auto;
+  }
+
+  .mb-50px, .ma-50px {
+    margin-bottom: 0 !important;
   }
 }
 @media only screen and (max-width: 600px) {
