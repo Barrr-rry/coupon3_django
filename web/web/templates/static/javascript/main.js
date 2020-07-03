@@ -1938,8 +1938,16 @@ const showSelfPosition = (position) => {
     })
   }
   let initPreloaderListenr = () => {
-    $(window).on('beforeunload', function () {
-      $('.preloader').show()
+    let ignore_onbeforeunload = false;
+    $('a[href^=mailto]').on('click', function () {
+      ignore_onbeforeunload = true;
+    })
+
+    $(window).on('beforeunload', function (e) {
+      if (!ignore_onbeforeunload) {
+        $('.preloader').show()
+      }
+      ignore_onbeforeunload = false
     })
   }
   let initToScroll = () => {

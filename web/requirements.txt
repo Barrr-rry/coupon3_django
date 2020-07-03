@@ -20,10 +20,12 @@ djangorestframework==3.10.3
 drf-nested-routers==0.91
 drf-serializer-cache==0.3.4
 et-xmlfile==1.0.1
+future==0.18.2
 idna==2.8
 itypes==1.1.0
 jdcal==1.4.1
 Jinja2==2.10.1
+line-bot-sdk==1.16.0
 loguru==0.5.0
 lxml==4.5.0
 Markdown==3.1.1
