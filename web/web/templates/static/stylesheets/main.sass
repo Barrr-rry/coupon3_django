@@ -18,8 +18,9 @@ body
 
 
 .row.display-initial
+  display: block
   //display: initial
-  flex-wrap: unset
+  //flex-wrap: unset
 
 h4
   font-size: 20px
@@ -1884,13 +1885,15 @@ form.form-listing
     .flat-explore-detail
       .col-md-8, .col-md-4
         max-width: 100%
-        flex: none
+        flex: 0 0 100%
+        //flex: none
 
   .flat-imagebox
     &.style5
       .col-md-6
         max-width: 100%
-        flex: none
+        flex: 0 0 100%
+        //flex: none
 
         .imagebox.style5.link-activity .box-image
           background-position: bottom left
@@ -1898,7 +1901,8 @@ form.form-listing
 
       .col-md-3
         max-width: 50%
-        flex: none
+        flex: 0 0 50%
+      //  flex: none
 
   .page-title.style2
     a.text-heading

@@ -10404,7 +10404,7 @@ body {
 }
 
 .row.display-initial {
-  flex-wrap: unset;
+  display: block;
 }
 
 h4 {
@@ -12197,12 +12197,12 @@ form.form-listing .only-submit-form-listing:hover {
 
   .header_sticky .flat-explore-detail .col-md-8, .header_sticky .flat-explore-detail .col-md-4 {
     max-width: 100%;
-    flex: none;
+    flex: 0 0 100%;
   }
 
   .flat-imagebox.style5 .col-md-6 {
     max-width: 100%;
-    flex: none;
+    flex: 0 0 100%;
   }
   .flat-imagebox.style5 .col-md-6 .imagebox.style5.link-activity .box-image {
     background-position: bottom left;
@@ -12210,7 +12210,7 @@ form.form-listing .only-submit-form-listing:hover {
   }
   .flat-imagebox.style5 .col-md-3 {
     max-width: 50%;
-    flex: none;
+    flex: 0 0 50%;
   }
 
   .page-title.style2 a.text-heading {
