@@ -375,6 +375,7 @@ def get_carouseltemplate(gps=None, store_name=None):
     if gps:
         ref_location = Point(gps[0], gps[1], srid=4326)
         queryset = queryset.annotate(distance=Distance("location", ref_location))
+        queryset = queryset.filter(latitude__isnull=False, longitude__isnull=False)
         queryset = queryset.order_by('distance')
         for el in queryset[:10]:
             columns.append(
