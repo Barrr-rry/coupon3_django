@@ -13,3 +13,40 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+<script>
+  function DetectIsIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+      // 回傳版本 <=10 的版本
+      return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+      // 回傳版本 >=11 的版本
+      var rv = ua.indexOf('rv:');
+      return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    var edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+      // 判斷Edge
+      return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
+  }
+
+  var q = DetectIsIE();
+  if (q != false) {
+    alert('使用當前瀏覽器可能會不相容，為了更好的瀏覽體驗，推薦使用 Google 瀏覽器\n')
+    window.location = "https://www.google.com.tw/chrome/"
+  } else {
+  }
+</script>
