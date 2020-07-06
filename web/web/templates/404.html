@@ -57,26 +57,16 @@
 
 {% include 'includes/header.html' %}<!-- /.header -->
 
-<section class="page-title parallax parallax1">
+<section class="page-title parallax parallax1 parallax-200">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
         <div class="page-title-heading">
-          Find the Plan That’s Right for You
+          找不到網頁
         </div>
-        <ul class="breadcrumbs">
-          <li>
-            <a href="index.html" title="">Home</a>
-            <span class="arrow_right"></span>
-          </li>
-          <li>
-            Pages
-          </li>
-        </ul>
       </div><!-- /.col-md-12 -->
     </div><!-- /.row -->
   </div><!-- /.container -->
-  <div class="overlay"></div>
 </section><!-- /.page-title -->
 
 <section class="flat-row flat-error-page">
@@ -85,18 +75,19 @@
       <div class="col-md-12">
         <div class="wrap-error center">
           <div class="img-error">
-            <img src="{% static "images/page/error.png" %}" alt="">
+<!--            <img src="{% static "images/page/error.svg" %}" alt="">-->
+            <img src="/media/error.svg" alt="">
           </div>
           <div class="info-error">
             <div class="error-title">
-              Opps! This page Could Not Be Found!
+              很抱歉，您輸入的網址不存在！
             </div>
             <div class="sub-error">
-              Sorry bit the page you are looking for does not exist, have been removed or name changed
+              請點擊目錄或以下按鈕到您要的頁面
             </div>
           </div>
           <div class="btn-more">
-            <a href="index.html" title="">Go to homepage</a>
+            <a href="/" title="">回到首頁</a>
           </div>
         </div><!-- /.wrap-error -->
       </div><!-- /.col-md-12 -->
