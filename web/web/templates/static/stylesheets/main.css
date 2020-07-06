@@ -11956,6 +11956,11 @@ form.form-listing .only-submit-form-listing:hover {
   text-align: center;
 }
 
+.fb_dialog {
+  bottom: 75px !important;
+  right: 12px !important;
+}
+
 @media only screen and (max-width: 1650px) {
   .flat-map-zoom-in .col-lg-6 {
     flex: none;
