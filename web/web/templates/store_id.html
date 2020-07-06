@@ -114,10 +114,12 @@
                 </a>
               </li>
             {% endif %}
-            <li class="address">
-              <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker"
-                                                        aria-hidden="true"></i>{{ instance.address }}</a>
-            </li>
+            {% if instance.latitude and instance.longitude and instance.search_status != 0 %}
+                <li class="address">
+                  <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker"
+                                                            aria-hidden="true"></i>{{ instance.address }}</a>
+                </li>
+            {% endif %}
           </ul><!-- /.box-address -->
         </div><!-- /.title-left -->
       </div><!-- /.col-md-8 -->
@@ -170,7 +172,7 @@
           <div class="pdmap style1" id="flat-map-4">
             <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
                  data-image="images/icon/map.png" data-name="Themesflat Map"></div>
-            {% if instance.latitude and instance.longitude %}
+            {% if instance.latitude and instance.longitude and instance.search_status != 0 %}
               <div id="map" class="map_store_id" style="width: 100%;height: 220px">
                 <a class="map_btn" target="_blank" href="{{ google }}">導航到商家</a>
               </div>
@@ -178,12 +180,14 @@
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
-              <li class="address">
-                <a href="{{ google }}" target="_blank">
-                  <i class="fa fa-map-marker" aria-hidden="true"></i>
-                  {{ instance.address }}
-                </a>
-              </li>
+              {% if instance.latitude and instance.longitude and instance.search_status != 0 %}
+                  <li class="address">
+                    <a href="{{ google }}" target="_blank">
+                      <i class="fa fa-map-marker" aria-hidden="true"></i>
+                      {{ instance.address }}
+                    </a>
+                  </li>
+              {% endif %}
               {% if instance.phone %}
                 <li>
                   <a href="tel:{{ instance.phone_2 }}" target="_blank"><i class="fa fa-phone"
