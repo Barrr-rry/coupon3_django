@@ -6,7 +6,8 @@
 <head>
   {% include 'includes/meta.html' %}
   <title>小資振興 | 上萬家商家優惠等你挖掘</title>
-  <meta name="keywords" content="振興優惠,商家優惠,振興加碼,小資振興,小資優惠,振興抵用券,振興抵用卷,振興補助,住宿優惠,訂房補助,訂房優惠,振興方案,振興折扣券,消費抵用券,國旅抵用券,振興優惠券,我愛東東消費券,振興方案,紓困方案,振興紓困券,振興酷碰券,酷碰券懶人包,修正版酷碰券,實體券,消費券,電子票證,行動支付,安心旅遊,防疫旅遊,政府旅遊補助,旅遊補助,振興券,酷碰券,振興三倍券,三倍券,振興卷,三倍卷,振興三倍卷,振興補助,康闓,康闓科技">
+  <meta name="keywords"
+        content="振興優惠,商家優惠,振興加碼,小資振興,小資優惠,振興抵用券,振興抵用卷,振興補助,住宿優惠,訂房補助,訂房優惠,振興方案,振興折扣券,消費抵用券,國旅抵用券,振興優惠券,我愛東東消費券,振興方案,紓困方案,振興紓困券,振興酷碰券,酷碰券懶人包,修正版酷碰券,實體券,消費券,電子票證,行動支付,安心旅遊,防疫旅遊,政府旅遊補助,旅遊補助,振興券,酷碰券,振興三倍券,三倍券,振興卷,三倍卷,振興三倍卷,振興補助,康闓,康闓科技">
   <meta name="description" content="不只三倍！快來看更多商家隱藏優惠，小資振興提供最齊全的商家優惠資訊">
 
   <meta property="og:type" content="website">
@@ -135,7 +136,7 @@
               <p>
                 {{ el.desc_safe|default_if_none:""|safe }}
               </p>
-              <img class="text-box-img" src="/media/雲林縣.jpg" alt="" />
+              <img class="text-box-img" src="/media/雲林縣.jpg" alt=""/>
             </div>
           </div>
         {% endfor %}
@@ -145,9 +146,11 @@
           <div class="pdmap style1" id="flat-map-4">
             <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
                  data-image="images/icon/map.png" data-name="Themesflat Map"></div>
-            <div id="map" class="map_store_id" style="width: 100%;height: 220px">
-              <a class="map_btn" target="_blank" href="{{ google }}">導航到商家</a>
-            </div>
+            {% if instance.latitude and instance.longitude %}
+              <div id="map" class="map_store_id" style="width: 100%;height: 220px">
+                <a class="map_btn" target="_blank" href="{{ google }}">導航到商家</a>
+              </div>
+            {% endif %}
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
@@ -160,7 +163,7 @@
               {% if instance.phone %}
                 <li>
                   <a href="tel:{{ instance.phone_2 }}" target="_blank"><i class="fa fa-phone"
-                                                                        aria-hidden="true"></i>{{ instance.phone }}
+                                                                          aria-hidden="true"></i>{{ instance.phone }}
                   </a>
                 </li>
               {% endif %}
@@ -183,15 +186,24 @@
 <!-- Javascript -->
 {% include 'includes/js.html' %}
 <script>
+  let lat = null
+  let lon = null
+  {% if instance.latitude %}
+    lat = {{instance.latitude}};
+    lon = {{instance.longitude}};
+  {% endif %}
+  console.log(lat)
   $(document).ready(() => {
     const position = {
       coords: {
-        latitude: {{instance.latitude}},
-        longitude: {{instance.longitude}}
+        latitude: lat,
+        longitude: lon
       },
       zoom: 12
     }
-    showSelfPosition(position)
+    if (lat && lon) {
+      showSelfPosition(position)
+    }
     $('.share-to').snsShare('快來看看{{instance.name|default_if_none:""}}用三倍券的超棒優惠！', window.location.href)
     $('.share-url').on('click', function () {
       let $el = $(this)
