@@ -10895,7 +10895,8 @@ footer .widget-about .logo-ft a {
 }
 .flat-highlights .highlights ul.menu-list li a span {
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 20px;
 }
 .flat-highlights .highlights ul.menu-list li a img {
   width: 50px;
