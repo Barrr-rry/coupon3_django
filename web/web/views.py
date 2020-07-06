@@ -15,6 +15,7 @@ from munch import AutoMunch
 import re
 from django.views.decorators.cache import cache_page
 from crawler import reids_wraper
+import traceback
 
 city_re = None
 site_re = None
@@ -251,8 +252,9 @@ class StoreView(BaseView):
         try:
             ret = self._get_context_data(*args, **kwargs)
             return ret
-        except Exception as e:
-            logger.error(f'store ERROR: {e}')
+        except Exception as ex:
+            logger.error(traceback.format_exc())
+            logger.error(ex, exc_info=True)
 
     def _get_context_data(self, *args, **kwargs):
         global city_re, site_re, road_re, road_dict
