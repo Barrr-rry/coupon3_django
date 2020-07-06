@@ -39,6 +39,9 @@ def filter_query(filter_dict, queryset):
                     q = or_q(q, Q(district__name__icontains=keyword))
                     q = or_q(q, Q(name__icontains=keyword))
 
+    if filter_dict['search_status'] is not None:
+        q = and_q(q, Q(search_status=filter_dict['search_status']))
+
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
         q = and_q(q, Q(district=filter_dict['district']))
@@ -102,6 +105,7 @@ class StoreFilter(filters.BaseFilterBackend):
         search = " ".join(keywords)
         activity = request.query_params.get('activity')
         status = request.query_params.get('status', 1)
+        search_status = request.query_params.get('search_status', 1)
         district = request.query_params.get('district', None)
         activity = request.query_params.get('activity', None)
         store_type = request.query_params.get('store_type', None)
@@ -121,6 +125,7 @@ class StoreFilter(filters.BaseFilterBackend):
                             ('district', district),
                             ('lat', lat),
                             ('lon', lon),
+                            ('search_status', search_status),
                             ('activity', activity),
                             ('status', status),
                             ('sort', sort),
@@ -160,6 +165,15 @@ class StoreFilter(filters.BaseFilterBackend):
                 schema=coreschema.String(
                     title='search',
                     description='str: 請輸入Search'
+                )
+            ),
+            coreapi.Field(
+                name='search_status',
+                required=False,
+                location='query',
+                schema=coreschema.Number(
+                    title='search_status',
+                    description='int: 請輸入Search Status'
                 )
             ),
             coreapi.Field(

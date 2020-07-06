@@ -91,6 +91,7 @@ class Store(DefaultAbstract):
     district = models.ForeignKey(District, related_name="store", on_delete=models.CASCADE, help_text="行政區fk")
     status = models.SmallIntegerField(default=0, help_text="商家狀態 0：待審核；1：審核通過（上架）；2：審核失敗（不顯示）")
     google_status = models.SmallIntegerField(default=0, help_text="from google 0: 沒有資料 1: 有資料")
+    search_status = models.SmallIntegerField(default=1, help_text="0: 一般商店：但只有選擇活動才能被搜尋 1: 目前的一般搜尋 2: 信用卡搜尋")
 
     def save(self, *args, **kwargs):
         if not self.location and self.latitude and self.longitude:
