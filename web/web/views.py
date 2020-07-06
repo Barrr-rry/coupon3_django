@@ -248,6 +248,13 @@ class StoreView(BaseView):
             road_re = r"|".join(road_list)
 
     def get_context_data(self, *args, **kwargs):
+        try:
+            ret = self._get_context_data(*args, **kwargs)
+            return ret
+        except Exception as e:
+            logger.error(f'store ERROR: {e}')
+
+    def _get_context_data(self, *args, **kwargs):
         global city_re, site_re, road_re, road_dict
         self.check_re()
         st = time.time()
