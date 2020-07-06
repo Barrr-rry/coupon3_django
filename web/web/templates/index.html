@@ -123,7 +123,7 @@
               <li>
                 <a href="/store/?store_type={{ el.id }}" title="">
                   <img src="/media/{{ el.icon }}" alt="" class="index_icon" width="400" height="400">
-                  <span>{{ el.name }}</span>
+                  <span>{{ el.name|safe }}</span>
                 </a>
               </li>
             {% endfor %}

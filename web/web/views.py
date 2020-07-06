@@ -38,8 +38,18 @@ class IndexView(BaseView):
     template_name = 'index.html'
 
     def get_context_data(self, *args, **kwargs):
+        instances = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
+        orders = ['美食', '住宿', '購物', '娛樂旅遊', '其他', '夜市', '連鎖店電商', '刷卡電子支付']
+        store_type = []
+        for order in orders:
+            for instance in instances:
+                if instance['name'] == order:
+                    store_type.append(instance)
+        for store in store_type:
+            store['name'] = store['name'].replace('連鎖店電商', '連鎖店<br/>電商')
+            store['name'] = store['name'].replace('刷卡電子支付', '刷卡<br/>電子支付')
         ret = dict(
-            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
+            store_type=store_type,
             token=self.token,
         )
         return ret
