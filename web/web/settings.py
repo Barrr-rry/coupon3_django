@@ -35,6 +35,7 @@ REST_FRAMEWORK = {
 
 INSTALLED_APPS = [
     'import_export',
+    'django.contrib.gis',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

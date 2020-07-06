@@ -262,6 +262,7 @@ class StoreView(BaseView):
         county = self.request.GET.get('county', 'all')
         store_type = self.request.GET.get('store_type', None)
         order_by = self.request.GET.get('order_by', None)
+        search_status = self.request.GET.get('search_status', 1)
         storediscount_discount_type = self.request.GET.get('storediscount_discount_type', None)
         ids = self.request.GET.get('ids', None)
         logger.info(f'get search: {search}')
@@ -384,6 +385,7 @@ class StoreView(BaseView):
                             logger.warning(f'not found gps: {search} {msg}')
                             lat = float(self.request.COOKIES.get('lat', 23.8523405))
                             lon = float(self.request.COOKIES.get('lon', 120.9009427))
+                            gps = [lat, lon]
                             break
                         if gps:
                             break
@@ -415,6 +417,7 @@ class StoreView(BaseView):
                             ('district', district),
                             ('lat', lat),
                             ('lon', lon),
+                            ('search_status', search_status),
                             ('activity', activity),
                             ('status', status),
                             ('sort', sort),
