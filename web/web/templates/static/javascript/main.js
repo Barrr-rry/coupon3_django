@@ -98,16 +98,14 @@ let clearAllMarker = (map) => {
 }
 
 let initStoreDataMarker = (datas) => {
-  let ul = ''
   for (let el of datas) {
-    for (let activity of el.activity) {
-      if (activity.name) {
-        ul = `
-        <ul>
-          <li><span>${activity.name}</span></li>     
-        </ul>
-        `
-      }
+    let ul = ''
+    if (el.storediscount_names) {
+      ul += `
+      <ul>
+        <li><span>${el.storediscount_names}</span></li>     
+      </ul>
+      `
     }
     let html = `
         <div>${el.name}</div>
@@ -1486,7 +1484,7 @@ const showSelfPosition = (position) => {
 
     $('input[name="upload-file"]').checkFileTypeAndSize({
       allowedExtensions: ['jpg', 'png'],
-      maxSize: 10,
+      maxSize: 1024,
       success: function () {
       },
       extensionerror: function () {
@@ -1938,8 +1936,16 @@ const showSelfPosition = (position) => {
     })
   }
   let initPreloaderListenr = () => {
-    $(window).on('beforeunload', function () {
-      $('.preloader').show()
+    let ignore_onbeforeunload = false;
+    $('a[href^=mailto]').on('click', function () {
+      ignore_onbeforeunload = true;
+    })
+
+    $(window).on('beforeunload', function (e) {
+      if (!ignore_onbeforeunload) {
+        $('.preloader').show()
+      }
+      ignore_onbeforeunload = false
     })
   }
   let initToScroll = () => {

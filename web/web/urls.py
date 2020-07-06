@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .documentation import include_docs_urls
-from api.views import get_urls
+from api.views import get_urls, webhook
 from api import views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -49,6 +49,7 @@ sitemaps = {
 urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url='media/shorticon_48.svg')),
     path('api/', include(get_urls())),
+    path("webhook/", webhook, name="webhook"),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('backend/conquers/admin/', admin.site.urls),
     path('', get_view(IndexView)),

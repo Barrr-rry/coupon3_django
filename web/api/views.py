@@ -51,6 +51,9 @@ from api.util import pickle_redis, to_datetime
 from api.models import (
     StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File
 )
+from django.contrib.gis.db.models.functions import Distance
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import Point
 
 router = routers.DefaultRouter()
 nested_routers = []
@@ -312,3 +315,105 @@ class LocationView(viewsets.ViewSet):
             if ret:
                 break
         return Response(dict(data=ret))
+
+
+from linebot import LineBotApi, WebhookHandler
+from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage, TemplateSendMessage, URIAction, \
+    MessageAction, PostbackAction, CarouselColumn, CarouselTemplate
+
+secret = '3ebd4109976f2a98666b1d374a6aee9d'
+token = 'vvbda1aAMKbmYdqspgnEKHeerEQ9HAepCs4XEAJU6qz1JheHIedgGgQB/ptp/7cHzFponZBSJmwyelOjstk9i5NjcQI6nSoPGgCsF326tWZVRwNte9inh6EOeI7KJZ1QKHocIjkDV7uwG8bTjI29iQdB04t89/1O/w1cDnyilFU='
+line_bot_api = LineBotApi(token)
+handler = WebhookHandler(secret)
+
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST, require_GET
+from django.http.response import HttpResponse, HttpResponseBadRequest
+
+
+@csrf_exempt
+@require_POST
+def webhook(request):
+    signature = request.headers["X-Line-Signature"]
+    body = request.body.decode()
+
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        messages = (
+            "Invalid signature. Please check your channel access token/channel secret."
+        )
+        logger.error(messages)
+        return HttpResponseBadRequest(messages)
+    return HttpResponse("OK")
+
+
+def to_column(el):
+    text = [e.name for e in el.storediscount.all() if e.name]
+    image = el.storeimage.first()
+    if image:
+        url = f'https://3coupon.info/media/{image.picture}'
+    else:
+        url = f'https://3coupon.info/media/{el.county.name}.jpg'
+    return CarouselColumn(
+        thumbnail_image_url=url,
+        title=el.name,
+        text=" ".join(text),
+        actions=[
+            URIAction(
+                label='查看優惠',
+                uri=f'http://3coupon.info/store/{el.id}/'
+            )
+        ]
+    )
+
+
+def get_carouseltemplate(gps=None, store_name=None):
+    queryset = Store.objects.filter(status=1).prefetch_related('storeimage')
+    columns = []
+    if gps:
+        ref_location = Point(gps[0], gps[1], srid=4326)
+        queryset = queryset.annotate(distance=Distance("location", ref_location))
+        queryset = queryset.filter(latitude__isnull=False, longitude__isnull=False)
+        queryset = queryset.order_by('distance')
+        for el in queryset[:10]:
+            columns.append(
+                to_column(el)
+            )
+
+    if store_name:
+        el = queryset.filter(name__icontains=store_name).first()
+        if el:
+            columns.append(
+                to_column(el)
+            )
+
+    carousel_template_message = TemplateSendMessage(
+        alt_text='Carousel template',
+        template=CarouselTemplate(
+            columns=columns
+        )
+    )
+    return carousel_template_message
+
+
+@handler.add(event=MessageEvent, message=TextMessage)
+def handle_message(event: MessageEvent):
+    message = get_carouseltemplate(store_name=event.message.text)
+    line_bot_api.reply_message(
+        reply_token=event.reply_token,
+        # messages=TextSendMessage(text=event.message.text)
+        messages=message,
+    )
+
+
+@handler.add(event=MessageEvent, message=LocationMessage)
+def handle_message(event: MessageEvent):
+    lat = event.message.latitude
+    lon = event.message.longitude
+    message = get_carouseltemplate(gps=(lat, lon))
+    line_bot_api.reply_message(
+        reply_token=event.reply_token,
+        messages=message,
+    )
