@@ -1420,7 +1420,7 @@ const showSelfPosition = (position) => {
       $('.store-disocunt-area').append(`
       <div class="store-discount d-flex" data-id="${discount_id}">
         <div class="store-discount-content col">
-          <div class="wrap-listing your-name">
+          <div class="wrap-listing phone">
             <label>活動名稱</label>
             <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">         
             <div class="discount_type">
@@ -1435,6 +1435,20 @@ const showSelfPosition = (position) => {
             <label>活動內容</label>
             <textarea rows="4" cols="5" name="description" placeholder="請輸入活動內容與注意事項"></textarea>
           </div><!-- /.wrap-listing -->
+          <div class="wrap-listing" style="margin-bottom: 15px">
+            <div class="row upload-images">
+            </div>
+            <label>請上傳活動照片</label>
+            <div class="browse">
+              <p>拖曳圖片至此，或</p>
+              <div class="upload">
+                <span>選取圖片</span>
+                <input type="file" name="upload-file" data-target="file-uploader" accept="image/*" multiple="multiple"/>
+              </div>
+              <p class="mt-4">圖片建議上傳尺寸 2000 px x 1527 px ， 格式 .jpg .png ，小於 1 MB</p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
         </div>
         <div class="col-auto d-flex align-items-center">
         <i class="fa fa-times pointer close-image" aria-hidden="true"
