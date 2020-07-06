@@ -150,7 +150,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
         return ret
 
     def get_distance_name(self, instance, *args, **kwargs):
-        if not hasattr(instance, 'distance'):
+        if not hasattr(instance, 'distance') or instance.distance is None:
             return ''
         m = instance.distance * 1000000
         if m > 1000:
