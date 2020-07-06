@@ -1435,6 +1435,7 @@ const showSelfPosition = (position) => {
             <label>活動內容</label>
             <textarea rows="4" cols="5" name="description" placeholder="請輸入活動內容與注意事項"></textarea>
           </div><!-- /.wrap-listing -->
+          <div class="clearfix"></div>
           <div class="wrap-listing" style="margin-bottom: 15px">
             <div class="row upload-images">
             </div>
