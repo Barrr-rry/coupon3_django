@@ -23,6 +23,7 @@ from api.models import (
 )
 from crawler import task
 import re
+import time
 
 fmt = '%Y-%m-%d %H:%M:%S'
 to_datetime = lambda x: make_aware(datetime.datetime.strptime(x, '%Y-%m-%d %H:%M'))
@@ -228,19 +229,32 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                     store=instance,
                     **el
                 )
-            instance = super().update(instance, validated_data)
+            try:
+                instance = super().update(instance, validated_data)
+            except Exception as e:
+                print()
+
             if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
                 instance.phone = instance.phone.replace('#', ' #')
                 instance.save()
+            st_time = time.time()
+            lat = None
+            lon = None
             if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
                 while True:
                     gps = task.get_task_result(task_id)
+                    ed_time = time.time()
                     if gps:
+                        lat = float(gps[0])
+                        lon = float(gps[1])
                         break
-                instance.latitude = float(gps[0])
-                instance.longitude = float(gps[1])
+                    if ed_time - st_time > 3:
+                        logger.warning(f'not found lat long by task_id: {task_id}')
+                        break
+                instance.latitude = lat
+                instance.longitude = lon
                 instance.save()
             return instance
 

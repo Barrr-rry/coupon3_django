@@ -42,6 +42,42 @@
           <div class="inner-box form">
             <div class="one-half">
               <div class="wrap-listing price">
+                <label>審核狀態</label>
+                <span class="ti-angle-down"></span>
+                <select name="status" value="{{ instance.status }}">
+                  <option value="1"
+                          {% if instance.status == 1 %}selected="selected"{% endif %}
+                  >通過
+                  </option>
+                  <option value="0"
+                          {% if instance.status == 0 %}selected="selected"{% endif %}
+                  >不通過
+                  </option>
+                </select>
+              </div><!-- /.wrap-listing -->
+            </div><!-- /.wrap-listing -->
+            <div class="one-half one-half-right">
+              <div class="wrap-listing price">
+                <label>是否能在一般列表中被搜尋</label>
+                <span class="ti-angle-down"></span>
+                <select name="search_status" value="{{ instance.search_status }}">
+                  <option value="0"
+                          {% if instance.search_status == 0 %}selected="selected"{% endif %}
+                  >否
+                  </option>
+                  <option value="1"
+                          {% if instance.search_status == 1 %}selected="selected"{% endif %}
+                  >是
+                  </option>
+                  <option value="2"
+                          {% if instance.search_status == 2 %}selected="selected"{% endif %}
+                  >信用卡
+                  </option>
+                </select>
+              </div><!-- /.wrap-listing -->
+            </div>
+            <div class="one-half">
+              <div class="wrap-listing price">
                 <label>商家分類</label>
                 <span class="ti-angle-down"></span>
                 <select name="store_type" value="{{ instance.store_type.id }}">
