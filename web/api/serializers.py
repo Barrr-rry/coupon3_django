@@ -92,6 +92,7 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
             ret)
         for url in urls:
             ret = ret.replace(url, f'<a href="{url}">{url}</a>')
+        ret = ret.replace('\n', '<br/>')
         return ret
 
     def get_desc_edit(self, instance):
