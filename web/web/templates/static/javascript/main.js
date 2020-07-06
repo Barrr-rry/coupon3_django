@@ -87,6 +87,20 @@ function getCookie(cname) {
   return
 }
 
+
+// image
+let appendImage = (res, $el, input_str = '') => {
+  $el.append(`
+  <div class="imgbox d-flex align-items-start" data-id="${res.id}" data-file="${res.filename}">
+    <img src="/media/${res.filename}" alt="">
+    <i class="fa fa-times pointer close-image" aria-hidden="true"
+    data-id="${res.id}"
+    ></i>
+    ${input_str}
+  </div>
+  `)
+}
+
 let now_position = {}
 
 let marker = []
@@ -1410,8 +1424,10 @@ const showSelfPosition = (position) => {
     })
 
 
+    let dicount_count = 0
     // 活動折扣
     let appendDiscount = () => {
+      dicount_count += 1
       discount_id += 1
       let options = ''
       for (let el of discount_type_list) {
@@ -1437,14 +1453,14 @@ const showSelfPosition = (position) => {
           </div><!-- /.wrap-listing -->
           <div class="clearfix"></div>
           <div class="wrap-listing" style="margin-bottom: 15px">
-            <div class="row upload-images">
+            <div class="row store-discount-upload-images-${dicount_count}">
             </div>
             <label>請上傳活動照片</label>
             <div class="browse">
               <p>拖曳圖片至此，或</p>
               <div class="upload">
                 <span>選取圖片</span>
-                <input type="file" name="upload-file" data-target="file-uploader" accept="image/*" multiple="multiple"/>
+                <input type="file" name="discount-upload-file" data-class="store-discount-upload-images" data-target="file-uploader" accept="image/*" multiple="multiple"/>
               </div>
               <p class="mt-4">圖片建議上傳尺寸 2000 px x 1527 px ， 格式 .jpg .png ，小於 1 MB</p>
             </div>
@@ -1458,6 +1474,55 @@ const showSelfPosition = (position) => {
         </div>
       </div>
       `)
+
+      $('input[name="discount-upload-file"]').checkFileTypeAndSize({
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+        maxSize: 1024,
+        success: function () {
+        },
+        extensionerror: function () {
+          let msg = '允許的格式為.jpg .png'
+          Swal.fire({
+            text: msg,
+            confirmButtonText: '確定'
+          })
+        },
+        sizeerror: function () {
+          let msg = '超過 1MB，請重新上傳圖片'
+          Swal.fire({
+            text: msg,
+            confirmButtonText: '確定'
+          })
+        }
+      });
+
+      $('input[name="discount-upload-file"]').change(function (e) {
+        let form = new FormData()
+        let $el = $(this)
+        form.append("file", e.target.files[0])
+        $('.preloader').show()
+        $.ajax({
+          method: 'POST',
+          url: '/api/file/',
+          processData: false,
+          data: form,
+          contentType: false, //required
+        }).done((res) => {
+          $('.preloader').hide()
+          let cls_$el = $(`.store-discount-upload-images-${dicount_count}`)
+          $(`.store-discount-upload-images-${dicount_count} .imgbox`).remove()
+          let input_str = `<input type="hidden" name="discount_picture" value="${res.filename}">`
+          appendImage(res, cls_$el, input_str)
+          setImageClick()
+        }).fail(e => {
+          $('.preloader').hide()
+          let msg = '超過 1MB，請重新上傳圖片'
+          Swal.fire({
+            text: msg,
+            confirmButtonText: '確定'
+          })
+        })
+      })
     }
 
     $('.store-discount .close-image').on('click', function () {
@@ -1475,17 +1540,6 @@ const showSelfPosition = (position) => {
 
     })
 
-    // image
-    let appendImage = (res) => {
-      $('.upload-images').append(`
-        <div class="imgbox d-flex align-items-start" data-id="${res.id}" data-file="${res.filename}">
-          <img src="/media/${res.filename}" alt="">
-          <i class="fa fa-times pointer close-image" aria-hidden="true"
-          data-id="${res.id}"
-          ></i>
-        </div>
-        `)
-    }
     let setImageClick = () => {
       $('.imgbox .close-image').off('click')
       $('.imgbox .close-image').on('click', function () {
@@ -1498,7 +1552,7 @@ const showSelfPosition = (position) => {
     // image file 上傳前確認
 
     $('input[name="upload-file"]').checkFileTypeAndSize({
-      allowedExtensions: ['jpg', 'png'],
+      allowedExtensions: ['jpg', 'jpeg', 'png'],
       maxSize: 1024,
       success: function () {
       },
@@ -1518,8 +1572,9 @@ const showSelfPosition = (position) => {
       }
     });
 
-    $('input[name="upload-file"]').change((e) => {
+    $('input[name="upload-file"]').change(function (e) {
       let form = new FormData()
+      let $el = $(this)
       form.append("file", e.target.files[0])
       $('.preloader').show()
       $.ajax({
@@ -1531,7 +1586,9 @@ const showSelfPosition = (position) => {
       }).done((res) => {
         $('.preloader').hide()
         files.push(res)
-        appendImage(res)
+        let cls_name = $el.attr('data-class')
+        let $cls_el = $(`.${cls_name}`)
+        appendImage(res, 'upload-images', $cls_el, '')
         setImageClick()
       }).fail(e => {
         $('.preloader').hide()
@@ -1582,6 +1639,7 @@ const showSelfPosition = (position) => {
                 name: ret.store_discount_name[i],
                 description: ret.description[i],
                 discount_type: ret.discount_type[i],
+                picture: ret.discount_picture[i],
               })
             }
           } else {
@@ -1589,6 +1647,7 @@ const showSelfPosition = (position) => {
               name: ret.store_discount_name,
               description: ret.description,
               discount_type: ret.discount_type,
+              picture: ret.discount_picture,
             })
           }
 
