@@ -1484,7 +1484,7 @@ const showSelfPosition = (position) => {
 
     $('input[name="upload-file"]').checkFileTypeAndSize({
       allowedExtensions: ['jpg', 'png'],
-      maxSize: 10,
+      maxSize: 1024,
       success: function () {
       },
       extensionerror: function () {
