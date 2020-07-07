@@ -99,15 +99,7 @@
 {% include 'includes/footer.html' %}
 
 <!-- Javascript -->
-<script type="text/javascript" src="{% static 'javascript/jquery.min.js' %}?token={{ token }}"></script>
-<script type="text/javascript" src="{% static 'javascript/bootstrap.min.js' %}?token={{ token }}"></script>
-<script type="text/javascript" src="{% static 'javascript/easing.js' %}?token={{ token }}"></script>
-<script type="text/javascript"
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtRmXKclfDp20TvfQnpgXSDPjut14x5wk&region=GB?token={{ token }}"></script>
-<script type="text/javascript" src="{% static 'javascript/gmap3.min.js' %}?token={{ token }}"></script>
-<script type="text/javascript" src="{% static 'javascript/parallax.js' %}?token={{ token }}"></script>
-<script type="text/javascript" src="{% static 'javascript/owl.carousel.js' %}?token={{ token }}"></script>
-<script type="text/javascript" src="{% static 'javascript/main.js' %}?token={{ token }}"></script>
+{% include 'includes/js.html' %}
 
 
 </body>

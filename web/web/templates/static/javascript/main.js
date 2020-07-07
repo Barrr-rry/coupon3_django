@@ -15,6 +15,24 @@
  * GoTop
  * RemovePreloader
  */
+(function (w) {
+
+  w.URLSearchParams = w.URLSearchParams || function (searchString) {
+    var self = this;
+    self.searchString = searchString;
+    self.get = function (name) {
+      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(self.searchString);
+      if (results == null) {
+        return null;
+      } else {
+        return decodeURI(results[1]) || 0;
+      }
+    };
+  }
+
+})(window)
+
+
 const default_position = {
   coords: {
     latitude: '23.8523405',
@@ -1628,9 +1646,7 @@ const showSelfPosition = (position) => {
       submitHandler(form) {
         let data = $(form).serializeArray()
         // let ret = {}
-        let ret = {
-          ...(formSerailize(data)),
-        }
+        let ret = formSerailize(data)
         let storediscount = []
         if (ret.store_discount_name) {
           if (Array.isArray(ret.store_discount_name)) {
@@ -1680,9 +1696,7 @@ const showSelfPosition = (position) => {
       submitHandler(form) {
         let data = $(form).serializeArray()
         // let ret = {}
-        let ret = {
-          ...(formSerailize(data)),
-        }
+        let ret = formSerailize(data)
         let storediscount = []
         if (ret.store_discount_name) {
           if (Array.isArray(ret.store_discount_name)) {
@@ -2030,25 +2044,6 @@ const showSelfPosition = (position) => {
       }, 1000)
     }
   }
-  let initLazyLoading = () => {
-    function onEnterView(entries, observer) {
-      for (let entry of entries) {
-        if (entry.isIntersecting) {
-          // 監視目標進入畫面
-          const img = entry.target
-          img.setAttribute('src', img.dataset.src) // 把值塞回 src
-          img.removeAttribute('data-src')
-          observer.unobserve(img) // 取消監視
-        }
-      }
-    }
-
-    const watcher = new IntersectionObserver(onEnterView)
-    const lazyImages = document.querySelectorAll('img.lazy')
-    for (let image of lazyImages) {
-      watcher.observe(image) // 開始監視
-    }
-  }
 
 
   $.fn.checkFileTypeAndSize = function (options) {
@@ -2128,7 +2123,6 @@ const showSelfPosition = (position) => {
     contactUs();
     storePage();
     initToScroll();
-    initLazyLoading();
     searchAPI();
   });
 
