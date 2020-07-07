@@ -1496,7 +1496,31 @@ const showSelfPosition = (position) => {
       $('input[name="discount-upload-file"]').checkFileTypeAndSize({
         allowedExtensions: ['jpg', 'jpeg', 'png'],
         maxSize: 1024,
-        success: function () {
+        success: function (self, e) {
+          let form = new FormData()
+          form.append("file", e.target.files[0])
+          $('.preloader').show()
+          $.ajax({
+            method: 'POST',
+            url: '/api/file/',
+            processData: false,
+            data: form,
+            contentType: false, //required
+          }).done((res) => {
+            $('.preloader').hide()
+            let cls_$el = $(`.store-discount-upload-images-${dicount_count}`)
+            $(`.store-discount-upload-images-${dicount_count} .imgbox`).remove()
+            let input_str = `<input type="hidden" name="discount_picture" value="${res.filename}">`
+            appendImage(res, cls_$el, input_str)
+            setImageClick()
+          }).fail(e => {
+            $('.preloader').hide()
+            let msg = '超過 1MB，請重新上傳圖片'
+            Swal.fire({
+              text: msg,
+              confirmButtonText: '確定'
+            })
+          })
         },
         extensionerror: function () {
           let msg = '允許的格式為.jpg .png'
@@ -1514,33 +1538,6 @@ const showSelfPosition = (position) => {
         }
       });
 
-      $('input[name="discount-upload-file"]').change(function (e) {
-        let form = new FormData()
-        let $el = $(this)
-        form.append("file", e.target.files[0])
-        $('.preloader').show()
-        $.ajax({
-          method: 'POST',
-          url: '/api/file/',
-          processData: false,
-          data: form,
-          contentType: false, //required
-        }).done((res) => {
-          $('.preloader').hide()
-          let cls_$el = $(`.store-discount-upload-images-${dicount_count}`)
-          $(`.store-discount-upload-images-${dicount_count} .imgbox`).remove()
-          let input_str = `<input type="hidden" name="discount_picture" value="${res.filename}">`
-          appendImage(res, cls_$el, input_str)
-          setImageClick()
-        }).fail(e => {
-          $('.preloader').hide()
-          let msg = '超過 1MB，請重新上傳圖片'
-          Swal.fire({
-            text: msg,
-            confirmButtonText: '確定'
-          })
-        })
-      })
     }
 
     $('.store-discount .close-image').on('click', function () {
@@ -1572,7 +1569,32 @@ const showSelfPosition = (position) => {
     $('input[name="upload-file"]').checkFileTypeAndSize({
       allowedExtensions: ['jpg', 'jpeg', 'png'],
       maxSize: 1024,
-      success: function () {
+      success: function (self, e) {
+        let form = new FormData()
+        let $el = $(self)
+        form.append("file", e.target.files[0])
+        $('.preloader').show()
+        $.ajax({
+          method: 'POST',
+          url: '/api/file/',
+          processData: false,
+          data: form,
+          contentType: false, //required
+        }).done((res) => {
+          $('.preloader').hide()
+          files.push(res)
+          let cls_name = $el.attr('data-class')
+          let $cls_el = $(`.${cls_name}`)
+          appendImage(res, $cls_el, '')
+          setImageClick()
+        }).fail(e => {
+          $('.preloader').hide()
+          let msg = '超過 1MB，請重新上傳圖片'
+          Swal.fire({
+            text: msg,
+            confirmButtonText: '確定'
+          })
+        })
       },
       extensionerror: function () {
         let msg = '允許的格式為.jpg .png'
@@ -1590,33 +1612,6 @@ const showSelfPosition = (position) => {
       }
     });
 
-    $('input[name="upload-file"]').change(function (e) {
-      let form = new FormData()
-      let $el = $(this)
-      form.append("file", e.target.files[0])
-      $('.preloader').show()
-      $.ajax({
-        method: 'POST',
-        url: '/api/file/',
-        processData: false,
-        data: form,
-        contentType: false, //required
-      }).done((res) => {
-        $('.preloader').hide()
-        files.push(res)
-        let cls_name = $el.attr('data-class')
-        let $cls_el = $(`.${cls_name}`)
-        appendImage(res, $cls_el, '')
-        setImageClick()
-      }).fail(e => {
-        $('.preloader').hide()
-        let msg = '超過 1MB，請重新上傳圖片'
-        Swal.fire({
-          text: msg,
-          confirmButtonText: '確定'
-        })
-      })
-    })
     $("#createStore").validate({
       rules: {
         name: "required",
@@ -2062,9 +2057,12 @@ const showSelfPosition = (position) => {
     options = $.extend(defaults, options)
     //遍历元素
     return this.each(function () {
-      $(this).on('change', function () {
+      $(this).on('change', function (e) {
         //获取文件路径
         var filePath = $(this).val()
+        if (!filePath) {
+          return
+        }
         //小写字母的文件路径
         var fileLowerPath = filePath.toLowerCase()
         //获取文件的后缀名
@@ -2090,7 +2088,7 @@ const showSelfPosition = (position) => {
             if (size > options.maxSize) {
               options.sizeerror()
             } else {
-              options.success()
+              options.success(this, e)
             }
           } catch (e) {
             alert("错误：" + e)
