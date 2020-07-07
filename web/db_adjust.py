@@ -16,10 +16,9 @@ from munch import AutoMunch
 from google import find_place_id, get_place_info, get_photo
 from log import logger
 
-queryset = Activity.original_objects.all()
+queryset = Activity.original_objects.filter(name__contains='振興嘉年華')
 for el in queryset:
-    if el.store.count() == 0:
-        el.delete()
-        print(el.id)
+    el.delete()
+    print(el.id)
 
 print()
