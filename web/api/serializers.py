@@ -133,6 +133,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     county_name = serializers.CharField(source='county.name', read_only=True)
     district_name = serializers.CharField(source='district.name', read_only=True)
     store_type_name = serializers.CharField(source='store_type.name', read_only=True)
+    store_type_icon = serializers.CharField(source='store_type.icon', read_only=True)
     images = serializers.SerializerMethodField()
     storediscount_names = serializers.SerializerMethodField()
     image_1 = serializers.SerializerMethodField()
