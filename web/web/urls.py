@@ -59,6 +59,7 @@ urlpatterns = [
     path('store/<int:store_id>/', get_view(StoreIdView)),
     path('store/<int:store_id>/update/', StoreUpdateView.as_view()),
     path('store_map/', get_view(StoreMapView), name='store_map'),
+    path('store_activity/', get_view(StoreActivityView), name='store_activity'),
     path('store/', get_view(StoreView), name='store'),
     path('store/county/', get_view(StoreCountyView), name='store/county'),
     path('test/', get_view(TestView)),

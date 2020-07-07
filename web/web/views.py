@@ -301,6 +301,7 @@ class StoreView(BaseView):
         msg_st = time.time()
         lat = None
         lon = None
+        msg_2 = msg
         if msg is None or not search:
             # 如果沒有輸入地址取得經緯度的方法
             el = None
@@ -318,7 +319,6 @@ class StoreView(BaseView):
                 lat = float(self.request.COOKIES.get('lat', 23.8523405))
                 lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
-            msg_2 = msg
             if len(msg) > 2:
                 msg = msg[:-1]
             for county_name in county_dct:
@@ -475,11 +475,14 @@ class StoreView(BaseView):
         if len(split_list) > 1:
             suffix = f'?{split_list[-1]}'
 
+        activity_instance = Activity.objects.filter(pk=activity).first()
+        activity_name = activity_instance.name if activity_instance else ''
         ret = dict(
             all_store_cache=self.get_all_store_cache(),
             lat=lat,
             lon=lon,
             activity=activity,
+            activity_name=activity_name,
             activity_list=activity_list,
             suffix=suffix,
             search=search if search is not None else '',
@@ -509,6 +512,10 @@ class StoreView(BaseView):
         ret.set_cookie('search-lat', context.get('lat'))
         ret.set_cookie('search-lon', context.get('lon'))
         return ret
+
+
+class StoreActivityView(StoreView):
+    template_name = 'store_activity.html'
 
 
 class StoreMapView(StoreView):

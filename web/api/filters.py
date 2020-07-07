@@ -39,7 +39,7 @@ def filter_query(filter_dict, queryset):
                     q = or_q(q, Q(district__name__icontains=keyword))
                     q = or_q(q, Q(name__icontains=keyword))
 
-    if filter_dict['search_status'] is not None:
+    if filter_dict['search_status'] is not None and filter_dict.get('activity', None) is None:
         q = and_q(q, Q(search_status=filter_dict['search_status']))
 
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
@@ -47,7 +47,11 @@ def filter_query(filter_dict, queryset):
         q = and_q(q, Q(district=filter_dict['district']))
 
     if filter_dict.get('activity', None) is not None:
-        q = and_q(q, Q(activity=filter_dict['activity']))
+        q = and_q(q,
+                  (Q(activity=filter_dict['activity']) & (
+                          Q(search_status=1) | Q(search_status=0)
+                  ))
+                  )
 
     filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
     if filter_dict['store_type'] is not None:
@@ -103,7 +107,6 @@ class StoreFilter(filters.BaseFilterBackend):
                         keywords.append(el.name)
                     break
         search = " ".join(keywords)
-        activity = request.query_params.get('activity')
         status = request.query_params.get('status', 1)
         search_status = request.query_params.get('search_status', 1)
         district = request.query_params.get('district', None)

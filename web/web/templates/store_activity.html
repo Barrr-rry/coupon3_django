@@ -1,0 +1,233 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  {% include 'includes/meta.html' %}
+  <title>小資振興 | 上萬家商家優惠等你挖掘</title>
+  <meta name="keywords"
+        content="振興優惠,商家優惠,振興加碼,小資振興,小資優惠,振興抵用券,振興抵用卷,振興補助,住宿優惠,訂房補助,訂房優惠,振興方案,振興折扣券,消費抵用券,國旅抵用券,振興優惠券,我愛東東消費券,振興方案,紓困方案,振興紓困券,振興酷碰券,酷碰券懶人包,修正版酷碰券,實體券,消費券,電子票證,行動支付,安心旅遊,防疫旅遊,政府旅遊補助,旅遊補助,振興券,酷碰券,振興三倍券,三倍券,振興卷,三倍卷,振興三倍卷,振興補助,康闓,康闓科技">
+  <meta name="description" content="不只三倍！快來看更多商家隱藏優惠，小資振興提供最齊全的商家優惠資訊">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://3coupon.info/">
+  <meta property="og:title" content="上萬家商家優惠等你挖掘 | 小資振興">
+  <meta property="og:description" content="不只三倍！快來看更多商家隱藏優惠，小資振興提供最齊全的商家優惠資訊">
+  <meta property="og:img" content="https://3coupon.info/media/og_img_3.jpg">
+  <meta property="og:site_name" content="上萬家商家優惠等你挖掘 | 小資振興">
+  <meta name="robots" content="index,follow">
+
+
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+  <style>
+    .mb-50px {
+      margin-bottom: 50px;
+    }
+  </style>
+</head>
+<body class="header_sticky">
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function () {
+    FB.init({
+      xfbml: true,
+      version: 'v7.0'
+    });
+  };
+
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+     attribution=setup_tool
+     page_id="100357275080787"
+     theme_color="#ff7e29"
+     logged_in_greeting="您好！請問您有遇到什麼問題嗎？"
+     logged_out_greeting="您好！請問您有遇到什麼問題嗎？">
+</div>
+{% include 'includes/preloader.html' %}
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+{#{% include 'includes/search.html' %}#}
+<section class="page-title parallax parallax1 parallax-200">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="page-title-heading">
+          {{ activity_name }}參與商家
+        </div>
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+  <!--  <div class="overlay"></div>-->
+</section>
+
+<section class="flat-row flat-imagebox style3 store-list" id="toscroll">
+  <div class="container">
+    <div class="row">
+    </div><!-- /.row -->
+    {#原本 style 3 改掉才不會出問題#}
+    <div class="wrap-imagebox ma-0px">
+      <div class="d-flex store-box">
+        {% for el in data %}
+          <div class="mb-50px col-md-4 store md-100">
+            <div class="imagebox style1">
+              <div class="box-imagebox">
+                <div class="link_block">
+                  <a href="/store/{{ el.id }}" target="_blank" class="link"></a>
+                  <div class="box-header">
+                    <div class="box-image">
+                      <img src="/media/{{ el.image_1 }}" alt="">
+                      <a href="/store/{{ el.id }}" title="">查看詳情</a>
+                      <div class="overlay"></div>
+                    </div>
+                  </div><!-- /.box-header -->
+                  <div class="box-content">
+                    <div class="box-title ad">
+                      <a href="/store/{{ el.id }}" target="_blank" title="">{{ el.name }}</a>
+                    </div>
+                    <ul class="rating">
+                      <li><span>{{ el.district_name }}</span></li>
+                      <li>
+                        <img src="/media/map_gray.svg" alt="">
+                        <span>{{ el.distance_name }}</span>
+                      </li>
+                      <li>
+                        <img src="/media/park_gray.svg" alt="">
+                        <span>{{ el.store_type_name }}</span>
+                      </li>
+                    </ul>
+                    <div class="box-desc">
+                      {% if el.storediscount_names %}
+                        <div class="sale-list">
+                          {{ el.storediscount_names }}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div><!-- /.box-content -->
+                </div>
+                <div class="imagebox_bottom">
+                  <p class="tag_block activity">
+                    {% for activity in el.activity %}
+                      {% if activity.name %}
+                        <span class="tag"><a data-activity="{{ activity.id }}" href="">{{ activity.name }}</a></span>
+                      {% endif %}
+                    {% endfor %}
+                  </p>
+                  <div class="right">
+                    <input type="checkbox" class="checkbox" id="share_{{ el.id }}">
+                    <label for="share_{{ el.id }}" class="label entypo-export">
+                      <!--                      <a href="">分享</a>-->
+                      分享
+                    </label>
+                    <div class="social">
+                      <ul>
+                        <li class="share-to entypo-line" data-sns="line" data-name="{{ el.name }}"
+                            data-url="store/{{ el.id }}">
+                          <img src="/media/share_line.svg" alt="">
+                        </li>
+                        <li class="share-to entypo-facebook" data-sns="facebook" data-name="{{ el.name }}"
+                            data-url="store/{{ el.id }}">
+                          <img src="/media/share_fb.svg" alt="">
+                        </li>
+                        <li class="share-url entypo-url" data-name="{{ el.name }}" data-url="store/{{ el.id }}">
+                          <img src="/media/share_url.svg" alt="">
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <!--                <ul class="location">-->
+                <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+                <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
+              </div><!-- /.box-imagebox -->
+            </div><!-- /.imagebox style1 -->
+          </div><!-- /.col-md-4 -->
+        {% endfor %}
+      </div><!-- /.row -->
+
+      {% if count > 6 %}
+        <div class="row">
+          <div class="col-md-12">
+            <div class="btn-more more-click">
+              <a href="javascript:void(0);" title="">顯示更多</a>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+
+  </div><!-- /.container -->
+</section><!-- /.flat-imagebox style3 -->
+
+
+{% include 'includes/footer.html' %}
+
+<!-- Javascript -->
+<script type="text/javascript">
+  let store_data = {{ json_data|safe }};
+  let data_count = {{ count }};
+  let sort = '{{ sort }}';
+  let activity = '{{ activity }}';
+</script>
+{% include 'includes/js.html' %}
+<script>
+  $(document).ready(() => {
+    initPosition()
+    let href_split = window.location.href.split('?')
+    $('.sort a').each(function () {
+      let $el = $(this)
+      let sort = $el.attr('data-sort')
+      let newurl = setParameters(window.location.href, {sort: sort})
+      $el.attr('href', newurl)
+    })
+
+
+    // init active sort
+    let $el = $(`a[data-sort=${sort}]`)
+    $el.addClass('active')
+
+
+    $('.activity a').each(function () {
+      let $el = $(this)
+      let activity = $el.attr('data-activity')
+      let newurl = setParameters(window.location.href, {activity: activity})
+      $el.attr('href', newurl)
+    })
+
+
+    // init active activity
+    $el = $(`a[data-activity=${activity}]`)
+    $el.addClass('active')
+
+
+  })
+</script>
+
+
+</body>
+</html>
