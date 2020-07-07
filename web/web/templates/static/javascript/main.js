@@ -2060,6 +2060,9 @@ const showSelfPosition = (position) => {
       $(this).on('change', function (e) {
         //获取文件路径
         var filePath = $(this).val()
+        if (!filePath) {
+          return
+        }
         //小写字母的文件路径
         var fileLowerPath = filePath.toLowerCase()
         //获取文件的后缀名
