@@ -133,6 +133,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
     county_name = serializers.CharField(source='county.name', read_only=True)
     district_name = serializers.CharField(source='district.name', read_only=True)
     store_type_name = serializers.CharField(source='store_type.name', read_only=True)
+    store_type_icon = serializers.CharField(source='store_type.icon', read_only=True)
     images = serializers.SerializerMethodField()
     storediscount_names = serializers.SerializerMethodField()
     image_1 = serializers.SerializerMethodField()
@@ -272,7 +273,7 @@ class CountySerializer(DefaultModelSerializer):
         model = County
 
     def get_count(self, instance, *args, **kwargs):
-        count = Store.objects.filter(county=instance).filter(status=1).count()
+        count = Store.objects.filter(county=instance).filter(status=1).filter(search_status=1).count()
         return count
 
 

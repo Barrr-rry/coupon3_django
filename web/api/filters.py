@@ -3,7 +3,7 @@ from rest_framework import filters
 from rest_framework.compat import coreapi, coreschema
 from django.utils import timezone
 from django.utils.timezone import make_aware
-from api.models import County, District, Store
+from api.models import County, District, Store, StoreType
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
@@ -124,7 +124,8 @@ class StoreFilter(filters.BaseFilterBackend):
             order_by = '-created_at'
         if sort == 'old':
             order_by = 'created_at'
-        if store_type in ['7', '8']:
+        store_type_2 = StoreType.objects.filter(pk=store_type).first()
+        if store_type_2 and store_type_2.name in ['連鎖店電商', '刷卡電子支付']:
             search_status = 2
         filter_dict = dict([('search', search),
                             ('district', district),
