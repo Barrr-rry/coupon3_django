@@ -83,12 +83,14 @@ class Store(DefaultAbstract):
     person = models.CharField(max_length=128, help_text="聯絡人", null=True, blank=True)
     email = models.CharField(max_length=128, help_text="信箱", null=True, blank=True)
     website = models.CharField(max_length=512, null=True, blank=True, help_text="網站")
-    address = models.CharField(max_length=128, help_text="商家地址", null=True)
+    address = models.CharField(max_length=128, help_text="商家地址", null=True, blank=True)
     latitude = models.FloatField(max_length=64, help_text="經度", null=True, blank=True)
     longitude = models.FloatField(max_length=64, help_text="緯度", null=True, blank=True)
     location = models.PointField(null=True, blank=True, srid=4326, help_text='Location')
-    county = models.ForeignKey(County, related_name="store", on_delete=models.CASCADE, help_text="縣市fk", null=True)
-    district = models.ForeignKey(District, related_name="store", on_delete=models.CASCADE, help_text="行政區fk", null=True)
+    county = models.ForeignKey(County, related_name="store", on_delete=models.CASCADE, help_text="縣市fk", null=True,
+                               blank=True)
+    district = models.ForeignKey(District, related_name="store", on_delete=models.CASCADE, help_text="行政區fk", null=True,
+                                 blank=True)
     status = models.SmallIntegerField(default=0, help_text="商家狀態 0：待審核；1：審核通過（上架）；2：審核失敗（不顯示）")
     google_status = models.SmallIntegerField(default=0, help_text="from google 0: 沒有資料 1: 有資料")
     search_status = models.SmallIntegerField(default=1, help_text="0: 一般商店：但只有選擇活動才能被搜尋 1: 目前的一般搜尋 2: 信用卡搜尋")
