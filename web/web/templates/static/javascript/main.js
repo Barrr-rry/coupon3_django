@@ -1588,7 +1588,7 @@ const showSelfPosition = (position) => {
         files.push(res)
         let cls_name = $el.attr('data-class')
         let $cls_el = $(`.${cls_name}`)
-        appendImage(res, 'upload-images', $cls_el, '')
+        appendImage(res, $cls_el, '')
         setImageClick()
       }).fail(e => {
         $('.preloader').hide()
