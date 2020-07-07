@@ -12735,6 +12735,10 @@ form.form-listing .only-submit-form-listing:hover {
   .mb-50px, .ma-50px {
     margin-bottom: 0 !important;
   }
+
+  .flat-introduce .introduce .introduce-content a.more-info {
+    margin-right: 7px;
+  }
 }
 @media only screen and (max-width: 600px) {
   .imagebox.style5.item .box-image .overlay span {
