@@ -121,6 +121,8 @@ class StoreFilter(filters.BaseFilterBackend):
             order_by = '-created_at'
         if sort == 'old':
             order_by = 'created_at'
+        if store_type in ['7', '8']:
+            search_status = 2
         filter_dict = dict([('search', search),
                             ('district', district),
                             ('lat', lat),
