@@ -272,7 +272,7 @@ class CountySerializer(DefaultModelSerializer):
         model = County
 
     def get_count(self, instance, *args, **kwargs):
-        count = Store.objects.filter(county=instance).filter(status=1).count()
+        count = Store.objects.filter(county=instance).filter(status=1).filter(search_status=1).count()
         return count
 
 
