@@ -337,6 +337,7 @@ from django.http.response import HttpResponse, HttpResponseBadRequest
 def webhook(request):
     signature = request.headers["X-Line-Signature"]
     body = request.body.decode()
+    logger.info('get webook')
 
     try:
         handler.handle(body, signature)
@@ -400,6 +401,7 @@ def get_carouseltemplate(gps=None, store_name=None):
 
 @handler.add(event=MessageEvent, message=TextMessage)
 def handle_message(event: MessageEvent):
+    logger.info(f'line from text: {event.message.text}')
     message = get_carouseltemplate(store_name=event.message.text)
     line_bot_api.reply_message(
         reply_token=event.reply_token,
@@ -412,6 +414,7 @@ def handle_message(event: MessageEvent):
 def handle_message(event: MessageEvent):
     lat = event.message.latitude
     lon = event.message.longitude
+    logger.info(f'line from gps: {lat}, {lon}')
     message = get_carouseltemplate(gps=(lat, lon))
     line_bot_api.reply_message(
         reply_token=event.reply_token,
