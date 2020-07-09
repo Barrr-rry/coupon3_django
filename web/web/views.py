@@ -439,9 +439,10 @@ class StoreView(BaseView):
             order_by = '-created_at'
         if sort == 'old':
             order_by = 'created_at'
-        store_type_2 = StoreType.objects.filter(pk=store_type).first()
-        if store_type_2 and store_type_2.name in ['連鎖店電商', '刷卡電子支付']:
-            search_status = 2
+        if store_type != 'all':
+            store_type_2 = StoreType.objects.filter(id=store_type).first()
+            if store_type_2 and store_type_2.name in ['連鎖店電商', '刷卡電子支付']:
+                search_status = 2
 
         filter_dict = dict([('search', search),
                             ('district', district),
