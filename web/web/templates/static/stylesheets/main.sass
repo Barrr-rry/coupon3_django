@@ -15,12 +15,10 @@ body
   font-family: "Noto Sans TC", sans-serif
 
 
-
-
 .row.display-initial
   display: block
-  //display: initial
-  //flex-wrap: unset
+//display: initial
+//flex-wrap: unset
 
 h4
   font-size: 20px
@@ -174,8 +172,10 @@ a
 
 #pulse-wrapper #pulse span
   position: absolute
-  margin-top: -25px /* = height / 2 */
-  margin-left: -25px /* = width / 2 */
+  margin-top: -25px
+  /* = height / 2 */
+  margin-left: -25px
+  /* = width / 2 */
   width: 50px
   height: 50px
   border-radius: 50%
@@ -183,7 +183,8 @@ a
   animation: pulse_animation 1.3s infinite
 
 #pulse-wrapper #pulse span:nth-child(2)
-  animation-delay: 0.3s /* Start the second wave with some delay */
+  animation-delay: 0.3s
+/* Start the second wave with some delay */
 
 
 // header component
@@ -971,6 +972,7 @@ footer
           height: 350px
           overflow: hidden
           background: #fff
+
           img
             position: absolute
             width: 100%
@@ -1679,6 +1681,185 @@ form.form-listing
   right: 12px !important
 
 
+//blog
+article.blog-post
+  min-height: auto
+
+  .featured-post
+    position: relative
+    width: 100%
+    height: 200px
+    overflow: hidden
+    padding: 0
+
+    img
+      width: 100%
+      height: 200px
+      object-fit: cover
+
+    a .overlay
+      background: rgba(204, 36, 38, 0.5)
+
+  .content-post
+    padding: 0 20px 10px
+
+    .entry-title
+      display: -webkit-box
+      line-height: 1.6rem
+      height: 50px
+      -webkit-line-clamp: 2
+      -webkit-box-orient: vertical
+      text-overflow: ellipsis
+      overflow: hidden
+
+      a
+        color: #333333
+
+        &:hover
+          color: #f25b22
+
+    p
+      position: relative
+      top: 0
+      left: 0
+      right: 0
+      width: 100%
+      min-height: 72px
+      overflow: hidden
+      display: -webkit-box
+      -webkit-line-clamp: 3
+      -webkit-box-orient: vertical
+      text-overflow: ellipsis
+      color: #999
+
+    ul.entry-meta
+      margin-top: 20px
+      padding: 6px 0 0
+      border-top: 1px solid #efefef
+      font-size: 13px
+
+      li
+        &.topic
+          float: left
+
+        &.date
+          float: right
+
+        a:hover
+          color: #f25b22
+
+//blog-single
+article.post-single
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.09)
+
+  .featured-post
+    position: relative
+    width: 100%
+    height: 500px
+    overflow: hidden
+    padding: 0
+    margin-bottom: 0
+    box-shadow: none
+
+    img
+      border-radius: 0
+      width: 100%
+      height: 500px
+      object-fit: cover
+
+  .entry-post
+    box-shadow: none
+
+    .entry-header
+      border-bottom: 1px solid #cccccc
+
+      h2.entry-title
+        letter-spacing: 3px
+        font-family: "Noto Sans TC", sans-serif
+        line-height: 55px
+
+      .entry-meta-post
+        li.topic, li.date
+          display: inline-block
+          padding: 0 7px
+          font-size: 13px
+          font-family: "Noto Sans TC", sans-serif
+
+      ul.social-ft
+        margin-top: 20px
+
+        li
+          display: inline-block
+
+          a
+            display: inline-block
+            width: 35px
+            height: 35px
+            padding: 4px 7px
+            margin: 0 3px
+            border-radius: 50px
+            background-color: #CCCCCC
+            text-align: center
+
+            &.share-fb:hover
+              background-color: #315A9D
+
+            &.share-line:hover
+              background-color: #00BE00
+
+            &.share-url:hover
+              background-color: #f25b22
+
+    .entry-content
+      text-align: left
+
+      .paragraph
+        margin-bottom: 30px
+
+      p
+        padding: 10px 0
+        font-size: 16px
+        letter-spacing: 1px
+        font-weight: 400
+        line-height: 30px
+
+      a
+        display: inline-block
+        margin: 0 2px
+        color: #f25b22
+        border-bottom: 1px solid transparent
+
+        &:hover
+          border-color: #f25b22
+
+      .title
+        font-size: 20px
+        letter-spacing: 1px
+
+      .title_num
+        font-size: 18px
+        letter-spacing: 1px
+        color: #f26423
+
+        //span
+        //  vertical-align: middle
+
+        .num
+          display: inline-block
+          color: #f26423
+          margin-right: 5px
+          font-style: italic
+          font-size: 22px
+//display: inline-block
+//width: 30px
+//background: #f26423
+//color: #ffffff
+//border-radius: 50px
+//text-align: center
+//margin-right: 5px
+//font-size: 14px
+
+
 //RWD
 @media only screen and (max-width: 1650px)
   .flat-map-zoom-in
@@ -1693,6 +1874,9 @@ form.form-listing
 
     .copyright
       margin-bottom: 20px
+
+  .main-single
+    padding: 25px 0 50px
 
 @media only screen and (max-width: 1350px), screen and (max-height: 900px)
 
@@ -1941,7 +2125,6 @@ form.form-listing
         max-width: 100%
         flex: 0 0 100%
         padding-right: 12px
-        //flex: none
 
   .flat-imagebox
     &.style5
@@ -1957,7 +2140,6 @@ form.form-listing
       .col-md-3
         max-width: 50%
         flex: 0 0 50%
-      //  flex: none
 
   .page-title.style2
     a.text-heading
@@ -1971,6 +2153,14 @@ form.form-listing
     flex: none
     max-width: 100%
 
+  article.blog-post .featured-post
+    height: 300px
+
+    img
+      height: 300px
+
+  article.post-single .entry-post .entry-content
+    padding: 0 30px
 
 @media only screen and (max-height: 900px)
   #logo
@@ -2122,6 +2312,7 @@ form.form-listing
 
   .flat-introduce
     padding: 40px 0 80px
+
     .introduce-header
       padding: 10px 0 35px
 
@@ -2134,6 +2325,12 @@ form.form-listing
     line-height: 65px
     left: 50%
     margin-left: -225px
+
+  article.blog-post .featured-post
+    height: 200px
+
+    img
+      height: 200px
 
 
 @media only screen and (max-width: 1199px) and (min-width: 768px)
@@ -2442,6 +2639,42 @@ form.form-listing
   .flat-introduce .introduce .introduce-content a.more-info
     margin-right: 7px
 
+
+  .main-single
+    padding: 0 0 50px
+
+    .container
+      padding: 0
+
+  article.post-single
+    box-shadow: none
+
+    .featured-post
+      height: 350px
+
+      img
+        height: 350px
+
+    .entry-header ul.social-ft li a
+
+      &.share-fb
+        background-color: #315A9D
+
+      &.share-line
+        background-color: #00BE00
+
+      &.share-url
+        background-color: #f25b22
+
+    .entry-post
+      .entry-header h2.entry-title
+        font-size: 36px
+        line-height: 50px
+
+//.entry-content
+//  padding: 0 15px
+
+
 @media only screen and (max-width: 600px)
   .imagebox.style5
     &.item
@@ -2454,6 +2687,13 @@ form.form-listing
   .parallax-200
     background-image: url("/media/bg_dark_mobile_3.svg")
     background-position: bottom center !important
+
+  article.post-single
+    .featured-post
+      height: 250px
+
+      img
+        height: 250px
 
 
 @media only screen and (max-width: 320px)
