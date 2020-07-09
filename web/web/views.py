@@ -98,7 +98,8 @@ class StoreUpdateView(BaseView):
         county_list = serializers.CountySerializer(many=True, instance=County.objects.all()).data
         district_list_json = json.dumps(district_list)
         county_list_json = json.dumps(county_list)
-        district_list = list(filter(lambda x: x['county'] == instance.county.id, district_list))
+        county_id = instance.county.id if instance.county else county_list[0]['id']
+        district_list = list(filter(lambda x: x['county'] == county_id, district_list))
         storediscount = serializers.StoreDiscountSerializer(many=True, instance=instance.storediscount.all()).data
         discounttype = serializers.DiscountTypeSerializer(many=True, instance=DiscountType.objects.all()).data
         storeimages = serializers.StoreImageSerializer(many=True, instance=instance.storeimage).data
@@ -438,9 +439,10 @@ class StoreView(BaseView):
             order_by = '-created_at'
         if sort == 'old':
             order_by = 'created_at'
-        store_type_2 = StoreType.objects.filter(pk=store_type).first()
-        if store_type_2 and store_type_2.name in ['連鎖店電商', '刷卡電子支付']:
-            search_status = 2
+        if store_type != 'all':
+            store_type_2 = StoreType.objects.filter(id=store_type).first()
+            if store_type_2 and store_type_2.name in ['連鎖店電商', '刷卡電子支付']:
+                search_status = 2
 
         filter_dict = dict([('search', search),
                             ('district', district),
@@ -484,7 +486,7 @@ class StoreView(BaseView):
         if len(split_list) > 1:
             suffix = f'?{split_list[-1]}'
 
-        activity_instance = Activity.objects.filter(pk=activity).first()
+        activity_instance = Activity.objects.filter(id=activity).first()
         activity_name = activity_instance.name if activity_instance else ''
         ret = dict(
             all_store_cache=self.get_all_store_cache(),

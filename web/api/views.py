@@ -167,6 +167,12 @@ class StoreViewSet(MyMixin):
             queryset = Store.objects.filter(status=1)
         return queryset
 
+    def filter_queryset(self, queryset):
+        if self.action == 'list':
+            for backend in list(self.filter_backends):
+                queryset = backend().filter_queryset(self.request, queryset, self)
+        return queryset
+
 
 @router_url('district')
 class DistrictViewSet(MyMixin):
