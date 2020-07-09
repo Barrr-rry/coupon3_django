@@ -420,7 +420,7 @@ class StoreView(BaseView):
             order_by = '-created_at'
         if sort == 'old':
             order_by = 'created_at'
-        if store_type != 'all':
+        if store_type and store_type != 'all':
             store_types = store_type.split(',')
             for store_type_2 in store_types:
                 if store_type_2 in ['7', '8', '11', '12']:
