@@ -38,6 +38,7 @@ odfpy==1.4.1
 openpyxl==3.0.4
 pandas==1.0.3
 passlib==1.7.1
+Pillow==7.2.0
 psycopg2==2.8.3
 Pygments==2.4.2
 pyquery==1.4.1
