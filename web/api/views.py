@@ -54,6 +54,7 @@ from api.models import (
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
+from PIL import Image
 
 router = routers.DefaultRouter()
 nested_routers = []
@@ -152,6 +153,16 @@ class FileViewSet(MyMixin):
     parser_classes = (MultiPartParser, FormParser)
     authentication_classes = []
     permission_classes = []
+
+    def create(self, request, *args, **kwargs):
+        ret = super().create(request, *args, **kwargs)
+        img_full_name = ret.data['filename']
+        img_name = img_full_name.replace(f'.{img_full_name.split(".")[-1]}', '')  # 檔名稱
+        output = img_name + ".webp"  # 輸出檔名稱
+        im = Image.open(os.path.join('media', img_full_name))  # 讀入檔案
+        im.save(os.path.join('media', output))  # 儲存
+        ret.data['filename'] = output
+        return ret
 
 
 @router_url('store')
