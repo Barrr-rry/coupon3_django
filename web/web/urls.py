@@ -79,6 +79,8 @@ urlpatterns = [
     path('eli5/voucher/', get_view(ELI5VoucherView), name='eli5/voucher'),
     path('eli5/hakka_tour/', get_view(ELI5HakkaTourView), name='eli5/hakka_tour'),
     path('eli5/sport/', get_view(ELI5SportView), name='eli5/sport'),
+    path('blog/', get_view(BlogView), name='blog'),
+    path('blog-single/', get_view(BlogSingleView), name='blog-single'),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain'), name='robots.txt'),
     path('ads.txt', TemplateView.as_view(template_name='ads.txt', content_type='text/plain'), name='ads.txt'),

@@ -30,6 +30,14 @@ class BaseView(TemplateView):
         return dict(token=self.token)
 
 
+class BlogView(BaseView):
+    template_name = 'Blog.html'
+
+
+class BlogSingleView(BaseView):
+    template_name = 'Blog-single.html'
+
+
 class TestView(BaseView):
     template_name = 'test.html'
 
