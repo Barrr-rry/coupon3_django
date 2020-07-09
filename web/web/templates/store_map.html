@@ -236,7 +236,6 @@
 <!-- Javascript -->
 <script type="text/javascript">
   let store_data = {{ json_data|safe }};
-  let all_store_cache = {{ all_store_cache|safe }};
   let data_count = {{ count }};
   let sort = '{{ sort }}';
   let lat = {{ lat }};
@@ -265,7 +264,11 @@
     $el.addClass('active')
     let positionFunction = (position) => {
       showSelfPosition(position)
-      initStoreDataMarker(all_store_cache)
+      let target = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      }
+      getLatLngData(target)
     }
 
     $('.activity a').each(function () {

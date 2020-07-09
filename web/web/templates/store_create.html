@@ -312,7 +312,6 @@
       let $district = $('select[name="district"]')
       $district.find('option').remove()
       let filters = district_list.filter(x => x.county === parseInt($el.val()))
-        debugger
       for (let el of filters) {
         $district.append(`<option value=${el.id}>${el.name}</option>`)
       }

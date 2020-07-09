@@ -184,6 +184,20 @@ class StoreViewSet(MyMixin):
                 queryset = backend().filter_queryset(self.request, queryset, self)
         return queryset
 
+    @action(methods=['GET'], detail=False, permission_classes=[], authentication_classes=[])
+    def latlng(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        queryset = queryset.filter(latitude__isnull=False, longitude__isnull=False)
+        queryset = queryset[:50]
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 @router_url('district')
 class DistrictViewSet(MyMixin):

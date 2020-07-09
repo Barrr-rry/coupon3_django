@@ -32,7 +32,7 @@
 
 })(window)
 
-
+let _map = null
 const default_position = {
   coords: {
     latitude: '23.8523405',
@@ -127,6 +127,15 @@ let clearAllMarker = (map) => {
     let target = marker.pop()
     map.removeLayer(target)
   }
+}
+let getLatLngData = (params) => {
+  $.ajax({
+    url: `/api/store/latlng?lat=${params.lat}&lng=${params.lng}`,
+    method: 'get'
+  }).done(data => {
+    clearAllMarker(_map)
+    initStoreDataMarker(data)
+  })
 }
 
 let initStoreDataMarker = (datas) => {
@@ -240,7 +249,6 @@ const greyIcon = new L.Icon({
   shadowSize: [41, 41]
 })
 const blueMarker = L.icon.pulse({iconSize: [20, 20], color: '#F25B22', fillColor: '#F25B22'})
-let _map = null
 const initMap = (position) => {
   if (!_map) {
     _map = L.map('map')
@@ -249,6 +257,9 @@ const initMap = (position) => {
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map)
+  map.on('moveend', function (e) {
+    getLatLngData(this.getCenter())
+  })
   return map
 }
 

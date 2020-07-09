@@ -115,8 +115,8 @@ class StoreFilter(filters.BaseFilterBackend):
         order_by = request.query_params.get('order_by', None)
         storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
         ids = request.query_params.get('ids', None)
-        lat = float(request.COOKIES.get('search-lat'))
-        lon = float(request.COOKIES.get('search-lon'))
+        lat = float(request.query_params.get('lng', request.COOKIES.get('search-lat')))
+        lon = float(request.query_params.get('lng', request.COOKIES.get('search-lon')))
 
         sort = request.query_params.get('sort', 'distance')
         # distance \ -distance or down
