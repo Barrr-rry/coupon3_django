@@ -12010,6 +12010,13 @@ form.form-listing .only-submit-form-listing:hover {
 
 article.blog-post {
   min-height: auto;
+  position: relative;
+}
+article.blog-post a.link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
 }
 article.blog-post .featured-post {
   position: relative;
@@ -12023,8 +12030,30 @@ article.blog-post .featured-post img {
   height: 200px;
   object-fit: cover;
 }
+article.blog-post .featured-post a span {
+  position: absolute;
+  display: block;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  font-size: 24px;
+  color: #fff;
+  transform: translate(-50%, -50%) scaleX(1.5);
+  z-index: 99;
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  -ms-transition: all 0.4s ease-in-out;
+  -o-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  opacity: 0;
+}
 article.blog-post .featured-post a .overlay {
-  background: rgba(204, 36, 38, 0.5);
+  background: rgba(204, 36, 38, 0.8);
+}
+article.blog-post:hover .featured-post a span {
+  opacity: 1;
+  transform: translate(-50%, -50%) scaleX(1);
 }
 article.blog-post .content-post {
   padding: 0 20px 10px;
@@ -12063,9 +12092,6 @@ article.blog-post .content-post ul.entry-meta {
   padding: 6px 0 0;
   border-top: 1px solid #efefef;
   font-size: 13px;
-}
-article.blog-post .content-post ul.entry-meta li.topic {
-  float: left;
 }
 article.blog-post .content-post ul.entry-meta li.date {
   float: right;
@@ -12159,6 +12185,7 @@ article.post-single .entry-post .entry-content a:hover {
 article.post-single .entry-post .entry-content .title {
   font-size: 20px;
   letter-spacing: 1px;
+  color: #f25b22;
 }
 article.post-single .entry-post .entry-content .title_num {
   font-size: 18px;
@@ -12171,6 +12198,16 @@ article.post-single .entry-post .entry-content .title_num .num {
   margin-right: 5px;
   font-style: italic;
   font-size: 22px;
+}
+article.post-single .entry-post .entry-content ul {
+  padding-left: 40px;
+  padding-bottom: 15px;
+}
+article.post-single .entry-post .entry-content ul li {
+  margin-top: 20px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  list-style-type: disc;
 }
 
 @media only screen and (max-width: 1650px) {
@@ -12975,6 +13012,13 @@ article.post-single .entry-post .entry-content .title_num .num {
   article.post-single .entry-post .entry-header h2.entry-title {
     font-size: 36px;
     line-height: 50px;
+  }
+
+  article.blog-post .overlay {
+    display: none;
+  }
+  article.blog-post:hover .featured-post a span {
+    opacity: 0;
   }
 }
 @media only screen and (max-width: 600px) {

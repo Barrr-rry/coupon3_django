@@ -1684,6 +1684,13 @@ form.form-listing
 //blog
 article.blog-post
   min-height: auto
+  position: relative
+
+  a.link
+    position: absolute
+    width: 100%
+    height: 100%
+    z-index: 100
 
   .featured-post
     position: relative
@@ -1697,8 +1704,32 @@ article.blog-post
       height: 200px
       object-fit: cover
 
-    a .overlay
-      background: rgba(204, 36, 38, 0.5)
+    a
+      span
+        position: absolute
+        display: block
+        width: 100px
+        top: 50%
+        left: 50%
+        text-align: center
+        font-size: 24px
+        color: #fff
+        transform: translate(-50%, -50%) scaleX(1.5)
+        z-index: 99
+        -webkit-transition: all 0.4s ease-in-out
+        -moz-transition: all 0.4s ease-in-out
+        -ms-transition: all 0.4s ease-in-out
+        -o-transition: all 0.4s ease-in-out
+        transition: all 0.4s ease-in-out
+        opacity: 0
+
+      .overlay
+        background: rgba(204, 36, 38, 0.8)
+
+  &:hover
+    .featured-post a span
+      opacity: 1
+      transform: translate(-50%, -50%) scaleX(1)
 
   .content-post
     padding: 0 20px 10px
@@ -1739,8 +1770,6 @@ article.blog-post
       font-size: 13px
 
       li
-        &.topic
-          float: left
 
         &.date
           float: right
@@ -1835,14 +1864,12 @@ article.post-single
       .title
         font-size: 20px
         letter-spacing: 1px
+        color: #f25b22
 
       .title_num
         font-size: 18px
         letter-spacing: 1px
         color: #f26423
-
-        //span
-        //  vertical-align: middle
 
         .num
           display: inline-block
@@ -1850,14 +1877,16 @@ article.post-single
           margin-right: 5px
           font-style: italic
           font-size: 22px
-//display: inline-block
-//width: 30px
-//background: #f26423
-//color: #ffffff
-//border-radius: 50px
-//text-align: center
-//margin-right: 5px
-//font-size: 14px
+
+      ul
+        padding-left: 40px
+        padding-bottom: 15px
+
+        li
+          margin-top: 20px
+          font-size: 16px
+          letter-spacing: 1px
+          list-style-type: disc
 
 
 //RWD
@@ -2670,6 +2699,15 @@ article.post-single
       .entry-header h2.entry-title
         font-size: 36px
         line-height: 50px
+
+
+  article.blog-post
+    .overlay
+      display: none
+
+    &:hover
+      .featured-post a span
+        opacity: 0
 
 //.entry-content
 //  padding: 0 15px
