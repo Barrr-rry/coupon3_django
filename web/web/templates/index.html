@@ -117,16 +117,47 @@
       <div class="col-md-12">
         <div class="highlights">
           <ul class="menu-list">
-            {% for el in store_type %}
-              {#如果是該頁面應該要顯示#}
-              {#<li class="active">#}
-              <li>
-                <a href="/store/?store_type={{ el.id }}" title="">
-                  <img src="/media/{{ el.icon }}" alt="" class="index_icon" width="400" height="400">
-                  <span>{{ el.name|safe }}</span>
-                </a>
-              </li>
-            {% endfor %}
+            <li>
+              <a href="/store/?store_type=1" title="">
+                <img src="/media/cutlery.svg" alt="" class="index_icon" width="400" height="400">
+                <span>美食</span>
+              </a>
+            </li><li>
+              <a href="/store/?store_type=2" title="">
+                <img src="/media/double-bed.svg" alt="" class="index_icon" width="400" height="400">
+                <span>住宿</span>
+              </a>
+            </li><li>
+              <a href="/store/?store_type=5" title="">
+                <img src="/media/shopping-bag.svg" alt="" class="index_icon" width="400" height="400">
+                <span>購物</span>
+              </a>
+            </li><li>
+              <a href="/store/?store_type=6,13" title="">
+                <img src="/media/dumbbell.svg" alt="" class="index_icon" width="400" height="400">
+                <span>娛樂、<br/>旅遊</span>
+              </a>
+            </li><li>
+              <a href="/store/?store_type=9" title="">
+                <img src="/media/other.svg" alt="" class="index_icon" width="400" height="400">
+                <span>其他</span>
+              </a>
+            </li><li>
+              <a href="/store/?store_type=10,14" title="">
+                <img src="/media/night-mark.svg" alt="" class="index_icon" width="400" height="400">
+                <span>夜市、<br/>商圈</span>
+              </a>
+            </li><li>
+              <a href="/store/?store_type=8,12" title="">
+                <img src="/media/park.svg" alt="" class="index_icon" width="400" height="400">
+                <span>電商、<br/>連鎖店</span>
+              </a>
+            </li><li>
+              <a href="/store/?store_type=7,11" title="">
+                <img src="/media/cocktail.svg" alt="" class="index_icon" width="400" height="400">
+                <span>刷卡、<br/>電子支付</span>
+              </a>
+            </li>
           </ul><!-- /.menu-list -->
         </div><!-- /.highlights -->
       </div><!-- /.col-md-12 -->

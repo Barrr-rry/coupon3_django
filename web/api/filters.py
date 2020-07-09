@@ -14,6 +14,14 @@ and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
 
 def filter_query(filter_dict, queryset):
     q = None
+    p = None
+    filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
+    if filter_dict['store_type'] is not None:
+        store_types = filter_dict['store_type'].split(',')
+        for store_type in store_types:
+            p = or_q(p, Q(store_type=store_type))
+        q = and_q(q, p)
+
     if filter_dict['search'] is not None:
         search = filter_dict['search'].strip().split()
         if len(search) > 1:
@@ -52,10 +60,6 @@ def filter_query(filter_dict, queryset):
                           Q(search_status=1) | Q(search_status=0)
                   ))
                   )
-
-    filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
-    if filter_dict['store_type'] is not None:
-        q = and_q(q, Q(store_type=filter_dict['store_type']))
 
     ref_location = Point(filter_dict['lat'], filter_dict['lon'], srid=4326)
     queryset = queryset.annotate(distance=Distance("location", ref_location))
@@ -124,9 +128,11 @@ class StoreFilter(filters.BaseFilterBackend):
             order_by = '-created_at'
         if sort == 'old':
             order_by = 'created_at'
-        store_type_2 = StoreType.objects.filter(pk=store_type).first()
-        if store_type_2 and store_type_2.name in ['連鎖店電商', '刷卡電子支付']:
-            search_status = 2
+        if store_type != 'all':
+            store_types = store_type.split(',')
+            for store_type_2 in store_types:
+                if store_type_2 in ['7', '8', '11', '12']:
+                    search_status = 2
         filter_dict = dict([('search', search),
                             ('district', district),
                             ('lat', lat),

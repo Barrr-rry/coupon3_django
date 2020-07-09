@@ -253,7 +253,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                         lon = float(gps[1])
                         break
                     if ed_time - st_time > 3:
-                        logger.warning(f'not found lat long by task_id: {task_id}')
+                        # logger.warning(f'not found lat long by task_id: {task_id}')
                         break
                 instance.latitude = lat
                 instance.longitude = lon

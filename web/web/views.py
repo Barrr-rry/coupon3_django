@@ -46,19 +46,8 @@ class IndexView(BaseView):
     template_name = 'index.html'
 
     def get_context_data(self, *args, **kwargs):
-        instances = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
-        orders = ['美食', '住宿', '購物', '娛樂旅遊', '其他', '夜市商圈', '連鎖店電商', '刷卡電子支付']
-        store_type = []
-        for order in orders:
-            for instance in instances:
-                if instance['name'] == order:
-                    store_type.append(instance)
-        for store in store_type:
-            store['name'] = store['name'].replace('夜市商圈', '夜市<br/>商圈')
-            store['name'] = store['name'].replace('連鎖店電商', '連鎖店<br/>電商')
-            store['name'] = store['name'].replace('刷卡電子支付', '刷卡<br/>電子支付')
         ret = dict(
-            store_type=store_type,
+            store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
             token=self.token,
         )
         return ret
@@ -432,9 +421,10 @@ class StoreView(BaseView):
         if sort == 'old':
             order_by = 'created_at'
         if store_type != 'all':
-            store_type_2 = StoreType.objects.filter(id=store_type).first()
-            if store_type_2 and store_type_2.name in ['連鎖店電商', '刷卡電子支付']:
-                search_status = 2
+            store_types = store_type.split(',')
+            for store_type_2 in store_types:
+                if store_type_2 in ['7', '8', '11', '12']:
+                    search_status = 2
 
         filter_dict = dict([('search', search),
                             ('district', district),
