@@ -1905,7 +1905,7 @@ const showSelfPosition = (position) => {
                     <span>${data.distance_name}</span>
                   </li>
                   <li>
-                    <img src="/media/park_gray.svg" alt="">
+                    <img src="/media/gray_${data.store_type_icon}" alt="">
                     <span>${data.store_type_name}</span>
                   </li>
                 </ul>
