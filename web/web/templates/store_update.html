@@ -15,20 +15,21 @@
 <body class="header_sticky">
 <div id="fb-root"></div>
 <script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            xfbml            : true,
-            version          : 'v7.0'
-        });
-    };
+  window.fbAsyncInit = function () {
+    FB.init({
+      xfbml: true,
+      version: 'v7.0'
+    });
+  };
 
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
 </script>
 <!-- Your Chat Plugin code -->
 <div class="fb-customerchat"
@@ -212,6 +213,32 @@
                                 value="{{ el.desc_edit }}"
                       >{{ el.desc_edit }}</textarea>
                     </div><!-- /.wrap-listing -->
+                    <div class="clearfix"></div>
+                    <div class="wrap-listing" style="margin-bottom: 15px">
+                      <label>請上傳活動照片</label>
+                      <div class="browse">
+                        <div class="row store-discount-upload-images-{{ forloop.counter0 }}">
+                          {% if el.picture %}
+                            <div class="imgbox d-flex align-items-start" data-id="{{ el.id }}"
+                                 data-file="{{ el.picture }}">
+                              <img src="/media/{{ el.picture }}" alt="">
+                              <i class="fa fa-times pointer close-image" aria-hidden="true"
+                                 data-id="{{ el.id }}"
+                              ></i>
+                              <input type="hidden" name="discount_picture" value="{{ el.picture }}">
+                            </div>
+                          {% endif %}
+                        </div>
+                        <p>拖曳圖片至此，或</p>
+                        <div class="upload">
+                          <span>選取圖片</span>
+                          <input type="file" name="discount-upload-file" data-class="store-discount-upload-images"
+                                 data-target="file-uploader" accept="image/*" multiple="multiple"/>
+                        </div>
+                        <p class="mt-4">圖片建議上傳尺寸 2000 px x 1527 px ， 格式 .jpg .png ，小於 1 MB</p>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
                   </div>
                   <div class="col-auto d-flex align-items-center">
                     <i class="fa fa-times pointer close-image" aria-hidden="true"
@@ -235,17 +262,19 @@
                   <i class="fa fa-times pointer close-image" aria-hidden="true"
                      data-id="{{ el.id }}"
                   ></i>
+                  <input type="hidden" name="discount_picture" value="{{ el.picture }}">
                 </div>
               {% endfor %}
 
             </div>
             <label>請上傳商家照片</label>
-            <div class="browse">
+            <div class=" browse">
               <p>拖曳圖片至此</p>
               <span>或</span>
               <div class="upload">
                 <span>選取圖片</span>
-                <input type="file" name="upload-file" data-target="file-uploader" accept="image/*" multiple="multiple"/>
+                <input type="file" name="upload-file" data-target="file-uploader" accept="image/*"
+                       data-class="upload-images" multiple="multiple"/>
               </div>
               <p class="mt-4">圖片建議上傳尺寸 2000 px x 1527 px ， 格式 .jpg .png ，小於 1 MB</p>
             </div>
@@ -349,6 +378,59 @@
         $district.append(`<option value=${el.id}>${el.name}</option>`)
       }
     })
+    // main 重複的code
+    let setImageClick = () => {
+      $('.imgbox .close-image').off('click')
+      $('.imgbox .close-image').on('click', function () {
+        let _id = $(this).attr('data-id')
+        $(`.imgbox[data-id="${_id}"]`).remove()
+        files = files.filter(x => parseInt(x.id) !== parseInt(_id))
+      })
+    }
+    $('input[name="discount-upload-file"]').checkFileTypeAndSize({
+      allowedExtensions: ['jpg', 'jpeg', 'png'],
+      maxSize: 1024,
+      success: function (self, e) {
+        let form = new FormData()
+        form.append("file", e.target.files[0])
+        $('.preloader').show()
+        $.ajax({
+          method: 'POST',
+          url: '/api/file/',
+          processData: false,
+          data: form,
+          contentType: false, //required
+        }).done((res) => {
+          $('.preloader').hide()
+          let cls_$el = $(self).parent().parent().find('.row')
+          $(self).parent().parent().find('.row .imgbox').remove()
+          let input_str = `<input type="hidden" name="discount_picture" value="${res.filename}">`
+          appendImage(res, cls_$el, input_str)
+          setImageClick()
+        }).fail(e => {
+          $('.preloader').hide()
+          let msg = '超過 1MB，請重新上傳圖片'
+          Swal.fire({
+            text: msg,
+            confirmButtonText: '確定'
+          })
+        })
+      },
+      extensionerror: function () {
+        let msg = '允許的格式為.jpg .png'
+        Swal.fire({
+          text: msg,
+          confirmButtonText: '確定'
+        })
+      },
+      sizeerror: function () {
+        let msg = '超過 1MB，請重新上傳圖片'
+        Swal.fire({
+          text: msg,
+          confirmButtonText: '確定'
+        })
+      }
+    });
   })
 </script>
 

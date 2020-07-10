@@ -33,6 +33,8 @@
 })(window)
 
 let _map = null
+
+let dicount_count = 0
 const default_position = {
   coords: {
     latitude: '23.8523405',
@@ -1453,7 +1455,6 @@ const showSelfPosition = (position) => {
     })
 
 
-    let dicount_count = 0
     // 活動折扣
     let appendDiscount = () => {
       dicount_count += 1
@@ -1503,7 +1504,7 @@ const showSelfPosition = (position) => {
         </div>
       </div>
       `)
-
+      // update 重複的code
       $('input[name="discount-upload-file"]').checkFileTypeAndSize({
         allowedExtensions: ['jpg', 'jpeg', 'png'],
         maxSize: 1024,
@@ -1519,8 +1520,8 @@ const showSelfPosition = (position) => {
             contentType: false, //required
           }).done((res) => {
             $('.preloader').hide()
-            let cls_$el = $(`.store-discount-upload-images-${dicount_count}`)
-            $(`.store-discount-upload-images-${dicount_count} .imgbox`).remove()
+            let cls_$el = $(self).parent().parent().find('.row')
+            $(self).parent().parent().find('.row .imgbox').remove()
             let input_str = `<input type="hidden" name="discount_picture" value="${res.filename}">`
             appendImage(res, cls_$el, input_str)
             setImageClick()
@@ -1550,7 +1551,6 @@ const showSelfPosition = (position) => {
       });
 
     }
-
     $('.store-discount .close-image').on('click', function () {
       let _id = $(this).attr('data-id')
       $(`.store-discount[data-id=${_id}]`).remove()
@@ -1566,6 +1566,7 @@ const showSelfPosition = (position) => {
 
     })
 
+    // update 重複的code
     let setImageClick = () => {
       $('.imgbox .close-image').off('click')
       $('.imgbox .close-image').on('click', function () {
@@ -1576,7 +1577,7 @@ const showSelfPosition = (position) => {
     }
     setImageClick()
     // image file 上傳前確認
-
+    // update 重複的code
     $('input[name="upload-file"]').checkFileTypeAndSize({
       allowedExtensions: ['jpg', 'jpeg', 'png'],
       maxSize: 1024,
@@ -1711,6 +1712,7 @@ const showSelfPosition = (position) => {
                 name: ret.store_discount_name[i],
                 description: ret.description[i],
                 discount_type: ret.discount_type[i],
+                picture: ret.discount_picture[i],
               })
             }
           } else {
@@ -1718,6 +1720,7 @@ const showSelfPosition = (position) => {
               name: ret.store_discount_name,
               description: ret.description,
               discount_type: ret.discount_type,
+              picture: ret.discount_picture,
             })
           }
 
