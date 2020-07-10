@@ -22,5 +22,6 @@ with transaction.atomic():
                     store=store,
                     discount_type_id=dis['discount_type_id'],
                     name=dis['name'],
-                    description=dis['description']
+                    description=dis['description'],
+                    picture=el['store_image_picture']
                 )
