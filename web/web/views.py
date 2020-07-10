@@ -479,14 +479,16 @@ class StoreView(BaseView):
             if store_type != 'all' and store_type.split(',') and len(store_type.split(',')) == 1:
                 choose_group_store_type = store_type
         group_filters = []
-        for gstore_type in group_store_type.split(','):
-            store_type_instance = StoreType.objects.get(pk=gstore_type)
-            group_filters.append(dict(
-                name=store_type_instance.name,
-                id=store_type_instance.id,
-                link=f'/store/?store_type={store_type_instance.id}&group_store_type={group_store_type}',
-                selected='active' if choose_group_store_type and int(choose_group_store_type) == store_type_instance.id else ''
-            ))
+        if group_store_type:
+            for gstore_type in group_store_type.split(','):
+                store_type_instance = StoreType.objects.get(pk=gstore_type)
+                group_filters.append(dict(
+                    name=store_type_instance.name,
+                    id=store_type_instance.id,
+                    link=f'/store/?store_type={store_type_instance.id}&group_store_type={group_store_type}',
+                    selected='active' if choose_group_store_type and int(
+                        choose_group_store_type) == store_type_instance.id else ''
+                ))
 
         ret = dict(
             lat=lat,
