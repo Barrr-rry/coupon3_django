@@ -1858,12 +1858,22 @@ const showSelfPosition = (position) => {
         }
       }
       let names = ''
+      let store_type_disable = ''
       if (data.storediscount_names) {
         names = `
       <div class="sale-list">
         ${data.storediscount_names}
       </div>
       `
+      if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
+          store_type_disable =
+              `<li><span>${data.district_name}</span></li>
+                  <li>
+                    <img src="/media/map_gray.svg" alt="">
+                    <span>${data.distance_name}</span>
+                  </li>`
+      }
+
       }
       $(document).ready(() => {
         let href_split = window.location.href.split('?')
@@ -1913,11 +1923,7 @@ const showSelfPosition = (position) => {
                   <a href="/store/${data.id}" title="">${data.name}</a>
                 </div>
                 <ul class="rating">
-                  <li><span>${data.district_name}</span></li>
-                  <li>
-                    <img src="/media/map_gray.svg" alt="">
-                    <span>${data.distance_name}</span>
-                  </li>
+                  ${store_type_disable}
                   <li>
                     <img src="/media/gray_${data.store_type_icon}" alt="">
                     <span>${data.store_type_name}</span>
