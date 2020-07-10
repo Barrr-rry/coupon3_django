@@ -1,5 +1,6 @@
 {% load static %}
-{% if request.user_agent.is_mobile %}
+{% load user_agents %}
+{% if request|is_mobile %}
   <div id="div-tam-ad-Z1594276438493jb"></div>
   <script type="text/javascript" language="javascript">
     adLoad2('Z1594276438493jb', '', 'div-tam-ad-Z1594276438493jb', true, testFlag, callbackFunction, floatPosition);

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'api',
     'django_crontab',
     'django.contrib.sitemaps',
+    'django_user_agents',
 ]
 MIDDLEWARE = [
     'django_samesite_none.middleware.SameSiteNoneMiddleware',
@@ -71,6 +72,10 @@ CACHES = {
         }
     }
 }
+
+# Name of cache backend to cache user agents. If it not specified default
+# cache alias will be used. Set to `None` to disable caching.
+USER_AGENTS_CACHE = 'default'
 
 CRONJOBS = [
 ]

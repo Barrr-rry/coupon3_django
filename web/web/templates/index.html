@@ -1,4 +1,5 @@
 {% load static %}
+{% load user_agents %}
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
@@ -236,7 +237,7 @@
           </div>
         </div><!-- /.imaebox style5 -->
       </div><!-- /.col-md-3 col-sm-6 -->
-      {% if request.user_agent.is_mobile %}
+      {% if request|is_mobile %}
         <div class="col-md-3 col-sm-6">
           <div id="div-tam-ad-21594276538731J"></div>
           <script type="text/javascript" language="javascript">
