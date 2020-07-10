@@ -1699,7 +1699,13 @@ const showSelfPosition = (position) => {
           data: JSON.stringify(ret),
           dataType: "json",
         }).done(res => {
-          window.location.href = `/store/${res.id}/`
+          Swal.fire({
+            text: '您的資料已經成功送出！審核通過後將會刊登，請耐心等候哦！',
+            confirmButtonText: '確定'
+          }).then(() => {
+            window.location.href = `/store/${res.id}/`
+          })
+
         })
       }
     })
