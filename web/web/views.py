@@ -548,7 +548,14 @@ class StoreCountyView(BaseView):
         data = serializers.CountySerializer(many=True, instance=queryset).data
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         storetypes.insert(0, dict(id='all', name='全部'))
+        dct = dict()
+        for el in data:
+            print(el['id'], el['name'])
+            dct[f'county_{el["id"]}'] = el['count']
+        dct[f'county_300'] = dct[f'county_12']+dct[f'county_13']
+        dct[f'county_200'] = dct[f'county_5'] + dct[f'county_6']
         ret = dict(
+            dct=dct,
             data=data,
             token=self.token,
             storetypes=storetypes,
