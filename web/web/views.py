@@ -353,11 +353,16 @@ class StoreView(BaseView):
                 # 確定road
                 if lat is None or lon is None:
                     target = re.findall(road_re, search)
-                    if target:
+                    if target and len(target) == len(search):
                         dct = road_dict[target[0]]
                         lat = dct['lat']
                         lon = dct['lon']
                         logger.info(f'get map from road: {search}')
+                if lat is None or lon is None:
+                    target_instnace = district_instance if district_instance else county_instance
+                    if target_instnace:
+                        lat = target_instnace.latitude
+                        lon = target_instnace.longitude
                 # 確定site
                 if lat is None or lon is None:
                     target = re.findall(site_re, search)
