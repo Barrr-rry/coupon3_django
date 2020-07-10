@@ -1,4 +1,10 @@
 {% load static %}
+{% if request.user_agent.is_mobile %}
+  <div id="div-tam-ad-Z1594276438493jb"></div>
+  <script type="text/javascript" language="javascript">
+    adLoad2('Z1594276438493jb', '', 'div-tam-ad-Z1594276438493jb', true, testFlag, callbackFunction, floatPosition);
+  </script>
+{% endif %}
 <footer>
   <div class="container">
     <div class="row">
@@ -32,7 +38,7 @@
   <div class="item">
     <a href="mailto:3coupontw@gmail.com">
       <img src="/media/icon-footer-mail.svg" alt="">
-        3coupontw@gmail.com
+      3coupontw@gmail.com
     </a>
   </div>
   <div class="item">
