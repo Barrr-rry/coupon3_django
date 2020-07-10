@@ -143,12 +143,20 @@ let getLatLngData = (params) => {
 let initStoreDataMarker = (datas) => {
   for (let el of datas) {
     let ul = ''
-    if (el.storediscount_names) {
-      ul += `
-      <ul>
-        <li><span>${el.storediscount_names}</span></li>     
-      </ul>
+    let i = 0
+    if (el.storediscount) {
+      debugger
+      for (let foo of el.storediscount) {
+        i += 1
+        ul = `
+            <ul>
+                <li><span>${foo.name}</span></li>     
+            </ul><br/>
       `
+        if (i >= 3) {
+          break
+        }
+      }
     }
     let html = `
         <div>${el.name}</div>
@@ -1859,12 +1867,19 @@ const showSelfPosition = (position) => {
       }
       let names = ''
       let store_type_disable = ''
-      if (data.storediscount_names) {
-        names = `
-      <div class="sale-list">
-        ${data.storediscount_names}
-      </div>
+      let i = 0
+      if (data.storediscount) {
+        for (let foo of data.storediscount) {
+          i += 1
+          names = `
+            <div class="sale-list">
+              ${foo.name}
+            </div><br/>
       `
+          if (i >= 3) {
+            break
+          }
+        }
       if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
           store_type_disable =
               `<li><span>${data.district_name}</span></li>
