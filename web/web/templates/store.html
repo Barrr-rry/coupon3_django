@@ -168,11 +168,10 @@
                                             <div class="box-desc">
                                                 {% if el.storediscount %}
                                                     {% for foo in el.storediscount %}
-                                                        {% if forloop.counter0 < 3 %}
+                                                        {% if forloop.counter0 < 3 and foo.name %}
                                                             <div class="sale-list">
                                                                 {{ foo.name }}
                                                             </div>
-                                                            <br/>
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}

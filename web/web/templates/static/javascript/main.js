@@ -145,16 +145,14 @@ let initStoreDataMarker = (datas) => {
     let ul = ''
     let i = 0
     if (el.storediscount) {
-      debugger
       for (let foo of el.storediscount) {
         i += 1
-        ul = `
+        if (i <= 3 && foo.name) {
+          ul = `
             <ul>
                 <li><span>${foo.name}</span></li>     
-            </ul><br/>
-      `
-        if (i >= 3) {
-          break
+            </ul>
+            `
         }
       }
     }
@@ -1877,13 +1875,12 @@ const showSelfPosition = (position) => {
       if (data.storediscount) {
         for (let foo of data.storediscount) {
           i += 1
-          names = `
+          if (i <= 3 && foo.name) {
+            names = `
             <div class="sale-list">
               ${foo.name}
             </div><br/>
-      `
-          if (i >= 3) {
-            break
+            `
           }
         }
       if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
