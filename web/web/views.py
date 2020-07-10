@@ -214,7 +214,6 @@ def distance(x):
 class StoreView(BaseView):
     template_name = 'store.html'
 
-
     def check_re(self):
         global city_re, site_re, road_re, road_dict
         if city_re is None or site_re is None or road_re is None:
@@ -470,9 +469,29 @@ class StoreView(BaseView):
 
         activity_instance = Activity.objects.filter(id=activity).first()
         activity_name = activity_instance.name if activity_instance else ''
+
+        # 確認是不是使用store_type
+        group_store_type = self.request.GET.get('group_store_type', None)
+        in_group_store_type = False
+        choose_group_store_type = None
+        if group_store_type:
+            in_group_store_type = True
+            if store_type != 'all' and store_type.split(',') and len(store_type.split(',')) == 1:
+                choose_group_store_type = store_type
+        group_filters = []
+        for gstore_type in group_store_type.split(','):
+            store_type_instance = StoreType.objects.get(pk=gstore_type)
+            group_filters.append(dict(
+                name=store_type_instance.name,
+                id=store_type_instance.id,
+                link=f'/store/?store_type={store_type_instance.id}&group_store_type={group_store_type}',
+                selected='active' if choose_group_store_type and int(choose_group_store_type) == store_type_instance.id else ''
+            ))
+
         ret = dict(
             lat=lat,
             lon=lon,
+            group_filters=group_filters,
             activity=activity,
             activity_name=activity_name,
             activity_list=activity_list,
