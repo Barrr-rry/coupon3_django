@@ -10758,6 +10758,16 @@ footer .widget-about .logo-ft a {
 .tp-banner .slider .slide:first-child {
   display: block;
 }
+.tp-banner .slider .slide_shop {
+  /* background-image: url("never-loaded.jpg"); */
+  /* background-image: url("bad.webp"); */
+}
+.tp-banner .slider .slide_shop.web {
+  background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp");
+}
+.tp-banner .slider .slide_shop.no-webp {
+  background-image: url("/media/臺南市.jpg");
+}
 .tp-banner .slider .slide_content {
   position: relative;
   text-align: center;

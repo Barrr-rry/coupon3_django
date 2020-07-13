@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
-<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
 <head>
@@ -25,6 +26,20 @@
 
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+  <style type="text/css">
+    .slide_shop{
+      /* background-image: url("never-loaded.jpg"); */
+      /* background-image: url("bad.webp"); */
+    }
+    .web slide_shop{
+      background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp");
+    }
+    .no-webp slide_shop{
+      background-image: url("/media/臺南市.jpg");
+    }
+
+  </style>
 
 </head>
 <body class="header_sticky">
@@ -60,18 +75,16 @@
 
 <section class="tp-banner">
   {% if instance.images %}
-    <div class="slider">
-      <div class="slide_viewer slide_viewer_store">
-        <div class="slide_group">
-          {% for el in instance.images %}
-            <div class="slide slide_shop"
-                 style="background-image: url('/media/{{ el }}')"
-            >
-            </div>
-          {% endfor %}
-        </div>
+  <div class="slider">
+    <div class="slide_viewer slide_viewer_store">
+      <div class="slide_group">
+        {% for el in instance.images %}
+        <div class="slide slide_shop" style=""></div>
+<!--        <script type="text/javascript" src="{% static 'javascript/modernizr-custom.js' %}?token={{ token }}"></script>-->
+        {% endfor %}
       </div>
-    </div><!-- End // .slider -->
+    </div>
+  </div><!-- End // .slider -->
   {% endif %}
 
   <div class="slide_buttons">
@@ -110,16 +123,16 @@
           </div><!-- /.box-title -->
           <ul class="box-address">
             {% if instance.phone %}
-              <li class="phone">
-                <a href="tel:{{ instance.phone_2 }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
-                </a>
-              </li>
+            <li class="phone">
+              <a href="tel:{{ instance.phone_2 }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
+              </a>
+            </li>
             {% endif %}
             {% if instance.latitude and instance.longitude and instance.search_status != 0 %}
-              <li class="address">
-                <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker"
-                                                          aria-hidden="true"></i>{{ instance.address }}</a>
-              </li>
+            <li class="address">
+              <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker"
+                                                        aria-hidden="true"></i>{{ instance.address }}</a>
+            </li>
             {% endif %}
           </ul><!-- /.box-address -->
         </div><!-- /.title-left -->
@@ -155,22 +168,22 @@
     <div class="row display-initial">
       <div class="col-md-8">
         {% for el in instance.storediscount %}
-          <div class="text-box">
-            <h3><span
-              class="discount-type-border">{{ el.discount_type.name|default_if_none:"" }}</span><span>{{ el.name|default_if_none:"" }}</span>
-            </h3>
-            <div class="text-desc">
-              <p>
-                {{ el.desc_safe|default_if_none:""|safe }}
-              </p>
-              {% if el.picture %}
-                <img class="text-box-img" src="/media/{{ el.picture }}" alt=""/>
-              {% endif %}
-            </div>
+        <div class="text-box">
+          <h3><span
+            class="discount-type-border">{{ el.discount_type.name|default_if_none:"" }}</span><span>{{ el.name|default_if_none:"" }}</span>
+          </h3>
+          <div class="text-desc">
+            <p>
+              {{ el.desc_safe|default_if_none:""|safe }}
+            </p>
+            {% if el.picture %}
+            <img class="text-box-img" src="/media/{{ el.picture }}" alt=""/>
+            {% endif %}
           </div>
+        </div>
         {% endfor %}
         {% if instance.ad %}
-          {{ instance.ad|safe }}
+        {{ instance.ad|safe }}
         {% endif %}
       </div><!-- /.col-md-8 -->
       <div class="col-md-4">
@@ -179,30 +192,30 @@
             <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
                  data-image="images/icon/map.png" data-name="Themesflat Map"></div>
             {% if instance.latitude and instance.longitude and instance.search_status != 0 %}
-              <div id="map" class="map_store_id" style="width: 100%;height: 220px">
-                <a class="map_btn" target="_blank" href="{{ google }}">導航到商家</a>
-              </div>
+            <div id="map" class="map_store_id" style="width: 100%;height: 220px">
+              <a class="map_btn" target="_blank" href="{{ google }}">導航到商家</a>
+            </div>
             {% endif %}
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
               {% if instance.latitude and instance.longitude and instance.search_status != 0 %}
-                <li class="address">
-                  <i class="fa fa-map-marker" aria-hidden="true"></i>
-                  <a href="{{ google }}" target="_blank">{{ instance.address }}</a>
-                </li>
+              <li class="address">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <a href="{{ google }}" target="_blank">{{ instance.address }}</a>
+              </li>
               {% endif %}
               {% if instance.phone %}
-                <li>
-                  <i class="fa fa-phone" aria-hidden="true"></i>
-                  <a href="tel:{{ instance.phone_2 }}" target="_blank">{{ instance.phone }}</a>
-                </li>
+              <li>
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <a href="tel:{{ instance.phone_2 }}" target="_blank">{{ instance.phone }}</a>
+              </li>
               {% endif %}
               {% if instance.website %}
-                <li>
-                  <i class="fa fa-globe" aria-hidden="true"></i>
-                  <a href="{{ instance.website }}" title="" target="_blank">{{ instance.website }}</a>
-                </li>
+              <li>
+                <i class="fa fa-globe" aria-hidden="true"></i>
+                <a href="{{ instance.website }}" title="" target="_blank">{{ instance.website }}</a>
+              </li>
               {% endif %}
             </ul>
           </div>
@@ -227,10 +240,23 @@
 <script>
   let lat = null
   let lon = null
-  {% if instance.latitude %}
-    lat = {{instance.latitude}};
-    lon = {{instance.longitude}};
-  {% endif %}
+  {%
+    if instance.latitude %}
+  lat = {
+  {
+    instance.latitude
+  }
+  }
+  ;
+  lon = {
+  {
+    instance.longitude
+  }
+  }
+  ;
+  {%
+    endif %
+  }
   console.log(lat)
   $(document).ready(() => {
     const position = {
