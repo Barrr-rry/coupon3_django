@@ -386,7 +386,7 @@ def to_column(el):
     n = 0
     for e in el.storediscount.all():
         if n < 3 and e.name:
-            text += f'-{e.name}/n'
+            text += f'-{e.name}\n'
         n += 1
     image = el.storeimage.first()
     if image:
@@ -420,11 +420,12 @@ def get_carouseltemplate(gps=None, store_name=None):
             )
 
     if store_name:
-        el = queryset.filter(name__icontains=store_name).first()
+        el = queryset.filter(name__icontains=store_name).all()
         if el:
-            columns.append(
-                to_column(el)
-            )
+            for ell in el[:10]:
+                columns.append(
+                    to_column(ell)
+                )
 
     carousel_template_message = TemplateSendMessage(
         alt_text='Carousel template',
