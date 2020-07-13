@@ -201,7 +201,7 @@
         dataType: "json",
       }).done(res => {
         $('.preloader').hide()
-        location = res.data
+        location = res.data.address
         let $input = $('input[name="address"]')
         $input.val(location)
         let $select_2 = $('select[name="county"]')
@@ -293,9 +293,10 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
       }).done(res => {
-        let lat = res.data[0]
-        let lon = res.data[1]
-        console.log('res:', lat, lon)
+        let lat = res.data.gps[0]
+        let lon = res.data.gps[1]
+        let $input = $('input[name="address"]')
+        $input.val(res.data.address)
         const position = {
           coords: {
             latitude: lat,

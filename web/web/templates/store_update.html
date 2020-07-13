@@ -311,7 +311,7 @@
           dataType: "json",
         }).done(res => {
           let $input = $('input[name="address"]')
-          $input.val(res.data)
+          $input.val(res.data.address)
         })
       })
       clearAllMarker(map)
@@ -352,8 +352,8 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
       }).done(res => {
-        let lat = res.data[0]
-        let lon = res.data[1]
+        let lat = res.data.gps[0]
+        let lon = res.data.gps[1]
         console.log('res:', lat, lon)
         const position = {
           coords: {

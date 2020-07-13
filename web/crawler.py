@@ -112,8 +112,10 @@ def get_latlon(driver, addr):
     dom = pq(doc)
     lat = dom("#markercm").eq(-1).attr('y')
     lon = dom("#markercm").eq(-1).attr('x')
+    address = dom('#markercm').eq(-1).attr('contenttip')
     return dict(
-        ret=[lat, lon],
+        gps=[lat, lon],
+        address=address,
         count=len(dom('#markercm'))
     )
 
@@ -130,9 +132,12 @@ def get_addr(driver, latlon_str):
     time.sleep(1)
     doc = driver.page_source
     dom = pq(doc)
-    ret = dom('#markercm').eq(-1).attr('contenttip')
+    lat = dom("#markercm").eq(-1).attr('y')
+    lon = dom("#markercm").eq(-1).attr('x')
+    address = dom('#markercm').eq(-1).attr('contenttip')
     return dict(
-        ret=ret,
+        gps=[lat, lon],
+        address=address,
         count=len(dom('#markercm'))
     )
 
@@ -162,13 +167,12 @@ def loop_queue():
             continue
         fn = get_addr if task_type == 'get_addr' else get_latlon
         dct = fn(driver, task_args)
-        ret = dct['ret']
         count = dct['count']
         if count > 20:
             reflash = True
-        task.set_task_response(task_id, ret)
+        task.set_task_response(task_id, dct)
         ed = time.time()
-        logger.info(f'task={tasks} ret={ret} time: {ed - st}')
+        logger.info(f'task={tasks} ret={dct} time: {ed - st}')
 
     driver.quit()
 

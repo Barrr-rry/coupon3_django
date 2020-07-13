@@ -391,7 +391,7 @@ class StoreView(BaseView):
                     gps_st = time.time()
                     while True:
                         gps_ed = time.time()
-                        gps = task.get_task_result(task_id)
+                        dct = task.get_task_result(task_id)
                         # 找不到
                         if gps_ed - gps_st > 3:
                             logger.warning(f'not found gps: {search} {msg}')
@@ -399,6 +399,9 @@ class StoreView(BaseView):
                             lon = float(self.request.COOKIES.get('lon', 120.9009427))
                             gps = [lat, lon]
                             break
+                        if not dct:
+                            continue
+                        gps = dct['gps']
                         if gps:
                             break
                     lat = float(gps[0])
@@ -504,8 +507,8 @@ class StoreView(BaseView):
             activity_list=activity_list,
             suffix=suffix,
             search=search if search is not None else '',
-            data=data[:6],
-            json_data=json.dumps(data[:6]),
+            data=data[:5],
+            json_data=json.dumps(data[:5]),
             count=queryset.count(),
             storetypes=storetypes,
             district=district,
@@ -552,7 +555,7 @@ class StoreCountyView(BaseView):
         for el in data:
             print(el['id'], el['name'])
             dct[f'county_{el["id"]}'] = el['count']
-        dct[f'county_300'] = dct[f'county_12']+dct[f'county_13']
+        dct[f'county_300'] = dct[f'county_12'] + dct[f'county_13']
         dct[f'county_200'] = dct[f'county_5'] + dct[f'county_6']
         ret = dict(
             dct=dct,

@@ -265,7 +265,9 @@ const initMap = (position) => {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map)
   map.on('moveend', function (e) {
-    getLatLngData(this.getCenter())
+    if ($('#getLatLngData').length) {
+      getLatLngData(this.getCenter())
+    }
   })
   return map
 }
@@ -2072,7 +2074,7 @@ const showSelfPosition = (position) => {
         dataType: "json",
       }).done(res => {
         let $input = $el.prev()
-        $input.val(res.data)
+        $input.val(res.data.address)
         $load.removeClass('loader')
         $el.find('svg').show()
       })
