@@ -11091,7 +11091,7 @@ footer .widget-about .logo-ft a {
 .flat-introduce .introduce-header a.tab {
   display: inline-block;
   padding: 6px 18px;
-  margin: 0px 10px 20px;
+  margin: 0 10px 20px;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 2px;
@@ -11103,6 +11103,9 @@ footer .widget-about .logo-ft a {
 .flat-introduce .introduce-header a.tab:hover, .flat-introduce .introduce-header a.tab.active {
   background-color: #f25b22;
   color: #ffffff;
+}
+.flat-introduce .introduce-header a.tab.tab:first-child {
+  margin-left: 0;
 }
 .flat-introduce .d-flex {
   margin-bottom: 50px;
@@ -11261,7 +11264,7 @@ footer .widget-about .logo-ft a {
   content: "";
   clear: both;
 }
-.flat-imagebox .filter-result .sort a, .flat-imagebox .filter-result .activity a {
+.flat-imagebox .filter-result .sort > a, .flat-imagebox .filter-result .activity > a {
   display: inline-block;
   font-size: 14px;
   font-weight: 400;
@@ -11272,20 +11275,20 @@ footer .widget-about .logo-ft a {
   margin-bottom: 25px;
   float: left;
 }
-.flat-imagebox .filter-result .sort a:hover, .flat-imagebox .filter-result .sort a.active, .flat-imagebox .filter-result .activity a:hover, .flat-imagebox .filter-result .activity a.active {
+.flat-imagebox .filter-result .sort > a:hover, .flat-imagebox .filter-result .sort > a.active, .flat-imagebox .filter-result .activity > a:hover, .flat-imagebox .filter-result .activity > a.active {
   color: #ffffff;
   background-color: #f25b22;
   border-color: #f25b22;
 }
-.flat-imagebox .filter-result .sort a:first-child, .flat-imagebox .filter-result .activity a:first-child {
+.flat-imagebox .filter-result .sort > a:first-child, .flat-imagebox .filter-result .activity > a:first-child {
   border-radius: 50px 0 0 50px;
   border-left: 1px solid rgba(242, 91, 34, 0.5);
 }
-.flat-imagebox .filter-result .sort a:last-child, .flat-imagebox .filter-result .activity a:last-child {
+.flat-imagebox .filter-result .sort > a:last-child, .flat-imagebox .filter-result .activity > a:last-child {
   border-radius: 0 50px 50px 0;
   border-right: 1px solid rgba(242, 91, 34, 0.5);
 }
-.flat-imagebox .filter-result .sort a.tag, .flat-imagebox .filter-result .activity a.tag {
+.flat-imagebox .filter-result .sort > a.tag, .flat-imagebox .filter-result .activity > a.tag {
   margin-right: 15px;
   margin-bottom: 15px;
   border-radius: 50px;
