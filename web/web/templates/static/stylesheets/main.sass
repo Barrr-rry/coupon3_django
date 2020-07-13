@@ -360,6 +360,7 @@ footer
     .slide_shop
       /* background-image: url("never-loaded.jpg"); */
       /* background-image: url("bad.webp"); */
+
       &.web
         background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp")
 
@@ -488,6 +489,21 @@ footer
   border-left-color: #f25b22 !important
   border-right-color: #f25b22 !important
 
+.pdmap .overlay
+  position: absolute
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  z-index: 1000
+  background: rgba(86, 41, 21, 0.4)
+
+  .map_btn
+    display: inline-block
+    outline: none
+    top: 50%
+    margin-top: -20px
+    bottom: auto
 
 // index
 .page-title
@@ -1414,8 +1430,10 @@ footer
             font-size: 16px
             color: #999999
             font-weight: 400
+
             i
               vertical-align: middle
+
             a
               font-size: 16px
               color: #999999
@@ -1425,9 +1443,9 @@ footer
               overflow: hidden
               text-overflow: ellipsis
               vertical-align: middle
+
               &:active, &:hover
                 color: #f25b22
-
 
 
 // create
@@ -2235,9 +2253,11 @@ article.post-single
         li
           min-height: 110px
           padding: 5px 0
+
           a
             img
               width: 45px
+
             span
               font-size: 14px
 
@@ -2320,9 +2340,11 @@ article.post-single
         li
           min-height: 120px
           padding: 12px 0
+
           a
             img
               width: 45px
+
             span
               font-size: 14px
 
