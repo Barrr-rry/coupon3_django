@@ -1471,7 +1471,7 @@ const showSelfPosition = (position) => {
       discount_id += 1
       let options = ''
       for (let el of discount_type_list) {
-        options += `<optiid="map"on value="${el.id}">${el.name}</option>`
+        options += `<option value="${el.id}">${el.name}</option>`
       }
       $('.store-disocunt-area').append(`
       <div class="store-discount d-flex" data-id="${discount_id}">
