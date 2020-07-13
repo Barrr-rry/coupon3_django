@@ -145,10 +145,10 @@
               <div class="clear"></div>
             </div><!-- /.wrap-listing -->
             <div class="pdmap style2 map_store_id" id="map" style="height: 320px">
-              <div class="overlay">
+              <div id="firstmap" class="overlay">
                 <a class="map_btn" href="#">使用您目前位置</a>
               </div>
-              <a class="map_btn" href="javascript:void(0);" style="outline: none;display: none">使用此位置</a>
+              <a class="map_btn use-address" href="javascript:void(0);" style="outline: none;display: none">使用此位置</a>
             </div><!-- /#flat-map -->
             <div class="clearfix"></div>
           </div><!-- /.inner-box -->
@@ -190,7 +190,7 @@
   $(document).ready(() => {
     let location = ''
     let gps_msg = ''
-    $('.map_btn').on('click', function (e) {
+    $('.map_btn.use-address').on('click', function (e) {
       e.preventDefault()
       e.stopPropagation()
       $('.preloader').show()
@@ -226,6 +226,14 @@
 
 
     })
+    $('#firstmap .map_btn').on('click',(e)=>{
+      e.preventDefault()
+      e.stopPropagation()
+      $('#firstmap').remove()
+      $('#firstmap .map_btn').remove()
+      $('#createStore .search-pin-load').click()
+    })
+
     let showPosition = (position) => {
       let map = initMap(position)
       map.off('click')
@@ -236,7 +244,7 @@
         marker.push(pos)
         map.addLayer(pos)
         gps_msg = msg
-        $('.map_btn').show()
+        $('.map_btn.use-address').show()
       })
       clearAllMarker(map)
 
