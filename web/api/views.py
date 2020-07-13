@@ -321,12 +321,12 @@ class LocationView(viewsets.ViewSet):
             2: 'get_addr'
         }
         task_id = task.enqueue_task(fn_mapping[task_type], msg)
-        ret = None
+        dct = None
         while True:
-            ret = task.get_task_result(task_id)
-            if ret:
+            dct = task.get_task_result(task_id)
+            if dct:
                 break
-        return Response(dict(data=ret))
+        return Response(dict(data=dct))
 
     def list(self, request, *args, **kwargs):
         """
@@ -340,12 +340,12 @@ class LocationView(viewsets.ViewSet):
             2: 'get_addr'
         }
         task_id = task.enqueue_task(fn_mapping[task_type], msg)
-        ret = None
+        dct = None
         while True:
-            ret = task.get_task_result(task_id)
-            if ret:
+            dct = task.get_task_result(task_id)
+            if dct:
                 break
-        return Response(dict(data=ret))
+        return Response(dict(data=dct))
 
 
 from linebot import LineBotApi, WebhookHandler
