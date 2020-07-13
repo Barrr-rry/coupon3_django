@@ -386,7 +386,7 @@ def to_column(el):
     n = 0
     for e in el.storediscount.all():
         if n < 3 and e.name:
-            text += f'-{e.name}/n'
+            text += f'-{e.name}\n'
         n += 1
     image = el.storeimage.first()
     if image:
