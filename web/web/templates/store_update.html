@@ -311,7 +311,7 @@
           dataType: "json",
         }).done(res => {
           let $input = $('input[name="address"]')
-          $input.val(res.data.address.replace('台','臺'))
+          $input.val(res.data.address.replace('台', '臺'))
         })
       })
       clearAllMarker(map)
@@ -357,7 +357,7 @@
         let lat = res.data.gps[0]
         let lon = res.data.gps[1]
         let $input = $('input[name="address"]')
-        $input.val(res.data.address.replace('台','臺'))
+        $input.val(res.data.address.replace('台', '臺'))
         console.log('res:', lat, lon)
         const position = {
           coords: {
@@ -367,19 +367,19 @@
           zoom: 15
         }
         for (let el of county_list) {
-            if (msg.indexOf(el.name) >= 0) {
-                $select_2.val(el.id)
-                $select_1.find('option').remove()
-                let filters = district_list.filter(x => x.county = el.id)
-                for (let ell of filters) {
-                    $select_1.append(`<option value=${ell.id}>${ell.name}</option>`)
-                }
+          if (msg.indexOf(el.name) >= 0) {
+            $select_2.val(el.id)
+            $select_1.find('option').remove()
+            let filters = district_list.filter(x => x.county = el.id)
+            for (let ell of filters) {
+              $select_1.append(`<option value=${ell.id}>${ell.name}</option>`)
             }
+          }
         }
         for (let el of district_list) {
-            if (msg.indexOf(el.name) >= 0) {
-                $select_1.val(el.id)
-            }
+          if (msg.indexOf(el.name) >= 0) {
+            $select_1.val(el.id)
+          }
         }
         $('#latitude').val(lat)
         $('#longitude').val(lon)
