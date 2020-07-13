@@ -10888,6 +10888,23 @@ footer .widget-about .logo-ft a {
   border-right-color: #f25b22 !important;
 }
 
+.pdmap .overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(86, 41, 21, 0.4);
+}
+.pdmap .overlay .map_btn {
+  display: inline-block;
+  outline: none;
+  top: 50%;
+  margin-top: -20px;
+  bottom: auto;
+}
+
 .page-title.style2 .page-title-heading {
   font-size: 46px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
