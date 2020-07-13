@@ -247,10 +247,12 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
+                dct = None
                 while True:
-                    gps = task.get_task_result(task_id)
+                    dct = task.get_task_result(task_id)
                     ed_time = time.time()
-                    if gps:
+                    if dct:
+                        gps = dct['gps']
                         lat = float(gps[0])
                         lon = float(gps[1])
                         break
