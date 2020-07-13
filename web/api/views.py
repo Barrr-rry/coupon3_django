@@ -179,7 +179,7 @@ class StoreViewSet(MyMixin):
         return queryset
 
     def filter_queryset(self, queryset):
-        if self.action == 'list':
+        if self.action in ['list', 'latlng']:
             for backend in list(self.filter_backends):
                 queryset = backend().filter_queryset(self.request, queryset, self)
         return queryset
@@ -382,7 +382,12 @@ def webhook(request):
 
 
 def to_column(el):
-    text = [e.name for e in el.storediscount.all() if e.name]
+    text = ''
+    n = 0
+    for e in el.storediscount.all():
+        if n < 3 and e.name:
+            text += f'-{e.name}\n'
+        n += 1
     image = el.storeimage.first()
     if image:
         url = f'https://3coupon.info/media/{image.picture}'
@@ -391,7 +396,7 @@ def to_column(el):
     return CarouselColumn(
         thumbnail_image_url=url,
         title=el.name,
-        text=" ".join(text),
+        text=text,
         actions=[
             URIAction(
                 label='查看優惠',
@@ -415,11 +420,12 @@ def get_carouseltemplate(gps=None, store_name=None):
             )
 
     if store_name:
-        el = queryset.filter(name__icontains=store_name).first()
+        el = queryset.filter(name__icontains=store_name).all()
         if el:
-            columns.append(
-                to_column(el)
-            )
+            for ell in el[:10]:
+                columns.append(
+                    to_column(ell)
+                )
 
     carousel_template_message = TemplateSendMessage(
         alt_text='Carousel template',
