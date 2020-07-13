@@ -311,7 +311,7 @@
           dataType: "json",
         }).done(res => {
           let $input = $('input[name="address"]')
-          $input.val(res.data.address)
+          $input.val(res.data.address.replace('台','臺'))
         })
       })
       clearAllMarker(map)

@@ -2074,7 +2074,7 @@ const showSelfPosition = (position) => {
         dataType: "json",
       }).done(res => {
         let $input = $el.prev()
-        $input.val(res.data.address)
+        $input.val(res.data.address.replace('台','臺'))
         $load.removeClass('loader')
         $el.find('svg').show()
       })

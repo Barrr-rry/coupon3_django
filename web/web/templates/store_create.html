@@ -201,7 +201,7 @@
         dataType: "json",
       }).done(res => {
         $('.preloader').hide()
-        location = res.data.address
+        location = res.data.address.replace('台','臺')
         let $input = $('input[name="address"]')
         $input.val(location)
         let $select_2 = $('select[name="county"]')
@@ -296,7 +296,7 @@
         let lat = res.data.gps[0]
         let lon = res.data.gps[1]
         let $input = $('input[name="address"]')
-        $input.val(res.data.address)
+        $input.val(res.data.address.replace('台','臺'))
         const position = {
           coords: {
             latitude: lat,
