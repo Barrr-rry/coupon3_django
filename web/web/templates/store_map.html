@@ -25,6 +25,30 @@
 
   <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+  <script type="text/javascript" src="https://adc.tamedia.com.tw/rmadp/static/js/gm-sdk7-mobile.js"></script>
+
+  <script type="text/javascript" language="javascript">
+      window.onload = function(){
+          getNativeAdParas('Q1594362301761yK', nativeAdCallback);
+      };
+      function nativeAdCallback(nadParas){
+          // 表示目前有廣告
+          if(nadParas.SHORTSUBJECT){
+              nadParas.SHORTSUBJECT     //短標題
+              nadParas.LONGSUBJECT      //長標題
+              nadParas.ICONSQUARE       //Icon圖片URL
+              nadParas.IMAGE960X640     //960*640圖片URL
+              nadParas.IMAGE1280X720    //1280*720圖片URL
+              nadParas.IMAGE1200X627    //1200*627圖片URL
+              nadParas.ICONRECTANGLE    //長方形Icon圖片URL
+              nadParas.VIDEO            //影片URL
+              nadParas.BODY             //內文
+              nadParas.nurl             //點擊URL
+          }else{
+              //TO DO
+          }
+      }
+  </script>
 
 
 </head>
@@ -216,6 +240,44 @@
                     </div><!-- /.imagebox style1 -->
                   </div><!-- /.col-md-4 -->
                 {% endfor %}
+                <div class="mb-50px col-lg-6 col-md-12 store">
+                      <div class="imagebox style1">
+                          <div class="box-imagebox">
+                              <div class="link_block">
+                                  <a href="{{ nadParas.nurl }}" target="_blank" class="link"></a>
+                                  <div class="box-header">
+                                      <div class="box-image">
+                                          <img src="{{ nadParas.IMAGE960X640 }}" alt="">
+                                          <a href="{{ nadParas.nurl }}" title="">查看詳情</a>
+                                          <div class="overlay"></div>
+                                      </div>
+                                  </div><!-- /.box-header -->
+                                  <div class="box-content">
+                                      <div class="box-title ad">
+                                          <a href="{{ nadParas.nurl }}" target="_blank" title="">{{ nadParas.SHORTSUBJECT }}</a>
+                                      </div>
+                                      <ul class="rating">
+                                          <li><span>{{ nadParas.SHORTSUBJECT }}</span></li>
+                                      </ul>
+                                      <div class="box-desc">
+                                          <div class="sale-list">
+                                              {{ nadParas.BODY }}
+                                          </div>
+                                      </div>
+                                  </div><!-- /.box-content -->
+                              </div>
+                              <div class="imagebox_bottom">
+                                  <p class="tag_block activity">
+                                      <span class="tag"><a href="#">廣告</a></span>
+                                  </p>
+                                  <div class="clear"></div>
+                              </div>
+                              <!--                <ul class="location">-->
+                              <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+                              <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
+                          </div><!-- /.box-imagebox -->
+                      </div><!-- /.imagebox style1 -->
+                  </div><!-- /.col-md-4 -->
               </div><!-- /.row -->
 
               {% if count > 6 %}
