@@ -38,7 +38,8 @@ def get_view(cls):
     if DEBUG:
         return cls.as_view()
     else:
-        return cache_page(60 * 60)(cls.as_view())
+        # return cache_page(60 * 60)(cls.as_view())
+        return cls.as_view()
 
 
 sitemaps = {

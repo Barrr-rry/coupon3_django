@@ -346,6 +346,8 @@
     $('.address-click').on('click', function () {
       let $el = $('input[name="address"]')
       let msg = $el.val()
+      let $select_2 = $('select[name="county"]')
+      let $select_1 = $('select[name="district"]')
       $.ajax({
         url: `/api/location/?task_type=1&msg=${msg}`,
         type: "GET",
@@ -354,6 +356,8 @@
       }).done(res => {
         let lat = res.data.gps[0]
         let lon = res.data.gps[1]
+        let $input = $('input[name="address"]')
+        $input.val(res.data.address.replace('台','臺'))
         console.log('res:', lat, lon)
         const position = {
           coords: {
@@ -361,6 +365,21 @@
             longitude: lon
           },
           zoom: 15
+        }
+        for (let el of county_list) {
+            if (msg.indexOf(el.name) >= 0) {
+                $select_2.val(el.id)
+                $select_1.find('option').remove()
+                let filters = district_list.filter(x => x.county = el.id)
+                for (let ell of filters) {
+                    $select_1.append(`<option value=${ell.id}>${ell.name}</option>`)
+                }
+            }
+        }
+        for (let el of district_list) {
+            if (msg.indexOf(el.name) >= 0) {
+                $select_1.val(el.id)
+            }
         }
         $('#latitude').val(lat)
         $('#longitude').val(lon)
