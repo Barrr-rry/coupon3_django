@@ -122,7 +122,7 @@ class StoreDiscount(DefaultAbstract):
                                       help_text="折扣fk")
     name = models.CharField(max_length=128, null=True, blank=True, help_text="折扣標題")
     description = models.TextField(help_text="敘述", null=True, blank=True)
-    picture = models.CharField(max_length=128, help_text="商家圖片", null=True, default=True)
+    picture = models.CharField(max_length=128, help_text="商家圖片", null=True, default=None)
 
 
 class StoreImage(DefaultAbstract):
