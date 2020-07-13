@@ -188,22 +188,20 @@
             <ul class="contact-list">
               {% if instance.latitude and instance.longitude and instance.search_status != 0 %}
                 <li class="address">
-                  <a href="{{ google }}" target="_blank">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                    {{ instance.address }}
-                  </a>
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <a href="{{ google }}" target="_blank">{{ instance.address }}</a>
                 </li>
               {% endif %}
               {% if instance.phone %}
                 <li>
-                  <a href="tel:{{ instance.phone_2 }}" target="_blank"><i class="fa fa-phone"
-                                                                          aria-hidden="true"></i>{{ instance.phone }}
-                  </a>
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  <a href="tel:{{ instance.phone_2 }}" target="_blank">{{ instance.phone }}</a>
                 </li>
               {% endif %}
               {% if instance.website %}
-                <li><i class="fa fa-globe" aria-hidden="true"></i><a href="{{ instance.website }}"
-                                                                     title="" target="_blank">{{ instance.website }}</a>
+                <li>
+                  <i class="fa fa-globe" aria-hidden="true"></i>
+                  <a href="{{ instance.website }}" title="" target="_blank">{{ instance.website }}</a>
                 </li>
               {% endif %}
             </ul>
