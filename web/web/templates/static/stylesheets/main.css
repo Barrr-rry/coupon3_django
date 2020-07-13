@@ -10496,11 +10496,11 @@ a:hover {
   color: #ffffff;
 }
 
-.map_store_id {
+.map_store_id, .update-map {
   height: 300px !important;
   text-align: center;
 }
-.map_store_id .map_btn {
+.map_store_id .map_btn, .update-map .map_btn {
   position: absolute;
   width: 200px;
   left: 50%;
@@ -10514,7 +10514,7 @@ a:hover {
   font-size: 18px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
-.map_store_id .map_btn:hover {
+.map_store_id .map_btn:hover, .update-map .map_btn:hover {
   background-color: #CC2426;
 }
 
@@ -10894,7 +10894,7 @@ footer .widget-about .logo-ft a {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 1000;
+  z-index: 1100;
   background: rgba(86, 41, 21, 0.4);
 }
 .pdmap .overlay .map_btn {
@@ -13040,7 +13040,7 @@ article.post-single .entry-post .entry-content ul li {
     width: 170px;
     margin-left: -85px;
     font-size: 15px;
-    font-size-padding: 6px 10px;
+    padding: 6px 10px;
   }
 
   button.only-submit-form-listing {
