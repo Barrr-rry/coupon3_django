@@ -179,7 +179,7 @@ class StoreViewSet(MyMixin):
         return queryset
 
     def filter_queryset(self, queryset):
-        if self.action == 'list':
+        if self.action in ['list', 'latlng']:
             for backend in list(self.filter_backends):
                 queryset = backend().filter_queryset(self.request, queryset, self)
         return queryset

@@ -50,6 +50,9 @@ def filter_query(filter_dict, queryset):
     if filter_dict['search_status'] is not None and filter_dict.get('activity', None) is None:
         q = and_q(q, Q(search_status=filter_dict['search_status']))
 
+    if filter_dict['status'] is not None:
+        q = and_q(q, Q(status=filter_dict['status']))
+
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
         q = and_q(q, Q(district=filter_dict['district']))
