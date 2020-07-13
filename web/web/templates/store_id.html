@@ -240,8 +240,7 @@
 <script>
   let lat = null
   let lon = null
-  {%
-    if instance.latitude %}
+  {% if instance.latitude %}
   lat = {{instance.latitude}}
   ;
   lon = {{instance.longitude}}
