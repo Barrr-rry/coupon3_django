@@ -11730,10 +11730,26 @@ footer .widget-about .logo-ft a {
 .header_sticky .flat-explore-detail .sidebar .box.contact-box {
   padding: 40px 40px 40px;
 }
-.header_sticky .flat-explore-detail .sidebar .box ul.contact-list li, .header_sticky .flat-explore-detail .sidebar .box ul.contact-list.a {
+.header_sticky .flat-explore-detail .sidebar .box ul.contact-list li {
   font-size: 16px;
   color: #999999;
   font-weight: 400;
+}
+.header_sticky .flat-explore-detail .sidebar .box ul.contact-list li i {
+  vertical-align: middle;
+}
+.header_sticky .flat-explore-detail .sidebar .box ul.contact-list li a {
+  font-size: 16px;
+  color: #999999;
+  font-weight: 400;
+  width: 90%;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+.header_sticky .flat-explore-detail .sidebar .box ul.contact-list li a:active, .header_sticky .flat-explore-detail .sidebar .box ul.contact-list li a:hover {
+  color: #f25b22;
 }
 
 .flat-listing {
