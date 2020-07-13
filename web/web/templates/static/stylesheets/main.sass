@@ -520,6 +520,7 @@ footer
     ul.menu-list
       li
         min-height: 158px
+        padding: 30px 0 27px
 
         a
           position: absolute
@@ -531,8 +532,8 @@ footer
 
           span
             margin-top: 10px
-            font-size: 15px
-            line-height: 20px
+            font-size: 14px
+            line-height: 18px
 
           img
             width: 50px
@@ -1907,6 +1908,9 @@ article.post-single
   .main-single
     padding: 25px 0 50px
 
+  #mainnav ul.menu > li
+    margin-right: 35px
+
 @media only screen and (max-width: 1350px), screen and (max-height: 900px)
 
   .header
@@ -2013,6 +2017,13 @@ article.post-single
           width: 30px
           height: auto
           margin-left: 24px
+
+  #mainnav ul.menu > li
+    margin-right: 30px
+
+    &:last-child
+      margin-right: 10px
+
   .parallax-200
     background-image: url("/media/bg_dark_tablet.svg")
     //background-position: 45% 50px !important
@@ -2114,7 +2125,7 @@ article.post-single
 
   .flat-introduce .introduce .introduce-content
     a.more-info
-      margin-top: 0px
+      margin-top: 0
 
     p
       display: block
@@ -2191,6 +2202,20 @@ article.post-single
   article.post-single .entry-post .entry-content
     padding: 0 30px
 
+  .flat-highlights
+    .highlights
+      padding: 24px 0
+
+      ul.menu-list
+        li
+          min-height: 110px
+          padding: 5px 0
+          a
+            img
+              width: 45px
+            span
+              font-size: 14px
+
 @media only screen and (max-height: 900px)
   #logo
     margin-top: 12px
@@ -2264,9 +2289,18 @@ article.post-single
     .slide_content
       padding: 230px 90px
 
-  .flat-highlights .highlights ul.menu-list li
-    min-height: 130px
-    padding: 20px 0 20px
+  .flat-highlights
+    .highlights
+      ul.menu-list
+        li
+          min-height: 120px
+          padding: 12px 0
+          a
+            img
+              width: 45px
+            span
+              font-size: 14px
+
 
   .flat-imagebox
     &.store-list
@@ -2421,9 +2455,6 @@ article.post-single
     .col-md-12
       padding-right: 0
       padding-left: 0
-
-      .highlights ul.menu-list li a span
-        font-size: 15px
 
   .header
     background-image: url("/media/bg_top_mobile.svg")
