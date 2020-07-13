@@ -219,13 +219,13 @@
                       <div class="browse">
                         <div class="row store-discount-upload-images-{{ forloop.counter0 }}">
                           {% if el.picture %}
+                            <input type="hidden" name="discount_picture" value="{{ el.picture }}">
                             <div class="imgbox d-flex align-items-start" data-id="{{ el.id }}"
                                  data-file="{{ el.picture }}">
                               <img src="/media/{{ el.picture }}" alt="">
                               <i class="fa fa-times pointer close-image" aria-hidden="true"
                                  data-id="{{ el.id }}"
                               ></i>
-                              <input type="hidden" name="discount_picture" value="{{ el.picture }}">
                             </div>
                           {% endif %}
                         </div>
@@ -262,7 +262,7 @@
                   <i class="fa fa-times pointer close-image" aria-hidden="true"
                      data-id="{{ el.id }}"
                   ></i>
-                  <input type="hidden" name="discount_picture" value="{{ el.picture }}">
+                  <input type="hidden" value="{{ el.picture }}">
                 </div>
               {% endfor %}
 
@@ -404,8 +404,8 @@
           $('.preloader').hide()
           let cls_$el = $(self).parent().parent().find('.row')
           $(self).parent().parent().find('.row .imgbox').remove()
-          let input_str = `<input type="hidden" name="discount_picture" value="${res.filename}">`
-          appendImage(res, cls_$el, input_str)
+          cls_$el.find('input').val(res.filename)
+          appendImage(res, cls_$el)
           setImageClick()
         }).fail(e => {
           $('.preloader').hide()

@@ -109,14 +109,13 @@ function getCookie(cname) {
 
 
 // image
-let appendImage = (res, $el, input_str = '') => {
+let appendImage = (res, $el) => {
   $el.append(`
   <div class="imgbox d-flex align-items-start" data-id="${res.id}" data-file="${res.filename}">
     <img src="/media/${res.filename}" alt="">
     <i class="fa fa-times pointer close-image" aria-hidden="true"
     data-id="${res.id}"
     ></i>
-    ${input_str}
   </div>
   `)
 }
@@ -1495,6 +1494,7 @@ const showSelfPosition = (position) => {
             <label>請上傳活動照片</label>
             <div class="browse">
               <div class="row store-discount-upload-images-${dicount_count}">
+                <input type="hidden" name="discount_picture">
               </div>
               <p>拖曳圖片至此，或</p>
               <div class="upload">
@@ -1531,8 +1531,8 @@ const showSelfPosition = (position) => {
             $('.preloader').hide()
             let cls_$el = $(self).parent().parent().find('.row')
             $(self).parent().parent().find('.row .imgbox').remove()
-            let input_str = `<input type="hidden" name="discount_picture" value="${res.filename}">`
-            appendImage(res, cls_$el, input_str)
+            cls_$el.find('input').val(res.filename)
+            appendImage(res, cls_$el)
             setImageClick()
           }).fail(e => {
             $('.preloader').hide()
@@ -1667,11 +1667,15 @@ const showSelfPosition = (position) => {
         if (ret.store_discount_name) {
           if (Array.isArray(ret.store_discount_name)) {
             for (let i = 0; i < ret.store_discount_name.length; i++) {
+              let picture = ret.discount_picture !== undefined ? ret.discount_picture[i] : null;
+              if (!picture) {
+                picture = null
+              }
               storediscount.push({
                 name: ret.store_discount_name[i],
                 description: ret.description[i],
                 discount_type: ret.discount_type[i],
-                picture: ret.discount_picture[i],
+                picture: picture,
               })
             }
           } else {
@@ -1723,11 +1727,15 @@ const showSelfPosition = (position) => {
         if (ret.store_discount_name) {
           if (Array.isArray(ret.store_discount_name)) {
             for (let i = 0; i < ret.store_discount_name.length; i++) {
+              let picture = ret.discount_picture !== undefined ? ret.discount_picture[i] : null;
+              if (!picture) {
+                picture = null
+              }
               storediscount.push({
                 name: ret.store_discount_name[i],
                 description: ret.description[i],
                 discount_type: ret.discount_type[i],
-                picture: ret.discount_picture[i],
+                picture: picture,
               })
             }
           } else {
