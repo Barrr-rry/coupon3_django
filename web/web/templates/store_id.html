@@ -242,21 +242,11 @@
   let lon = null
   {%
     if instance.latitude %}
-  lat = {
-  {
-    instance.latitude
-  }
-  }
+  lat = {{instance.latitude}}
   ;
-  lon = {
-  {
-    instance.longitude
-  }
-  }
+  lon = {{instance.longitude}}
   ;
-  {%
-    endif %
-  }
+  {% endif %}
   console.log(lat)
   $(document).ready(() => {
     const position = {
