@@ -200,7 +200,7 @@
                         >
                           {% for e in discounttype %}
                             <option value="{{ e.id }}"
-                                    {% if e.discount_type.id == e.id %}selected="selected"{% endif %}
+                                    {% if el.discount_type.id == e.id %}selected="selected"{% endif %}
                             >{{ e.name }}
                             </option>
                           {% endfor %}
