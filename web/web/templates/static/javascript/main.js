@@ -1448,7 +1448,10 @@ const showSelfPosition = (position) => {
     let changeLocation = () => {
       $('input[name="address"]').val(`${county_name}${district_name}`)
     }
-    changeLocation()
+    if ($("#createStore").length) {
+      changeLocation()
+    }
+
 
     $('select[name="county"]').on('change', function (e) {
       county_name = $(`select[name="county"] option[value="${e.target.value}"]`).text()
@@ -1883,14 +1886,14 @@ const showSelfPosition = (position) => {
             `
           }
         }
-      if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
+        if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
           store_type_disable =
-              `<li><span>${data.district_name}</span></li>
+            `<li><span>${data.district_name}</span></li>
                   <li>
                     <img src="/media/map_gray.svg" alt="">
                     <span>${data.distance_name}</span>
                   </li>`
-      }
+        }
 
       }
       $(document).ready(() => {
