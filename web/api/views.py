@@ -382,7 +382,12 @@ def webhook(request):
 
 
 def to_column(el):
-    text = [e.name for e in el.storediscount.all() if e.name]
+    text = ''
+    n = 0
+    for e in el.storediscount.all():
+        if n < 3:
+            text += f'-{e.name}/n'
+        n += 1
     image = el.storeimage.first()
     if image:
         url = f'https://3coupon.info/media/{image.picture}'
@@ -391,7 +396,7 @@ def to_column(el):
     return CarouselColumn(
         thumbnail_image_url=url,
         title=el.name,
-        text=" ".join(text),
+        text=text,
         actions=[
             URIAction(
                 label='查看優惠',
