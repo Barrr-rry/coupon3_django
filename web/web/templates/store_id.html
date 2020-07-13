@@ -75,16 +75,18 @@
 
 <section class="tp-banner">
   {% if instance.images %}
-  <div class="slider">
-    <div class="slide_viewer slide_viewer_store">
-      <div class="slide_group">
-        {% for el in instance.images %}
-        <div class="slide slide_shop" style=""></div>
-<!--        <script type="text/javascript" src="{% static 'javascript/modernizr-custom.js' %}?token={{ token }}"></script>-->
-        {% endfor %}
-      </div>
-    </div>
-  </div><!-- End // .slider -->
+      <div class="slider">
+          <div class="slide_viewer slide_viewer_store">
+              <div class="slide_group">
+                  {% for el in instance.images %}
+                      <div class="slide slide_shop"
+                           style="background-image: url('/media/{{ el }}')"
+                      >
+                      </div>
+                  {% endfor %}
+              </div>
+          </div>
+      </div><!-- End // .slider -->
   {% endif %}
 
   <div class="slide_buttons">
