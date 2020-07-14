@@ -361,6 +361,10 @@ footer
       /* background-image: url("never-loaded.jpg"); */
       /* background-image: url("bad.webp"); */
 
+
+
+
+
       &.web
         background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp")
 
@@ -1402,12 +1406,69 @@ footer
             margin-right: 8px
 
         .text-desc
+          font-size: 16px
+
           p
-            font-size: 18px
-            letter-spacing: 2px
-            color: #999999
+            font-size: 16px
+            letter-spacing: 1px
+            color: #333333
             font-weight: 400
-            line-height: 32px
+            line-height: 24px
+
+            &.dot
+              margin-bottom: 8px
+              padding-left: 15px
+
+              &:before
+                content: "．"
+                padding-right: 5px
+                margin-left: -22px
+
+          h5.project-title
+            position: relative
+            font-size: 18px
+            font-weight: bold
+            margin-top: 30px
+            margin-bottom: 8px
+            padding-left: 10px
+            border-left: 5px solid #f25b22
+            color: #333333
+            line-height: 18px
+
+            &:first-child
+              margin-top: 0
+
+            &:after
+              content: ""
+              position: absolute
+
+          a
+            color: #f25b22
+
+          ul.num
+            line-height: 30px
+            margin-bottom: 10px
+
+            li
+              counter-increment: li
+              padding-left: 15px
+              letter-spacing: 1px
+              line-height: 24px
+              padding-bottom: 8px
+
+              &:before
+                content: counter(li)
+                color: #f25b22
+                width: 15px
+                display: inline-block
+                margin-right: 0.5em
+                margin-left: -23px
+                text-align: right
+                direction: rtl
+                font-style: italic
+
+          .indent
+            padding-left: 17px
 
         .text-box-img
           position: relative
@@ -2787,6 +2848,10 @@ article.post-single
     &:hover
       .featured-post a span
         opacity: 0
+
+  .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc h5.project-title
+    font-size: 16px
+    line-height: 16px
 
 //.entry-content
 //  padding: 0 15px
