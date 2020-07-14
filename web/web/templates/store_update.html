@@ -297,6 +297,13 @@
 {% include 'includes/js.html' %}
 <script>
   $(document).ready(() => {
+    const position = {
+        coords: {
+            latitude: {{ instance.latitude }},
+            longitude: {{ instance.longitude }}
+        },
+        zoom: 7
+    }
     let showPosition = (position) => {
       let map = initMap(position)
       map.off('click')
@@ -322,28 +329,7 @@
       marker.push(pos)
       map.addLayer(pos)
     }
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, () => {
-        const position = {
-          coords: {
-            latitude: '23.8523405',
-            longitude: '120.9009427'
-          },
-          zoom: 7
-        }
-        showPosition(position)
-      })
-    } else {
-      alert('您的瀏覽器不支援定位系統')
-      const position = {
-        coords: {
-          latitude: '23.8523405',
-          longitude: '120.9009427'
-        },
-        zoom: 7
-      }
-      showPosition(position)
-    }
+    showPosition(position)
 
     $('.address-click').on('click', function () {
       let $el = $('input[name="address"]')
