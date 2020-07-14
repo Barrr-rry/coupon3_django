@@ -31,11 +31,11 @@ class BaseView(TemplateView):
 
 
 class BlogView(BaseView):
-    template_name = 'Blog.html'
+    template_name = 'blog.html'
 
 
 class BlogSingleView(BaseView):
-    template_name = 'Blog-single.html'
+    template_name = 'blog-single.html'
 
 
 class TestView(BaseView):

@@ -1,4 +1,6 @@
 from log import logger
+import traceback
+from django.http import HttpResponse
 
 
 def defaultmiddleware(get_response):
@@ -17,3 +19,16 @@ def defaultmiddleware(get_response):
         return response
 
     return middleware
+
+
+class CatchErrorMiddleware:
+    def __init__(self, get_response, *args, **kwargs):
+        self.get_response = get_response
+
+    def __call__(self, request, *args, **kwargs):
+        response = self.get_response(request)
+        return response
+
+    def process_exception(self, request, exception):
+        logger.error(f'{request.build_absolute_uri()},{traceback.format_exc()}')
+        return HttpResponse("Error processing the request.", status=500)
