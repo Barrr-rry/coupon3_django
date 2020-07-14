@@ -394,14 +394,18 @@ def to_column(el):
         url = f'https://3coupon.info/media/{image.picture}'
     else:
         url = f'https://3coupon.info/media/{el.county.name}.jpg'
+    logger.warning(f'to col url: {url}')
+    name = el.name
+    uri = f'https://3coupon.info/store/{el.id}/'
+    logger.info(f'title: {name} text: {text} url: {url}')
     return CarouselColumn(
         thumbnail_image_url=url,
-        title=el.name,
+        title=name,
         text=text,
         actions=[
             URIAction(
-                label='查看優惠',
-                uri=f'http://3coupon.info/store/{el.id}/'
+                label='test',
+                uri=uri
             )
         ]
     )
@@ -434,7 +438,9 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
+    logger.info(f'columens len: {len(columns)} {columns}')
     if len(columns) < 1:
+        logger.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
         no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
                         '或是試試其他方法：\n\n' \
                         '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
@@ -449,6 +455,12 @@ def get_carouseltemplate(gps=None, store_name=None):
 def handle_message(event: MessageEvent):
     logger.info(f'line from text: {event.message.text}')
     message = get_carouseltemplate(store_name=event.message.text)
+
+    data = [message.as_json_dict()]
+    logger.info(f'last data: {data}')
+    import json
+    logger.info(f'last data json: {json.dumps(data)}')
+    logger.info(f'line from text success: {event.message.text}')
     line_bot_api.reply_message(
         reply_token=event.reply_token,
         # messages=TextSendMessage(text=event.message.text)

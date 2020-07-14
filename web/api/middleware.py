@@ -49,6 +49,6 @@ class CatchErrorMiddleware:
         return response
 
     def process_exception(self, request, exception):
-        logger.exception(f'{request.build_absolute_uri()} , {traceback.format_exc()}')
+        logger.error(f'{request.build_absolute_uri()} , {traceback.format_exc()}')
         line_notify(f'coupon3: {traceback.format_exc()}')
         return HttpResponse("Error processing the request.", status=500)
