@@ -127,7 +127,7 @@ class StoreDiscount(DefaultAbstract):
 
 class StoreImage(DefaultAbstract):
     store = models.ForeignKey(Store, related_name="storeimage", on_delete=models.CASCADE, help_text="商家fk")
-    picture = models.CharField(max_length=128, help_text="商家圖片")
+    picture = models.CharField(max_length=128, help_text="商家圖片", null=True, blank=True)
 
 
 def validate_file(file):
