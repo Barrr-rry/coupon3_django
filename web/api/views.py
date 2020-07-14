@@ -353,8 +353,10 @@ from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage, TemplateSendMessage, URIAction, \
     MessageAction, PostbackAction, CarouselColumn, CarouselTemplate
 
-secret = '8207acee5ae83ea617f5a2f6b1e2ad5e'
-token = 'Me6okVNBI6dZ1tWLD2krySeisJvtfYwsbS8k2R7GnsrGxYnIWASwPJq8JurNnC/zh7tFN5RhTUjaJ754Hn2so8zUboJQjVm2vifUOI/KwQzs83atLWb/vIMZIaXy0CAFC2PVd5nghZKTY/DaIqUq2wdB04t89/1O/w1cDnyilFU='
+secret = '3ebd4109976f2a98666b1d374a6aee9d'
+token = 'vvbda1aAMKbmYdqspgnEKHeerEQ9HAepCs4XEAJU6qz1JheHIedgGgQB/ptp/7cHzFponZBSJmwyelOjstk9i5NjcQI6nSoPGgCsF326tWZVRwNte9inh6EOeI7KJZ1QKHocIjkDV7uwG8bTjI29iQdB04t89/1O/w1cDnyilFU='
+# secret = '8207acee5ae83ea617f5a2f6b1e2ad5e'
+# token = 'Me6okVNBI6dZ1tWLD2krySeisJvtfYwsbS8k2R7GnsrGxYnIWASwPJq8JurNnC/zh7tFN5RhTUjaJ754Hn2so8zUboJQjVm2vifUOI/KwQzs83atLWb/vIMZIaXy0CAFC2PVd5nghZKTY/DaIqUq2wdB04t89/1O/w1cDnyilFU='
 line_bot_api = LineBotApi(token)
 handler = WebhookHandler(secret)
 
@@ -394,6 +396,7 @@ def to_column(el):
     else:
         url = f'https://3coupon.info/media/{el.county.name}.jpg'
     logger.info(f'title: {el.name} text: {text} url: {url}')
+    text = ''
     return CarouselColumn(
         thumbnail_image_url=url,
         title=el.name,
