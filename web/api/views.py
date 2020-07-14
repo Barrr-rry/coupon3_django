@@ -395,6 +395,7 @@ def to_column(el):
         url = f'https://3coupon.info/media/{el.county.name}.jpg'
     logger.warning(f'to col url: {url}')
     name = el.name
+    uri = f'https://3coupon.info/store/{el.id}/'
     logger.info(f'title: {name} text: {text} url: {url}')
     return CarouselColumn(
         thumbnail_image_url=url,
