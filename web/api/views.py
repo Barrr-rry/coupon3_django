@@ -393,6 +393,7 @@ def to_column(el):
         url = f'https://3coupon.info/media/{image.picture}'
     else:
         url = f'https://3coupon.info/media/{el.county.name}.jpg'
+    logger.warning(f'to col url: {url}')
     name = el.name
     logger.info(f'title: {name} text: {text} url: {url}')
     text = ''
