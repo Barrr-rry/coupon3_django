@@ -396,10 +396,6 @@ def to_column(el):
     logger.warning(f'to col url: {url}')
     name = el.name
     logger.info(f'title: {name} text: {text} url: {url}')
-    text = ''
-    name = 'fake'
-    uri = f'https://3coupon.info/store/{el.id}/'
-    uri = 'https://3coupon.info/'
     return CarouselColumn(
         thumbnail_image_url=url,
         title=name,
@@ -457,6 +453,10 @@ def get_carouseltemplate(gps=None, store_name=None):
 def handle_message(event: MessageEvent):
     logger.info(f'line from text: {event.message.text}')
     message = get_carouseltemplate(store_name=event.message.text)
+    data = [msg.as_json_dict() for msg in message]
+    logger.info(f'last data: {data}')
+    import json
+    logger.info(f'last data json: {json.dumps(data)}')
     logger.info(f'line from text success: {event.message.text}')
     line_bot_api.reply_message(
         reply_token=event.reply_token,
