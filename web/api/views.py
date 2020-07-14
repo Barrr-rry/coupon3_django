@@ -433,7 +433,7 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
-    if columns.count() < 1:
+    if len(columns) < 1:
         no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
                         '或是試試其他方法：\n\n' \
                         '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
