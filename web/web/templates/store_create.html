@@ -230,8 +230,17 @@
 
     })
     $('input[name="address"]').on('change paste keyup', () => {
+
       $('#firstmap').remove()
       $('#firstmap .map_btn').remove()
+    })
+    $('#createStore .search-pin-load').on('click', () => {
+      $('#firstmap').remove()
+      $('#firstmap .map_btn').remove()
+    })
+    $('#firstmap').on('click', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
     })
     $('#firstmap .map_btn').on('click', (e) => {
       e.preventDefault()

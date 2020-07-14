@@ -178,7 +178,7 @@
               <div class="clear"></div>
             </div><!-- /.wrap-listing -->
             <div class="pdmap style2 update-map" id="map" style="height: 320px">
-              <div class="overlay">
+              <div id="firstmap" class="overlay">
                 <a class="map_btn" href="#">使用您目前位置</a>
               </div>
             </div><!-- /#flat-map -->
@@ -298,12 +298,32 @@
 <script>
   $(document).ready(() => {
     const position = {
-        coords: {
-            latitude: {{ instance.latitude }},
-            longitude: {{ instance.longitude }}
-        },
-        zoom: 7
+      coords: {
+        latitude: {{ instance.latitude }},
+        longitude: {{ instance.longitude }}
+      },
+      zoom: 7
     }
+    $('input[name="address"]').on('change paste keyup', () => {
+      $('#firstmap').remove()
+      $('#firstmap .map_btn').remove()
+    })
+    $('#firstmap').on('click', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+    })
+    $('#updateStore .search-pin-load').on('click', () => {
+      $('#firstmap').remove()
+      $('#firstmap .map_btn').remove()
+    })
+    $('#firstmap .map_btn').on('click', (e) => {
+      e.preventDefault()
+      e.stopPropagation()
+      $('#firstmap').remove()
+      $('#firstmap .map_btn').remove()
+      $('#createStore .search-pin-load').click()
+    })
+
     let showPosition = (position) => {
       let map = initMap(position)
       map.off('click')
@@ -342,6 +362,8 @@
         contentType: "application/json; charset=utf-8",
         dataType: "json",
       }).done(res => {
+        $('#firstmap').remove()
+        $('#firstmap .map_btn').remove()
         let lat = res.data.gps[0]
         let lon = res.data.gps[1]
         let $input = $('input[name="address"]')
