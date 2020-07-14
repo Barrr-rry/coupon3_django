@@ -2,11 +2,15 @@ from log import logger
 import traceback
 from django.http import HttpResponse
 import requests
+import os
 
 token = 'PAy6SmSfpfEI6nNN8K4cQKsUcjve4kxCWg03B49Tqt4'
+DEBUG = os.environ.get('ENV') != 'prod'
 
 
 def line_notify(msg):
+    if DEBUG:
+        return
     url = "https://notify-api.line.me/api/notify"
 
     headers = {
