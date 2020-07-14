@@ -397,8 +397,8 @@ def to_column(el):
     logger.info(f'title: {name} text: {text} url: {url}')
     text = ''
     name = 'fake'
-    url = f'http://3coupon.info/store/{el.id}/'
-    url = 'http://3coupon.info/'
+    uri = f'http://3coupon.info/store/{el.id}/'
+    uri = 'http://3coupon.info/'
     return CarouselColumn(
         thumbnail_image_url=url,
         title=name,
@@ -406,7 +406,7 @@ def to_column(el):
         actions=[
             URIAction(
                 label='查看優惠',
-                uri=url
+                uri=uri
             )
         ]
     )
@@ -439,6 +439,7 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
+    logger.info(f'columens len: {len(columns)} {columns}')
     if len(columns) < 1:
         logger.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
         no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
