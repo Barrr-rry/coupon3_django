@@ -454,7 +454,8 @@ def get_carouseltemplate(gps=None, store_name=None):
 def handle_message(event: MessageEvent):
     logger.info(f'line from text: {event.message.text}')
     message = get_carouseltemplate(store_name=event.message.text)
-    data = [msg.as_json_dict() for msg in message]
+
+    data = [message.as_json_dict()]
     logger.info(f'last data: {data}')
     import json
     logger.info(f'last data json: {json.dumps(data)}')
