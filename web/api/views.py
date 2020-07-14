@@ -398,15 +398,15 @@ def to_column(el):
     logger.info(f'title: {name} text: {text} url: {url}')
     text = ''
     name = 'fake'
-    uri = f'http://3coupon.info/store/{el.id}/'
-    uri = 'http://3coupon.info/'
+    uri = f'https://3coupon.info/store/{el.id}/'
+    uri = 'https://3coupon.info/'
     return CarouselColumn(
         thumbnail_image_url=url,
         title=name,
         text=text,
         actions=[
             URIAction(
-                label='查看優惠',
+                label='test',
                 uri=uri
             )
         ]
