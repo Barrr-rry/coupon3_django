@@ -158,9 +158,10 @@ class FileViewSet(MyMixin):
     #     ret = super().create(request, *args, **kwargs)
     #     img_full_name = ret.data['filename']
     #     img_name = img_full_name.replace(f'.{img_full_name.split(".")[-1]}', '')  # 檔名稱
-    #     output = img_name + ".webp"  # 輸出檔名稱
+    #     output = img_name + ".jpeg"  # 輸出檔名稱
     #     im = Image.open(os.path.join('media', img_full_name))  # 讀入檔案
-    #     im.save(os.path.join('media', output))  # 儲存
+    #     im = im.convert("RGB")
+    #     im.save(os.path.join('media', output), "JPEG", optimize=True, quality=70)  # 儲存
     #     ret.data['filename'] = output
     #     return ret
 
