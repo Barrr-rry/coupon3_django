@@ -18,3 +18,12 @@ with transaction.atomic():
             print(f'remove dis id: {el.id} store id: {el.store_id}')
             el.delete()
 
+    queryset = StoreImage.objects.all()
+    for el in queryset:
+        if el.picture and len(el.picture) == 1:
+            el.picture = None
+            el.save()
+        store = Store.objects.filter(id=el.store_id)
+        if not store:
+            print(f'remove dis id: {el.id} store id: {el.store_id}')
+            el.delete()
