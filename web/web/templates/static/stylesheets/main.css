@@ -11613,6 +11613,7 @@ footer .widget-about .logo-ft a {
 }
 
 #map {
+  position: relative;
   height: 1200px;
 }
 #map .lpi-1592630594977-98115 {
