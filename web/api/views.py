@@ -433,12 +433,13 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
-    # if columns.count() == 0:
-    #     return '找不到相關的商家，再重新試試看吧😊\n\n'\
-    #            '或是試試其他方法：\n\n'\
-    #            '【１】以 LINE 送出定位點查詢附近商家優惠\n\n'\
-    #            '【２】輸入店名找商家優惠，如「六福村」\n\n'\
-    #            '【３】前往網頁好查版：https://3coupon.info/store/county/'
+    if len(columns) < 1:
+        no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
+                        '或是試試其他方法：\n\n' \
+                        '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
+                        '【２】輸入店名找商家優惠，如「六福村」\n\n' \
+                        '【３】前往網頁好查版：https://3coupon.info/store/county/'
+        return TextSendMessage(text=no_store_text)
 
     return carousel_template_message
 

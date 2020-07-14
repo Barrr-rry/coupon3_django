@@ -11737,12 +11737,70 @@ footer .widget-about .logo-ft a {
   margin-top: 4px;
   margin-right: 8px;
 }
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc {
+  font-size: 16px;
+}
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc p {
-  font-size: 18px;
-  letter-spacing: 2px;
-  color: #999999;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #333333;
   font-weight: 400;
-  line-height: 32px;
+  line-height: 24px;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc p.dot {
+  margin-bottom: 8px;
+  padding-left: 15px;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc p.dot:before {
+  content: "．";
+  padding-right: 5px;
+  margin-left: -22px;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc h5.project-title {
+  position: relative;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 8px;
+  padding-left: 10px;
+  border-left: 5px solid #f25b22;
+  color: #333333;
+  line-height: 18px;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc h5.project-title:first-child {
+  margin-top: 0;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc h5.project-title:after {
+  content: "";
+  position: absolute;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc a {
+  color: #f25b22;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc ul.num {
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc ul.num li {
+  counter-increment: li;
+  padding-left: 15px;
+  letter-spacing: 1px;
+  line-height: 24px;
+  padding-bottom: 8px;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc ul.num li:before {
+  content: counter(li);
+  color: #f25b22;
+  width: 15px;
+  display: inline-block;
+  margin-right: 0.5em;
+  margin-left: -23px;
+  text-align: right;
+  direction: rtl;
+  font-style: italic;
+}
+.header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc .indent {
+  padding-left: 17px;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-box-img {
   position: relative;
@@ -13095,6 +13153,11 @@ article.post-single .entry-post .entry-content ul li {
   }
   article.blog-post:hover .featured-post a span {
     opacity: 0;
+  }
+
+  .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc h5.project-title {
+    font-size: 16px;
+    line-height: 16px;
   }
 }
 @media only screen and (max-width: 600px) {
