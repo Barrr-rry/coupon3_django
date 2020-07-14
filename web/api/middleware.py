@@ -1,6 +1,21 @@
 from log import logger
 import traceback
 from django.http import HttpResponse
+import requests
+
+token = 'PAy6SmSfpfEI6nNN8K4cQKsUcjve4kxCWg03B49Tqt4'
+
+
+def line_notify(msg):
+    url = "https://notify-api.line.me/api/notify"
+
+    headers = {
+        "Authorization": "Bearer " + token
+    }
+
+    payload = {'message': msg}
+    r = requests.post(url, headers=headers, params=payload)
+    return r.status_code
 
 
 def defaultmiddleware(get_response):
@@ -31,4 +46,5 @@ class CatchErrorMiddleware:
 
     def process_exception(self, request, exception):
         logger.error(f'{request.build_absolute_uri()},{traceback.format_exc()}')
+        line_notify(f'coupon3: {traceback.format_exc()}')
         return HttpResponse("Error processing the request.", status=500)
