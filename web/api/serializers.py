@@ -92,6 +92,26 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
             ret)
         for url in urls:
             ret = ret.replace(url, f'<a href="{url}">{url}</a>')
+        replace_data = re.findall('【.+? 】：', ret)
+        for raw_text in replace_data:
+            replace_text = raw_text.replace('【', '<h5 class="project-title">').replace(' 】：', '</h5>')
+            ret = ret.replace(raw_text, replace_text)
+        for line in re.findall('＊.+', ret):
+            temp = line.strip("\r").strip('＊')
+            new_line = f'<p class="dot">{temp}</p>'
+            print(new_line)
+            ret = ret.replace(line, new_line)
+        for line in ret.split('\n'):
+            if re.findall(r'（\d+?）', line):
+                temp = re.sub(r'（\d+?）', '', line).strip("\r").strip()
+                new_line = f'<li>{temp}</li>'
+                ret = ret.replace(line, new_line)
+        ret = ret.replace('</li>\n\r\n', '</li>')
+        ret = ret.replace('\r\n\r\n', '\r\n')
+        find = re.findall('<li>.+?</li>', ret)
+        for line in find:
+            ret = ret.replace(line, f'<ul class="num indent">{line}</ul>')
+        ret = ret.replace('</ul><ul class="num indent">', '')
         ret = ret.replace('\n', '<br/>')
         return ret
 

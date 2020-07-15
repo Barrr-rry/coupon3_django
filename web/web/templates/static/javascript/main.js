@@ -1490,17 +1490,19 @@ const showSelfPosition = (position) => {
           <div class="wrap-listing your-name">
             <label>活動內容</label>
             <textarea rows="4" cols="5" name="description" placeholder="請輸入活動內容與注意事項">
-‌【 活動內容 】：
-
+【 活動內容 】：
 【 活動期間 】：2020/7/15 ~ 2020/12/31
-
 【 活動說明 】：
-
- - （請輸入活動說明，記得刪除本行）
-
- - （請輸入活動說明，記得刪除本行）
-
- - 活動網址：
+＊（請輸入活動說明，記得刪除本行）
+＊（請輸入活動說明，記得刪除本行）
+（1）
+（2）
+（3）
+＊（請輸入活動說明，記得刪除本行）
+（1）
+（2）
+（3）
+【 活動網址 】：
             </textarea>
           </div><!-- /.wrap-listing -->
           <div class="clearfix"></div>
