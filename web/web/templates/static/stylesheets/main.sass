@@ -365,6 +365,7 @@ footer
 
 
 
+
       &.web
         background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp")
 
@@ -1203,6 +1204,47 @@ footer
 
             img
               width: 25px
+
+
+.flat-imagebox.style3
+  .wrap-box-search
+    background-color: transparent
+    margin-top: 0
+    margin-bottom: 40px
+
+    &.style2 form > span
+      input
+        padding: 0 40px
+        background-color: #ffffff
+        color: #666666
+        font-size: 14px
+        letter-spacing: 1px
+        font-weight: 400
+
+      input::-webkit-input-placeholder
+        color: #999999
+
+      input::-moz-placeholder
+        color: #999999
+
+      input::-moz-placeholder
+        color: #999999
+
+      input:-ms-input-placeholder
+        color: #999999
+
+      > span
+        width: 20px
+        z-index: 1
+        right: auto
+        left: 30px
+        color: #999999
+
+    a
+      position: absolute
+      display: inline-block
+      right: 30px
+      top: 15px
 
 
 // store-county
@@ -2240,6 +2282,22 @@ article.post-single
         max-width: 100%
 
 
+  .flat-imagebox.style3
+    .wrap-box-search
+      margin-bottom: 10px !important
+
+      &.style2 form > span
+        > span
+          margin-top: 2px
+          left: 20px
+
+      a
+        position: absolute
+        display: inline-block
+        right: 30px
+        top: 15px
+
+
 @media only screen and (max-width: 991px)
   form.form-listing
     .inner-box
@@ -2285,6 +2343,9 @@ article.post-single
       .col-md-3
         max-width: 50%
         flex: 0 0 50%
+
+    &.style3
+      padding: 25px 0 93px
 
   .page-title.style2
     a.text-heading
