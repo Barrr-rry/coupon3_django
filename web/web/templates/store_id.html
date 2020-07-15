@@ -28,14 +28,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 
   <style type="text/css">
-    .slide_shop{
+    .slide_shop {
       /* background-image: url("never-loaded.jpg"); */
       /* background-image: url("bad.webp"); */
     }
-    .web slide_shop{
+
+    .web slide_shop {
       background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp");
     }
-    .no-webp slide_shop{
+
+    .no-webp slide_shop {
       background-image: url("/media/臺南市.jpg");
     }
 
@@ -75,18 +77,18 @@
 
 <section class="tp-banner">
   {% if instance.images %}
-      <div class="slider">
-          <div class="slide_viewer slide_viewer_store">
-              <div class="slide_group">
-                  {% for el in instance.images %}
-                      <div class="slide slide_shop"
-                           style="background-image: url('/media/{{ el }}')"
-                      >
-                      </div>
-                  {% endfor %}
-              </div>
-          </div>
-      </div><!-- End // .slider -->
+    <div class="slider">
+      <div class="slide_viewer slide_viewer_store">
+        <div class="slide_group">
+          {% for el in instance.images %}
+            <div class="slide slide_shop"
+                 style="background-image: url('/media/{{ el }}')"
+            >
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div><!-- End // .slider -->
   {% endif %}
 
   <div class="slide_buttons">
@@ -125,16 +127,16 @@
           </div><!-- /.box-title -->
           <ul class="box-address">
             {% if instance.phone %}
-            <li class="phone">
-              <a href="tel:{{ instance.phone_2 }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
-              </a>
-            </li>
+              <li class="phone">
+                <a href="tel:{{ instance.phone_2 }}"><i class="fa fa-phone" aria-hidden="true"></i>{{ instance.phone }}
+                </a>
+              </li>
             {% endif %}
             {% if instance.latitude and instance.longitude and instance.search_status != 2 %}
-            <li class="address">
-              <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker"
-                                                        aria-hidden="true"></i>{{ instance.address }}</a>
-            </li>
+              <li class="address">
+                <a href="{{ google }}" target="_blank"><i class="fa fa-map-marker"
+                                                          aria-hidden="true"></i>{{ instance.address }}</a>
+              </li>
             {% endif %}
           </ul><!-- /.box-address -->
         </div><!-- /.title-left -->
@@ -169,48 +171,48 @@
   <div class="container">
     <div class="row display-initial">
       <div class="col-md-8">
-{#        <div class="text-box">#}
-{#          <h3><span#}
-{#            class="discount-type-border">測試</span><span>測試標題</span>#}
-{#          </h3>#}
-{#          <div class="text-desc">#}
-{#            <h5 class="project-title">活動內容</h5>#}
-{#            <p>內容內容內容內容內容內容內容內容</p>#}
-{#            <h5 class="project-title">活動期間</h5>#}
-{#            <p>2020/7/15 ~ 2020/12/31</p>#}
-{#            <h5 class="project-title">活動說明</h5>#}
-{#            <p class="dot">說明說明說明說明說明說明</p>#}
-{#            <p class="dot">說明說明說明說明說明說明說明說明說明說明說明說明說明說明#}
-{#              <ul class="num indent">#}
-{#                <li>註解註解註解</li>#}
-{#                <li>註解註解註解註解註解註解註解註解註解註解註解註解</li>#}
-{#                <li>註解註解註解註解註解</li>#}
-{#                <li>註解註解註解註解註解</li>#}
-{#                <li>註解註解註解註解註解</li>#}
-{#              </ul>#}
-{#            </p>#}
-{#            <p class="dot">說明說明說明說明說明</p>#}
-{#            <h5 class="project-title">活動網址</h5>#}
-{#            <p><a href="https://conquers.co/">https://conquers.co/</a></p>#}
-{#          </div>#}
-{#        </div>#}
+        {#        <div class="text-box">#}
+        {#          <h3><span#}
+        {#            class="discount-type-border">測試</span><span>測試標題</span>#}
+        {#          </h3>#}
+        {#          <div class="text-desc">#}
+        {#            <h5 class="project-title">活動內容</h5>#}
+        {#            <p>內容內容內容內容內容內容內容內容</p>#}
+        {#            <h5 class="project-title">活動期間</h5>#}
+        {#            <p>2020/7/15 ~ 2020/12/31</p>#}
+        {#            <h5 class="project-title">活動說明</h5>#}
+        {#            <p class="dot">說明說明說明說明說明說明</p>#}
+        {#            <p class="dot">說明說明說明說明說明說明說明說明說明說明說明說明說明說明#}
+        {#              <ul class="num indent">#}
+        {#                <li>註解註解註解</li>#}
+        {#                <li>註解註解註解註解註解註解註解註解註解註解註解註解</li>#}
+        {#                <li>註解註解註解註解註解</li>#}
+        {#                <li>註解註解註解註解註解</li>#}
+        {#                <li>註解註解註解註解註解</li>#}
+        {#              </ul>#}
+        {#            </p>#}
+        {#            <p class="dot">說明說明說明說明說明</p>#}
+        {#            <h5 class="project-title">活動網址</h5>#}
+        {#            <p><a href="https://conquers.co/">https://conquers.co/</a></p>#}
+        {#          </div>#}
+        {#        </div>#}
         {% for el in instance.storediscount %}
-        <div class="text-box">
-          <h3><span
-            class="discount-type-border">{{ el.discount_type.name|default_if_none:"" }}</span><span>{{ el.name|default_if_none:"" }}</span>
-          </h3>
-          <div class="text-desc">
-            <p>
-              {{ el.desc_safe|default_if_none:""|safe }}
-            </p>
-            {% if el.picture %}
-            <img class="text-box-img" src="/media/{{ el.picture }}" alt=""/>
-            {% endif %}
+          <div class="text-box">
+            <h3><span
+              class="discount-type-border">{{ el.discount_type.name|default_if_none:"" }}</span><span>{{ el.name|default_if_none:"" }}</span>
+            </h3>
+            <div class="text-desc">
+              <p>
+                {{ el.desc_safe|default_if_none:""|safe }}
+              </p>
+              {% if el.picture %}
+                <img class="text-box-img" src="/media/{{ el.picture }}" alt=""/>
+              {% endif %}
+            </div>
           </div>
-        </div>
         {% endfor %}
         {% if instance.ad %}
-        {{ instance.ad|safe }}
+          {{ instance.ad|safe }}
         {% endif %}
       </div><!-- /.col-md-8 -->
       <div class="col-md-4">
@@ -219,39 +221,39 @@
             <div class="flat-maps" data-address="Ngõ 178 Nguyễn Lương Bằng, Chợ Dừa, Đống Đa, Hà Nội, Việt Nam"
                  data-image="images/icon/map.png" data-name="Themesflat Map"></div>
             {% if instance.latitude and instance.longitude and instance.search_status != 2 %}
-            <div id="map" class="map_store_id" style="width: 100%;height: 220px">
-              <a class="map_btn" target="_blank" href="{{ google }}">導航到商家</a>
-            </div>
+              <div id="map" class="map_store_id" style="width: 100%;height: 220px">
+                <a class="map_btn" target="_blank" href="{{ google }}">導航到商家</a>
+              </div>
             {% endif %}
           </div><!-- /#flat-map -->
           <div class="box contact-box">
             <ul class="contact-list">
               {% if instance.latitude and instance.longitude and instance.search_status != 2 %}
-              <li class="address">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <a href="{{ google }}" target="_blank">{{ instance.address }}</a>
-              </li>
+                <li class="address">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <a href="{{ google }}" target="_blank">{{ instance.address }}</a>
+                </li>
               {% endif %}
               {% if instance.phone %}
-              <li>
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <a href="tel:{{ instance.phone_2 }}" target="_blank">{{ instance.phone }}</a>
-              </li>
+                <li>
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  <a href="tel:{{ instance.phone_2 }}" target="_blank">{{ instance.phone }}</a>
+                </li>
               {% endif %}
               {% if instance.website %}
-              <li>
-                <i class="fa fa-globe" aria-hidden="true"></i>
-                <a href="{{ instance.website }}" title="" target="_blank">{{ instance.website }}</a>
-              </li>
+                <li>
+                  <i class="fa fa-globe" aria-hidden="true"></i>
+                  <a href="{{ instance.website }}" title="" target="_blank">{{ instance.website }}</a>
+                </li>
               {% endif %}
             </ul>
           </div>
         </div>
-        <ins class="scupioadslot" style="display:inline-block;width:100%;height:280px;"
+        <ins class="scupioadslot" style="display:inline-block;width:970px;height:90px;"
              data-sca-pub="lQgDGBIrQDI="
              data-sca-web="5143"
              data-sca-category="24"
-             data-sca-cid="18216"
+             data-sca-cid="18233"
              data-sca-slot-type="STA"></ins>
         <script async src="https://img.scupio.com/js/ad.js"></script>
       </div><!-- /.col-md-4 -->
@@ -268,10 +270,10 @@
   let lat = null
   let lon = null
   {% if instance.latitude %}
-  lat = {{instance.latitude}}
-  ;
-  lon = {{instance.longitude}}
-  ;
+    lat = {{instance.latitude}}
+    ;
+    lon = {{instance.longitude}}
+    ;
   {% endif %}
   console.log(lat)
   $(document).ready(() => {

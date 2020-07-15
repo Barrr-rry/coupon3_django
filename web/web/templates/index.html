@@ -239,7 +239,7 @@
         </div><!-- /.imaebox style5 -->
       </div><!-- /.col-md-3 col-sm-6 -->
       {% if request|is_mobile %}
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 col-sm-6" id="mobile-ad">
           <div class="imagebox">
             <div id="div-tam-ad-21594276538731J" style="width: 100%"></div>
             <script type="text/javascript" language="javascript">
@@ -299,6 +299,10 @@
 
 <script>
   $(document).ready(() => {
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if(!isMobile){
+      $('#mobile-ad').remove()
+    }
     initPosition()
   })
   $('.slider').each(function () {
