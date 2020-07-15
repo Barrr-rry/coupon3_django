@@ -4,48 +4,35 @@ import json
 import os
 from PIL import Image
 
-desc = """【活動說明】：經政府公告，本網站可使用三倍券。
+"""
+12370兩廳院～12540嘉明湖國家步道山屋
+
+12579兩廳院～12749嘉明湖國家步道山屋
+
+資料都重複了，請刪除一組
+
+‌
+
+剩餘一組資料改成：
+
+原有之discount 敘述改成 （看是否 discount 改成同一筆）
+
+【活動說明】：經政府公告，本網站可使用三倍券。
 
 【活動時間】：2020/7/15 ~ 2020/12/31。
 
-【活動網站】：https://3000.gov.tw/News.aspx?n=53&sms=9110 。"""
-with transaction.atomic():
-    queryset = StoreDiscount.objects.filter(picture__icontains='.webp')
-    for el in queryset:
-        img_path = os.path.join('media', el.picture)
-        if not os.path.exists(img_path):
-            print('not found pic:', el.picture)
-            el.picture = None
-            el.save()
-        else:
-            img_full_name = el.picture
-            img_name = img_full_name.replace(f'.{img_full_name.split(".")[-1]}', '')  # 檔名稱
-            output = img_name + ".jpeg"  # 輸出檔名稱
-            im = Image.open(os.path.join('media', img_full_name))  # 讀入檔案
-            im = im.convert("RGB")
-            im.save(os.path.join('media', output), "JPEG", optimize=True, quality=70)  # 儲存
-            img_full_path = os.path.join('media', img_full_name)
-            el.picture = output
-            el.save()
-            # if os.path.exists(img_full_path):
-            #     os.remove(img_full_path)
+【活動網站】：https://3000.gov.tw/News.aspx?n=53&sms=9110 。
 
-    queryset = StoreImage.objects.filter(picture__icontains='.webp')
+store_type 都改成電商
+
+然後地理資訊都清空
+
+status = 1
+"""
+store_type = StoreType.objects.filter(name='電商').first()
+with transaction.atomic():
+    queryset = Store.objects.filter(id__gte=12370, id__lte=12540)
     for el in queryset:
-        img_path = os.path.join('media', el.picture)
-        if not os.path.exists(img_path):
-            print('not found pic:', el.picture)
-            el.picture = None
-            el.save()
-        else:
-            img_full_name = el.picture
-            img_name = img_full_name.replace(f'.{img_full_name.split(".")[-1]}', '')  # 檔名稱
-            output = img_name + ".jpeg"  # 輸出檔名稱
-            im = Image.open(os.path.join('media', img_full_name))  # 讀入檔案
-            im = im.convert("RGB")
-            im.save(os.path.join('media', output), "JPEG", optimize=True, quality=70)  # 儲存
-            img_full_path = os.path.join('media', img_full_name)
-            el.picture = output
-            el.save()
-            # if os.path.exists(img_full_path):
-            #     os.remove(img_full_path)
+        el.status = 1
+        el.store_type = store_type
+        el.save()
