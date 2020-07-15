@@ -60,7 +60,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <form id="updateStore" action="" class="form-listing" method="post" accept-charset="utf-8">
+        <form id="updateStore" action="" class="form-listing" method="post" accept-charset="utf-8" onkeydown="return event.key !== 'Enter';">
           <input type="hidden" name="id" value="{{ instance.id }}">
           <input type="hidden" name="latitude" id="latitude">
           <input type="hidden" name="longitude" id="longitude">
@@ -302,7 +302,7 @@
         latitude: {{ instance.latitude }},
         longitude: {{ instance.longitude }}
       },
-      zoom: 7
+      zoom: 15
     }
     $('input[name="address"]').on('change paste keyup', () => {
       $('#firstmap').remove()
