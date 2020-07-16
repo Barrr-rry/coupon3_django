@@ -67,13 +67,13 @@ function nativeAdCallback(nadParas) {
             </div><!-- /.box-header -->
             <div class="box-content">
               <div class="box-title ad">
-                <a href="${nadParas.nurl}" title="">${nadParas.SHORTSUBJECT}</a>
+                <a href="${nadParas.nurl}" title="">${nadParas.SHORTSUBJECT.length > 1 ? nadParas.SHORTSUBJECT : ''}</a>
               </div>
               <div>
-              ${nadParas.LONGSUBJECT}
+              ${nadParas.LONGSUBJECT.length > 1 ? nadParas.LONGSUBJECT : ''}
               </div>
               <div class="box-desc">
-                ${nadParas.BODY}
+                ${nadParas.BODY.length > 1 ? nadParas.BODY : ''}
               </div>
             </div><!-- /.box-content -->
           </div>
