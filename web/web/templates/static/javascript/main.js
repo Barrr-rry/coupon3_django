@@ -61,7 +61,7 @@ function nativeAdCallback(nadParas) {
             <div class="box-header">
               <div class="box-image">
                 <img src="${nadParas.IMAGE960X640}" alt="">
-                <a title="">查看廣告詳情</a>
+                <a title="" style="cursor: pointer">查看廣告詳情</a>
                 <div class="overlay"></div>
               </div>
             </div><!-- /.box-header -->
@@ -79,7 +79,10 @@ function nativeAdCallback(nadParas) {
           </div>
           <div class="imagebox_bottom">
             <p class="tag_block activity">
+            <span class="tag">
             廣告
+            </span>
+            
             </p>
             <div class="clear"></div>
           </div>
