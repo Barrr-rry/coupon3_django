@@ -11549,6 +11549,28 @@ footer .widget-about .logo-ft a {
   width: 25px;
 }
 
+.ad-short-sub {
+  width: 100%;
+  vertical-align: middle;
+  letter-spacing: 1px;
+  margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 25px;
+  color: #aaaaaa;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.ad-long-sub {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .flat-imagebox.style3 .wrap-box-search {
   background-color: transparent;
   margin-top: 0;
