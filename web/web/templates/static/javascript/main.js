@@ -80,7 +80,7 @@ function nativeAdCallback(nadParas) {
           <div class="imagebox_bottom">
             <p class="tag_block activity">
             <span class="tag">
-            廣告
+            <a href="#">廣告</a>
             </span>
             
             </p>
