@@ -109,7 +109,7 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
         regex = r"(<li>.*?<\/li>)+"
         matches = re.finditer(regex, ret, re.MULTILINE)
         for match in matches:
-            ret = re.sub(match.group(), f'<ul class="num indent">{match.group()}</ul>', ret)
+            ret = ret.replace(match.group(), f'<ul class="num indent">{match.group()}</ul>')
         # ret = ret.replace('\n', '<br/>')
         return ret
 
