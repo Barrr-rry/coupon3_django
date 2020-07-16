@@ -11411,7 +11411,7 @@ footer .widget-about .logo-ft a {
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 2px;
-  color: #aaaaaa;
+  color: #333333;
   margin-top: 15px;
 }
 .imagebox .box-imagebox .link_block .box-content .box-desc .sale-list {
@@ -11421,7 +11421,8 @@ footer .widget-about .logo-ft a {
   width: 100%;
 }
 .imagebox .box-imagebox .link_block .box-content .box-desc .sale-list:before {
-  content: "-";
+  content: "．";
+  margin-left: -5px;
 }
 .imagebox .box-imagebox .imagebox_bottom {
   border-top: 1px solid #ebebeb;
@@ -11569,6 +11570,11 @@ footer .widget-about .logo-ft a {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  padding-left: 18px;
+}
+.ad-long-sub:before {
+  content: "．";
+  margin-left: -22px;
 }
 
 .flat-imagebox.style3 .wrap-box-search {

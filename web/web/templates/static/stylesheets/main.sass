@@ -366,6 +366,7 @@ footer
 
 
 
+
       &.web
         background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp")
 
@@ -1059,7 +1060,7 @@ footer
           font-size: 16px
           font-weight: 400
           letter-spacing: 2px
-          color: #aaaaaa
+          color: #333333
           margin-top: 15px
 
           .sale-list
@@ -1069,7 +1070,8 @@ footer
             width: 100%
 
             &:before
-              content: "-"
+              content: "．"
+              margin-left: -5px
 
     .imagebox_bottom
       border-top: 1px solid #ebebeb
@@ -1084,14 +1086,6 @@ footer
         white-space: nowrap
         text-overflow: ellipsis
         color: #f25b22
-        //&:after
-        //  content: "..."
-        //  color: #f25b22
-        //  font-size: 27px
-        //  display: inline-block
-        //  position: absolute
-        //  margin-top: -6px
-        //  margin-left: 10px
 
         span.tag
           display: inline-block
@@ -1224,6 +1218,11 @@ footer
   display: -webkit-box
   -webkit-line-clamp: 3
   -webkit-box-orient: vertical
+  padding-left: 18px
+
+  &:before
+    content: "．"
+    margin-left: -22px
 
 .flat-imagebox.style3
   .wrap-box-search
