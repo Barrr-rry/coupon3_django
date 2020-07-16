@@ -197,6 +197,7 @@
         {#          </div>#}
         {#        </div>#}
         {% for el in instance.storediscount %}
+
           <div class="text-box">
             <h3><span
               class="discount-type-border">{{ el.discount_type.name|default_if_none:"" }}</span><span>{{ el.name|default_if_none:"" }}</span>
@@ -215,6 +216,7 @@
           {{ instance.ad|safe }}
         {% endif %}
       </div><!-- /.col-md-8 -->
+
       <div class="col-md-4">
         <div class="sidebar">
           <div class="pdmap style1" id="flat-map-4">
