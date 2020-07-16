@@ -2069,7 +2069,7 @@ const showSelfPosition = (position) => {
       $('.store-box').append(html)
     }
     $(".more-click").on('click', () => {
-      let index = 6
+      let index = 5
       let offset = $('.store').length
       let max_offset = Math.min(offset + index, data_count)
       let search = window.location.search
@@ -2088,6 +2088,7 @@ const showSelfPosition = (position) => {
         for (let data of res.results) {
           appendStore(data)
         }
+        getNativeAdParas('Q1594362301761yK', nativeAdCallback)
         // if ($('#map').length) {
         //   initStoreDataMarker(res.results)
         // }

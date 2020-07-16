@@ -450,7 +450,7 @@ class StoreView(BaseView):
             filter_dict['search'] = msg_2
         data_st = time.time()
         queryset = filters.filter_query(filter_dict, queryset)
-        data = serializers.StoreSerializer(many=True, instance=queryset[:6]).data
+        data = serializers.StoreSerializer(many=True, instance=queryset[:5]).data
         data_ed = time.time()
 
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
@@ -507,8 +507,8 @@ class StoreView(BaseView):
             activity_list=activity_list,
             suffix=suffix,
             search=search if search is not None else '',
-            data=data[:6],
-            json_data=json.dumps(data[:6]),
+            data=data[:5],
+            json_data=json.dumps(data[:5]),
             count=queryset.count(),
             storetypes=storetypes,
             district=district,
