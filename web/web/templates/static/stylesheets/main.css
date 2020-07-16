@@ -11798,14 +11798,16 @@ footer .widget-about .logo-ft a {
   padding-top: 0;
   border-top: none;
 }
-.header_sticky .flat-explore-detail .col-md-8 .text-box span {
+.header_sticky .flat-explore-detail .col-md-8 .text-box h3 {
   display: inline-block;
   vertical-align: middle;
   line-height: 32px;
-  margin-bottom: 5px;
+  margin-bottom: 40px;
 }
-.header_sticky .flat-explore-detail .col-md-8 .text-box span.discount-type-border {
+.header_sticky .flat-explore-detail .col-md-8 .text-box h3 .discount-type-border {
+  position: relative;
   padding: 2px 15px;
+  top: -3px;
   border-radius: 6px;
   background-color: #f25b22;
   color: #ffffff;
@@ -13077,6 +13079,29 @@ article.post-single .entry-post .entry-content ul li {
   .header_sticky .flat-explore-detail #map {
     height: 200px !important;
   }
+  .header_sticky .flat-explore-detail .col-md-8 .text-box h3 {
+    font-size: 28px;
+    letter-spacing: 2px;
+    line-height: 38px;
+  }
+  .header_sticky .flat-explore-detail .col-md-8 .text-box h3 .discount-type-border {
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+  .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc h5.project-title {
+    font-size: 24px;
+    line-height: 24px;
+    margin-top: 40px;
+    margin-bottom: 12px;
+  }
+  .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc p {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc ul {
+    font-size: 20px;
+    line-height: 32px;
+  }
   .header_sticky .flat-title ul.social-ft {
     text-align: left;
     margin-top: 20px;
@@ -13094,9 +13119,18 @@ article.post-single .entry-post .entry-content ul li {
   .header_sticky .flat-title ul.social-ft li a.share-url {
     background-color: #f25b22;
   }
+  .header_sticky .flat-title .title-left .box-title {
+    margin-bottom: 16px;
+  }
   .header_sticky .flat-title .title-left .box-title a {
-    font-size: 36px;
+    font-size: 38px;
     line-height: 48px;
+  }
+  .header_sticky .flat-title .title-left ul.box-address li {
+    font-size: 18px;
+  }
+  .header_sticky .flat-title .title-left ul.box-address li.phone {
+    margin-bottom: 16px;
   }
 
   .flat-iconbox.style2 {
@@ -13258,11 +13292,6 @@ article.post-single .entry-post .entry-content ul li {
   }
   article.blog-post:hover .featured-post a span {
     opacity: 0;
-  }
-
-  .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc h5.project-title {
-    font-size: 16px;
-    line-height: 16px;
   }
 }
 @media only screen and (max-width: 600px) {
