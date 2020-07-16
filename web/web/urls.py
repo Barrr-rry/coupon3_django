@@ -61,6 +61,7 @@ urlpatterns = [
     path('store_map/', get_view(StoreMapView), name='store_map'),
     path('store_activity/', get_view(StoreActivityView), name='store_activity'),
     path('store/', get_view(StoreView), name='store'),
+    path('store_temp/', StoreTempView.as_view(), name='store_temp'),
     path('store/county/', get_view(StoreCountyView), name='store/county'),
     path('test/', get_view(TestView)),
     path('qa/', get_view(QAView), name='qa'),

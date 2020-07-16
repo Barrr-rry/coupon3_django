@@ -43,6 +43,60 @@ const default_position = {
   zoom: 7
 }
 
+function nativeAdCallback(nadParas) {
+  // 表示目前有廣告
+  if (nadParas.SHORTSUBJECT) {
+    let class_name = ''
+    if ($('#map').length) {
+      class_name = 'mb-50px col-lg-6 col-md-12 store'
+    } else {
+      class_name = 'mb-50px col-md-4 store md-100'
+    }
+    let html = `
+    <div class="${class_name}">
+      <div class="imagebox style1">
+        <div class="box-imagebox">
+          <div class="link_block">
+            <a href="${nadParas.nurl}" class="link" target="_blank"></a>
+            <div class="box-header">
+              <div class="box-image">
+                <img src="${nadParas.IMAGE960X640}" alt="">
+                <a title="">查看詳情</a>
+                <div class="overlay"></div>
+              </div>
+            </div><!-- /.box-header -->
+            <div class="box-content">
+              <div class="box-title ad">
+                <a href="${nadParas.nurl}" title="">${nadParas.SHORTSUBJECT}</a>
+              </div>
+              <div>
+              ${nadParas.LONGSUBJECT}
+              </div>
+              <div class="box-desc">
+                ${nadParas.BODY}
+              </div>
+            </div><!-- /.box-content -->
+          </div>
+          <div class="imagebox_bottom">
+            <p class="tag_block activity">
+            廣告
+            </p>
+            <div class="clear"></div>
+          </div>
+          <!--                <ul class="location">-->
+          <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+          <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
+        </div><!-- /.box-imagebox -->
+      </div><!-- /.imagebox style1 -->
+    </div>
+    `
+
+    $('.store-box').append(html)
+  } else {
+    //TO DO
+  }
+}
+
 let initPosition = () => {
   let setError = () => {
     setCookie("lat", default_position.coords.latitude, 365)
@@ -2074,7 +2128,7 @@ const showSelfPosition = (position) => {
         dataType: "json",
       }).done(res => {
         let $input = $el.prev()
-        $input.val(res.data.address.replace('台','臺'))
+        $input.val(res.data.address.replace('台', '臺'))
         $load.removeClass('loader')
         $el.find('svg').show()
       })

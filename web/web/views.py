@@ -535,6 +535,10 @@ class StoreView(BaseView):
         return ret
 
 
+class StoreTempView(StoreView):
+    template_name = 'store_temp.html'
+
+
 class StoreActivityView(StoreView):
     template_name = 'store_activity.html'
 
