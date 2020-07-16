@@ -11583,9 +11583,9 @@ footer .widget-about .logo-ft a {
   margin-bottom: 40px;
 }
 .flat-imagebox.style3 .wrap-box-search.style2 form > span input {
-  padding: 0 40px;
   background-color: #ffffff;
   color: #666666;
+  border-color: #dddddd;
   font-size: 14px;
   letter-spacing: 1px;
   font-weight: 400;
@@ -11608,6 +11608,14 @@ footer .widget-about .logo-ft a {
   right: auto;
   left: 30px;
   color: #999999;
+}
+.flat-imagebox.style3 .wrap-box-search.style2 form > span .search-btn {
+  position: absolute;
+  line-height: 35px;
+  height: auto;
+  right: 26px;
+  top: 8px;
+  padding: 0 26px;
 }
 .flat-imagebox.style3 .wrap-box-search a {
   position: absolute;
@@ -12635,6 +12643,9 @@ article.post-single .entry-post .entry-content ul li {
     margin-top: 2px;
     left: 20px;
   }
+  .flat-imagebox.style3 .wrap-box-search.style2 form > span .search-btn {
+    right: 10px;
+  }
   .flat-imagebox.style3 .wrap-box-search a {
     position: absolute;
     display: inline-block;
@@ -13271,6 +13282,10 @@ article.post-single .entry-post .entry-content ul li {
   article.post-single .featured-post img {
     height: 250px;
   }
+
+  .imagebox .box-imagebox .imagebox_bottom p.tag_block {
+    width: 82%;
+  }
 }
 @media only screen and (max-width: 320px) {
   .flat-imagebox .filter-result .result {
@@ -13286,9 +13301,6 @@ article.post-single .entry-post .entry-content ul li {
     padding: 1px 9px;
   }
 
-  .imagebox {
-    margin-bottom: 0;
-  }
   .imagebox .box-imagebox .imagebox_bottom p.tag_block {
     width: 79%;
     padding: 16px 30px 15px 25px;

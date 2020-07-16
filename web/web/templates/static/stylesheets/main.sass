@@ -1232,9 +1232,10 @@ footer
 
     &.style2 form > span
       input
-        padding: 0 40px
+        //padding: 0 40px
         background-color: #ffffff
         color: #666666
+        border-color: #dddddd
         font-size: 14px
         letter-spacing: 1px
         font-weight: 400
@@ -1257,6 +1258,14 @@ footer
         right: auto
         left: 30px
         color: #999999
+
+      .search-btn
+        position: absolute
+        line-height: 35px
+        height: auto
+        right: 26px
+        top: 8px
+        padding: 0 26px
 
     a
       position: absolute
@@ -2315,6 +2324,9 @@ article.post-single
           margin-top: 2px
           left: 20px
 
+        .search-btn
+          right: 10px
+
       a
         position: absolute
         display: inline-block
@@ -2968,6 +2980,9 @@ article.post-single
       img
         height: 250px
 
+  .imagebox .box-imagebox .imagebox_bottom p.tag_block
+    width: 82%
+
 
 @media only screen and (max-width: 320px)
   .flat-imagebox .filter-result
@@ -2984,7 +2999,7 @@ article.post-single
       padding: 1px 9px
 
   .imagebox
-    margin-bottom: 0
+    //margin-bottom: 0
 
     .box-imagebox .imagebox_bottom p.tag_block
       width: 79%
