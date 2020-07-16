@@ -84,10 +84,29 @@
   <!--  <div class="overlay"></div>-->
 </section>
 
-<section class="flat-row flat-imagebox style3 store-list" id="toscroll">
+<section class="flat-row flat-imagebox style3" id="toscroll">
   <div class="container">
     <div class="row">
     </div><!-- /.row -->
+
+    <div class="wrap-box-search style2">
+      <form method="get" accept-charset="utf-8" action="/store/">
+                <span class="location">
+                  <span class="ti-location-pin"></span>
+                  <input type="text" placeholder="搜尋本活動中的商家名稱" name="search">
+                  <a href="javascript:void(0);" class="search-pin-icon" id="position">
+                    <svg width="20" height="20">
+                      <image xlink:href="/media/search-bar-arget.svg" width="20" height="20"/>
+                    </svg>
+                  </a>
+                  <a href="" class="search-pin-load">
+                    <div></div>
+                  </a>
+                </span>
+      </form><!-- /form -->
+      <div class="clear"></div>
+    </div><!-- /.wrap-box-search -->
+
     {#原本 style 3 改掉才不會出問題#}
     <div class="wrap-imagebox ma-0px">
       <div class="d-flex store-box">
