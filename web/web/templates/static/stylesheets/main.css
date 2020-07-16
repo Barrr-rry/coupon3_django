@@ -11787,6 +11787,8 @@ footer .widget-about .logo-ft a {
 .header_sticky .flat-explore-detail .col-md-8 .text-box span {
   display: inline-block;
   vertical-align: middle;
+  line-height: 32px;
+  margin-bottom: 5px;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box span.discount-type-border {
   padding: 2px 15px;
@@ -11797,6 +11799,7 @@ footer .widget-about .logo-ft a {
   font-size: 14px;
   margin-top: 4px;
   margin-right: 8px;
+  line-height: initial;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc {
   font-size: 16px;
@@ -11836,7 +11839,10 @@ footer .widget-about .logo-ft a {
   position: absolute;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc a {
+  display: block;
+  width: 100%;
   color: #f25b22;
+  word-wrap: break-word;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc ul.num {
   line-height: 30px;
@@ -13070,6 +13076,10 @@ article.post-single .entry-post .entry-content ul li {
   }
   .header_sticky .flat-title ul.social-ft li a.share-url {
     background-color: #f25b22;
+  }
+  .header_sticky .flat-title .title-left .box-title a {
+    font-size: 36px;
+    line-height: 48px;
   }
 
   .flat-iconbox.style2 {

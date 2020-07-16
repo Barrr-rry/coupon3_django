@@ -1455,6 +1455,8 @@ footer
         span
           display: inline-block
           vertical-align: middle
+          line-height: 32px
+          margin-bottom: 5px
 
           &.discount-type-border
             padding: 2px 15px
@@ -1465,6 +1467,7 @@ footer
             font-size: 14px
             margin-top: 4px
             margin-right: 8px
+            line-height: initial
 
         .text-desc
           font-size: 16px
@@ -1504,7 +1507,10 @@ footer
               position: absolute
 
           a
+            display: block
+            width: 100%
             color: #f25b22
+            word-wrap: break-word
 
           ul.num
             line-height: 30px
@@ -2754,22 +2760,28 @@ article.post-single
       #map
         height: 200px !important
 
-    .flat-title ul.social-ft
-      text-align: left
-      margin-top: 20px
+    .flat-title
+      ul.social-ft
+        text-align: left
+        margin-top: 20px
 
-      li a
-        margin-left: 0
-        margin-right: 15px
+        li a
+          margin-left: 0
+          margin-right: 15px
 
-        &.share-fb
-          background-color: #315A9D
+          &.share-fb
+            background-color: #315A9D
 
-        &.share-line
-          background-color: #00BE00
+          &.share-line
+            background-color: #00BE00
 
-        &.share-url
-          background-color: #f25b22
+          &.share-url
+            background-color: #f25b22
+
+      .title-left .box-title a
+        font-size: 36px
+        line-height: 48px
+
 
   .flat-iconbox
     &.style2
