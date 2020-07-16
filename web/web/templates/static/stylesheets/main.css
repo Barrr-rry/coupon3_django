@@ -11411,7 +11411,7 @@ footer .widget-about .logo-ft a {
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 2px;
-  color: #aaaaaa;
+  color: #333333;
   margin-top: 15px;
 }
 .imagebox .box-imagebox .link_block .box-content .box-desc .sale-list {
@@ -11421,7 +11421,8 @@ footer .widget-about .logo-ft a {
   width: 100%;
 }
 .imagebox .box-imagebox .link_block .box-content .box-desc .sale-list:before {
-  content: "-";
+  content: "．";
+  margin-left: -5px;
 }
 .imagebox .box-imagebox .imagebox_bottom {
   border-top: 1px solid #ebebeb;
@@ -11569,6 +11570,11 @@ footer .widget-about .logo-ft a {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  padding-left: 18px;
+}
+.ad-long-sub:before {
+  content: "．";
+  margin-left: -22px;
 }
 
 .flat-imagebox.style3 .wrap-box-search {
@@ -11577,9 +11583,9 @@ footer .widget-about .logo-ft a {
   margin-bottom: 40px;
 }
 .flat-imagebox.style3 .wrap-box-search.style2 form > span input {
-  padding: 0 40px;
   background-color: #ffffff;
   color: #666666;
+  border-color: #dddddd;
   font-size: 14px;
   letter-spacing: 1px;
   font-weight: 400;
@@ -11602,6 +11608,14 @@ footer .widget-about .logo-ft a {
   right: auto;
   left: 30px;
   color: #999999;
+}
+.flat-imagebox.style3 .wrap-box-search.style2 form > span .search-btn {
+  position: absolute;
+  line-height: 35px;
+  height: auto;
+  right: 26px;
+  top: 8px;
+  padding: 0 26px;
 }
 .flat-imagebox.style3 .wrap-box-search a {
   position: absolute;
@@ -11787,6 +11801,8 @@ footer .widget-about .logo-ft a {
 .header_sticky .flat-explore-detail .col-md-8 .text-box span {
   display: inline-block;
   vertical-align: middle;
+  line-height: 32px;
+  margin-bottom: 5px;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box span.discount-type-border {
   padding: 2px 15px;
@@ -11797,6 +11813,7 @@ footer .widget-about .logo-ft a {
   font-size: 14px;
   margin-top: 4px;
   margin-right: 8px;
+  line-height: initial;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc {
   font-size: 16px;
@@ -11836,7 +11853,10 @@ footer .widget-about .logo-ft a {
   position: absolute;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc a {
+  display: block;
+  width: 100%;
   color: #f25b22;
+  word-wrap: break-word;
 }
 .header_sticky .flat-explore-detail .col-md-8 .text-box .text-desc ul.num {
   line-height: 30px;
@@ -12623,6 +12643,9 @@ article.post-single .entry-post .entry-content ul li {
     margin-top: 2px;
     left: 20px;
   }
+  .flat-imagebox.style3 .wrap-box-search.style2 form > span .search-btn {
+    right: 10px;
+  }
   .flat-imagebox.style3 .wrap-box-search a {
     position: absolute;
     display: inline-block;
@@ -13071,6 +13094,10 @@ article.post-single .entry-post .entry-content ul li {
   .header_sticky .flat-title ul.social-ft li a.share-url {
     background-color: #f25b22;
   }
+  .header_sticky .flat-title .title-left .box-title a {
+    font-size: 36px;
+    line-height: 48px;
+  }
 
   .flat-iconbox.style2 {
     padding: 80px 0;
@@ -13255,6 +13282,10 @@ article.post-single .entry-post .entry-content ul li {
   article.post-single .featured-post img {
     height: 250px;
   }
+
+  .imagebox .box-imagebox .imagebox_bottom p.tag_block {
+    width: 82%;
+  }
 }
 @media only screen and (max-width: 320px) {
   .flat-imagebox .filter-result .result {
@@ -13270,9 +13301,6 @@ article.post-single .entry-post .entry-content ul li {
     padding: 1px 9px;
   }
 
-  .imagebox {
-    margin-bottom: 0;
-  }
   .imagebox .box-imagebox .imagebox_bottom p.tag_block {
     width: 79%;
     padding: 16px 30px 15px 25px;

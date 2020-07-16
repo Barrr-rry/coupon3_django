@@ -366,6 +366,7 @@ footer
 
 
 
+
       &.web
         background-image: url("/media/205c0dec-e001-4477-b383-1a54d2570964@710x470.webp")
 
@@ -1059,7 +1060,7 @@ footer
           font-size: 16px
           font-weight: 400
           letter-spacing: 2px
-          color: #aaaaaa
+          color: #333333
           margin-top: 15px
 
           .sale-list
@@ -1069,7 +1070,8 @@ footer
             width: 100%
 
             &:before
-              content: "-"
+              content: "．"
+              margin-left: -5px
 
     .imagebox_bottom
       border-top: 1px solid #ebebeb
@@ -1084,14 +1086,6 @@ footer
         white-space: nowrap
         text-overflow: ellipsis
         color: #f25b22
-        //&:after
-        //  content: "..."
-        //  color: #f25b22
-        //  font-size: 27px
-        //  display: inline-block
-        //  position: absolute
-        //  margin-top: -6px
-        //  margin-left: 10px
 
         span.tag
           display: inline-block
@@ -1224,6 +1218,11 @@ footer
   display: -webkit-box
   -webkit-line-clamp: 3
   -webkit-box-orient: vertical
+  padding-left: 18px
+
+  &:before
+    content: "．"
+    margin-left: -22px
 
 .flat-imagebox.style3
   .wrap-box-search
@@ -1233,9 +1232,10 @@ footer
 
     &.style2 form > span
       input
-        padding: 0 40px
+        //padding: 0 40px
         background-color: #ffffff
         color: #666666
+        border-color: #dddddd
         font-size: 14px
         letter-spacing: 1px
         font-weight: 400
@@ -1258,6 +1258,14 @@ footer
         right: auto
         left: 30px
         color: #999999
+
+      .search-btn
+        position: absolute
+        line-height: 35px
+        height: auto
+        right: 26px
+        top: 8px
+        padding: 0 26px
 
     a
       position: absolute
@@ -1455,6 +1463,8 @@ footer
         span
           display: inline-block
           vertical-align: middle
+          line-height: 32px
+          margin-bottom: 5px
 
           &.discount-type-border
             padding: 2px 15px
@@ -1465,6 +1475,7 @@ footer
             font-size: 14px
             margin-top: 4px
             margin-right: 8px
+            line-height: initial
 
         .text-desc
           font-size: 16px
@@ -1504,7 +1515,10 @@ footer
               position: absolute
 
           a
+            display: block
+            width: 100%
             color: #f25b22
+            word-wrap: break-word
 
           ul.num
             line-height: 30px
@@ -2310,6 +2324,9 @@ article.post-single
           margin-top: 2px
           left: 20px
 
+        .search-btn
+          right: 10px
+
       a
         position: absolute
         display: inline-block
@@ -2754,22 +2771,28 @@ article.post-single
       #map
         height: 200px !important
 
-    .flat-title ul.social-ft
-      text-align: left
-      margin-top: 20px
+    .flat-title
+      ul.social-ft
+        text-align: left
+        margin-top: 20px
 
-      li a
-        margin-left: 0
-        margin-right: 15px
+        li a
+          margin-left: 0
+          margin-right: 15px
 
-        &.share-fb
-          background-color: #315A9D
+          &.share-fb
+            background-color: #315A9D
 
-        &.share-line
-          background-color: #00BE00
+          &.share-line
+            background-color: #00BE00
 
-        &.share-url
-          background-color: #f25b22
+          &.share-url
+            background-color: #f25b22
+
+      .title-left .box-title a
+        font-size: 36px
+        line-height: 48px
+
 
   .flat-iconbox
     &.style2
@@ -2957,6 +2980,9 @@ article.post-single
       img
         height: 250px
 
+  .imagebox .box-imagebox .imagebox_bottom p.tag_block
+    width: 82%
+
 
 @media only screen and (max-width: 320px)
   .flat-imagebox .filter-result
@@ -2973,7 +2999,7 @@ article.post-single
       padding: 1px 9px
 
   .imagebox
-    margin-bottom: 0
+    //margin-bottom: 0
 
     .box-imagebox .imagebox_bottom p.tag_block
       width: 79%
