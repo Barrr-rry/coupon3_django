@@ -1478,7 +1478,7 @@ const showSelfPosition = (position) => {
         <div class="store-discount-content col">
           <div class="wrap-listing phone">
             <label>活動名稱</label>
-            <input type="text" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">         
+            <input type="text" onkeydown="return event.key !== 'Enter';" name="store_discount_name" placeholder="請輸入活動名稱（20個字內）">         
             <div class="discount_type">
               <label>活動類型</label>
               <span class="ti-angle-down"></span>
@@ -1657,7 +1657,6 @@ const showSelfPosition = (position) => {
         phone: {
           isPhone: true
         },
-        store_discount_name: "required",
         email: {
           required: true,
           isEmail: true,
@@ -1671,7 +1670,6 @@ const showSelfPosition = (position) => {
         person: "請输入聯絡人姓名",
         address: "請输入地址",
         phone: "請输入正確電話格式",
-        store_discount_name: "請输入活動名稱",
         email: "請输入正確信箱格式",
         website: "請输入正確url格式",
       },

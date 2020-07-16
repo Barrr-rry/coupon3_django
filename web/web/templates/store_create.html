@@ -73,7 +73,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <form id="createStore" action="" class="form-listing" method="post" accept-charset="utf-8" onkeydown="return event.key !== 'Enter';">
+        <form id="createStore" action="" class="form-listing" method="post" accept-charset="utf-8">
           <input type="hidden" name="latitude" id="latitude">
           <input type="hidden" name="longitude" id="longitude">
           <div class="inner-box form">
@@ -90,23 +90,23 @@
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing your-name">
               <label>商家名稱</label>
-              <input type="text" name="name" placeholder="請輸入商家名稱">
+              <input type="text" onkeydown="return event.key !== 'Enter';" name="name" placeholder="請輸入商家名稱">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing phone">
               <label>聯絡電話</label>
-              <input type="text" name="phone" placeholder="格式如 0912345678 或 06-1234567">
+              <input type="text" onkeydown="return event.key !== 'Enter';" name="phone" placeholder="格式如 0912345678 或 06-1234567">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing website">
               <label>聯絡人（ 不會公開 ）</label>
-              <input type="text" name="person" placeholder="請輸入聯絡人姓名">
+              <input type="text" onkeydown="return event.key !== 'Enter';" name="person" placeholder="請輸入聯絡人姓名">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing phone">
               <label>電子信箱</label>
-              <input type="text" name="email" placeholder="請輸入電子信箱">
+              <input type="text" onkeydown="return event.key !== 'Enter';" name="email" placeholder="請輸入電子信箱">
             </div><!-- /.wrap-listing -->
             <div class="wrap-listing website">
               <label>網站（ 選填 ）</label>
-              <input type="text" name="website" placeholder="http://">
+              <input type="text" onkeydown="return event.key !== 'Enter';" name="website" placeholder="http://">
             </div><!-- /.wrap-listing -->
             <div class="one-half">
               <div class="wrap-listing price">
@@ -134,7 +134,7 @@
             <div class="clearfix"></div>
             <div class="wrap-listing location">
               <label>地址</label>
-              <input type="text" name="address" placeholder="請輸入商家地址或活動地址">
+              <input type="text" onkeydown="return event.key !== 'Enter';" name="address" placeholder="請輸入商家地址或活動地址">
               <a href="javascript:void(0);" id="position" class="search-pin-load">
                 <svg width="20" height="20">
                   <image xlink:href="/media/search-bar-arget.svg" width="20" height="20"></image>
