@@ -16,6 +16,9 @@ class ParanoidQuerySet(models.QuerySet):
     ``date_deleted``, effectively soft-deleting the object.
     """
 
+    def real_delete(self):
+        return super().delete()
+
     def delete(self):
         for obj in self:
             obj.deleted_status = True
@@ -45,6 +48,9 @@ class DefaultAbstract(models.Model):
         abstract = True
         # ordering = ['-updated_at', '-created_at']
         ordering = ['-created_at']
+
+    def real_delete(self, *args, **kwargs):
+        return super().delete(*args, **kwargs)
 
     def delete(self, **kwargs):
         self.deleted_status = True
