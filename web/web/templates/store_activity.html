@@ -90,10 +90,11 @@
     </div><!-- /.row -->
 
     <div class="wrap-box-search style2">
-      <form method="get" accept-charset="utf-8" action="/store/">
-          <span class="location">
+      <form method="get" accept-charset="utf-8" action="/store_activity/">
+        <input type="hidden" name="activity" value="{{ activity }}">
+        <span class="location">
             <input type="text" placeholder="搜尋本活動中的商家名稱" name="search">
-            <button type="button" class="search-btn">搜尋</button>
+            <button type="submit" class="search-btn">搜尋</button>
           </span>
       </form><!-- /form -->
       <div class="clear"></div>
