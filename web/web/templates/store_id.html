@@ -203,9 +203,7 @@
               class="discount-type-border">{{ el.discount_type.name|default_if_none:"" }}</span><span>{{ el.name|default_if_none:"" }}</span>
             </h3>
             <div class="text-desc">
-              <p>
-                {{ el.desc_safe|default_if_none:""|safe }}
-              </p>
+              {{ el.desc_safe|default_if_none:""|safe }}
               {% if el.picture %}
                 <img class="text-box-img" src="/media/{{ el.picture }}" alt=""/>
               {% endif %}
