@@ -407,7 +407,7 @@ def to_column(el):
         text=text,
         actions=[
             URIAction(
-                label='test',
+                label='查看',
                 uri=uri
             )
         ]
