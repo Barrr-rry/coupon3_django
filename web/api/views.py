@@ -396,7 +396,7 @@ def to_column(el):
     if image:
         url = f'https://3coupon.info/media/{image.picture}'
     else:
-        url = f'https://3coupon.info/media/{el.image_1}.jpg'
+        url = f'https://3coupon.info/media/{el.image_1}'
     logger.warning(f'to col url: {url}')
     name = el.name
     uri = f'https://3coupon.info/store/{el.id}/'
