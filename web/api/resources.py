@@ -2,6 +2,7 @@ from api.models import (
     StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
 )
 
+# import export csv file用的
 from import_export import resources
 
 modellist = (

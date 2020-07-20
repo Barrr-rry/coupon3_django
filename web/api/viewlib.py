@@ -1,6 +1,10 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 
+"""
+此module 給views 用的 此專案沒有用到
+"""
+
 
 class List2RetrieveMixin:
     def list(self, request, *args, **kwargs):
