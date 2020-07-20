@@ -34,6 +34,166 @@
 
 let _map = null
 
+let initStoreShare = () => {
+  $('.share-to').off('click')
+  $('share-url').off('click')
+
+  $('.share-to').snsShare((self) => {
+    let $el = $(self)
+    let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！`
+    return msg
+  }, (self) => {
+    let $el = $(self)
+    let url = `${window.location.origin}/${$el.attr('data-url')}`
+    return url
+  })
+  $('.share-url').on('click', function () {
+    let $el = $(this)
+    let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！${window.location.origin}/${$el.attr('data-url')}`
+    copy(msg)
+    Swal.fire({
+      text: '網址已複製',
+      confirmButtonText: '確定'
+    })
+  })
+}
+
+// append to store
+let appendStore = (data) => {
+  let class_name = ''
+  if ($('#map').length) {
+    class_name = 'mb-50px col-lg-6 col-md-12 store'
+  } else {
+    class_name = 'mb-50px col-md-4 store md-100'
+  }
+  let li = ''
+  for (let el of data.activity) {
+    if (el.name) {
+      li += `<span class="tag"><a data-activity="${el.id}" href="">${el.name}</a></span>`
+    }
+  }
+  let names = ''
+  let store_type_disable = ''
+  let i = 0
+  if (data.storediscount) {
+    for (let foo of data.storediscount) {
+      i += 1
+      if (i <= 3 && foo.name) {
+        names = `
+            <div class="sale-list">
+              ${foo.name}
+            </div><br/>
+            `
+      }
+    }
+    if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
+      store_type_disable =
+        `<li><span>${data.district_name}</span></li>
+                  <li>
+                    <img src="/media/map_gray.svg" alt="">
+                    <span>${data.distance_name}</span>
+                  </li>`
+    }
+
+  }
+  $(document).ready(() => {
+    let href_split = window.location.href.split('?')
+    $('.sort a').each(function () {
+      let $el = $(this)
+      let sort = $el.attr('data-sort')
+      let newurl = setParameters(window.location.href, {sort: sort})
+      $el.attr('href', newurl)
+    })
+
+
+    // init active sort
+    let $el = $(`a[data-sort=${sort}]`)
+    $el.addClass('active')
+
+
+    $('.activity a').each(function () {
+      let $el = $(this)
+      let activity = $el.attr('data-activity')
+      let newurl = setParameters(window.location.href, {activity: activity})
+      $el.attr('href', newurl)
+    })
+
+
+    // init active activity
+    $el = $(`a[data-activity=${activity}]`)
+    $el.addClass('active')
+
+
+  })
+
+  let html = `
+      <div class="${class_name}">
+        <div class="imagebox style1">
+          <div class="box-imagebox">
+            <div class="link_block">
+              <a href="/store/${data.id}" class="link" target="_blank"></a>
+              <div class="box-header">
+                <div class="box-image">
+                  <img src="/media/${data.image_1}" alt="">
+                  <a title="">查看詳情</a>
+                  <div class="overlay"></div>
+                </div>
+              </div><!-- /.box-header -->
+              <div class="box-content">
+                <div class="box-title ad">
+                  <a href="/store/${data.id}" title="">${data.name}</a>
+                </div>
+                <ul class="rating">
+                  ${store_type_disable}
+                  <li>
+                    <img src="/media/gray_${data.store_type_icon}" alt="">
+                    <span>${data.store_type_name}</span>
+                  </li>
+                </ul>
+                <div class="box-desc">
+                  ${names}
+                </div>
+              </div><!-- /.box-content -->
+            </div>
+            <div class="imagebox_bottom">
+              <p class="tag_block activity">
+                ${li}
+              </p>
+              <div class="right">
+                <input type="checkbox" class="checkbox" id="share_${data.id}">
+                <label for="share_${data.id}" class="label entypo-export">
+                  <!--                      <a href="">分享</a>-->
+                  分享
+                </label>
+                <div class="social">
+                  <ul>
+                    <li class="share-to entypo-line" data-sns="line" data-name="${data.name}"
+                        data-url="store/${data.id}">
+                      <img src="/media/share_line.svg" alt="">
+                    </li>
+                    <li class="share-to entypo-facebook" data-sns="facebook" data-name="${data.name}"
+                        data-url="store/${data.id}">
+                      <img src="/media/share_fb.svg" alt="">
+                    </li>
+                    <li class="share-url entypo-url" data-name="${data.name}" data-url="store/${data.id}">
+                      <img src="/media/share_url.svg" alt="">
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <!--                <ul class="location">-->
+            <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
+            <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
+          </div><!-- /.box-imagebox -->
+        </div><!-- /.imagebox style1 -->
+      </div>
+      `
+  $('.store-box').append(html)
+}
+
+
 let dicount_count = 0
 const default_position = {
   coords: {
@@ -97,7 +257,31 @@ function nativeAdCallback(nadParas) {
 
     $('.store-box').append(html)
   } else {
-    //TO DO
+    let index = 1
+    let offset = $('.store').length
+    let max_offset = Math.min(offset + index, data_count)
+    let search = window.location.search
+    if (search) {
+      search += `&limit=${index}&&offset=${offset}`
+    } else {
+      search += `?limit=${index}&&offset=${offset}`
+    }
+    $('.preloader').show()
+    $.ajax({
+      url: `/api/store/${search}`,
+      type: "GET",
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+    }).done(res => {
+      for (let data of res.results) {
+        appendStore(data)
+      }
+      if (max_offset === data_count || !res.next) {
+        $(".more-click").remove()
+      }
+      initStoreShare()
+      $('.preloader').hide()
+    })
   }
 }
 
@@ -1913,165 +2097,9 @@ const showSelfPosition = (position) => {
       sformsubmit = true
     })
 
-    let initStoreShare = () => {
-      $('.share-to').off('click')
-      $('share-url').off('click')
 
-      $('.share-to').snsShare((self) => {
-        let $el = $(self)
-        let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！`
-        return msg
-      }, (self) => {
-        let $el = $(self)
-        let url = `${window.location.origin}/${$el.attr('data-url')}`
-        return url
-      })
-      $('.share-url').on('click', function () {
-        let $el = $(this)
-        let msg = `快來看看${$el.attr('data-name')}用三倍券的超棒優惠！${window.location.origin}/${$el.attr('data-url')}`
-        copy(msg)
-        Swal.fire({
-          text: '網址已複製',
-          confirmButtonText: '確定'
-        })
-      })
-    }
     initStoreShare()
 
-    // add store
-    let appendStore = (data) => {
-      let class_name = ''
-      if ($('#map').length) {
-        class_name = 'mb-50px col-lg-6 col-md-12 store'
-      } else {
-        class_name = 'mb-50px col-md-4 store md-100'
-      }
-      let li = ''
-      for (let el of data.activity) {
-        if (el.name) {
-          li += `<span class="tag"><a data-activity="${el.id}" href="">${el.name}</a></span>`
-        }
-      }
-      let names = ''
-      let store_type_disable = ''
-      let i = 0
-      if (data.storediscount) {
-        for (let foo of data.storediscount) {
-          i += 1
-          if (i <= 3 && foo.name) {
-            names = `
-            <div class="sale-list">
-              ${foo.name}
-            </div><br/>
-            `
-          }
-        }
-        if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
-          store_type_disable =
-            `<li><span>${data.district_name}</span></li>
-                  <li>
-                    <img src="/media/map_gray.svg" alt="">
-                    <span>${data.distance_name}</span>
-                  </li>`
-        }
-
-      }
-      $(document).ready(() => {
-        let href_split = window.location.href.split('?')
-        $('.sort a').each(function () {
-          let $el = $(this)
-          let sort = $el.attr('data-sort')
-          let newurl = setParameters(window.location.href, {sort: sort})
-          $el.attr('href', newurl)
-        })
-
-
-        // init active sort
-        let $el = $(`a[data-sort=${sort}]`)
-        $el.addClass('active')
-
-
-        $('.activity a').each(function () {
-          let $el = $(this)
-          let activity = $el.attr('data-activity')
-          let newurl = setParameters(window.location.href, {activity: activity})
-          $el.attr('href', newurl)
-        })
-
-
-        // init active activity
-        $el = $(`a[data-activity=${activity}]`)
-        $el.addClass('active')
-
-
-      })
-
-      let html = `
-      <div class="${class_name}">
-        <div class="imagebox style1">
-          <div class="box-imagebox">
-            <div class="link_block">
-              <a href="/store/${data.id}" class="link" target="_blank"></a>
-              <div class="box-header">
-                <div class="box-image">
-                  <img src="/media/${data.image_1}" alt="">
-                  <a title="">查看詳情</a>
-                  <div class="overlay"></div>
-                </div>
-              </div><!-- /.box-header -->
-              <div class="box-content">
-                <div class="box-title ad">
-                  <a href="/store/${data.id}" title="">${data.name}</a>
-                </div>
-                <ul class="rating">
-                  ${store_type_disable}
-                  <li>
-                    <img src="/media/gray_${data.store_type_icon}" alt="">
-                    <span>${data.store_type_name}</span>
-                  </li>
-                </ul>
-                <div class="box-desc">
-                  ${names}
-                </div>
-              </div><!-- /.box-content -->
-            </div>
-            <div class="imagebox_bottom">
-              <p class="tag_block activity">
-                ${li}
-              </p>
-              <div class="right">
-                <input type="checkbox" class="checkbox" id="share_${data.id}">
-                <label for="share_${data.id}" class="label entypo-export">
-                  <!--                      <a href="">分享</a>-->
-                  分享
-                </label>
-                <div class="social">
-                  <ul>
-                    <li class="share-to entypo-line" data-sns="line" data-name="${data.name}"
-                        data-url="store/${data.id}">
-                      <img src="/media/share_line.svg" alt="">
-                    </li>
-                    <li class="share-to entypo-facebook" data-sns="facebook" data-name="${data.name}"
-                        data-url="store/${data.id}">
-                      <img src="/media/share_fb.svg" alt="">
-                    </li>
-                    <li class="share-url entypo-url" data-name="${data.name}" data-url="store/${data.id}">
-                      <img src="/media/share_url.svg" alt="">
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="clear"></div>
-            </div>
-            <!--                <ul class="location">-->
-            <!--                  <li class="address"><span class="ti-location-pin"></span>電話: {{ el.phone }}</li>-->
-            <!--                </ul>&lt;!&ndash; /.location &ndash;&gt;-->
-          </div><!-- /.box-imagebox -->
-        </div><!-- /.imagebox style1 -->
-      </div>
-      `
-      $('.store-box').append(html)
-    }
     $(".more-click").on('click', () => {
       let index = 5
       let offset = $('.store').length
