@@ -9,6 +9,9 @@ import time
 from django.utils.timezone import make_aware
 import datetime
 from contextlib import contextmanager
+"""
+此module 要寫爬蟲用的 但這邊用不到
+"""
 
 
 class PickleRedis:

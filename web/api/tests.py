@@ -11,8 +11,16 @@ import random
 from run_init import main, test_email
 from api.models import Store
 
+"""
+此module 是針對 api 寫test case
+"""
+
 
 class DefaultTestMixin:
+    """
+    default test case
+    """
+
     @classmethod
     def setUpTestData(cls):
         main(for_test=True)
@@ -22,6 +30,13 @@ class DefaultTestMixin:
 class TestCounty(DefaultTestMixin, APITestCase):
 
     def test_county_list(self):
+        """
+        判斷status
+        是不是陣列資料
+        以及是不是有該有的參數
+
+        下面依此類推
+        """
         url = '/api/county/'
         r = self.user.get(url)
         self.assertEqual(r.status_code, 200)
@@ -61,6 +76,9 @@ class TestStore(DefaultTestMixin, APITestCase):
                           'status', 'store_type', 'county', 'district'})
 
     def test_store_post(self):
+        """
+        自己新增一筆資料 看看是否能新增成功 否則 測試失敗
+        """
         url = '/api/store/'
         data = dict(
             storeimage_data=["test.jpg"],
@@ -96,6 +114,9 @@ class TestStore(DefaultTestMixin, APITestCase):
         self.assertNotEqual(before_count, after_count)
 
     def test_store_update(self):
+        """
+        自己更新一筆資料 看看是否能新增成功 否則 測試失敗
+        """
         instance = Store.objects.last()
         url = f'/api/store/{instance.id}/'
         data = dict(

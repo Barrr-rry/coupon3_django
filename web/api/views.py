@@ -56,38 +56,14 @@ from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
 from PIL import Image
 
+"""
+定義好router
+這樣再配上自己寫的 @router_url('file')
+可以很快速的定義好 class 與url 之間的mapping 不用都寫在web.urls 節省開發時間 
+"""
 router = routers.DefaultRouter()
 nested_routers = []
 orderdct = OrderedDict()
-
-
-class UpdateCache:
-    prefix_key = None
-
-    def update(self, *args, **kwargs):
-        self.cache_process()
-        return super().update(*args, **kwargs)
-
-    def create(self, *args, **kwargs):
-        self.cache_process()
-        return super().create(*args, **kwargs)
-
-    def destroy(self, *args, **kwargs):
-        self.cache_process()
-        return super().destroy(*args, **kwargs)
-
-    def cache_process(self):
-        if not self.prefix_key:
-            return
-        data = pickle_redis.get_data('cache')
-        if not data:
-            data = dict()
-            cache_list = ['coupon', 'product', 'banner', 'caetegory', 'tag', 'price', 'configsetting']
-            for key in cache_list:
-                data[key] = str(uuid.uuid4())
-        else:
-            data[self.prefix_key] = str(uuid.uuid4())
-        pickle_redis.set_data('cache', data)
 
 
 class UpdateModelMixin:
@@ -96,6 +72,9 @@ class UpdateModelMixin:
     """
 
     def update(self, request, *args, **kwargs):
+        """
+        讓所有的update 都可以更改partiral 部分資料
+        """
         kwargs['partial'] = True
         partial = kwargs.pop('partial', True)
         instance = self.get_object()
@@ -116,10 +95,17 @@ class UpdateModelMixin:
 
 class MyMixin(CreateModelMixin, UpdateModelMixin, ListModelMixin, RetrieveModelMixin, DestroyModelMixin,
               viewsets.GenericViewSet):
+    """
+    共用 view
+    """
     pass
 
 
 def router_url(url, prefix=None, *args, **kwargs):
+    """
+    定義好 router url 這樣才不用 每一個urls 都要重新定義
+    """
+
     def decorator(cls):
         if not prefix:
             router.register(url, cls, *args, **kwargs)
@@ -140,6 +126,9 @@ def router_url(url, prefix=None, *args, **kwargs):
 
 
 def get_urls():
+    """
+    get urls for urls.py
+    """
     urls = router.get_urls()
     for nested_router in nested_routers:
         urls += nested_router.get_urls()
@@ -155,6 +144,9 @@ class FileViewSet(MyMixin):
     permission_classes = []
 
     def create(self, request, *args, **kwargs):
+        """
+        將下載的檔案做壓縮並且把舊的刪掉
+        """
         ret = super().create(request, *args, **kwargs)
         img_full_name = ret.data['filename']
         img_name = img_full_name.replace(f'.{img_full_name.split(".")[-1]}', '')  # 檔名稱
@@ -163,8 +155,10 @@ class FileViewSet(MyMixin):
         im = im.convert("RGB")
         im.save(os.path.join('media', output), "JPEG", optimize=True, quality=70)  # 儲存
         img_full_path = os.path.join('media', img_full_name)
+        # 把舊的刪掉
         if os.path.exists(img_full_path):
             os.remove(img_full_path)
+        # 更新檔案名字
         ret.data['filename'] = output
         return ret
 
@@ -178,11 +172,13 @@ class StoreViewSet(MyMixin):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.action == 'list':
+        # list 的資料 default 搜尋要status=1
+        if self.action in ['list', 'latlng']:
             queryset = Store.objects.filter(status=1)
         return queryset
 
     def filter_queryset(self, queryset):
+        # 判斷 list or latlng 都用同樣的filter
         if self.action in ['list', 'latlng']:
             for backend in list(self.filter_backends):
                 queryset = backend().filter_queryset(self.request, queryset, self)
@@ -191,7 +187,9 @@ class StoreViewSet(MyMixin):
     @action(methods=['GET'], detail=False, permission_classes=[], authentication_classes=[])
     def latlng(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
+        # 要搜尋一定要有經緯度的
         queryset = queryset.filter(latitude__isnull=False, longitude__isnull=False)
+        # 最多只有50 筆資料
         queryset = queryset[:50]
 
         page = self.paginate_queryset(queryset)
@@ -229,6 +227,9 @@ class StoreTypeViewSet(MyMixin):
 
 @router_url('contact', basename='contact')
 class ContactView(viewsets.ViewSet):
+    """
+    因為此class 沒有用到seralizer 所以自己動議schema 跟create
+    """
     schema = ManualSchema(
         fields=[
             coreapi.Field(
@@ -268,6 +269,9 @@ class ContactView(viewsets.ViewSet):
     )
 
     def create(self, request, *args, **kwargs):
+        """
+        寄信功能
+        """
         from api.mail import send_mail
         email = request.data.get('email')
         name = request.data.get('name')
@@ -311,8 +315,9 @@ class LocationView(viewsets.ViewSet):
     @action(methods=['GET'], detail=False, permission_classes=[], authentication_classes=[])
     def temp(self, request, *args, **kwargs):
         """
-                1: get_latlon 2: get_addr
-                """
+        測試api 用
+        1: get_latlon 2: get_addr
+        """
         from crawler import task
         import random
         task_type = int(request.query_params.get('task_type', 1))
@@ -334,6 +339,7 @@ class LocationView(viewsets.ViewSet):
 
     def list(self, request, *args, **kwargs):
         """
+        gps get map 取得經緯度的時候用
         1: get_latlon 2: get_addr
         """
         from crawler import task
@@ -352,6 +358,9 @@ class LocationView(viewsets.ViewSet):
         return Response(dict(data=dct))
 
 
+"""
+初始化 linebot 的元件
+"""
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage, TemplateSendMessage, URIAction, \
@@ -370,6 +379,9 @@ from django.http.response import HttpResponse, HttpResponseBadRequest
 @csrf_exempt
 @require_POST
 def webhook(request):
+    """
+    這邊收到callback data 在傳遞下面 交給handler.handle 做判斷
+    """
     signature = request.headers["X-Line-Signature"]
     body = request.body.decode()
     logger.info('get webook')
@@ -386,6 +398,9 @@ def webhook(request):
 
 
 def to_column(el):
+    """
+    曾取得的資料組成line response 的資料
+    """
     text = ''
     n = 0
     for e in el.storediscount.all():
@@ -415,6 +430,10 @@ def to_column(el):
 
 
 def get_carouseltemplate(gps=None, store_name=None):
+    """
+    判斷是從gps 取得資料 還是要自己filter store_name
+    並姐把結果response 給line bot messages
+    """
     queryset = Store.objects.filter(status=1).prefetch_related('storeimage')
     columns = []
     if gps:
@@ -456,6 +475,9 @@ def get_carouseltemplate(gps=None, store_name=None):
 
 @handler.add(event=MessageEvent, message=TextMessage)
 def handle_message(event: MessageEvent):
+    """
+    這邊處理文字格式
+    """
     logger.info(f'line from text: {event.message.text}')
     message = get_carouseltemplate(store_name=event.message.text)
 
@@ -473,6 +495,9 @@ def handle_message(event: MessageEvent):
 
 @handler.add(event=MessageEvent, message=LocationMessage)
 def handle_message(event: MessageEvent):
+    """
+    這邊處理定位格式
+    """
     lat = event.message.latitude
     lon = event.message.longitude
     logger.info(f'line from gps: {lat}, {lon}')

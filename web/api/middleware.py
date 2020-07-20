@@ -9,6 +9,10 @@ DEBUG = os.environ.get('ENV') != 'prod'
 
 
 def line_notify(msg):
+    """
+    line 通知功能
+    """
+    # 開發機 不需要通知 不然會收不完
     if DEBUG:
         return
     url = "https://notify-api.line.me/api/notify"
@@ -26,6 +30,9 @@ def defaultmiddleware(get_response):
     # One-time configuration and initialization.
 
     def middleware(request):
+        """
+        為了 可以在這邊紀錄每一筆request response 資訊
+        """
         # Code to be executed for each request before
         # the view (and later middleware) are called.
         # print(f'req: {request.method} {request.path}')
@@ -49,6 +56,10 @@ class CatchErrorMiddleware:
         return response
 
     def process_exception(self, request, exception):
+        """
+        為了捕捉exception
+        """
         logger.error(f'{request.build_absolute_uri()} , {traceback.format_exc()}')
+        # 發出錯誤通知 告訴notify 哪裡有錯誤
         line_notify(f'coupon3: {traceback.format_exc()}')
         raise exception

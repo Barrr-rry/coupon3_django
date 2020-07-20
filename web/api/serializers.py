@@ -29,37 +29,17 @@ fmt = '%Y-%m-%d %H:%M:%S'
 to_datetime = lambda x: make_aware(datetime.datetime.strptime(x, '%Y-%m-%d %H:%M'))
 
 
-class MemberHiddenField:
-    def set_context(self, serializer_field):
-        if not isinstance(serializer_field.context['request'].user, Member):
-            raise serializers.ValidationError('操作錯誤')
-        self.target = serializer_field.context['request'].user
-
-    def __call__(self, *args, **kwargs):
-        return self.target
-
-
-def serializer_factory(cls_name, cls, fds):
-    class Meta(cls.Meta):
-        fields = fds
-
-    return type(cls_name, (cls,), dict(Meta=Meta))
-
-
-def response_time(self, instance, key):
-    if getattr(instance, key) is None:
-        return None
-    else:
-        return getattr(instance, key).strftime(fmt)
-
-
 class FileSerializer(serializers.ModelSerializer):
+    # get file name
     filename = serializers.SerializerMethodField()
 
     class Meta(CommonMeta):
         model = File
 
     def get_filename(self, instance):
+        """
+        get file name 得知在media 他可能會被改名字 因為如果重複資料 他會加亂數
+        """
         return instance.file.name
 
 
@@ -86,26 +66,37 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
         model = StoreDiscount
 
     def get_desc_safe(self, instance):
+        """
+        更新raw desc data 變成前端可以吃得到的html tag
+        """
         ret = instance.description
+        # 偵測到url 自動加上a tag
         urls = re.findall(
             r'(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})',
             ret)
         for url in urls:
             ret = ret.replace(url, f'<a href="{url}">{url}</a>')
+
+        # 更新標題
         replace_data = re.findall('【.+? 】：', ret)
         for raw_text in replace_data:
             replace_text = raw_text.replace('【', '<h5 class="project-title">').replace(' 】：', '</h5>')
             ret = ret.replace(raw_text, replace_text)
+
+        # 更新 * 字樣的文字
         for line in re.findall('＊.+', ret):
             temp = line.strip("\r").strip('＊')
             new_line = f'<p class="dot">{temp}</p>'
             print(new_line)
             ret = ret.replace(line, new_line)
+
+        # 加上 數字li tag
         for line in ret.split('\n'):
             if re.findall(r'（\d+?）', line):
                 temp = re.sub(r'（\d+?）', '', line).strip("\r").strip()
                 new_line = f'<li>{temp}</li>'
                 ret = ret.replace(line + '\n', new_line)
+        # 判斷所有的li tag 在外層加上ul
         regex = r"(<li>.*?<\/li>)+"
         matches = re.finditer(regex, ret, re.MULTILINE)
         for match in matches:
@@ -114,6 +105,7 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
         return ret
 
     def get_desc_edit(self, instance):
+        # 針對 edit 做調整
         ret = instance.description
         return ret.replace('<br>', '\n').replace('<BR>', '\n').strip()
 
@@ -163,6 +155,9 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
         model = Store
 
     def get_image_1(self, instance, *args, **kwargs):
+        """
+        判斷有沒有image 沒有就用替代圖
+        """
         target = instance.storeimage.first()
         if not target:
             ret = instance.store_type.replace_icon
@@ -171,6 +166,10 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
         return ret
 
     def get_distance_name(self, instance, *args, **kwargs):
+        """
+        更新 距離的文字訊息內容
+        看是否會超過公里還是公尺
+        """
         if not hasattr(instance, 'distance') or instance.distance is None:
             return ''
         try:
@@ -185,12 +184,18 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
         return m
 
     def get_phone_2(self, instance, *args, **kwargs):
+        """
+        phone 格式更改
+        """
         phone = instance.phone
         if phone and '#' in phone:
             phone = phone.replace(' #', ',')
         return phone
 
     def get_storediscount_names(self, instance, *args, **kwargs):
+        """
+        將所有的折扣訊息 組裝起來給前端
+        """
         names = map(lambda x: x.name, instance.storediscount.all())
         names = list(filter(lambda x: x, names))
         if not names:
@@ -198,14 +203,23 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
         return ", ".join(names)
 
     def get_images(self, instance, *args, **kwargs):
+        """
+        get 所有的store images
+        """
         ret = []
         for el in instance.storeimage.all():
             ret.append(el.picture)
         return ret
 
     def create(self, validated_data):
+        """
+        overwrite store create 因為有改很多東西 也需要巢狀新增
+        """
+        # 這個是指 要嘛所有更改全部成功 如果有任何error 就全部不成功
         with transaction.atomic():
+            # get store image data
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
+            # get store discount data
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
             instance = super().create(validated_data)
             if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
@@ -221,6 +235,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                     store=instance,
                     **el
                 )
+            # 更新gps 位置
             if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
@@ -236,15 +251,21 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             return instance
 
     def update(self, instance, validated_data):
+        """
+        overwrite store create 因為有改很多東西 也需要巢狀更改
+        """
+        # 這個是指 要嘛所有更改全部成功 如果有任何error 就全部不成功
         with transaction.atomic():
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
+            # 先將舊有的資料刪除
             StoreImage.original_objects.filter(store=instance).delete()
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
                     picture=pic
                 )
+            # 先將舊有的資料刪除
             StoreDiscount.original_objects.filter(store=instance).delete()
             for el in storediscount_data:
                 StoreDiscount.objects.create(
@@ -262,6 +283,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             st_time = time.time()
             lat = None
             lon = None
+            # 如果沒有gps 則是更新pgs
             if not (instance.latitude and instance.longitude):
                 task_id = task.enqueue_task('get_latlon', instance.address)
                 gps = None
@@ -295,6 +317,9 @@ class CountySerializer(DefaultModelSerializer):
         model = County
 
     def get_count(self, instance, *args, **kwargs):
+        """
+        store 數量 先filter status = 1 & search_status = 1
+        """
         count = Store.objects.filter(county=instance).filter(status=1).filter(search_status=1).count()
         return count
 

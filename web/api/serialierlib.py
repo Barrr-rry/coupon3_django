@@ -6,6 +6,14 @@ from django.utils.functional import cached_property
 from rest_framework.utils.serializer_helpers import BindingDict
 from django.utils import timezone
 
+"""
+此module 是把seralizers 一些會用到的常用lib 移動到這邊 做切開的動作
+"""
+
+"""
+此Meta 是定義 要顯示哪些seralizers 常用的定義在這邊
+"""
+
 
 class CommonMeta:
     exclude = [
@@ -48,7 +56,7 @@ class UpdateRequiredSerailizerMixin:
     @cached_property
     def fields(self):
         """
-        A dictionary of {field_name: field_instance}.
+        避免每次update 都要把所有的參數都帶上去才可以update
         """
         # `fields` is evaluated lazily. We do this to ensure that we don't
         # have issues importing modules that use ModelSerializers as fields,
@@ -67,13 +75,23 @@ class UpdateRequiredSerailizerMixin:
 
 
 class DefaultModelSerializer(UpdateRequiredSerailizerMixin, serializers.ModelSerializer):
+    """
+    有針對我們的需求做seralizer 的優化
+    其他seralizer 就繼承這一個
+    """
 
     def update(self, instance, validated_data):
+        """
+        如果有update  就自動更新 update time
+        """
         if hasattr(instance, 'updated_at'):
             instance.updated_at = timezone.now()
         return super().update(instance, validated_data)
 
     def pull_validate_data(self, validated_data, key, default=None):
+        """
+        自動delete 一些 method 常用lib
+        """
         ret = validated_data.get(key, default)
         if key in validated_data:
             del validated_data[key]
@@ -84,6 +102,10 @@ class DefaultModelSerializer(UpdateRequiredSerailizerMixin, serializers.ModelSer
 
 
 class HiddenField:
+    """
+    需要隱藏的欄位 此專案目前沒有用到
+    """
+
     def set_context(self, serializer_field):
         raise NotImplemented
 
@@ -92,6 +114,9 @@ class HiddenField:
 
 
 def hiddenfield_factory(target_class):
+    """
+    需要隱藏的欄位 此專案目前沒有用到
+    """
     cls_name = target_class.__name__
 
     class Mixin:
@@ -107,6 +132,10 @@ def hiddenfield_factory(target_class):
 
 
 class WritebleSerailizer(serializers.ModelSerializer):
+    """
+    用於巢狀 serliazer 此專案沒有用到
+    """
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.writable_fields = []
@@ -124,12 +153,18 @@ class WritebleSerailizer(serializers.ModelSerializer):
 
 
 def serializer_factory(model, serializer=WritebleSerailizer):
+    """
+    用於巢狀 serliazer 此專案沒有用到
+    """
     meta_class = type('Meta', (CommonMeta,), dict(model=model))
     attrs = {'Meta': meta_class}
     return type('_%sSerializer' % model.__class__.__name__, (serializer,), attrs)
 
 
 class NestedModelSerializer(DefaultModelSerializer):
+    """
+    用於巢狀 serliazer 此專案沒有用到
+    """
     def __init__(self, *args, **kwargs):
         super(NestedModelSerializer, self).__init__(*args, **kwargs)
         self.forward_fields, self.reverse_fields = [], []

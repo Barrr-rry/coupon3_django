@@ -1,9 +1,14 @@
+# queryset 查詢的語法
 from django.db.models import Q, Sum, Count
 from rest_framework import filters
+# rest api 文檔用
 from rest_framework.compat import coreapi, coreschema
+# django timezone
 from django.utils import timezone
 from django.utils.timezone import make_aware
+# import models
 from api.models import County, District, Store, StoreType
+# 算距離的module
 from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
@@ -13,6 +18,9 @@ and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
 
 
 def filter_query(filter_dict, queryset):
+    """
+    給api filter & web.views 裡面共用function 因為都是一樣的query 方式
+    """
     q = None
     p = None
     filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
@@ -92,8 +100,12 @@ def filter_query(filter_dict, queryset):
 
 class StoreFilter(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
+        """
+        filter 資料前 先對資料做初始化
+        """
         search = request.query_params.get('search', None)
         keywords = []
+        # 針對search 文字做優化
         if search:
             search = search.replace('台', '臺')
             msg = search
@@ -114,6 +126,7 @@ class StoreFilter(filters.BaseFilterBackend):
                         keywords.append(el.name)
                     break
         search = " ".join(keywords)
+        # 取得所有需要用到的參數 並且針對參數做優化調整
         status = request.query_params.get('status', 1)
         search_status = request.query_params.get('search_status', 1)
         district = request.query_params.get('district', None)
@@ -136,6 +149,7 @@ class StoreFilter(filters.BaseFilterBackend):
             for store_type_2 in store_types:
                 if store_type_2 in ['7', '8', '11', '12']:
                     search_status = 2
+        # filter_query 前組成function 需要的格式
         filter_dict = dict([('search', search),
                             ('district', district),
                             ('lat', lat),
@@ -152,8 +166,13 @@ class StoreFilter(filters.BaseFilterBackend):
         return filter_query(filter_dict, queryset)
 
     def get_schema_fields(self, view):
+        """
+        schema 告訴該api filter 可以帶入什麼參數 做查詢
+        """
+        # list 資料不需要帶參數
         if view.action != 'list':
             return []
+        # 以下資料參數 都是上面會用到的參數
         return (
             coreapi.Field(
                 name='ids',

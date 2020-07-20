@@ -12,14 +12,20 @@ from django.contrib.gis.geos import Point
 
 class ParanoidQuerySet(models.QuerySet):
     """
-    Prevents objects from being hard-deleted. Instead, sets the
-    ``date_deleted``, effectively soft-deleting the object.
+    更改原本的queryset
+    不要讓他刪除原本的資料
     """
 
     def real_delete(self):
+        """
+        真的要刪除再用這個function
+        """
         return super().delete()
 
     def delete(self):
+        """
+        overwrite 原本delete 功能 改成 符合我們db 的格式
+        """
         for obj in self:
             obj.deleted_status = True
             obj.deleted_at = timezone.now()
@@ -28,7 +34,7 @@ class ParanoidQuerySet(models.QuerySet):
 
 class ParanoidManager(models.Manager):
     """
-    Only exposes objects that have NOT been soft-deleted.
+    預設queryset 自動filter deleted_status=False 的資料 這樣才不用每一個都還要額外寫
     """
 
     def get_queryset(self):
@@ -37,22 +43,30 @@ class ParanoidManager(models.Manager):
 
 
 class DefaultAbstract(models.Model):
+    """
+    每一個model 定義歐繼承此class 這樣就不用每一筆資料 用還要寫重複的東西
+    """
     deleted_status = models.BooleanField(default=False, help_text='資料刪除狀態')
     created_at = models.DateTimeField(auto_now_add=True, help_text='建立時間')
     updated_at = models.DateTimeField(null=True, help_text='更新時間')
     deleted_at = models.DateTimeField(null=True, blank=True, help_text='刪除時間')
+    # 覆蓋本來的objects
     objects = ParanoidManager()
+    # 真的需要再改用這個方法
     original_objects = models.Manager()
 
     class Meta:
         abstract = True
         # ordering = ['-updated_at', '-created_at']
+        # 預設排序 都從最新資料在前面
         ordering = ['-created_at']
 
     def real_delete(self, *args, **kwargs):
+        # 真的要delete 在call this function
         return super().delete(*args, **kwargs)
 
     def delete(self, **kwargs):
+        # overwrite delete function
         self.deleted_status = True
         self.deleted_at = timezone.now()
         self.save()
@@ -103,11 +117,13 @@ class Store(DefaultAbstract):
     ad = models.TextField(default=None, null=True, blank=True, help_text='廣告')
 
     def save(self, *args, **kwargs):
+        # save 資料前 確認如果有經緯度 自動填上location 欄位 這樣才不會改太多程式碼
         if not self.location and self.latitude and self.longitude:
             self.location = Point(float(self.latitude), float(self.longitude), srid=4326)
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
+        # get url
         return f'/store/{self.pk}'
 
 
@@ -137,6 +153,9 @@ class StoreImage(DefaultAbstract):
 
 
 def validate_file(file):
+    """
+    後端驗證 檔案大小以及圖片格式
+    """
     import re
     file_size = 1048576
     try:

@@ -4,7 +4,8 @@ from .models import Store
 
 
 class StaticViewSitemap(Sitemap):
-    """Reverse 'static' views for XML sitemap."""
+    """給google 做sitemap"""
+
     def items(self):
         # Return list of url names for views to include in sitemap
         return ['store',
@@ -39,4 +40,5 @@ class StaticViewSitemap(Sitemap):
 class StoreSitemap(Sitemap):
 
     def items(self):
+        """只讓他查詢 status=1 的store"""
         return Store.objects.filter(status=1)
