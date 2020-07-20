@@ -34,6 +34,8 @@ def get_place_info(place_id):
         phone=data.get('formatted_phone_number'),
         website=data.get('website'),
         name=data['name'],
+        lat=data['geometry']['location']['lat'],
+        lon=data['geometry']['location']['lng'],
         photos=data.get('photos', [])
     )
     return ret
