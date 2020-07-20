@@ -131,6 +131,10 @@ class StoreFilter(filters.BaseFilterBackend):
             order_by = '-created_at'
         if sort == 'old':
             order_by = 'created_at'
+        if sort == 'pop':
+            order_by = 'pop'
+        if sort == '-pop':
+            order_by = '-pop'
         if store_type and store_type != 'all':
             store_types = store_type.split(',')
             for store_type_2 in store_types:
