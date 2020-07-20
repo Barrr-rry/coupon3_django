@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django_user_agents',
 ]
 MIDDLEWARE = [
-    'django_samesite_none.middleware.SameSiteNoneMiddleware',
+    # 'django_samesite_none.middleware.SameSiteNoneMiddleware',
     'api.middleware.defaultmiddleware',
     'api.middleware.CatchErrorMiddleware',
     'django.middleware.security.SecurityMiddleware',

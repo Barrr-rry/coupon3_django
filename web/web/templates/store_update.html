@@ -181,6 +181,7 @@
               <div id="firstmap" class="overlay">
                 <a class="map_btn" href="#">使用您目前位置</a>
               </div>
+              <a class="map_btn use-address" href="javascript:void(0);" style="outline: none;display: none">使用此位置</a>
             </div><!-- /#flat-map -->
             <div class="clearfix"></div>
           </div><!-- /.inner-box -->
@@ -297,6 +298,10 @@
 {% include 'includes/js.html' %}
 <script>
   $(document).ready(() => {
+    $('#firstmap').remove()
+    $('#firstmap .map_btn').remove()
+    let location = ''
+    let gps_msg = ''
     const position = {
       coords: {
         latitude: {{ instance.latitude }},
@@ -304,6 +309,43 @@
       },
       zoom: 15
     }
+      $('.map_btn.use-address').on('click', function (e) {
+          e.preventDefault()
+          e.stopPropagation()
+          $('.preloader').show()
+          console.log('msg1:'+gps_msg)
+          $.ajax({
+              url: `/api/location/?task_type=2&msg=${gps_msg}`,
+              type: "GET",
+              contentType: "application/json; charset=utf-8",
+              dataType: "json",
+          }).done(res => {
+              $('.preloader').hide()
+              location = res.data.address.replace('台', '臺')
+              let $input = $('input[name="address"]')
+              $input.val(location)
+              let $select_2 = $('select[name="county"]')
+              let $select_1 = $('select[name="district"]')
+              for (let el of county_list) {
+                  if (location.indexOf(el.name) >= 0) {
+                      $select_2.val(el.id)
+                      $select_1.find('option').remove()
+                      let filters = district_list.filter(x => x.county = el.id)
+                      for (let ell of filters) {
+                          $select_1.append(`<option value=${ell.id}>${ell.name}</option>`)
+                      }
+                  }
+              }
+              for (let el of district_list) {
+                  if (location.indexOf(el.name) >= 0) {
+                      $select_1.val(el.id)
+                  }
+              }
+              $(this).hide()
+          })
+
+
+      })
     $('input[name="address"]').on('change paste keyup', () => {
       $('#firstmap').remove()
       $('#firstmap .map_btn').remove()
@@ -333,6 +375,9 @@
         const pos = L.marker([e.latlng.lat, e.latlng.lng], {icon: greenIcon}).bindPopup('目前位置').openPopup()
         marker.push(pos)
         map.addLayer(pos)
+        gps_msg = msg
+        console.log('msg2:'+msg)
+        $('.map_btn.use-address').show()
         $.ajax({
           url: `/api/location/?task_type=2&msg=${msg}`,
           type: "GET",
@@ -356,6 +401,7 @@
       let msg = $el.val()
       let $select_2 = $('select[name="county"]')
       let $select_1 = $('select[name="district"]')
+      console.log('msg3:'+msg)
       $.ajax({
         url: `/api/location/?task_type=1&msg=${msg}`,
         type: "GET",
