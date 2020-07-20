@@ -91,11 +91,13 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
             ret = ret.replace(line, new_line)
 
         # 加上 數字li tag
+        ret += '\n'
         for line in ret.split('\n'):
             if re.findall(r'（\d+?）', line):
                 temp = re.sub(r'（\d+?）', '', line).strip("\r").strip()
                 new_line = f'<li>{temp}</li>'
                 ret = ret.replace(line + '\n', new_line)
+        ret = ret.strip()
         # 判斷所有的li tag 在外層加上ul
         regex = r"(<li>.*?<\/li>)+"
         matches = re.finditer(regex, ret, re.MULTILINE)
