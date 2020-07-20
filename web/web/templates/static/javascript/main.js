@@ -52,6 +52,9 @@ function nativeAdCallback(nadParas) {
     } else {
       class_name = 'mb-50px col-md-4 store md-100'
     }
+    let desc = `<div class="box-desc ad-long-sub">
+                ${nadParas.BODY.length > 1 ? nadParas.BODY : ''}
+              </div>`
     let html = `
     <div class="${class_name}">
       <div class="imagebox style1">
@@ -72,9 +75,7 @@ function nativeAdCallback(nadParas) {
               <div class="ad-short-sub">
               ${nadParas.LONGSUBJECT.length > 1 ? nadParas.LONGSUBJECT : ''}
               </div>
-              <div class="box-desc ad-long-sub">
-                ${nadParas.BODY.length > 1 ? nadParas.BODY : ''}
-              </div>
+              ${nadParas.BODY.length > 1 ? desc : ''}
             </div><!-- /.box-content -->
           </div>
           <div class="imagebox_bottom">
