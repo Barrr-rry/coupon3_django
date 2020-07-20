@@ -10,24 +10,32 @@ import re
 import pandas as pd
 import numpy as np
 from google import find_place_id, get_place_info, get_photo
+import math
 
 """
-from https://drive.google.com/file/d/1HwE72ESlUevHPhXrEvnLrBImsiPht4m3/view
+from https://drive.google.com/file/d/1scKtTo1VERcRJiQB0HAC_jtMRPUorQy9/view
 """
 
-file_name = '商圈店家優惠一覽表(對外)-7.16.xlsx'
+file_name = '2020觀光工廠振興券與活動優惠彙整(對外).xlsx'
 excel = pd.ExcelFile(file_name)
 targets = []
 for sheet_name in excel.sheet_names:
     df = pd.read_excel(file_name, sheet_name=sheet_name)
-    data = df.dropna()
-    for index, el in data.iterrows():
+    for index, el in df.iterrows():
+        desc_list = []
+        for idx in [1, 2, 3, 4, 5]:
+            to_add = True
+            try:
+                to_add = not math.isnan(el[idx])
+            except Exception as e:
+                pass
+
+            if to_add:
+                desc_list.append(el[idx])
+
         targets.append(dict(
-            name=el['店名'].strip(),
-            address=el['地址'].strip(),
-            phone=el['電話'].strip(),
-            desc=el['優惠內容'].strip(),
-            website=el['網址'].strip(),
+            name=el['Name'].strip(),
+            desc_list=desc_list,
         ))
 
 with transaction.atomic():
@@ -41,7 +49,12 @@ with transaction.atomic():
         district_dct[el.name] = el
 
     for el in targets:
-        addr = el['address']
+        place_id = find_place_id(el['name'])
+        if not place_id:
+            logger.warning(f'not found place id: {el.name}')
+            continue
+        info = get_place_info(place_id)
+        addr = info['address']
         print(addr)
         lat = None
         lon = None
@@ -67,55 +80,46 @@ with transaction.atomic():
                 name=el['name'],
                 address=addr,
                 store_type=store_type,
-                latitude=lat,
-                longitude=lon,
+                latitude=info['lat'],
+                longitude=info['lon'],
                 county_id=county_id,
                 district_id=district_id,
-                phone=el['phone'],
+                phone=info['phone'],
                 email=None,
-                website=el['website'],
+                website=info['website'],
                 status=0,
                 pop=0,
+                google_name=info['name'],
+                google_status=1,
             )
-            if len(el['desc']) < 100:
-                store_discount = StoreDiscount.objects.create(
-                    store=store,
-                    discount_type=discount_type,
-                    name=el['desc']
-                )
-            else:
-                store_discount = StoreDiscount.objects.create(
-                    store=store,
-                    discount_type=discount_type,
-                    description=el['desc']
-                )
+            for desc in el['desc_list']:
+                if len(desc) < 100:
+                    store_discount = StoreDiscount.objects.create(
+                        store=store,
+                        discount_type=discount_type,
+                        name=desc
+                    )
+                else:
+                    store_discount = StoreDiscount.objects.create(
+                        store=store,
+                        discount_type=discount_type,
+                        description=desc
+                    )
 
         except Exception as e:
             logger.warning('store error 不過不管了')
             continue
         try:
-            el = store
-            if find_addr:
-                place_id = find_place_id(el.name)
-                if not place_id:
-                    logger.warning(f'not found place id: {el.name}')
-                    continue
-
-            info = get_place_info(place_id)
-            el.google_name = info['name']
-            el.latitude = info['lat']
-            el.longitude = info['lon']
+            # el.latitude = info['lat']
+            # el.longitude = info['lon']
             for photo in info['photos']:
                 ref = photo['photo_reference']
                 img = get_photo(ref)
                 StoreImage.objects.create(
-                    store=el,
+                    store=store,
                     picture=img,
                 )
                 break
-            el.google_status = 1
-            el.save()
         except Exception as e:
             logger.error(f'fuck dead: {el.name}')
 
-print()
