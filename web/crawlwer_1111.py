@@ -6,6 +6,8 @@ import requests
 from pyquery import PyQuery as pq
 from urllib.parse import urljoin
 import json
+
+
 # 抓取target_urls
 
 
@@ -56,25 +58,16 @@ def crawlwer_1111():
         r = requests.get(target_url)
         doc = r.text
         dom = pq(doc)
-        for i in range(dom('div > iframe').length):
-            address = dom('p.small-text').text().split(' ')[i].split('\n')[0]
-            phone = dom('p.small-text').text().split(' ')[i].split('\n')[0]
-            sub_name = dom('h3.title-sin_map').eq(i).text()
-            name = dom('#wrapper > div > div > div > div > div > div > div').eq(1).text()
+        name = dom('#wrapper > div > div > div > div > div > div > div').eq(1).text()
+        dom('h1').text()
+        for el in dom('div.property_item').items():
+            phone = el('p.small-text a').text()
+            small_text_el = el('p.small-text')
+            small_text_el.remove('a')
+            address = small_text_el.text()
+            sub_name = el('h3.title-sin_map').text()
             discount_title = dom('#wrapper > div > div > div > div > div > div > div').eq(2).text().split('\n')
-            discount = dom('div.Article_Content')
-            discount = discount.remove('.row').remove('.d-none').remove('h2.pt-3').text()
-            i
 
 
-
-
-
-
-
-
-
-crawlwer_1111()
-
-print()
-
+if __name__ == '__main__':
+    crawlwer_1111()
