@@ -204,7 +204,7 @@ let initStoreDataMarker = (datas) => {
       for (let foo of el.storediscount) {
         i += 1
         if (i <= 3 && foo.name) {
-          ul = `
+          ul += `
             <ul>
                 <li><span>${foo.name}</span></li>     
             </ul>
@@ -1958,10 +1958,10 @@ const showSelfPosition = (position) => {
         for (let foo of data.storediscount) {
           i += 1
           if (i <= 3 && foo.name) {
-            names = `
+            names += `
             <div class="sale-list">
               ${foo.name}
-            </div><br/>
+            </div>
             `
           }
         }
