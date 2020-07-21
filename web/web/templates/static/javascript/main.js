@@ -2381,6 +2381,20 @@ const showSelfPosition = (position) => {
       })
     })
   }
+  let initAD = () => {
+    $('#footer-ad').append(
+      `
+      <div class="col-md-12" style=" position: relative; text-align: center; margin-top:80px;">
+        <ins class="scupioadslot" style="display:inline-block;width:970px;height:90px;"
+           data-sca-pub="lQgDGBIrQDI="
+           data-sca-web="5143"
+           data-sca-category="24"
+           data-sca-cid="18233"
+           data-sca-slot-type="STA">
+        </ins>
+      </div>
+    `)
+  }
 
 
   $(function () {
@@ -2406,6 +2420,7 @@ const showSelfPosition = (position) => {
     storePage();
     initToScroll();
     searchAPI();
+    initAD();
   });
 
 })(jQuery);
