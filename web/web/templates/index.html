@@ -238,23 +238,21 @@
           </div>
         </div><!-- /.imaebox style5 -->
       </div><!-- /.col-md-3 col-sm-6 -->
-      {% if request|is_mobile %}
-        <div class="d-md-none" id="mobile-ad">
-          <div class="imagebox">
-            <div id="div-tam-ad-21594276538731J" style="width: 100%"></div>
-            <script type="text/javascript" language="javascript">
-              var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-              if(isMobile){
-                adLoad2('21594276538731J', '', 'div-tam-ad-21594276538731J', true, 0, callback, 1);
-              }
+      <div class="d-md-none" id="mobile-ad">
+        <div class="imagebox">
+          <div id="div-tam-ad-21594276538731J" style="width: 100%"></div>
+          <script type="text/javascript" language="javascript">
+            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            if (isMobile) {
+              adLoad2('21594276538731J', '', 'div-tam-ad-21594276538731J', true, 0, callback, 1);
+            }
 
-              function callback(status) {
-                console.log('%c[TAMedia]%c Callback status : ' + status, 'background:#DDDDDD;color:#FF5511;', 'background:#DDDDDD;color:#000000;');
-              }
-            </script>
-          </div>
+            function callback(status) {
+              console.log('%c[TAMedia]%c Callback status : ' + status, 'background:#DDDDDD;color:#FF5511;', 'background:#DDDDDD;color:#000000;');
+            }
+          </script>
         </div>
-      {% endif %}
+      </div>
 
       <div class="col-md-3 col-sm-6">
         <div class="imagebox style5 item">
@@ -300,7 +298,7 @@
 <script>
   $(document).ready(() => {
     var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if(!isMobile){
+    if (!isMobile) {
       $('#mobile-ad').remove()
     }
     initPosition()
