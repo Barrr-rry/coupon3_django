@@ -191,7 +191,8 @@ class StoreIdView(BaseView):
         google = f'https://www.google.com.tw/maps/search/{lat},+{lon}/@{lat},{lon},17z?hl=zh-TW'
         ret = dict(
             instance=serializers.StoreSerializer(instance=instance).data,
-            google=google
+            google=google,
+            token=self.token,
         )
         pop = instance.pop + 1
         instance.pop = pop
