@@ -3,6 +3,9 @@ import datetime
 
 # https://cuiqingcai.com/7776.html
 # https://blog.csdn.net/mouday/article/details/88560543
+"""
+log 初始化資料
+"""
 logger.add(
     f'./logs/{datetime.date.today():%Y%m%d}.log',
     rotation='1 day',

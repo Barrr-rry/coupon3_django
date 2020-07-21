@@ -10,11 +10,17 @@ import uuid
 from log import logger
 from pyquery import PyQuery as pq
 from api.util import get_time
+"""
+此module 主要是做map 爬蟲
+"""
 
 r = redis.StrictRedis(host='coupon3-redis')
 
 
 class FIFOqueue:
+    """
+    利用 queue 做先進先出 每一次執行一個任務
+    """
 
     def __init__(self, r):
         self.key = 'QueueTask'
@@ -55,6 +61,10 @@ reids_wraper = RedisWrap(r)
 
 
 class Task:
+    """
+    主要透過task 傳送任務 讓任務可以在crawler & 其他需要gps 的地方可以溝通
+    並且將過去資料存入redis 減少運算時間
+    """
     def __init__(self):
         pass
 
@@ -86,6 +96,7 @@ task = Task()
 
 
 def get_driver():
+    # selenium 初始化資料
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("no-sandbox")
     chrome_options.add_argument("--disable-extensions")
@@ -103,6 +114,7 @@ def get_driver():
 
 
 def get_latlon(driver, addr):
+    # 抓取經緯度
     search = driver.find_element_by_id("searchWord")
     search.clear()
     search.send_keys(addr)
@@ -125,6 +137,7 @@ def get_addr(driver, latlon_str):
     lat lon
     latlon_str = f'{lat}, {lon}'
     """
+    # # 抓取address
     search = driver.find_element_by_id("searchWord")
     search.clear()
     search.send_keys(latlon_str)
@@ -168,6 +181,7 @@ def loop_queue():
         fn = get_addr if task_type == 'get_addr' else get_latlon
         dct = fn(driver, task_args)
         count = dct['count']
+        # 如果一直增加搜尋紀錄 超過20 個 沒有人要資料的時候 就重新reflash
         if count > 20:
             reflash = True
         task.set_task_response(task_id, dct)

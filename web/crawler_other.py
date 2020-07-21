@@ -5,6 +5,9 @@ import os
 from io import BytesIO
 import json
 
+"""
+過去的爬蟲匯入資料 如果不需要就可以刪掉了
+"""
 url = 'https://3000.gov.tw/News.aspx?n=53&sms=9110&page=1&PageSize=200'
 r = requests.get(url)
 dom = pq(r.text)

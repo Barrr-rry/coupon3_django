@@ -2,7 +2,7 @@ from run_init import *
 import math
 
 """
-將store 新增資料從google place id 抓
+之前抓資料用的 現在不用不到了
 """
 import random
 import re

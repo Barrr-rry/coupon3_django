@@ -5,7 +5,9 @@ from run_init import *
 from django.db import transaction, router
 from log import logger
 from google import find_place_id, get_place_info, get_photo
-
+"""
+測試用 沒有用到就可以刪掉了
+"""
 
 def check_none(data):
     return None if data == 'Null' else data

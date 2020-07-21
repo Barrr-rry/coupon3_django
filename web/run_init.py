@@ -16,6 +16,10 @@ from munch import Munch
 
 fmt = '%Y-%m-%d %H:%M:%S'
 test_email = 'max@conquers.co'
+"""
+初始化資料
+但是上線後這邊的資料不再更新了
+"""
 
 
 def main(for_test=False, config_data=None):

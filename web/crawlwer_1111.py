@@ -11,7 +11,9 @@ from google import find_place_id, get_place_info, get_photo
 
 # 抓取target_urls
 
-
+"""
+過去的爬蟲匯入資料 如果不需要就可以刪掉了
+"""
 def save_urls():
     search_urls = """
     https://marketing.1111.com.tw/uwhere/Search?Type=1684

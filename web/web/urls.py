@@ -1,17 +1,5 @@
-"""web URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+所有的網址定義都在這邊
 """
 from django.contrib import admin
 from django.urls import path, include
@@ -35,6 +23,9 @@ DEBUG = os.environ.get('ENV') != 'prod'
 
 
 def get_view(cls):
+    """
+    使用cache 機制 如果debug mode 就不增加
+    """
     if DEBUG:
         return cls.as_view()
     else:
@@ -51,6 +42,7 @@ urlpatterns = [
     path('api/', include(get_urls())),
     path("webhook/", webhook, name="webhook"),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # 後台管理網址
     path('backend/conquers/admin/', admin.site.urls),
     path('', get_view(IndexView)),
     path('404/', NotFoundView.as_view(), name='404'),
@@ -89,6 +81,7 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
+    # 文檔只會出現在debug mode
     urlpatterns += path('docs/',
                         include_docs_urls(title='RESTFUL API', description=docs.doc_desc, authentication_classes=[])),
 

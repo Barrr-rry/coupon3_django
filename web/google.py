@@ -3,9 +3,15 @@ import urllib.parse
 from log import logger
 
 key = 'AIzaSyB8SR12DJW0lrsurwa74PrCsfytq8BWqJc'
+"""
+此module 又是用google map 抓東西
+"""
 
 
 def find_place_id(msg):
+    """
+    一開始需要抓到place id 才可以抓其他資料
+    """
     ret = ''
     url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'
     r = requests.get(url, params=dict(
@@ -19,6 +25,9 @@ def find_place_id(msg):
 
 
 def get_place_info(place_id):
+    """
+    透過place id 取得info
+    """
     url = 'https://maps.googleapis.com/maps/api/place/details/json'
     r = requests.get(url, params=dict(
         key=key, place_id=place_id, language='zh-TW'
@@ -42,6 +51,9 @@ def get_place_info(place_id):
 
 
 def get_photo(ref):
+    """
+    將info 的photo 傳過來儲存成media/img 並且回傳
+    """
     url = 'https://maps.googleapis.com/maps/api/place/photo'
     r = requests.get(url, params=dict(
         maxwidth=640,
