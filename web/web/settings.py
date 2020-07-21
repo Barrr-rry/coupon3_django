@@ -138,7 +138,20 @@ DATABASES = {
         'TEST': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'test.db'),
-        }
+        },
+        # 'OPTIONS': {'charset': 'utf8mb4'},
+        'OPTIONS': {
+            'charset': 'utf8',
+            'use_unicode': True,
+            'init_command': 'SET '
+                            'storage_engine=INNODB,'
+                            'character_set_connection=utf8,'
+                            'collation_connection=utf8mb4_unicode_ci'
+            # 'sql_mode=STRICT_TRANS_TABLES,'    # see note below
+            # 'SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
+        },
+        'TEST_CHARSET': 'utf8',
+        'TEST_COLLATION': 'utf8mb4_unicode_ci',
     }
 }
 
