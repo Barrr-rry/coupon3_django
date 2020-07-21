@@ -2384,15 +2384,16 @@ const showSelfPosition = (position) => {
   let initAD = () => {
     $('#footer-ad').append(
       `
-      <div class="col-md-12" style=" position: relative; text-align: center; margin-top:80px;">
+      <div class="d-none d-lg-block col-md-12" style=" position: relative; text-align: center; margin-top:80px;">
         <ins class="scupioadslot" style="display:inline-block;width:970px;height:90px;"
-           data-sca-pub="lQgDGBIrQDI="
-           data-sca-web="5143"
-           data-sca-category="24"
-           data-sca-cid="18216"
-           data-sca-slot-type="STA">
+             data-sca-pub="lQgDGBIrQDI="
+             data-sca-web="5143"
+             data-sca-category="24"
+             data-sca-cid="18233"
+             data-sca-slot-type="STA">
         </ins>
-      </div>
+        <script async src="https://img.scupio.com/js/ad.js"></script>
+      </div><!-- /.col-md-12 -->
     `)
   }
 
