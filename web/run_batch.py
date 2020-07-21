@@ -11,51 +11,72 @@ import pandas as pd
 import numpy as np
 from google import find_place_id, get_place_info, get_photo
 import math
+from collections import defaultdict
 
 """
 from https://drive.google.com/file/d/1scKtTo1VERcRJiQB0HAC_jtMRPUorQy9/view
 """
 
-file_name = '2020觀光工廠振興券與活動優惠彙整(對外).xlsx'
+file_name = '市場攤商優惠統計7.16.(對外).xlsx'
 excel = pd.ExcelFile(file_name)
-targets = []
+targets = defaultdict(str)
+
 for sheet_name in excel.sheet_names:
     df = pd.read_excel(file_name, sheet_name=sheet_name)
     for index, el in df.iterrows():
-        desc_list = []
-        for idx in [1, 2, 3, 4, 5]:
-            to_add = True
-            try:
-                to_add = not math.isnan(el[idx])
-            except Exception as e:
-                pass
+        # targets.append(dict(
+        #     name=el['Name'].strip(),
+        #     desc_list=desc_list,
+        # ))
+        desc = targets[el['市場名稱']]
+        if not desc:
+            desc = '＊參與商家\n'
+        phone_str = ''
+        if el['電話']:
+            phone_str = f'（電話）{el["電話"]} '
+        other = el['其他']
+        is_nan = False
+        try:
+            is_nan = math.isnan(other)
+        except Exception as e:
+            pass
 
-            if to_add:
-                desc_list.append(el[idx])
+        if is_nan:
+            other = ''
+            if el['折數'] != el['其他']:
+                other = f'持三倍券消費 {el["折數"]}優待'
 
-        targets.append(dict(
-            name=el['Name'].strip(),
-            desc_list=desc_list,
-        ))
-
+        desc += f'（1）{el["店家"]} {phone_str}{other}\n'
+        targets[el['市場名稱']] = desc
 with transaction.atomic():
     querset = District.objects.all()
+    discount_type = DiscountType.objects.filter(name='優惠').first()
     district_dct = dict()
 
-    discount_type = DiscountType.objects.filter(name='優惠').first()
     store_type = StoreType.objects.filter(name='商圈').first()
 
     for el in querset:
         district_dct[el.name] = el
 
-    for el in targets:
-        place_id = find_place_id(el['name'])
+    for name in targets:
+        desc = targets[name]
+
+        place_id = find_place_id(name)
+        info = dict(
+            address=None,
+            phone=None,
+            website=None,
+            name=None,
+            lat=None,
+            lon=None,
+            photos=[],
+        )
         if not place_id:
             logger.warning(f'not found place id: {el.name}')
+            info = get_place_info(place_id)
             continue
-        info = get_place_info(place_id)
         addr = info['address']
-        print(addr)
+        print(name, addr)
         lat = None
         lon = None
         find_addr = 1
@@ -77,7 +98,7 @@ with transaction.atomic():
 
         try:
             store = Store.objects.create(
-                name=el['name'],
+                name=name,
                 address=addr,
                 store_type=store_type,
                 latitude=info['lat'],
@@ -92,19 +113,11 @@ with transaction.atomic():
                 google_name=info['name'],
                 google_status=1,
             )
-            for desc in el['desc_list']:
-                if len(desc) < 100:
-                    store_discount = StoreDiscount.objects.create(
-                        store=store,
-                        discount_type=discount_type,
-                        name=desc
-                    )
-                else:
-                    store_discount = StoreDiscount.objects.create(
-                        store=store,
-                        discount_type=discount_type,
-                        description=desc
-                    )
+            store_discount = StoreDiscount.objects.create(
+                store=store,
+                discount_type=discount_type,
+                description=desc
+            )
 
         except Exception as e:
             logger.warning('store error 不過不管了')
@@ -123,3 +136,4 @@ with transaction.atomic():
         except Exception as e:
             logger.error(f'fuck dead: {el.name}')
 
+print()
