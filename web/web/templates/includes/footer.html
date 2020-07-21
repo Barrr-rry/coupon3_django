@@ -7,22 +7,7 @@
   var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   if (isMobile) {
     adLoad2('Z1594276438493jb', '', 'div-tam-ad-Z1594276438493jb', true, 0, callback, 1);
-  }else{
-    $('#footer-ad').append(
-      `
-      <div class="">
-        <ins class="scupioadslot" style="display:inline-block;width:100%;height:300px;"
-             data-sca-pub="lQgDGBIrQDI="
-             data-sca-web="5143"
-             data-sca-category="24"
-             data-sca-cid="18233"
-             data-sca-slot-type="STA">
-        </ins>
-      </div>
-`
-    )
   }
-
 
 
   function callback(status) {
@@ -84,3 +69,20 @@
     <i class="fa fa-chevron-up"></i>
   </a><!-- /.go-top -->
 </div><!-- /.button-go-top -->
+<script>
+  $(document).ready(() => {
+    $('#footer-ad').append(
+      `
+      <div class="">
+        <ins class="scupioadslot" style="display:inline-block;width:100%;height:300px;"
+             data-sca-pub="lQgDGBIrQDI="
+             data-sca-web="5143"
+             data-sca-category="24"
+             data-sca-cid="18233"
+             data-sca-slot-type="STA">
+        </ins>
+      </div>
+`
+    )
+  })
+</script>
