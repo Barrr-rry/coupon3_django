@@ -10731,6 +10731,16 @@ footer .widget-about .logo-ft a {
   clear: both;
 }
 
+.footer-ad {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  margin-bottom: 50px;
+}
+.footer-ad .d-lg-block {
+  margin-top: 0 !important;
+}
+
 .tp-banner {
   position: relative;
 }
@@ -12736,6 +12746,10 @@ article.post-single .entry-post .entry-content ul li {
   }
   .flat-highlights .highlights ul.menu-list li a span {
     font-size: 14px;
+  }
+
+  .footer-ad {
+    display: none;
   }
 }
 @media only screen and (max-height: 900px) {
