@@ -111,6 +111,8 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
     def get_desc_edit(self, instance):
         # 針對 edit 做調整
         ret = instance.description
+        if not ret:
+            return ''
         return ret.replace('<br>', '\n').replace('<BR>', '\n').strip()
 
 
