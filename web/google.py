@@ -42,7 +42,7 @@ def get_place_info(place_id):
         address=data.get('formatted_address'),
         phone=data.get('formatted_phone_number'),
         website=data.get('website'),
-        name=data['name'],
+        name=data.get('name'),
         lat=data['geometry']['location']['lat'],
         lon=data['geometry']['location']['lng'],
         photos=data.get('photos', [])
