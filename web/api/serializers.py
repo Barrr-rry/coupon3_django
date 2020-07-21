@@ -70,6 +70,8 @@ class StoreDiscountSerializer(serializers.ModelSerializer):
         更新raw desc data 變成前端可以吃得到的html tag
         """
         ret = instance.description
+        if not ret:
+            return ''
         # 偵測到url 自動加上a tag
         urls = re.findall(
             r'(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})',
