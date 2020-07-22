@@ -33,3 +33,14 @@ logger.add(
     filter=lambda record: record["extra"].get("name") == "location"
 )
 
+
+logger.add(
+    f'./logs/{datetime.date.today():%Y%m%d}_location_error.log',
+    rotation='1 day',
+    retention='7 days',
+    level='INFO',
+    format="{time:YYYY-MM-DD at HH:mm:ss} | {level} | PID:{process} |{message}",
+    backtrace=True, diagnose=True,
+    filter=lambda record: record["extra"].get("name") == "line"
+)
+
