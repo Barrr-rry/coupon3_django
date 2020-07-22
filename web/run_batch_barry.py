@@ -37,7 +37,7 @@ for store in stores:
             store.address = info.get('address', store.address)
             store.phone = info.get('phone', store.phone)
             store.website = info.get('website', store.website)
-            if len(store.website) >= 512:
+            if store.website and len(store.website) >= 512:
                 store.website = None
             store.latitude = info.get('lat', store.latitude)
             store.longitude = info.get('lon', store.longitude)
