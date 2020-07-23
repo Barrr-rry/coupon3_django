@@ -171,5 +171,9 @@ def validate_file(file):
     return True
 
 
+class ConfigSetting(DefaultAbstract):
+    in_maintenance = models.BooleanField(default=False, help_text="維護中")
+
+
 class File(DefaultAbstract):
     file = models.FileField(validators=[validate_file])

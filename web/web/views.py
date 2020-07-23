@@ -118,6 +118,10 @@ class StoreUpdateView(BaseView):
         return ret
 
 
+class MaintainView(BaseView):
+    template_name = 'maintain.html'
+
+
 class ContactView(BaseView):
     template_name = 'contact.html'
 
