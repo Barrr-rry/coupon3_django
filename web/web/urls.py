@@ -46,6 +46,7 @@ urlpatterns = [
     path('backend/conquers/admin/', admin.site.urls),
     path('', get_view(IndexView)),
     path('404/', NotFoundView.as_view(), name='404'),
+    path('maintain/', MaintainView.as_view(), name='maintain'),
     path('store/create/', StoreCreateView.as_view(), name='store/create'),
     path('contact/', get_view(ContactView), name='contact'),
     path('store/<int:store_id>/', get_view(StoreIdView)),
