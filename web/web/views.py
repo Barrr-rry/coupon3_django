@@ -330,12 +330,24 @@ class StoreView(BaseView):
             """
             el = None
             if county and county != 'all':
-                el = County.objects.get(pk=county)
+                try:
+                    el = County.objects.get(pk=county)
+                except Exception as e:
+                    pass
+
             elif district and district != 'all':
-                el = District.objects.get(pk=district)
+                try:
+                    el = District.objects.get(pk=district)
+                except Exception as e:
+                    pass
+
             elif activity:
-                el = Activity.objects.get(pk=activity)
-                el = el.county.first()
+                try:
+                    el = Activity.objects.get(pk=activity)
+                    el = el.county.first()
+                except Exception as e:
+                    pass
+
             if el:
                 lat = el.latitude
                 lon = el.longitude
