@@ -74,10 +74,10 @@ services:
     restart: always
 
     environment:
-      - VIRTUAL_HOST=3coupon.info
+      - VIRTUAL_HOST=li1593-188.members.linode.com
       - VIRTUAL_NETWORK=nginx-proxy
       - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=3coupon.info
+      - LETSENCRYPT_HOST=li1593-188.members.linode.com
       - LETSENCRYPT_EMAIL=max@conquers.co
     depends_on:
       - coupon3-web
