@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile_pd
     restart: always
     command: >
-      bash -c "service cron start & python crawler.py & uwsgi  --emperor uwsgi.ini"
+      bash -c "uwsgi  --emperor uwsgi.ini"
     ports:
       - "2002:2000"
     volumes:
