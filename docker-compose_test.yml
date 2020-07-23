@@ -1,5 +1,20 @@
 version: '3'
 services:
+  coupon-db:
+    image: mariadb
+    restart: always
+    command: ['--character-set-server=utf8', '--collation-server=utf8_unicode_ci']
+    environment:
+      MYSQL_ROOT_PASSWORD: conquers666
+      MYSQL_USER: conquers666
+      MYSQL_PASSWORD: conquers666
+      MYSQL_DATABASE: ezgo
+    ports:
+      - "5556:3306"
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d  # 挂载自定义配置目录，即上述的 mysql/conf/django-blog.cnf 中的配置
+      - ./mysql/data:/var/lib/mysql  # 挂载数据目录
+      - ./mysql/log:/var/log  # 挂载日志目录
   coupon3-web:
     container_name: coupon3-django-web
     sysctls:
@@ -9,16 +24,17 @@ services:
       dockerfile: Dockerfile_test
     restart: always
     command: >
-      bash -c "service cron start & uwsgi  --emperor uwsgi.ini"
+      bash -c "service cron start & python crawler.py & uwsgi  --emperor uwsgi.ini"
     ports:
       - "2002:2000"
     volumes:
       - ./web:/app
       - ./log:/root/var/log
-#      - rest_framework:/usr/local/lib/python3.7/site-packages/rest_framework/static/rest_framework
-      - static:/app/web/templates/static
+      #      - rest_framework:/usr/local/lib/python3.7/site-packages/rest_framework/static/rest_framework
+      - static_vol:/app/web/templates/static
     depends_on:
       - coupon3-redis
+      - coupon-db
   coupon3-redis:
     image: redis:alpine
     restart: always
@@ -68,8 +84,9 @@ services:
       - certs:/etc/nginx/certs:ro
       - ./web:/app
       - ./log:/var/log/nginx
-#      - rest_framework:/usr/share/nginx/html/static/rest_framework
-      - static:/usr/share/nginx/html/static
+      #      - rest_framework:/usr/share/nginx/html/static/rest_framework
+#      - static_vol:/usr/share/nginx/html/static
+      - ./web/web/templates/static:/usr/share/nginx/html/static
 
     restart: always
 
@@ -82,8 +99,8 @@ services:
     depends_on:
       - coupon3-web
 volumes:
-#  rest_framework:
-  static:
+  #  rest_framework:
+  static_vol:
   certs:
   html:
   vhost:
