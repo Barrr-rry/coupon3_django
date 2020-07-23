@@ -132,6 +132,15 @@ class StoreUpdateView(BaseView):
 class MaintainView(TemplateView):
     template_name = 'maintain.html'
 
+    def render_to_response(self, context, **response_kwargs):
+        in_maintenance = False
+        instance = ConfigSetting.objects.first()
+        if instance:
+            in_maintenance = instance.in_maintenance
+        if in_maintenance:
+            return super().render_to_response(context, **response_kwargs)
+        return HttpResponseRedirect('/')
+
 
 class ContactView(BaseView):
     template_name = 'contact.html'
