@@ -5,7 +5,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'web.settings')
 django.setup()
 from django.contrib.auth.models import User
 from api import serializers
-from api.models import StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, Activity
+from api.models import StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, Activity, \
+    ConfigSetting
 from django.utils import timezone
 import datetime
 import random
