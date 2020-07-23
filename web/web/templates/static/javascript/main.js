@@ -2264,7 +2264,7 @@ const showSelfPosition = (position) => {
     // initStoreDataMarker(store_data)
   }
   let searchAPI = () => {
-    $('.search-pin-icon, .search-pin-load, .ti-search').on('click', function () {
+    $('.search-pin-icon, .search-pin-load').on('click', function () {
       initPosition()
       let $el = $(this)
       $el.find('svg').hide()
@@ -2281,19 +2281,6 @@ const showSelfPosition = (position) => {
         } catch (e) {
         }
       }
-      if ($(" #search ").val() == ''){
-        $.ajax({
-          url: `/api/location/?task_type=2&msg=${msg}`,
-          type: "GET",
-          contentType: "application/json; charset=utf-8",
-          dataType: "json",
-        }).done(res => {
-          $(" #search ").val(res.data.address.replace('台', '臺'))
-          $load.removeClass('loader')
-          $el.find('svg').show()
-        })
-      }
-
       $.ajax({
         url: `/api/location/?task_type=2&msg=${msg}`,
         type: "GET",
@@ -2402,7 +2389,7 @@ const showSelfPosition = (position) => {
     `)
   }
   let checkSearch = () => {
-    if ($(" #search ").val() == '') {
+    if ($(" #search ").val() == '' && !$(" #updateStore ").length) {
       $('.search-pin-icon').click()
       $('.search-pin-load').click()
     }
