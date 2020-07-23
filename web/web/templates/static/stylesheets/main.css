@@ -12042,9 +12042,20 @@ form.form-listing .inner-box .wrap-listing.location a.search-pin-load {
   right: 12%;
 }
 form.form-listing .inner-box .browse {
+  position: relative;
   background-color: #FBFBFB;
   border: 2px dashed #cccccc;
   padding: 45px 15px;
+}
+form.form-listing .inner-box .browse .upload {
+  position: unset;
+}
+form.form-listing .inner-box .browse .upload input {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 form.form-listing .inner-box .browse .imgbox {
   padding: 0 20px;
