@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"><!--<![endif]-->
+<head>
+  {% include 'includes/meta.html' %}
+
+  <!-- Mobile Specific Metas -->
+
+  <!-- Boostrap style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/bootstrap.min.css' %}?token={{ token }}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/style.css' %}?token={{ token }}">
+
+  <!-- Reponsive -->
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/responsive.css' %}?token={{ token }}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}?token={{ token }}">
+  <link rel="stylesheet" type="text/css" href="{% static 'stylesheets/main.css' %}">
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+
+
+
+</head>
+<body>
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml            : true,
+            version          : 'v7.0'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/zh_TW/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- Your Chat Plugin code -->
+<div class="fb-customerchat"
+     attribution=setup_tool
+     page_id="100357275080787"
+     theme_color="#ff7e29"
+     logged_in_greeting="您好！請問您有遇到什麼問題嗎？"
+     logged_out_greeting="您好！請問您有遇到什麼問題嗎？">
+</div>
+
+{% include 'includes/preloader.html' %}
+
+{% include 'includes/header.html' %}<!-- /.header -->
+
+
+<section class="flat-row flat-error-page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="wrap-error center">
+          <div class="img-error">
+            <img src="/media/maintain.svg" alt="">
+          </div>
+        </div><!-- /.wrap-error -->
+      </div><!-- /.col-md-12 -->
+    </div><!-- /.row -->
+  </div><!-- /.container -->
+</section><!-- /.flat-error-page -->
+
+
+{% include 'includes/footer.html' %}
+
+<!-- Javascript -->
+{% include 'includes/js.html' %}
+
+
+</body>
+</html>
