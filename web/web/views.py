@@ -21,6 +21,7 @@ city_re = None
 site_re = None
 road_re = None
 road_dict = dict()
+logger.info('初始化')
 
 
 class BaseView(TemplateView):
