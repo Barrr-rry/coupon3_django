@@ -2389,6 +2389,10 @@ const showSelfPosition = (position) => {
       </div><!-- /.col-md-12 -->
     `)
   }
+  let checkSearch = () => {
+    $('.search-pin-icon').click()
+    $('.search-pin-load').click()
+  }
 
 
   $(function () {
@@ -2415,6 +2419,7 @@ const showSelfPosition = (position) => {
     initToScroll();
     searchAPI();
     initAD();
+    checkSearch();
   });
 
 })(jQuery);
