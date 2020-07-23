@@ -2264,7 +2264,7 @@ const showSelfPosition = (position) => {
     // initStoreDataMarker(store_data)
   }
   let searchAPI = () => {
-    $('.search-pin-icon, .search-pin-load').on('click', function () {
+    $('.search-pin-icon, .search-pin-load, .ti-search').on('click', function () {
       initPosition()
       let $el = $(this)
       $el.find('svg').hide()
@@ -2280,6 +2280,18 @@ const showSelfPosition = (position) => {
           break
         } catch (e) {
         }
+      }
+      if ($(" #search ").val() == ''){
+        $.ajax({
+          url: `/api/location/?task_type=2&msg=${msg}`,
+          type: "GET",
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+        }).done(res => {
+          $(" #search ").val(res.data.address.replace('台', '臺'))
+          $load.removeClass('loader')
+          $el.find('svg').show()
+        })
       }
 
       $.ajax({
@@ -2390,8 +2402,10 @@ const showSelfPosition = (position) => {
     `)
   }
   let checkSearch = () => {
-    $('.search-pin-icon').click()
-    $('.search-pin-load').click()
+    if ($(" #search ").val() == '') {
+      $('.search-pin-icon').click()
+      $('.search-pin-load').click()
+    }
   }
 
 
