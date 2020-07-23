@@ -1,6 +1,6 @@
 from django.views.generic.base import View, TemplateView
 from api.models import (
-    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity, ConfigSetting
 )
 from api import serializers
 from api import filters
@@ -16,6 +16,7 @@ import re
 from django.views.decorators.cache import cache_page
 from crawler import reids_wraper
 import traceback
+from django.http import HttpResponseRedirect
 
 city_re = None
 site_re = None
@@ -30,6 +31,15 @@ class BaseView(TemplateView):
     每一個頁面都要有token
     每一次部署後 js css 都可以cache 版本更新後就會抓到不同token
     """
+
+    def render_to_response(self, context, **response_kwargs):
+        in_maintenance = False
+        instance = ConfigSetting.objects.first()
+        if instance:
+            in_maintenance = instance.in_maintenance
+        if in_maintenance:
+            return HttpResponseRedirect('/maintain/')
+        return super().render_to_response(context, **response_kwargs)
 
     def get_context_data(self, *args, **kwargs):
         """
@@ -119,7 +129,7 @@ class StoreUpdateView(BaseView):
         return ret
 
 
-class MaintainView(BaseView):
+class MaintainView(TemplateView):
     template_name = 'maintain.html'
 
 

@@ -2,13 +2,13 @@ from django.contrib import admin
 from django.db.models.fields.related import ForeignKey, ManyToManyField
 from django.db.models.fields.reverse_related import ManyToOneRel, ManyToManyRel
 from api.models import (
-    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity
+    StoreType, County, District, Store, DiscountType, StoreDiscount, StoreImage, File, Activity, ConfigSetting
 )
 from import_export.admin import ImportExportModelAdmin, ImportExportActionModelAdmin
 from api.resources import StoreResource, ActivityResource, StoreDiscountResource
 
 modellist = (
-    StoreType, County, District, DiscountType, StoreImage, File
+    StoreType, County, District, DiscountType, StoreImage, File, ConfigSetting
 )
 # 後台管理需要設定要監控哪些model
 for md in modellist:
