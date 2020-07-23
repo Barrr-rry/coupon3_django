@@ -1,16 +1,18 @@
-FROM python:3.7
+FROM qazxc56690659/coupon3_django_coupon3-web:latest
 COPY ./web /app
-ENV ENV test
+ENV ENV prod
 WORKDIR /app
 RUN pip install -r requirements.txt
 
 RUN apt-get update && apt-get install -y cron
 RUN service cron start
-RUN python manage.py crontab add
+#RUN python manage.py crontab add
+RUN apt-get -y install binutils libproj-dev gdal-bin
+
+# Copy hello-cron file to the cron.d directory
 #COPY ./django-cron /etc/cron.d/django-cron
+# Give execution rights on the cron job
 #RUN chmod 0644 /etc/cron.d/django-cron
-
-
 # Apply cron job
 #RUN crontab /etc/cron.d/django-cron
 #RUN ./init.sh
