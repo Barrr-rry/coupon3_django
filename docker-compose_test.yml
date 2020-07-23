@@ -21,7 +21,7 @@ services:
       net.core.somaxconn: 32768
     build:
       context: .
-      dockerfile: Dockerfile_test
+      dockerfile: Dockerfile_pd
     restart: always
     command: >
       bash -c "service cron start & python crawler.py & uwsgi  --emperor uwsgi.ini"
@@ -77,7 +77,7 @@ services:
     container_name: "nginx-container"
     build:
       context: .
-      dockerfile: DockerfileNginx-test
+      dockerfile: ./Dockerfile_nginx
     volumes:
       - dhparam:/etc/nginx/dhparam
       - vhost:/etc/nginx/vhost.d
