@@ -294,7 +294,6 @@ let initPosition = () => {
   let setPosition = (position) => {
     setCookie("lat", position.coords.latitude, 365)
     setCookie("lon", position.coords.longitude, 365)
-    console.log('set position:', now_position)
   }
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(setPosition, setError)
@@ -302,7 +301,6 @@ let initPosition = () => {
     alert('您的瀏覽器不支援定位系統')
     setError()
   }
-  console.log('init position')
 }
 
 function getParameters(url) {
@@ -412,7 +410,6 @@ let share = (social) => {
   const webTitle = `振興券`,
     webUrl = window.location.href
   let shareUrl = (social === 'line') ? `振興券：${webUrl}?openExternalBrowser=1` : webUrl
-  console.log('share:', shareUrl)
   window.open('https://www.addtoany.com/add_to/' + social + '?linkurl=' + shareUrl + '&amp;linkname=' + encodeURI(shareUrl))
 }
 let copy = (content) => {
@@ -445,7 +442,6 @@ let copy = (content) => {
 }
 
 const showError = (error) => {
-  console.log('error:', error)
   const position = {
     coords: {
       latitude: '23.8523405',
@@ -1952,7 +1948,6 @@ const showSelfPosition = (position) => {
         ret.storeimage_data = files.map(x => x.filename)
         ret.latitude = null
         ret.longitude = null
-        console.log(ret)
         $.ajax({
           url: '/api/store/',
           type: "POST",
@@ -2016,7 +2011,6 @@ const showSelfPosition = (position) => {
         ret.storeimage_data = storeimage_data
         ret.latitude = null
         ret.longitude = null
-        console.log(ret)
         $.ajax({
           url: `/api/store/${ret.id}/`,
           type: "PUT",
@@ -2319,7 +2313,6 @@ const showSelfPosition = (position) => {
     if ($('#toscroll') && $('#toscroll')[0]) {
       setTimeout(() => {
         $('#toscroll')[0].scrollIntoView()
-        console.log('scrollll')
       }, 1000)
     }
   }

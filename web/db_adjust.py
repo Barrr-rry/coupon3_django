@@ -4,7 +4,7 @@ import math
 from django.db import transaction
 
 """
-"lat": "24.635421", "lon": "121.750068"
+db 調整 不需要就可以刪掉了
 """
 import random
 import re

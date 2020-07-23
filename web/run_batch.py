@@ -14,7 +14,7 @@ import math
 from collections import defaultdict
 
 """
-from https://drive.google.com/file/d/1scKtTo1VERcRJiQB0HAC_jtMRPUorQy9/view
+每一次批次更新資料  用這個
 """
 
 file_name = '市場攤商優惠統計7.16.(對外).xlsx'

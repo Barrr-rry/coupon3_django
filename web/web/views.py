@@ -25,12 +25,20 @@ road_dict = dict()
 
 class BaseView(TemplateView):
     token = str(uuid.uuid4())
+    """
+    每一個頁面都要有token
+    每一次部署後 js css 都可以cache 版本更新後就會抓到不同token
+    """
 
     def get_context_data(self, *args, **kwargs):
+        """
+        這個資料是跑到前端的參數 所以要訂什麼都在 get_context_data
+        """
         return dict(token=self.token)
 
 
 class BlogView(BaseView):
+    # 定義 你要用哪一個template
     template_name = 'blog.html'
 
 
@@ -47,6 +55,7 @@ class IndexView(BaseView):
 
     def get_context_data(self, *args, **kwargs):
         ret = dict(
+            # 前端畫面 要選擇很多store_type
             store_type=serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data,
             token=self.token,
         )
@@ -63,6 +72,7 @@ class StoreCreateView(BaseView):
     def get_context_data(self, *args, **kwargs):
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         county_list = serializers.CountySerializer(many=True, instance=County.objects.all()).data
+        # 轉成json 格式 因為要給js 吃
         district_list_json = json.dumps(district_list)
         county_list_json = json.dumps(county_list)
         county_id = county_list[0]['id']
@@ -85,6 +95,7 @@ class StoreUpdateView(BaseView):
         instance = Store.objects.get(pk=kwargs.get('store_id'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         county_list = serializers.CountySerializer(many=True, instance=County.objects.all()).data
+        # 轉成json 格式 因為要給js 吃
         district_list_json = json.dumps(district_list)
         county_list_json = json.dumps(county_list)
         county_id = instance.county.id if instance.county else county_list[0]['id']
@@ -183,17 +194,20 @@ class StoreIdView(BaseView):
     template_name = 'store_id.html'
 
     def get_context_data(self, *args, **kwargs):
+        # queryset這樣抓資料會比較快一些
         instance = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
             select_related('county').prefetch_related('activity'). \
             select_related('district').select_related('store_type').get(pk=kwargs.get('store_id'))
         lat = instance.latitude
         lon = instance.longitude
+        # google 網址格式
         google = f'https://www.google.com.tw/maps/search/{lat},+{lon}/@{lat},{lon},17z?hl=zh-TW'
         ret = dict(
             instance=serializers.StoreSerializer(instance=instance).data,
             google=google,
             token=self.token,
         )
+        # 更新人氣
         pop = instance.pop + 1
         instance.pop = pop
         instance.save()
@@ -201,7 +215,10 @@ class StoreIdView(BaseView):
 
 
 def distance(x):
-    # 更新後目前用不到 但是先把算式留著
+    """
+    最初版本的算距離公式
+    更新後目前用不到 但是先把算式留著
+    """
     nlat = x['latitude']
     nlon = x['longitude']
     ret = (abs(nlat - lat) ** 2 + abs(nlon - lon) ** 2) ** (1 / 2)
@@ -219,9 +236,14 @@ class StoreView(BaseView):
     template_name = 'store.html'
 
     def check_re(self):
+        """
+        因為city road 等資訊 不會更新 初始化第一筆資料 要到後就記住
+        可以再找城市或道路的時候可以直接抓到經緯度
+        """
         global city_re, site_re, road_re, road_dict
         if city_re is None or site_re is None or road_re is None:
             location_data = []
+            # 資料從此json 而來
             with open('./location.json') as f:
                 location_data = json.loads(f.read())
             city_list = []
@@ -246,11 +268,15 @@ class StoreView(BaseView):
             for el in District.objects.all():
                 site_list.append(el.name)
 
+            # regex 在判斷上速度會比較快
             city_re = r"|".join(city_list)
             site_re = r"|".join(site_list)
             road_re = r"|".join(road_list)
 
     def get_context_data(self, *args, **kwargs):
+        """
+        這邊最常容易遇到問題 所以寫try catch
+        """
         try:
             ret = self._get_context_data(*args, **kwargs)
             return ret
@@ -263,6 +289,7 @@ class StoreView(BaseView):
         self.check_re()
         st = time.time()
         task_spend = 0
+        # 初始化filter 的資料
         status = self.request.GET.get('status', 1)
         queryset = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
             prefetch_related('activity').select_related('county'). \
@@ -278,10 +305,12 @@ class StoreView(BaseView):
         ids = self.request.GET.get('ids', None)
         logger.info(f'get search: {search}')
 
+        # 改變文字 跟db 相符
         if search:
             search = search.replace('台', '臺')
 
         # get all county
+        # 將所有的db count_dict 存成mapping
         county_dct = dict()
         for el in County.objects.all():
             county_dct[el.name] = dict(id=el.id, instance=el)
@@ -296,15 +325,29 @@ class StoreView(BaseView):
         lon = None
         msg_2 = msg
         if msg is None or not search:
-            # 如果沒有輸入地址取得經緯度的方法
+            """
+            沒有輸入文字從縣市霍霍活動取得 真的在沒有看cookie 或者給default 值
+            """
             el = None
             if county and county != 'all':
-                el = County.objects.get(pk=county)
+                try:
+                    el = County.objects.get(pk=county)
+                except Exception as e:
+                    pass
+
             elif district and district != 'all':
-                el = District.objects.get(pk=district)
+                try:
+                    el = District.objects.get(pk=district)
+                except Exception as e:
+                    pass
+
             elif activity:
-                el = Activity.objects.get(pk=activity)
-                el = el.county.first()
+                try:
+                    el = Activity.objects.get(pk=activity)
+                    el = el.county.first()
+                except Exception as e:
+                    pass
+
             if el:
                 lat = el.latitude
                 lon = el.longitude
@@ -312,6 +355,7 @@ class StoreView(BaseView):
                 lat = float(self.request.COOKIES.get('lat', 23.8523405))
                 lon = float(self.request.COOKIES.get('lon', 120.9009427))
         else:
+            # 模糊搜尋 XX區 XX市
             if len(msg) > 2:
                 msg = msg[:-1]
             for county_name in county_dct:
@@ -396,7 +440,7 @@ class StoreView(BaseView):
                     while True:
                         gps_ed = time.time()
                         dct = task.get_task_result(task_id)
-                        # 找不到
+                        # 找不到資料 給初始值
                         if gps_ed - gps_st > 3:
                             logger.warning(f'not found gps: {search} {msg}')
                             lat = float(self.request.COOKIES.get('lat', 23.8523405))
@@ -424,7 +468,7 @@ class StoreView(BaseView):
             if county_dct.get(keyword):
                 el = county_dct[keyword]['instance']
                 activity_list = serializers.ActivitySerializer(many=True, instance=el.activity).data
-
+        # sort 排序方式
         sort = self.request.GET.get('sort', 'distance')
         # distance \ -distance or down
         if sort == 'new':
@@ -435,12 +479,14 @@ class StoreView(BaseView):
             order_by = '-pop'
         if sort == '-pop':
             order_by = 'pop'
+        # 抓取特別的 store_type
         if store_type and store_type != 'all':
             store_types = store_type.split(',')
             for store_type_2 in store_types:
                 if store_type_2 in ['7', '8', '11', '12']:
                     search_status = 2
 
+        # 準備get filter queryset
         filter_dict = dict([('search', search),
                             ('district', district),
                             ('lat', lat),
@@ -458,19 +504,23 @@ class StoreView(BaseView):
             filter_dict['search'] = msg_2
         data_st = time.time()
         queryset = filters.filter_query(filter_dict, queryset)
+        # 組成資料 一開始只有5筆
         data = serializers.StoreSerializer(many=True, instance=queryset[:5]).data
         data_ed = time.time()
 
+        # 組成資料 並且要把全部加入進去
         storetypes = serializers.StoreTypeSerializer(many=True, instance=StoreType.objects.all()).data
         storetypes.insert(0, dict(id='all', name='全部'))
         district_list = serializers.DistrictSerializer(many=True, instance=District.objects.all()).data
         district_list.insert(0, dict(id='all', name='全部'))
 
+        # 判斷county
         if not county:
             county = 'all'
         if isinstance(county, County):
             county = county.id
 
+        # 判斷store discount type
         if storediscount_discount_type is not None:
             dtype = storediscount_discount_type.split(',')
         else:
@@ -483,10 +533,11 @@ class StoreView(BaseView):
         if len(split_list) > 1:
             suffix = f'?{split_list[-1]}'
 
+        # 取得activity name
         activity_instance = Activity.objects.filter(id=activity).first()
         activity_name = activity_instance.name if activity_instance else ''
 
-        # 確認是不是使用store_type
+        # 確認是不是使用store_type 前端需要
         group_store_type = self.request.GET.get('group_store_type', None)
         in_group_store_type = False
         choose_group_store_type = None
@@ -537,7 +588,7 @@ class StoreView(BaseView):
 
     def render_to_response(self, context, **response_kwargs):
         ret = super().render_to_response(context, **response_kwargs)
-
+        # 將每一次的 search 要把lat, lon 記錄下來 這樣要顯示更多的時候 就可以從cookie get 了 就不用再從做一次 節省時間
         ret.set_cookie('search-lat', context.get('lat'))
         ret.set_cookie('search-lon', context.get('lon'))
         return ret
@@ -567,6 +618,7 @@ class StoreCountyView(BaseView):
         for el in data:
             print(el['id'], el['name'])
             dct[f'county_{el["id"]}'] = el['count']
+        # 前端store county 為hard code 因為擺放順序有差 且縣市 有的要一起搜尋
         dct[f'county_300'] = dct[f'county_12'] + dct[f'county_13']
         dct[f'county_200'] = dct[f'county_5'] + dct[f'county_6']
         ret = dict(

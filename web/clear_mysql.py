@@ -7,6 +7,9 @@ django.setup()
 from django.db import connection
 from django.core.management import call_command
 from django.conf import settings
+"""
+清除資料庫資料
+"""
 
 
 def drop_db(prefix=None):

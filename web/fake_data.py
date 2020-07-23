@@ -1,6 +1,8 @@
 import string
 import random
-
+"""
+此專案沒有用到
+"""
 letters = string.ascii_letters + string.digits + '_'
 cn_name = [
     '游盈以',

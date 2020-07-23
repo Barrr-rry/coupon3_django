@@ -12,64 +12,59 @@ import numpy as np
 from google import find_place_id, get_place_info, get_photo
 import math
 
-with open('./1111_crawlwer.json') as f:
-    ret = json.loads(f.read())
-
-
-def deEmojify(text):
-    regrex_pattern = re.compile(pattern = "["
-                                          u"\U0001F600-\U0001F64F"  # emoticons
-                                          u"\U0001F300-\U0001F5FF"  # symbols & pictographs
-                                          u"\U0001F680-\U0001F6FF"  # transport & map symbols
-                                          u"\U0001F1E0-\U0001F1FF"
-                                          u"\U00002702-\U000027B0"
-
-                                          # u"\U000024C2-\U0001F251"
-                                          u"\U0001f926-\U0001f937"
-                                          u"\U00010000-\U0010ffff"
-                                          "]+", flags = re.UNICODE)
-    text = regrex_pattern.sub(r'',text)
-    return text
-
-
-with transaction.atomic():
-    discount_type = DiscountType.objects.filter(name__icontains='優惠').first()
+stores = Store.objects.filter(address__icontains='高雄市前金區中正四路148號').all()
+al = stores.count()
+nw = 0
+logger_location = logger.bind(name="location")
+for store in stores:
+    logger.info(f'{round((nw/al)*100, 3)}%')
+    place_id = find_place_id(store.name)
+    info = get_place_info(place_id)
+    querset = District.objects.all()
     district_dct = dict()
-    for el in District.objects.all():
+    for el in querset:
         district_dct[el.name] = el
-
-    for rett in ret:
-        for key in district_dct:
-            if key in rett['store']['address']:
-                district_id = district_dct[key].id
-                county_id = district_dct[key].county_id
-                break
+    if info:
         try:
-            store = Store.objects.create(
-                name=rett['store']['name'],
-                phone=rett['store']['phone'],
-                address=rett['store']['address'],
-                website=rett['store']['website'],
-                latitude=rett['store'].get('latitude', None),
-                longitude=rett['store'].get('longitude', None),
-                store_type_id=rett['store']['store_type'],
-                google_status=rett['store']['google_status'],
-                google_name=rett['store']['google_name'],
-                county_id=county_id,
-                district_id=district_id,
-            )
-            rett['storediscount']['description'] = deEmojify(rett['storediscount']['description'])
-            StoreDiscount.objects.create(
-                store=store,
-                name=rett['storediscount']['name'],
-                description=rett['storediscount']['description'],
-                discount_type=discount_type
-            )
-            StoreImage.objects.create(
-                store=store,
-                picture=rett['store_image']['picture']
-            )
+            county_id = None
+            district_id = None
+            for key in district_dct:
+                if key in info.get('address', store.address):
+                    district_id = district_dct[key].id
+                    county_id = district_dct[key].county_id
+                    break
+            store.google_name = info.get('name', store.name)
+            store.address = info.get('address', store.address)
+            store.phone = info.get('phone', store.phone)
+            store.website = info.get('website', store.website)
+            if store.website and len(store.website) >= 512:
+                store.website = None
+            store.latitude = info.get('lat', store.latitude)
+            store.longitude = info.get('lon', store.longitude)
+            store.county_id = county_id
+            store.district_id = district_id
+            store.google_status = 1
+            store.status = 0
+            store.save()
+
+            for photo in info['photos']:
+                ref = photo['photo_reference']
+                img = get_photo(ref)
+                StoreImage.objects.create(
+                    store=store,
+                    picture=img,
+                )
+                break
+            logger.info(f'suc store_id:{store.id}')
         except Exception as e:
-            print(rett['store']['phone'])
+            logger.error(f'fil store_id:{store.id}')
+            logger_location.error(f'fal store_id:{store.id}')
+            for msg in e.args:
+                logger_location.error(f'fal msg:{msg}')
+    nw += 1
+
+
+
+
 
 

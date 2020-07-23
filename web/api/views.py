@@ -55,6 +55,7 @@ from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
 from PIL import Image
+import traceback
 
 """
 定義好router
@@ -375,6 +376,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST, require_GET
 from django.http.response import HttpResponse, HttpResponseBadRequest
 
+logger_line = logger.bind(name="line")
+
 
 @csrf_exempt
 @require_POST
@@ -384,7 +387,7 @@ def webhook(request):
     """
     signature = request.headers["X-Line-Signature"]
     body = request.body.decode()
-    logger.info('get webook')
+    logger_line.info('get webook')
 
     try:
         handler.handle(body, signature)
@@ -392,7 +395,7 @@ def webhook(request):
         messages = (
             "Invalid signature. Please check your channel access token/channel secret."
         )
-        logger.error(messages)
+        logger_line.error(messages)
         return HttpResponseBadRequest(messages)
     return HttpResponse("OK")
 
@@ -412,10 +415,10 @@ def to_column(el):
         url = f'https://3coupon.info/media/{image.picture}'
     else:
         url = f'https://3coupon.info/media/{el.store_type.replace_icon}'
-    logger.warning(f'to col url: {url}')
+    logger_line.warning(f'to col url: {url}')
     name = el.name
     uri = f'https://3coupon.info/store/{el.id}/'
-    logger.info(f'title: {name} text: {text} url: {url}')
+    logger_line.info(f'title: {name} text: {text} url: {url}')
     return CarouselColumn(
         thumbnail_image_url=url,
         title=name,
@@ -460,9 +463,9 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
-    logger.info(f'columens len: {len(columns)} {columns}')
+    logger_line.info(f'columens len: {len(columns)} {columns}')
     if len(columns) < 1:
-        logger.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
+        logger_line.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
         no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
                         '或是試試其他方法：\n\n' \
                         '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
@@ -478,19 +481,22 @@ def handle_message(event: MessageEvent):
     """
     這邊處理文字格式
     """
-    logger.info(f'line from text: {event.message.text}')
+    logger_line.info(f'line from text: {event.message.text}')
     message = get_carouseltemplate(store_name=event.message.text)
 
     data = [message.as_json_dict()]
-    logger.info(f'last data: {data}')
+    logger_line.info(f'last data: {data}')
     import json
-    logger.info(f'last data json: {json.dumps(data)}')
-    logger.info(f'line from text success: {event.message.text}')
-    line_bot_api.reply_message(
-        reply_token=event.reply_token,
-        # messages=TextSendMessage(text=event.message.text)
-        messages=message,
-    )
+    logger_line.info(f'last data json: {json.dumps(data)}')
+    logger_line.info(f'line from text success: {event.message.text}')
+    try:
+        line_bot_api.reply_message(
+            reply_token=event.reply_token,
+            # messages=TextSendMessage(text=event.message.text)
+            messages=message,
+        )
+    except Exception as e:
+        logger_line.error(f'error msg: {traceback.format_exc()}')
 
 
 @handler.add(event=MessageEvent, message=LocationMessage)
@@ -500,9 +506,12 @@ def handle_message(event: MessageEvent):
     """
     lat = event.message.latitude
     lon = event.message.longitude
-    logger.info(f'line from gps: {lat}, {lon}')
+    logger_line.info(f'line from gps: {lat}, {lon}')
     message = get_carouseltemplate(gps=(lat, lon))
-    line_bot_api.reply_message(
-        reply_token=event.reply_token,
-        messages=message,
-    )
+    try:
+        line_bot_api.reply_message(
+            reply_token=event.reply_token,
+            messages=message,
+        )
+    except Exception as e:
+        logger_line.error(f'error msg: {traceback.format_exc()}')
