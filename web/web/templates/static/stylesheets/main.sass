@@ -324,12 +324,19 @@ footer
         height: 15px
         top: 2px
         background: url("/media/conquer_logo.svg")
+        -webkit-transition: all 0.2s ease-in-out
+        -moz-transition: all 0.2s ease-in-out
+        -o-transition: all 0.2s ease-in-out
+        transition: all 0.2s ease-in-out
 
       &:hover
         color: #CC2426
 
         span.conquers_logo
           background:  url("/media/conquer_logo_h.svg")
+
+      &.conquers:hover
+        color: #F4CE42
 
       &.link-contact
         display: inline-block
