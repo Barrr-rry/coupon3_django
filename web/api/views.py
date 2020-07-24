@@ -439,7 +439,6 @@ def get_carouseltemplate(gps=None, store_name=None):
     """
     queryset = Store.objects.filter(status=1).prefetch_related('storeimage')
     columns = []
-    ret = []
     if gps:
         ref_location = Point(gps[0], gps[1], srid=4326)
         queryset = queryset.annotate(distance=Distance("location", ref_location))
@@ -452,14 +451,15 @@ def get_carouseltemplate(gps=None, store_name=None):
 
     if store_name:
         if store_name == '我想看教學':
+            messages = []
             no_store_text = '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                             '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                             '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                             '【４】查看下方教學影片'
-            ret.append(TextSendMessage(text=no_store_text))
-            # ret.append(VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
-            #                             preview_image_url='https://3coupon.info/media/超簡單.jpg'))
-            return ret
+            messages_1 = TextSendMessage(text=no_store_text)
+            messages_2 = VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
+                                          preview_image_url='https://3coupon.info/media/超簡單.jpg')
+            return messages[messages_1, messages_2]
 
         el = queryset.filter(name__icontains=store_name).all()
         if el:
@@ -474,10 +474,9 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
-    ret.append(carousel_template_message)
     logger_line.info(f'columens len: {len(columns)} {columns}')
     if len(columns) < 1:
-        ret = []
+        messages = []
         logger_line.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
         no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
                         '或是試試其他方法：\n\n' \
@@ -485,11 +484,12 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                         '【４】查看下方教學影片'
-        ret.append(TextSendMessage(text=no_store_text))
-        # ret.append(VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
-        #                             preview_image_url='https://3coupon.info/media/超簡單.jpg'))
+        messages_1 = TextSendMessage(text=no_store_text)
+        messages_2 = VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
+                                      preview_image_url='https://3coupon.info/media/超簡單.jpg')
+        return messages[messages_1, messages_2]
 
-    return ret
+    return carousel_template_message
 
 
 @handler.add(event=MessageEvent, message=TextMessage)
@@ -499,13 +499,12 @@ def handle_message(event: MessageEvent):
     """
     logger_line.info(f'line from text: {event.message.text}')
     messages = get_carouseltemplate(store_name=event.message.text)
-
-    # for msg in messages:
-    #     data = [msg.as_json_dict()]
-    #     logger_line.info(f'last data: {data}')
-    #     import json
-    #     logger_line.info(f'last data json: {json.dumps(data)}')
-    #     logger_line.info(f'line from text success: {event.msg.text}')
+    #
+    # data = [msg.as_json_dict()]
+    # logger_line.info(f'last data: {data}')
+    # import json
+    # logger_line.info(f'last data json: {json.dumps(data)}')
+    # logger_line.info(f'line from text success: {event.msg.text}')
     try:
         line_bot_api.reply_message(
             reply_token=event.reply_token,
@@ -526,10 +525,9 @@ def handle_message(event: MessageEvent):
     logger_line.info(f'line from gps: {lat}, {lon}')
     messages = get_carouseltemplate(gps=(lat, lon))
     try:
-        for message in messages:
-            line_bot_api.reply_message(
-                reply_token=event.reply_token,
-                messages=message,
-            )
+        line_bot_api.reply_message(
+            reply_token=event.reply_token,
+            messages=message,
+        )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
