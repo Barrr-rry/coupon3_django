@@ -503,9 +503,9 @@ def handle_message(event: MessageEvent):
     logger_line.info(f'line from text success: {event.message.text}')
     try:
         line_bot_api.reply_message(
-            reply_token=event.reply_token,
+            event.reply_token,
             # messages=TextSendMessage(text=event.message.text)
-            messages=message,
+            message,
         )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
