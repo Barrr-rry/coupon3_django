@@ -481,7 +481,9 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                         f'【４】查看下方教學影片:{original_content_url}'
-        return TextSendMessage(text=no_store_text)
+        # return TextSendMessage(text=no_store_text)
+        return VideoSendMessage(original_content_url=original_content_url,
+                                preview_image_url=preview_image_url)
 
     return carousel_template_message
 
