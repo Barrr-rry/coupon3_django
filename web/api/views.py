@@ -506,7 +506,6 @@ def get_carouseltemplate(gps=None, store_name=None):
         ]
         return messages
 
-
     return carousel_template_message
 
 
@@ -545,7 +544,7 @@ def handle_message(event: MessageEvent):
     try:
         line_bot_api.reply_message(
             reply_token=event.reply_token,
-            messages=message,
+            messages=messages,
         )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
