@@ -305,6 +305,11 @@
 </script>
 
 <script>
+  $(document).ready(() => {
+    setTimeout(() => {
+      $('.preloader').hide()
+    }, 5000)
+  })
   $('.slider').each(function () {
     var $this = $(this);
     var $group = $this.find('.slide_group');

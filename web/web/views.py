@@ -389,8 +389,8 @@ class StoreView(BaseView):
                     keywords.append(county_name)
                     county_instance = county
                     break
-
-            for el in District.objects.all():
+            find_district = District.objects.all() if not county_instance else District.objects.filter(county=county_instance)
+            for el in find_district:
                 if len(el.name) > 2:
                     if (el.name[:-1] in msg or msg in el.name[:-1]) and '縣' not in msg_2:
                         msg = msg.replace(el.name, '')
@@ -424,7 +424,7 @@ class StoreView(BaseView):
                         logger.info(f'get map from store: {search}')
                 # 確定road
                 if lat is None or lon is None:
-                    target = re.findall(road_re, search)
+                    target = re.findall(road_re, search) or re.findall(road_re, msg)
                     if target and len(target) == len(search):
                         dct = road_dict[target[0]]
                         lat = dct['lat']
