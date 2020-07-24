@@ -365,7 +365,7 @@ class LocationView(viewsets.ViewSet):
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage, LocationMessage, TemplateSendMessage, URIAction, \
-    MessageAction, PostbackAction, CarouselColumn, CarouselTemplate
+    MessageAction, PostbackAction, CarouselColumn, CarouselTemplate, VideoSendMessage
 
 secret = '8207acee5ae83ea617f5a2f6b1e2ad5e'
 token = 'Me6okVNBI6dZ1tWLD2krySeisJvtfYwsbS8k2R7GnsrGxYnIWASwPJq8JurNnC/zh7tFN5RhTUjaJ754Hn2so8zUboJQjVm2vifUOI/KwQzs83atLWb/vIMZIaXy0CAFC2PVd5nghZKTY/DaIqUq2wdB04t89/1O/w1cDnyilFU='
@@ -450,6 +450,16 @@ def get_carouseltemplate(gps=None, store_name=None):
             )
 
     if store_name:
+        ret = []
+        if store_name == '我想看教學':
+            no_store_text = '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
+                            '【２】輸入店名找商家優惠，如「六福村」\n\n' \
+                            '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
+                            '【４】查看下方教學影片'
+            ret[0] = TextSendMessage(text=no_store_text)
+            ret[1] = VideoSendMessage(original_content_url='影片網址', preview_image_url='預覽的圖片網址')
+            return ret
+
         el = queryset.filter(name__icontains=store_name).all()
         if el:
             for ell in el[:10]:
@@ -463,6 +473,7 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
+    ret[0] = carousel_template_message
     logger_line.info(f'columens len: {len(columns)} {columns}')
     if len(columns) < 1:
         logger_line.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
@@ -470,10 +481,13 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '或是試試其他方法：\n\n' \
                         '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
-                        '【３】前往網頁好查版：https://3coupon.info/store/county/'
-        return TextSendMessage(text=no_store_text)
+                        '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
+                        '【４】查看下方教學影片'
+        ret[0] = TextSendMessage(text=no_store_text)
+        ret[1] = VideoSendMessage(original_content_url='/media/20200724165616_HD.mp4', preview_image_url='')
+        return ret
 
-    return carousel_template_message
+    return ret
 
 
 @handler.add(event=MessageEvent, message=TextMessage)
@@ -482,7 +496,7 @@ def handle_message(event: MessageEvent):
     這邊處理文字格式
     """
     logger_line.info(f'line from text: {event.message.text}')
-    message = get_carouseltemplate(store_name=event.message.text)
+    messages = get_carouseltemplate(store_name=event.message.text)
 
     data = [message.as_json_dict()]
     logger_line.info(f'last data: {data}')
@@ -490,11 +504,12 @@ def handle_message(event: MessageEvent):
     logger_line.info(f'last data json: {json.dumps(data)}')
     logger_line.info(f'line from text success: {event.message.text}')
     try:
-        line_bot_api.reply_message(
-            reply_token=event.reply_token,
-            # messages=TextSendMessage(text=event.message.text)
-            messages=message,
-        )
+        for message in messages:
+            line_bot_api.reply_message(
+                reply_token=event.reply_token,
+                # messages=TextSendMessage(text=event.message.text)
+                messages=message,
+            )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
 
