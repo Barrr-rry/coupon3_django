@@ -10403,6 +10403,16 @@ body {
   font-family: "Noto Sans TC", sans-serif;
 }
 
+::selection {
+  background: #f25b22 !important;
+  color: #fff;
+}
+
+::-moz-selection {
+  background: #f25b22 !important;
+  color: #fff;
+}
+
 .row.display-initial {
   display: block;
 }
