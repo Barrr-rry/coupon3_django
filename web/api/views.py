@@ -484,7 +484,7 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
-                        f'【４】查看下方教學影片:{original_content_url}'
+                        '【４】查看下方教學影片:'
         msg_1 = TextSendMessage(text=no_store_text)
         msg_2 = VideoSendMessage(original_content_url=original_content_url,
                                  preview_image_url=preview_image_url)
