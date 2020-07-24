@@ -453,21 +453,22 @@ def get_carouseltemplate(gps=None, store_name=None):
 
     if store_name:
         if store_name == '我想看教學':
-            messages = []
             no_store_text = '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                             '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                             '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                             '【４】查看下方教學影片'
-            messages_1 = {
-                             'type': 'text',
-                             'text':  no_store_text
-                          }
-            messages_2 = {
-                             'type': 'video',
-                             'original_content_url': original_content_url,
-                             'preview_image_url': preview_image_url,
-                          }
-            return messages[messages_1, messages_2]
+            messages = [
+                            {
+                                'type': 'text',
+                                'text':  no_store_text
+                            },
+                            {
+                                'type': 'video',
+                                'original_content_url': original_content_url,
+                                'preview_image_url': preview_image_url,
+                            }
+                        ]
+            return messages
 
         el = queryset.filter(name__icontains=store_name).all()
         if el:
@@ -492,16 +493,19 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                         '【４】查看下方教學影片'
-        messages_1 = {
-            'type': 'text',
-            'text':  no_store_text
-        }
-        messages_2 = {
-            'type': 'video',
-            'original_content_url': original_content_url,
-            'preview_image_url': preview_image_url,
-        }
-        return messages[messages_1, messages_2]
+        messages = [
+            {
+                'type': 'text',
+                'text':  no_store_text
+            },
+            {
+                'type': 'video',
+                'original_content_url': original_content_url,
+                'preview_image_url': preview_image_url,
+            }
+        ]
+        return messages
+
 
     return carousel_template_message
 
