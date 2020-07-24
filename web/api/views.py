@@ -439,6 +439,8 @@ def get_carouseltemplate(gps=None, store_name=None):
     """
     queryset = Store.objects.filter(status=1).prefetch_related('storeimage')
     columns = []
+    original_content_url = 'https://3coupon.info/media/超簡單.mp4'
+    preview_image_url = 'https://3coupon.info/media/超簡單.jpg'
     if gps:
         ref_location = Point(gps[0], gps[1], srid=4326)
         queryset = queryset.annotate(distance=Distance("location", ref_location))
@@ -457,12 +459,14 @@ def get_carouseltemplate(gps=None, store_name=None):
                             '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                             '【４】查看下方教學影片'
             messages_1 = {
-                TextSendMessage(text=no_store_text)
-            }
+                             'type': 'text',
+                             'text':  no_store_text
+                          }
             messages_2 = {
-                VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
-                                 preview_image_url='https://3coupon.info/media/超簡單.jpg')
-            }
+                             'type': 'video',
+                             'original_content_url': original_content_url,
+                             'preview_image_url': preview_image_url,
+                          }
             return messages[messages_1, messages_2]
 
         el = queryset.filter(name__icontains=store_name).all()
@@ -489,11 +493,13 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                         '【４】查看下方教學影片'
         messages_1 = {
-            TextSendMessage(text=no_store_text)
+            'type': 'text',
+            'text':  no_store_text
         }
         messages_2 = {
-            VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
-                             preview_image_url='https://3coupon.info/media/超簡單.jpg')
+            'type': 'video',
+            'original_content_url': original_content_url,
+            'preview_image_url': preview_image_url,
         }
         return messages[messages_1, messages_2]
 
