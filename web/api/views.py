@@ -453,23 +453,12 @@ def get_carouseltemplate(gps=None, store_name=None):
 
     if store_name:
         if store_name == '我想看教學':
+            logger_line.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
             no_store_text = '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                             '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                             '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                             '【４】查看下方教學影片'
-            messages = [
-                            {
-                                'type': 'text',
-                                'text':  no_store_text
-                            },
-                            {
-                                'type': 'video',
-                                'original_content_url': original_content_url,
-                                'preview_image_url': preview_image_url,
-                            }
-                        ]
-            return messages
-
+            return TextSendMessage(text=no_store_text)
         el = queryset.filter(name__icontains=store_name).all()
         if el:
             for ell in el[:10]:
@@ -485,26 +474,14 @@ def get_carouseltemplate(gps=None, store_name=None):
     )
     logger_line.info(f'columens len: {len(columns)} {columns}')
     if len(columns) < 1:
-        messages = []
         logger_line.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
         no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
                         '或是試試其他方法：\n\n' \
                         '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
-                        '【４】查看下方教學影片'
-        messages = [
-            {
-                'type': 'text',
-                'text':  no_store_text
-            },
-            {
-                'type': 'video',
-                'original_content_url': original_content_url,
-                'preview_image_url': preview_image_url,
-            }
-        ]
-        return messages
+                        f'【４】查看下方教學影片:{original_content_url}'
+        return TextSendMessage(text=no_store_text)
 
     return carousel_template_message
 
@@ -515,18 +492,18 @@ def handle_message(event: MessageEvent):
     這邊處理文字格式
     """
     logger_line.info(f'line from text: {event.message.text}')
-    messages = get_carouseltemplate(store_name=event.message.text)
-    #
-    # data = [msg.as_json_dict()]
-    # logger_line.info(f'last data: {data}')
-    # import json
-    # logger_line.info(f'last data json: {json.dumps(data)}')
-    # logger_line.info(f'line from text success: {event.msg.text}')
+    message = get_carouseltemplate(store_name=event.message.text)
+
+    data = [message.as_json_dict()]
+    logger_line.info(f'last data: {data}')
+    import json
+    logger_line.info(f'last data json: {json.dumps(data)}')
+    logger_line.info(f'line from text success: {event.message.text}')
     try:
         line_bot_api.reply_message(
             reply_token=event.reply_token,
             # messages=TextSendMessage(text=event.message.text)
-            messages=messages,
+            messages=message,
         )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
@@ -540,11 +517,11 @@ def handle_message(event: MessageEvent):
     lat = event.message.latitude
     lon = event.message.longitude
     logger_line.info(f'line from gps: {lat}, {lon}')
-    messages = get_carouseltemplate(gps=(lat, lon))
+    message = get_carouseltemplate(gps=(lat, lon))
     try:
         line_bot_api.reply_message(
             reply_token=event.reply_token,
-            messages=messages,
+            messages=message,
         )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
