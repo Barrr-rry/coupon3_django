@@ -45,11 +45,16 @@ def save_urls():
         f.write(json.dumps(target_urls))
 
 
+def getHTML(url):
+    headers = {'User-Agent': 'User-Agent:Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'}
+    return requests.get(url, headers=headers, verify=False)
+
+
 def save_img(url):
-    r = requests.get(url)
+    r = getHTML(url)
     if r.status_code == 200:
         file_name = url.split('/')[-1]
-        with open(f"/media/{file_name}", 'wb') as f:
+        with open(f"./media/{file_name}", 'wb+') as f:
             f.write(r.content)
         return file_name
 
@@ -60,11 +65,12 @@ def crawlwer_1111():
         target_urls = json.loads(f.read())
     retttt = []
     for target_url in target_urls:
-        r = requests.get(target_url)
+        r = getHTML(target_url)
         doc = r.text
         dom = pq(doc)
         img = dom('[property="og:image"]').attr.content
-        img = f'http:{img}'
+        if 'http' not in img:
+            img = f'http:{img}'
         img = save_img(img)
         store_type = 9
         title = dom('html > head > title').text()
@@ -82,7 +88,7 @@ def crawlwer_1111():
             if el.text():
                 discount_2 += el.text() + '\n'
         discount_2 = discount_2.strip()
-        discount_discription = f'【 活動內容 】:{discount_1}【 活動期間 】：【 活動說明 】：{discount_2} ＊活動網址：'
+        discount_discription = f'【 活動內容 】：{discount_1} 【 活動期間 】： 【 活動說明 】：{discount_2}  ＊活動網址：'
         for el in dom('div.property_item').items():
             phone = el('p.small-text a').text()
             small_text_el = el('p.small-text')
@@ -90,13 +96,25 @@ def crawlwer_1111():
             address = small_text_el.text()
             place_id = find_place_id(address)
             info = get_place_info(place_id)
+            google_status = 0
+            google_name = None
+            addr = '高雄市前金區中正四路148號'
+            lat = 23.8523405
+            lon = 120.9009427
+            website = None
             if info:
                 address = info.get('address', address)
                 lat = info.get('lat', None)
                 lon = info.get('lon', None)
+                # phone = info.get('phone', phone)
+                website = info.get('website', None)
+                google_status = 1
+                google_name = info.get('name', None)
             sub_name = el('h3.title-sin_map').text()
             name = f'{main_name}  {sub_name}'
-            rettt = {'store': {'name': name, 'phone': phone, 'address': address, 'latitude': lat, 'longitude': lon, 'store_type': store_type},
+            rettt = {'store': {'name': name, 'phone': phone, 'address': address, 'latitude': lat, 'longitude': lon,
+                               'store_type': store_type, 'google_status': google_status, 'google_name': google_name,
+                               'website': website},
                      'storediscount': {'name': discount_name, 'description': discount_discription},
                      'store_image': {'picture': img}}
             retttt.append(rettt)

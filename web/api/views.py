@@ -500,11 +500,12 @@ def handle_message(event: MessageEvent):
     logger_line.info(f'line from text: {event.message.text}')
     messages = get_carouseltemplate(store_name=event.message.text)
 
-    data = [message.as_json_dict()]
-    logger_line.info(f'last data: {data}')
-    import json
-    logger_line.info(f'last data json: {json.dumps(data)}')
-    logger_line.info(f'line from text success: {event.message.text}')
+    for message in messages:
+        data = [message.as_json_dict()]
+        logger_line.info(f'last data: {data}')
+        import json
+        logger_line.info(f'last data json: {json.dumps(data)}')
+        logger_line.info(f'line from text success: {event.message.text}')
     try:
         for message in messages:
             line_bot_api.reply_message(
@@ -524,11 +525,12 @@ def handle_message(event: MessageEvent):
     lat = event.message.latitude
     lon = event.message.longitude
     logger_line.info(f'line from gps: {lat}, {lon}')
-    message = get_carouseltemplate(gps=(lat, lon))
+    messages = get_carouseltemplate(gps=(lat, lon))
     try:
-        line_bot_api.reply_message(
-            reply_token=event.reply_token,
-            messages=message,
-        )
+        for message in messages:
+            line_bot_api.reply_message(
+                reply_token=event.reply_token,
+                messages=message,
+            )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
