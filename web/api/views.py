@@ -439,8 +439,8 @@ def get_carouseltemplate(gps=None, store_name=None):
     """
     queryset = Store.objects.filter(status=1).prefetch_related('storeimage')
     columns = []
-    original_content_url = 'https://3coupon.info/media/超簡單.mp4'
-    preview_image_url = 'https://3coupon.info/media/超簡單.jpg'
+    original_content_url = 'https://3coupon.info/media/easy.mp4'
+    preview_image_url = 'https://3coupon.info/media/easy.jpg'
     if gps:
         ref_location = Point(gps[0], gps[1], srid=4326)
         queryset = queryset.annotate(distance=Distance("location", ref_location))
