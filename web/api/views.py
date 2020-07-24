@@ -507,12 +507,11 @@ def handle_message(event: MessageEvent):
         logger_line.info(f'last data json: {json.dumps(data)}')
         logger_line.info(f'line from text success: {event.message.text}')
     try:
-        for message in messages:
-            line_bot_api.reply_message(
-                reply_token=event.reply_token,
-                # messages=TextSendMessage(text=event.message.text)
-                messages=message,
-            )
+        line_bot_api.reply_message(
+            reply_token=event.reply_token,
+            # messages=TextSendMessage(text=event.message.text)
+            messages=messages,
+        )
     except Exception as e:
         logger_line.error(f'error msg: {traceback.format_exc()}')
 
