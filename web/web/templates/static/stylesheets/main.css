@@ -12073,6 +12073,7 @@ form.form-listing .inner-box .browse .imgbox i {
   background: #ffffffe6;
   font-size: 20px;
   color: #f26423;
+  z-index: 100;
 }
 form.form-listing .inner-box .browse p {
   font-size: 18px;
