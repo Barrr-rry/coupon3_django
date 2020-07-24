@@ -439,6 +439,7 @@ def get_carouseltemplate(gps=None, store_name=None):
     """
     queryset = Store.objects.filter(status=1).prefetch_related('storeimage')
     columns = []
+    ret = []
     if gps:
         ref_location = Point(gps[0], gps[1], srid=4326)
         queryset = queryset.annotate(distance=Distance("location", ref_location))
@@ -450,7 +451,6 @@ def get_carouseltemplate(gps=None, store_name=None):
             )
 
     if store_name:
-        ret = []
         if store_name == '我想看教學':
             no_store_text = '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                             '【２】輸入店名找商家優惠，如「六福村」\n\n' \
