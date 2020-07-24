@@ -457,7 +457,8 @@ def get_carouseltemplate(gps=None, store_name=None):
                             '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                             '【４】查看下方教學影片'
             ret[0] = TextSendMessage(text=no_store_text)
-            ret[1] = VideoSendMessage(original_content_url='影片網址', preview_image_url='預覽的圖片網址')
+            ret[1] = VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
+                                      preview_image_url='https://3coupon.info/media/超簡單.jpg')
             return ret
 
         el = queryset.filter(name__icontains=store_name).all()
@@ -484,7 +485,8 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                         '【４】查看下方教學影片'
         ret[0] = TextSendMessage(text=no_store_text)
-        ret[1] = VideoSendMessage(original_content_url='/media/20200724165616_HD.mp4', preview_image_url='')
+        ret[1] = VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
+                                  preview_image_url='https://3coupon.info/media/超簡單.jpg')
         return ret
 
     return ret
