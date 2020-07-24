@@ -456,9 +456,9 @@ def get_carouseltemplate(gps=None, store_name=None):
                             '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                             '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                             '【４】查看下方教學影片'
-            ret[0] = TextSendMessage(text=no_store_text)
-            ret[1] = VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
-                                      preview_image_url='https://3coupon.info/media/超簡單.jpg')
+            ret.append(TextSendMessage(text=no_store_text))
+            ret.append(VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
+                                        preview_image_url='https://3coupon.info/media/超簡單.jpg'))
             return ret
 
         el = queryset.filter(name__icontains=store_name).all()
@@ -474,9 +474,10 @@ def get_carouseltemplate(gps=None, store_name=None):
             columns=columns
         )
     )
-    ret[0] = carousel_template_message
+    ret.append(carousel_template_message)
     logger_line.info(f'columens len: {len(columns)} {columns}')
     if len(columns) < 1:
+        ret = []
         logger_line.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
         no_store_text = '找不到相關的商家，再重新試試看吧😊\n\n' \
                         '或是試試其他方法：\n\n' \
@@ -484,10 +485,9 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                         '【４】查看下方教學影片'
-        ret[0] = TextSendMessage(text=no_store_text)
-        ret[1] = VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
-                                  preview_image_url='https://3coupon.info/media/超簡單.jpg')
-        return ret
+        ret.append(TextSendMessage(text=no_store_text))
+        ret.append(VideoSendMessage(original_content_url='https://3coupon.info/media/超簡單.mp4',
+                                    preview_image_url='https://3coupon.info/media/超簡單.jpg'))
 
     return ret
 
