@@ -500,12 +500,12 @@ def handle_message(event: MessageEvent):
     logger_line.info(f'line from text: {event.message.text}')
     messages = get_carouseltemplate(store_name=event.message.text)
 
-    for message in messages:
-        data = [message.as_json_dict()]
-        logger_line.info(f'last data: {data}')
-        import json
-        logger_line.info(f'last data json: {json.dumps(data)}')
-        logger_line.info(f'line from text success: {event.message.text}')
+    # for msg in messages:
+    #     data = [msg.as_json_dict()]
+    #     logger_line.info(f'last data: {data}')
+    #     import json
+    #     logger_line.info(f'last data json: {json.dumps(data)}')
+    #     logger_line.info(f'line from text success: {event.msg.text}')
     try:
         line_bot_api.reply_message(
             reply_token=event.reply_token,
