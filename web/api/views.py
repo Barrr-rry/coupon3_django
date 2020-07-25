@@ -421,8 +421,8 @@ def to_column(el):
     logger_line.info(f'title: {name} text: {text} url: {url}')
     return CarouselColumn(
         thumbnail_image_url=url,
-        title=name,
-        text=text,
+        title=name[:50],
+        text=text[:50],
         actions=[
             URIAction(
                 label='查看',

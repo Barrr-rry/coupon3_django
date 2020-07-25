@@ -1640,6 +1640,10 @@ const showSelfPosition = (position) => {
         }, 500
       );
     });
+    setTimeout(function () {
+        $('.preloader').hide();
+      }, 5000
+    );
   }; // Remove Preloader
 
   let formSerailize = (data) => {
