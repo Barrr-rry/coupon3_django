@@ -41,35 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django_user_agents',
 ]
-coordinates = {
-    'JAL': {
-        "type": "FeatureCollection",
 
-        "features": [
-            {"type": "Feature", "properties": {"Name": "jalandhar", "Description": ""}, "geometry": {"type": "Polygon",
-                                                                                                     "coordinates": [[[
-                                                                                                                          75.510571,
-                                                                                                                          31.384717,
-                                                                                                                          0.0],
-                                                                                                                      [
-                                                                                                                          75.515237,
-                                                                                                                          31.270770,
-                                                                                                                          0.0],
-                                                                                                                      [
-                                                                                                                          75.683574,
-                                                                                                                          31.264225,
-                                                                                                                          0.0],
-                                                                                                                      [
-                                                                                                                          75.672656,
-                                                                                                                          31.390200,
-                                                                                                                          0.0],
-                                                                                                                      [
-                                                                                                                          75.510571,
-                                                                                                                          31.384717,
-                                                                                                                          0.0]]]}}
-        ]
-    }
-}
 MIDDLEWARE = [
     # 'django_samesite_none.middleware.SameSiteNoneMiddleware',
     # middleware 才可以加log
