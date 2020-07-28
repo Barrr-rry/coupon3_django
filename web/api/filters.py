@@ -67,7 +67,12 @@ def filter_query(filter_dict, queryset):
 
     filter_dict['county'] = None if filter_dict['county'] == 'all' else filter_dict['county']
     if filter_dict['county'] is not None:
-        q = and_q(q, Q(county=filter_dict['county']))
+        ctys = filter_dict['county'].split(',')
+        qcity = None
+        for cty in ctys:
+            qcity = or_q(qcity, Q(county=cty))
+        if qcity:
+            q = and_q(q, qcity)
 
     if filter_dict.get('activity', None) is not None:
         q = and_q(q,
