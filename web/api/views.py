@@ -150,6 +150,7 @@ class FileViewSet(MyMixin):
         """
         ret = super().create(request, *args, **kwargs)
         img_full_name = ret.data['filename']
+        logger.info(f'upload raw image: {img_full_name}')
         img_name = img_full_name.replace(f'.{img_full_name.split(".")[-1]}', '')  # 檔名稱
         output = img_name + ".jpeg"  # 輸出檔名稱
         im = Image.open(os.path.join('media', img_full_name))  # 讀入檔案
@@ -158,6 +159,7 @@ class FileViewSet(MyMixin):
         img_full_path = os.path.join('media', img_full_name)
         # 把舊的刪掉
         if os.path.exists(img_full_path):
+            logger.info(f'upload clear image: {img_full_path} new output: {output}')
             os.remove(img_full_path)
         # 更新檔案名字
         ret.data['filename'] = output
