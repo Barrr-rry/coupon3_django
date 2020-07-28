@@ -65,6 +65,10 @@ def filter_query(filter_dict, queryset):
     if filter_dict['district'] is not None:
         q = and_q(q, Q(district=filter_dict['district']))
 
+    filter_dict['county'] = None if filter_dict['county'] == 'all' else filter_dict['county']
+    if filter_dict['county'] is not None:
+        q = and_q(q, Q(county=filter_dict['county']))
+
     if filter_dict.get('activity', None) is not None:
         q = and_q(q,
                   (Q(activity=filter_dict['activity']) & (
@@ -130,6 +134,7 @@ class StoreFilter(filters.BaseFilterBackend):
         status = request.query_params.get('status', 1)
         search_status = request.query_params.get('search_status', 1)
         district = request.query_params.get('district', None)
+        county = request.query_params.get('county', None)
         activity = request.query_params.get('activity', None)
         store_type = request.query_params.get('store_type', None)
         order_by = request.query_params.get('order_by', None)
@@ -156,6 +161,7 @@ class StoreFilter(filters.BaseFilterBackend):
         # filter_query 前組成function 需要的格式
         filter_dict = dict([('search', search),
                             ('district', district),
+                            ('county', county),
                             ('lat', lat),
                             ('lon', lon),
                             ('search_status', search_status),

@@ -389,7 +389,8 @@ class StoreView(BaseView):
                     keywords.append(county_name)
                     county_instance = county
                     break
-            find_district = District.objects.all() if not county_instance else District.objects.filter(county=county_instance)
+            find_district = District.objects.all() if not county_instance else District.objects.filter(
+                county=county_instance)
             for el in find_district:
                 if len(el.name) > 2:
                     if (el.name[:-1] in msg or msg in el.name[:-1]) and '縣' not in msg_2:
@@ -513,6 +514,7 @@ class StoreView(BaseView):
         # 準備get filter queryset
         filter_dict = dict([('search', search),
                             ('district', district),
+                            ('county', county),
                             ('lat', lat),
                             ('lon', lon),
                             ('search_status', search_status),
