@@ -5,7 +5,7 @@ from log import logger
 
 # 如果store 被刪掉 其他的img dis 等 都要一起被刪掉
 # with transaction.atomic():
-queryset = Store.objects.filter(deleted_status=True)
+queryset = Store.original_objects.filter(deleted_status=True)
 for el in queryset:
     print(el.name)
     # for img in el.storeimage.all():
