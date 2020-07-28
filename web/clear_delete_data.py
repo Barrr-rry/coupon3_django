@@ -9,6 +9,7 @@ for el in Store.original_objects.raw('SELECT id FROM api_store'):
         a = el.location
     except Exception as e:
         print(el.id, el.deleted_status)
+        el.delete()
 
     # for img in el.storeimage.all():
     #     img.deleted_status = True
