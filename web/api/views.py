@@ -158,7 +158,7 @@ class FileViewSet(MyMixin):
         im.save(os.path.join('media', output), "JPEG", optimize=True, quality=70)  # 儲存
         img_full_path = os.path.join('media', img_full_name)
         # 把舊的刪掉
-        if os.path.exists(img_full_path):
+        if os.path.exists(img_full_path) and not output != img_full_path:
             logger.info(f'upload clear image: {img_full_path} new output: {output}')
             os.remove(img_full_path)
         # 更新檔案名字
