@@ -67,12 +67,16 @@ def filter_query(filter_dict, queryset):
 
     filter_dict['county'] = None if filter_dict['county'] == 'all' else filter_dict['county']
     if filter_dict['county'] is not None:
-        ctys = filter_dict['county'].split(',')
-        qcity = None
-        for cty in ctys:
-            qcity = or_q(qcity, Q(county=cty))
-        if qcity:
-            q = and_q(q, qcity)
+        ctys = filter_dict['county']
+        if isinstance(ctys, int):
+            ctys = ctys.split(',')
+            qcity = None
+            for cty in ctys:
+                qcity = or_q(qcity, Q(county=cty))
+            if qcity:
+                q = and_q(q, qcity)
+        else:
+            q = and_q(q, Q(county=ctys))
 
     if filter_dict.get('activity', None) is not None:
         q = and_q(q,
