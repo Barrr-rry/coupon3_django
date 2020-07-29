@@ -68,7 +68,7 @@ def filter_query(filter_dict, queryset):
     filter_dict['county'] = None if filter_dict['county'] == 'all' else filter_dict['county']
     if filter_dict['county'] is not None:
         ctys = filter_dict['county']
-        if isinstance(ctys, int):
+        if not isinstance(ctys, County):
             ctys = ctys.split(',')
             qcity = None
             for cty in ctys:
