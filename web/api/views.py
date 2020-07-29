@@ -454,13 +454,16 @@ def get_carouseltemplate(gps=None, store_name=None):
             )
 
     if store_name:
+        # 我想看教學
         if store_name == '我想看教學':
             logger_line.info(f'line text columen < 1 : store_name: {store_name} gps: {gps}')
             no_store_text = '【１】以 LINE 送出定位點查詢附近商家優惠\n\n' \
                             '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                             '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                             '【４】查看下方教學影片'
+            # 文字
             msg_1 = TextSendMessage(text=no_store_text)
+            # video
             msg_2 = VideoSendMessage(original_content_url=original_content_url,
                                      preview_image_url=preview_image_url)
             msg = [msg_1, msg_2]
@@ -487,7 +490,9 @@ def get_carouseltemplate(gps=None, store_name=None):
                         '【２】輸入店名找商家優惠，如「六福村」\n\n' \
                         '【３】前往網頁好查版：https://3coupon.info/store/county/\n\n' \
                         '【４】查看下方教學影片:'
+        # 文字
         msg_1 = TextSendMessage(text=no_store_text)
+        # video
         msg_2 = VideoSendMessage(original_content_url=original_content_url,
                                  preview_image_url=preview_image_url)
         msg = [msg_1, msg_2]
