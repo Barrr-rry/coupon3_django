@@ -61,7 +61,13 @@ session.mount('https://', TLSAdapter())
 
 
 def get_url(url):
+    """
+    session 的方式 是因為某些會有ssl error 的問題
+    :param url:
+    :return:
+    """
     r = None
+    # 照理說應該要用retry 如果超過限制要怎麼做 但簡單爬蟲 就沒有差
     while True:
         try:
             r = session.get(url, timeout=60)
@@ -73,6 +79,12 @@ def get_url(url):
 
 @contextmanager
 def get_time(logger, msg):
+    """
+    計算時間的logger 此專案沒有用到
+    :param logger:
+    :param msg:
+    :return:
+    """
     st = time.time()
     yield
     ed = time.time()

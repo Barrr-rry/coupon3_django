@@ -227,15 +227,19 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             storeimage_data = self.pull_validate_data(validated_data, 'storeimage_data', [])
             # get store discount data
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
+            # 新增 store
             instance = super().create(validated_data)
             if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
+                # 修改phone 的格式
                 instance.phone = instance.phone.replace('#', ' #')
                 instance.save()
+            # 新增所有store image
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
                     picture=pic
                 )
+            # 新增所有store discount
             for el in storediscount_data:
                 StoreDiscount.objects.create(
                     store=instance,
@@ -266,6 +270,7 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
             storediscount_data = self.pull_validate_data(validated_data, 'storediscount_data', [])
             # 先將舊有的資料刪除
             StoreImage.original_objects.filter(store=instance).delete()
+            # 新增新的store image
             for pic in storeimage_data:
                 StoreImage.objects.create(
                     store=instance,
@@ -273,16 +278,19 @@ class StoreSerializer(SerializerCacheMixin, DefaultModelSerializer):
                 )
             # 先將舊有的資料刪除
             StoreDiscount.original_objects.filter(store=instance).delete()
+            # 新增新的store discount
             for el in storediscount_data:
                 StoreDiscount.objects.create(
                     store=instance,
                     **el
                 )
+            # 更新store
             try:
                 instance = super().update(instance, validated_data)
             except Exception as e:
                 print()
 
+            # 更改手機format
             if instance.phone and '#' in instance.phone and ' #' not in instance.phone:
                 instance.phone = instance.phone.replace('#', ' #')
                 instance.save()

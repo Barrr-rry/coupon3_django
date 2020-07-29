@@ -160,6 +160,7 @@ def validate_file(file):
     import re
     file_size = 1048576
     try:
+        # 確定檔案格式
         content_type = file.content_type
         if re.findall('^image/.+?', content_type):
             if file.size > file_size:

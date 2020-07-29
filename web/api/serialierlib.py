@@ -10,9 +10,8 @@ from django.utils import timezone
 此module 是把seralizers 一些會用到的常用lib 移動到這邊 做切開的動作
 """
 
-"""
-此Meta 是定義 要顯示哪些seralizers 常用的定義在這邊
-"""
+
+# 此Meta 是定義 要顯示哪些seralizers 常用的定義在這邊
 
 
 class CommonMeta:
@@ -165,6 +164,7 @@ class NestedModelSerializer(DefaultModelSerializer):
     """
     用於巢狀 serliazer 此專案沒有用到
     """
+
     def __init__(self, *args, **kwargs):
         super(NestedModelSerializer, self).__init__(*args, **kwargs)
         self.forward_fields, self.reverse_fields = [], []

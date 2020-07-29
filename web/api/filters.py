@@ -13,6 +13,7 @@ from django.contrib.gis.db.models.functions import Distance
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import Point
 
+# 查詢語法
 or_q = lambda q, other_fn: other_fn if q is None else q | other_fn
 and_q = lambda q, other_fn: other_fn if q is None else q & other_fn
 
@@ -23,6 +24,7 @@ def filter_query(filter_dict, queryset):
     """
     q = None
     p = None
+    # 判斷store type
     filter_dict['store_type'] = None if filter_dict['store_type'] == 'all' else filter_dict['store_type']
     if filter_dict['store_type'] is not None:
         store_types = filter_dict['store_type'].split(',')
@@ -30,6 +32,7 @@ def filter_query(filter_dict, queryset):
             p = or_q(p, Q(store_type=store_type))
         q = and_q(q, p)
 
+    # search 的filter
     if filter_dict['search'] is not None:
         search = filter_dict['search'].strip().split()
         if len(search) > 1:
@@ -55,16 +58,20 @@ def filter_query(filter_dict, queryset):
                     q = or_q(q, Q(district__name__icontains=keyword))
                     q = or_q(q, Q(name__icontains=keyword))
 
+    # search status 的filter
     if filter_dict['search_status'] is not None and filter_dict.get('activity', None) is None:
         q = and_q(q, Q(search_status=filter_dict['search_status']))
 
+    # status 的filter
     if filter_dict['status'] is not None:
         q = and_q(q, Q(status=filter_dict['status']))
 
+    # district 的filter
     filter_dict['district'] = None if filter_dict['district'] == 'all' else filter_dict['district']
     if filter_dict['district'] is not None:
         q = and_q(q, Q(district=filter_dict['district']))
 
+    # county 的filter
     filter_dict['county'] = None if filter_dict['county'] == 'all' else filter_dict['county']
     if filter_dict['county'] is not None:
         ctys = filter_dict['county']
@@ -78,13 +85,14 @@ def filter_query(filter_dict, queryset):
         else:
             q = and_q(q, Q(county=ctys))
 
+    # activity 的filter
     if filter_dict.get('activity', None) is not None:
         q = and_q(q,
                   (Q(activity=filter_dict['activity']) & (
                           Q(search_status=1) | Q(search_status=0)
                   ))
                   )
-
+    # 組成 distance
     ref_location = Point(filter_dict['lat'], filter_dict['lon'], srid=4326)
     queryset = queryset.annotate(distance=Distance("location", ref_location))
     # 算距離
@@ -94,16 +102,19 @@ def filter_query(filter_dict, queryset):
     if filter_dict['order_by']:
         queryset = queryset.order_by(filter_dict['order_by'])
 
+    # discount_type 的filter
     filter_dict['storediscount_discount_type'] = None if filter_dict['storediscount_discount_type'] == 'all' else \
         filter_dict['storediscount_discount_type']
     if filter_dict['storediscount_discount_type'] is not None:
         for storediscount in filter_dict['storediscount_discount_type'].split(','):
             q = or_q(q, Q(storediscount__discount_type=storediscount))
 
+    # ids 的filter
     if filter_dict['ids']:
         ids = filter_dict['ids'].split(',')
         q = and_q(q, Q(id__in=ids))
 
+    # 上述任何一個就在filter 下去
     if q:
         queryset = queryset.filter(q)
         return queryset
@@ -120,15 +131,17 @@ class StoreFilter(filters.BaseFilterBackend):
         keywords = []
         # 針對search 文字做優化
         if search:
+            # 共同定義文字
             search = search.replace('台', '臺')
             msg = search
+            # 去掉最後一個字 XX縣 XX市 XX區 多搜尋到沒有關係
             if len(search) > 2:
                 search = search[:-1]
             for county in County.objects.all():
                 if county.name[:-1] in search or search in county.name[:-1]:
                     keywords.append(county.name)
                     break
-
+            # 抓區域
             for el in District.objects.all():
                 if len(el.name) > 2:
                     if (el.name[:-1] in search or search in el.name[:-1]) and '縣' not in msg:
@@ -149,9 +162,11 @@ class StoreFilter(filters.BaseFilterBackend):
         order_by = request.query_params.get('order_by', None)
         storediscount_discount_type = request.query_params.get('storediscount_discount_type', None)
         ids = request.query_params.get('ids', None)
+        # 給予預設資料 避免有些user 抓不到資料
         lat = float(request.query_params.get('lng', request.COOKIES.get('search-lat', 23.8523405)))
         lon = float(request.query_params.get('lng', request.COOKIES.get('search-lon', 120.9009427)))
 
+        # 定義sort 方法
         sort = request.query_params.get('sort', 'distance')
         # distance \ -distance or down
         if sort == 'new':
@@ -162,6 +177,7 @@ class StoreFilter(filters.BaseFilterBackend):
             order_by = 'pop'
         if sort == '-pop':
             order_by = '-pop'
+        # 這些特別的store type search status=2 這個寫成hard code 是固定的邏輯
         if store_type and store_type != 'all':
             store_types = store_type.split(',')
             for store_type_2 in store_types:

@@ -18,6 +18,7 @@ for md in modellist:
     自己寫一個for loop 自動產生新的class 減少重複工
     """
     list_display = []
+    # 關聯資料的部分不好顯示則沒有顯示
     for field in md._meta.get_fields():
         if isinstance(field, ForeignKey):
             list_display.append(field.attname)
@@ -28,12 +29,14 @@ for md in modellist:
         else:
             list_display.append(field.name)
     datetime_list = []
+    # 基本資料 這個可以不用新增
     for i in ['created_at', 'updated_at', 'deleted_at', 'created']:
         if i in list_display:
             list_display.remove(i)
             datetime_list.append(i)
     list_display += datetime_list
 
+    # 動態init 一個 class 並且註冊他
     class_name = f'{md.__name__}Admin'
     cls = type(class_name, (ImportExportModelAdmin, ImportExportActionModelAdmin), dict(
         list_display=list_display,
@@ -48,6 +51,7 @@ for md, resource in [
     (StoreDiscount, StoreDiscountResource),
 ]:
     list_display = []
+    # 關聯資料的部分不好顯示則沒有顯示
     for field in md._meta.get_fields():
         if isinstance(field, ForeignKey):
             list_display.append(field.attname)
@@ -58,16 +62,19 @@ for md, resource in [
         else:
             list_display.append(field.name)
     datetime_list = []
+    # 基本資料 這個可以不用新增
     for i in ['created_at', 'updated_at', 'deleted_at', 'created']:
         if i in list_display:
             list_display.remove(i)
             datetime_list.append(i)
     list_display += datetime_list
 
+    # 動態init 一個 class 並且註冊他
     class_name = f'{md.__name__}Admin'
     cls = type(class_name, (ImportExportModelAdmin, ImportExportActionModelAdmin), dict(
         list_display=list_display,
         # 唯一差別在這邊要多一個resouce
         resource_class=resource
     ))
+    # 註冊一個class 上面的工程是自動建立一個class
     admin.site.register(md, cls)
