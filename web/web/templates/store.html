@@ -278,6 +278,7 @@
   let store_data = {{ json_data|safe }};
   let data_count = {{ count }};
   let sort = '{{ sort }}';
+  let store_type = '{{ store_type }}';
   let activity = '{{ activity }}';
 </script>
 {% include 'includes/js.html' %}
@@ -296,6 +297,10 @@
     // init active sort
     let $el = $(`a[data-sort=${sort}]`)
     $el.addClass('active')
+    if (store_type && store_type !== 'None' && store_type !== 'all') {
+      console.log('store_type:', store_type)
+      $('#search-form [name="store_type"]').val(store_type)
+    }
 
 
     $('.activity a').each(function () {
