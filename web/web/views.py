@@ -33,6 +33,8 @@ class BaseView(TemplateView):
     """
 
     def render_to_response(self, context, **response_kwargs):
+        if context.get('error') == '404':
+            return HttpResponseRedirect('/404/')
         in_maintenance = False
         instance = ConfigSetting.objects.first()
         if instance:
@@ -219,9 +221,12 @@ class StoreIdView(BaseView):
 
     def get_context_data(self, *args, **kwargs):
         # queryset這樣抓資料會比較快一些
-        instance = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
-            select_related('county').prefetch_related('activity'). \
-            select_related('district').select_related('store_type').get(pk=kwargs.get('store_id'))
+        try:
+            instance = Store.objects.prefetch_related('storediscount').prefetch_related('storeimage'). \
+                select_related('county').prefetch_related('activity'). \
+                select_related('district').select_related('store_type').get(pk=kwargs.get('store_id'))
+        except Exception as e:
+            return {'error': '404'}
         lat = instance.latitude
         lon = instance.longitude
         # google 網址格式
