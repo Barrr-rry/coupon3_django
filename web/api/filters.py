@@ -129,6 +129,7 @@ class StoreFilter(filters.BaseFilterBackend):
         """
         search = request.query_params.get('search', None)
         keywords = []
+        msg = ''
         # 針對search 文字做優化
         if search:
             # 共同定義文字
@@ -152,6 +153,8 @@ class StoreFilter(filters.BaseFilterBackend):
                         keywords.append(el.name)
                     break
         search = " ".join(keywords)
+        if not search:
+            search = msg
         # 取得所有需要用到的參數 並且針對參數做優化調整
         status = request.query_params.get('status', 1)
         search_status = request.query_params.get('search_status', 1)

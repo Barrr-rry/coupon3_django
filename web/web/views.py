@@ -383,11 +383,11 @@ class StoreView(BaseView):
             if len(msg) > 2:
                 msg = msg[:-1]
             for county_name in county_dct:
-                county = county_dct[county_name]['instance']
+                _county = county_dct[county_name]['instance']
                 if county_name[:-1] in msg or msg in county_name[:-1]:
                     msg = msg.replace(county_name, '')
                     keywords.append(county_name)
-                    county_instance = county
+                    county_instance = _county
                     break
             find_district = District.objects.all() if not county_instance else District.objects.filter(
                 county=county_instance)
