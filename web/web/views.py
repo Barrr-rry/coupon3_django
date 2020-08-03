@@ -487,8 +487,12 @@ class StoreView(BaseView):
 
         activity_list = []
         if not keywords and activity:
-            el = Activity.objects.get(pk=activity)
-            keywords.append(el.county.first().name)
+            try:
+                el = Activity.objects.get(pk=activity)
+                keywords.append(el.county.first().name)
+            except Exception as e:
+                pass
+
         for keyword in keywords:
             if county_dct.get(keyword):
                 el = county_dct[keyword]['instance']
