@@ -86,21 +86,23 @@ let appendStore = (data) => {
             `
       }
     }
-    if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11 && data.district_name) {
-      store_type_disable =
-        `<li><span>${data.district_name}</span></li>
+    if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11) {
+      if (data.district_name) {
+        store_type_disable =
+            `<li><span>${data.district_name}</span></li>
                   <li>
                     <img src="/media/map_gray.svg" alt="">
                     <span>${data.distance_name}</span>
                   </li>`
-    }
-    else {
-      store_type_disable =
-          `
+      }
+      else {
+        store_type_disable =
+            `
                   <li>
                     <img src="/media/map_gray.svg" alt="">
                     <span>${data.distance_name}</span>
                   </li>`
+      }
     }
 
   }
@@ -2135,20 +2137,22 @@ const showSelfPosition = (position) => {
           }
         }
         if (data.store_type != 8 && data.store_type != 12 && data.store_type != 7 && data.store_type != 11 && data.district_name) {
-          store_type_disable =
-            `<li><span>${data.district_name}</span></li>
+          if (data.district_name) {
+            store_type_disable =
+                `<li><span>${data.district_name}</span></li>
               <li>
                 <img src="/media/map_gray.svg" alt="">
                 <span>${data.distance_name}</span>
               </li>`
-        }
-        else {
-          store_type_disable =
-              `
+          }
+          else {
+            store_type_disable =
+                `
               <li>
                 <img src="/media/map_gray.svg" alt="">
                 <span>${data.distance_name}</span>
               </li>`
+          }
         }
 
       }
