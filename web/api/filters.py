@@ -41,9 +41,10 @@ def filter_query(filter_dict, queryset):
             if len(search[1]) > 2:
                 search[1] = search[1][:-1]
             county = County.objects.filter(name__icontains=search[0]).all()
-            district = District.objects.filter(name__icontains=search[1]).all()
-            if (county.count() + district.count()) > 0:
-                q = and_q(q, Q(district__name__icontains=search[1]))
+            # district = District.objects.filter(name__icontains=search[1]).all()
+            # if (county.count() + district.count()) > 0:
+            if (county.count()) > 0:
+                # q = and_q(q, Q(district__name__icontains=search[1]))
                 q = and_q(q, Q(county__name__icontains=search[0]))
 
         else:
@@ -51,11 +52,12 @@ def filter_query(filter_dict, queryset):
                 if len(keyword) > 2:
                     keyword = keyword[:-1]
                 county_1 = County.objects.filter(name__icontains=keyword).all()
-                district_1 = District.objects.filter(name__icontains=keyword).all()
+                # district_1 = District.objects.filter(name__icontains=keyword).all()
                 name = Store.objects.filter(name__icontains=keyword).all()
-                if (county_1.count() + district_1.count() + name.count()) > 0:
+                # if (county_1.count() + district_1.count() + name.count()) > 0:
+                if (county_1.count() + name.count()) > 0:
                     q = or_q(q, Q(county__name__icontains=keyword))
-                    q = or_q(q, Q(district__name__icontains=keyword))
+                    # q = or_q(q, Q(district__name__icontains=keyword))
                     q = or_q(q, Q(name__icontains=keyword))
 
     # search status 的filter
@@ -86,9 +88,15 @@ def filter_query(filter_dict, queryset):
             q = and_q(q, Q(county=ctys))
 
     # activity 的filter
-    if filter_dict.get('activity', None) is not None:
+    activity_id = None
+    try:
+        activity_id = int(filter_dict.get('activity', None))
+    except Exception as e:
+        pass
+
+    if activity_id is not None:
         q = and_q(q,
-                  (Q(activity=filter_dict['activity']) & (
+                  (Q(activity=activity_id) & (
                           Q(search_status=1) | Q(search_status=0)
                   ))
                   )
