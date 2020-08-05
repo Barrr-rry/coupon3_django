@@ -155,7 +155,9 @@
                             </div>
                             <ul class="rating">
                               {% if el.store_type != 8 and el.store_type != 12 and el.store_type != 7 and el.store_type != 11 %}
-                                <li><span>{{ el.district_name }}</span></li>
+                                {% if el.district_name %}
+                                    <li><span>{{ el.district_name }}</span></li>
+                                {% endif %}
                                 <li>
                                   <img src="/media/map_gray.svg" alt="">
                                   <span>{{ el.distance_name }}</span>
