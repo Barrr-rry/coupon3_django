@@ -329,7 +329,10 @@
     // init active activity
     $el = $(`a[data-activity=${activity}]`)
     $el.addClass('active')
-
+    if (href_split.length < 2 && getCookie('lat') && getCookie('lon')) {
+        lat = getCookie('lat'),
+        lon = getCookie('lon')
+    }
     const position = {
       coords: {
         latitude: lat,
