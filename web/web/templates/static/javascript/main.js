@@ -1642,7 +1642,7 @@ const showSelfPosition = (position) => {
     });
     setTimeout(function () {
         $('.preloader').hide();
-      }, 5000
+      }, 2000
     );
   }; // Remove Preloader
 
