@@ -86,9 +86,15 @@ def filter_query(filter_dict, queryset):
             q = and_q(q, Q(county=ctys))
 
     # activity 的filter
-    if filter_dict.get('activity', None) is not None:
+    activity_id = None
+    try:
+        activity_id = int(filter_dict.get('activity', None))
+    except Exception as e:
+        pass
+
+    if activity_id is not None:
         q = and_q(q,
-                  (Q(activity=filter_dict['activity']) & (
+                  (Q(activity=activity_id) & (
                           Q(search_status=1) | Q(search_status=0)
                   ))
                   )

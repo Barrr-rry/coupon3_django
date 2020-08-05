@@ -569,7 +569,12 @@ class StoreView(BaseView):
             suffix = f'?{split_list[-1]}'
 
         # 取得activity name
-        activity_instance = Activity.objects.filter(id=activity).first()
+        activity_instance = None
+        try:
+            activity_instance = Activity.objects.filter(id=activity).first()
+        except Exception as e:
+            pass
+
         activity_name = activity_instance.name if activity_instance else ''
 
         # 確認是不是使用store_type 前端需要
@@ -583,7 +588,11 @@ class StoreView(BaseView):
         group_filters = []
         if group_store_type:
             for gstore_type in group_store_type.split(','):
-                store_type_instance = StoreType.objects.get(pk=gstore_type)
+                try:
+                    store_type_instance = StoreType.objects.get(pk=gstore_type)
+                except Exception as e:
+                    continue
+
                 group_filters.append(dict(
                     name=store_type_instance.name,
                     id=store_type_instance.id,
